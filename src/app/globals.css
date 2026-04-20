@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #8e88e4;
+  --color-secondary: #79d2b5;
+  --color-accent: #ffb84d;
+  --color-lavender: #f3f2ff;
+  --color-background-light: #fdf8f3;
+  --color-background-dark: #121212;
+
+  --radius: 1.5rem;
+  --radius-large: 2.5rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans antialiased text-slate-800 dark:text-slate-100 bg-background-light dark:bg-background-dark;
+  }
+}
+
+@layer components {
+  .timeline-line::before {
+    content: "";
+    position: absolute;
+    left: 23px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e5e7eb;
+  }
+  .dark .timeline-line::before {
+    background: #374151;
+  }
+  .bg-gradient-soft {
+    background: linear-gradient(135deg, #f3f2ff 0%, #fdf8f3 100%);
+  }
+  .dark .bg-gradient-soft {
+    background: linear-gradient(135deg, #1e1b4b 0%, #121212 100%);
+  }
+}
