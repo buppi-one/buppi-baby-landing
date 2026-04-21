@@ -119,6 +119,7 @@ export const fr: Messages = {
     quickLinks: "Liens rapides",
     home: "Accueil",
     privacy: "Confidentialité",
+    terms: "Conditions",
     support: "Support",
     deleteAccount: "Supprimer le compte",
     copyright: "© 2026 Buppi Baby. Tous droits réservés.",
@@ -359,6 +360,90 @@ export const fr: Messages = {
       heading: "7. Contact",
       text: "Pour demander la suppression par email ou pour des questions, écrivez à ",
       email: "privacidade@buppi.baby",
+    },
+  },
+  terms: {
+    badge: "📜 CONDITIONS D'UTILISATION",
+    title: "Conditions d'utilisation",
+    updated: "Dernière mise à jour : 21 avril 2026",
+    intro:
+      "Ces conditions d'utilisation régissent l'accès et l'utilisation de l'application Buppi Baby. En créant un compte, en souscrivant à un abonnement ou en utilisant toute fonctionnalité de l'app, vous déclarez avoir lu, compris et accepté ces conditions.",
+    sections: [
+      {
+        heading: "1. À propos du service",
+        intro:
+          "Buppi Baby est une application de suivi de la routine des bébés (alimentation, sommeil, couches, croissance, étapes et autres activités). Certaines fonctionnalités sont gratuites ; les fonctionnalités avancées nécessitent un abonnement payant.",
+      },
+      {
+        heading: "2. Compte",
+        intro:
+          "Pour utiliser l'app, vous créez un compte via Google ou Apple. Vous êtes responsable de la sécurité de vos identifiants et de toute activité sur votre compte. Le compte est personnel et non transférable.",
+      },
+      {
+        heading: "3. Plans et abonnements",
+        intro:
+          "Nous proposons des plans d'abonnement à renouvellement automatique (mensuels et annuels) vendus via l'App Store (iOS) et Google Play (Android). Les plans actuellement disponibles — nom, durée et prix — sont affichés dans l'app sur l'écran d'abonnement et dans les fiches respectives des magasins avant la confirmation de l'achat.",
+      },
+      {
+        heading: "4. Facturation, renouvellement et annulation",
+        intro:
+          "Votre abonnement est traité par votre compte App Store ou Google Play :",
+        items: [
+          { text: "Le paiement est prélevé à la confirmation de l'achat." },
+          {
+            text: "L'abonnement se renouvelle automatiquement à la fin de chaque période (mensuelle ou annuelle) pour le même montant, sauf annulation au moins 24 heures avant la fin de la période en cours.",
+          },
+          {
+            text: "Vous pouvez annuler à tout moment dans les paramètres de votre compte (iOS : Réglages → Identifiant Apple → Abonnements ; Android : Play Store → Abonnements). L'annulation arrête le renouvellement ; l'accès continue jusqu'à la fin de la période déjà payée.",
+          },
+          {
+            text: "Les remboursements sont régis par les politiques d'Apple et de Google. Nous ne traitons pas les remboursements directement.",
+          },
+          {
+            text: "Les périodes d'essai gratuit, lorsqu'elles sont proposées, se convertissent automatiquement en abonnement payant si elles ne sont pas annulées avant expiration.",
+          },
+        ],
+      },
+      {
+        heading: "5. Usage acceptable",
+        intro: "Vous vous engagez à ne pas :",
+        items: [
+          { text: "Utiliser l'app à des fins illégales ou portant atteinte aux droits de tiers." },
+          { text: "Tenter d'obtenir un accès non autorisé aux systèmes, comptes ou données." },
+          { text: "Rétro-ingénierie, décompiler ou distribuer des copies de l'application." },
+          { text: "Saisir de fausses informations ou des contenus offensants/abusifs ou exposant des tiers." },
+        ],
+      },
+      {
+        heading: "6. Vos données",
+        intro:
+          "Vos données et celles des bébés enregistrés vous appartiennent. Nous les stockons chiffrées et les traitons conformément à la Politique de Confidentialité. Vous pouvez exporter ou supprimer votre compte à tout moment (voir les pages Confidentialité et Supprimer le compte).",
+      },
+      {
+        heading: "7. Disponibilité et modifications",
+        intro:
+          "Le service est fourni « en l'état » et « selon disponibilité ». Nous pouvons mettre à jour des fonctionnalités, des prix, restreindre des accès ou interrompre des parties du service. Les modifications importantes de ces conditions seront communiquées dans l'app ou par email.",
+      },
+      {
+        heading: "8. Responsabilités et limites",
+        intro:
+          "Buppi Baby est un outil informatif de suivi. Il ne remplace pas un diagnostic, traitement ou conseil médical, nutritionnel ou pédiatrique. Les décisions de santé doivent être prises avec des professionnels qualifiés. Dans la mesure maximale permise par la loi applicable, notre responsabilité pour les dommages indirects, accidentels ou consécutifs est limitée au montant payé pour l'abonnement au cours des 12 derniers mois.",
+      },
+      {
+        heading: "9. Résiliation",
+        intro:
+          "Nous pouvons suspendre ou résilier votre compte en cas de violation de ces conditions. Vous pouvez résilier votre compte à tout moment via « Supprimer le compte » dans l'app.",
+      },
+      {
+        heading: "10. Loi applicable",
+        intro:
+          "Ces conditions sont régies par les lois de la République fédérative du Brésil. Les parties élisent les tribunaux de São Paulo/SP comme for exclusif, sauf disposition contraire de la législation sur la consommation.",
+      },
+    ],
+    contact: {
+      heading: "11. Contact",
+      text: "Des questions sur ces conditions ? Écrivez à ",
+      email: "suporte@buppi.baby",
     },
   },
 };

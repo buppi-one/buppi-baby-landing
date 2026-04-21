@@ -90,6 +90,7 @@ export type Messages = {
     quickLinks: string;
     home: string;
     privacy: string;
+    terms: string;
     support: string;
     deleteAccount: string;
     copyright: string;
@@ -114,6 +115,18 @@ export type Messages = {
     faq: FaqItem[];
   };
   deleteAccount: {
+    badge: string;
+    title: string;
+    updated: string;
+    intro: string;
+    sections: PrivacySection[];
+    contact: {
+      heading: string;
+      text: string;
+      email: string;
+    };
+  };
+  terms: {
     badge: string;
     title: string;
     updated: string;

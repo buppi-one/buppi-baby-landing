@@ -119,6 +119,7 @@ export const es: Messages = {
     quickLinks: "Enlaces rápidos",
     home: "Inicio",
     privacy: "Privacidad",
+    terms: "Términos",
     support: "Soporte",
     deleteAccount: "Eliminar cuenta",
     copyright: "© 2026 Buppi Baby. Todos los derechos reservados.",
@@ -348,6 +349,90 @@ export const es: Messages = {
       heading: "7. Contacto",
       text: "Para solicitar la eliminación por email o para preguntas, escríbenos a ",
       email: "privacidade@buppi.baby",
+    },
+  },
+  terms: {
+    badge: "📜 TÉRMINOS DE USO",
+    title: "Términos de Uso",
+    updated: "Última actualización: 21 de abril de 2026",
+    intro:
+      "Estos Términos de Uso rigen el acceso y uso de la aplicación Buppi Baby. Al crear una cuenta, suscribirte a un plan o utilizar cualquier función del app, declaras haber leído, entendido y aceptado estos términos.",
+    sections: [
+      {
+        heading: "1. Sobre el servicio",
+        intro:
+          "Buppi Baby es una aplicación de seguimiento de la rutina infantil (alimentación, sueño, pañales, crecimiento, logros y otras actividades). Parte de las funciones es gratuita; las funcionalidades avanzadas requieren suscripción de pago.",
+      },
+      {
+        heading: "2. Cuenta",
+        intro:
+          "Para usar la app creas una cuenta con Google o Apple. Eres responsable de mantener tus credenciales seguras y de toda actividad realizada en tu cuenta. La cuenta es personal e intransferible.",
+      },
+      {
+        heading: "3. Planes y suscripciones",
+        intro:
+          "Ofrecemos planes de suscripción auto-renovable (mensuales y anuales) vendidos a través de la App Store (iOS) y Google Play (Android). Los planes disponibles actualmente — nombre, duración y precio — se muestran dentro de la app en la pantalla de suscripción y en las fichas de las tiendas antes de confirmar la compra.",
+      },
+      {
+        heading: "4. Facturación, renovación y cancelación",
+        intro:
+          "Tu suscripción se procesa en tu cuenta de App Store o Google Play:",
+        items: [
+          { text: "El pago se cobra al confirmar la compra." },
+          {
+            text: "La suscripción se renueva automáticamente al final de cada periodo (mensual o anual) por el mismo importe, salvo cancelación con al menos 24 horas de antelación al final del ciclo actual.",
+          },
+          {
+            text: "Puedes cancelar cuando quieras en los ajustes de tu cuenta (iOS: Ajustes → Apple ID → Suscripciones; Android: Play Store → Suscripciones). La cancelación detiene la renovación; el acceso continúa hasta el fin del periodo ya pagado.",
+          },
+          {
+            text: "Los reembolsos se rigen por las políticas de Apple y Google. No procesamos reembolsos directamente.",
+          },
+          {
+            text: "Los periodos de prueba gratuita, cuando se ofrecen, se convierten automáticamente en suscripción de pago si no se cancelan antes del vencimiento.",
+          },
+        ],
+      },
+      {
+        heading: "5. Uso aceptable",
+        intro: "Aceptas no:",
+        items: [
+          { text: "Usar la app con fines ilegales o que violen derechos de terceros." },
+          { text: "Intentar obtener acceso no autorizado a sistemas, cuentas o datos." },
+          { text: "Aplicar ingeniería inversa, descompilar o distribuir copias de la aplicación." },
+          { text: "Introducir información falsa o contenido ofensivo, abusivo o que exponga a terceros." },
+        ],
+      },
+      {
+        heading: "6. Tus datos",
+        intro:
+          "Tus datos y los de los bebés registrados te pertenecen. Los almacenamos cifrados y los procesamos conforme a la Política de Privacidad. Puedes exportar o eliminar tu cuenta cuando quieras (ver páginas de Privacidad y Eliminar cuenta).",
+      },
+      {
+        heading: "7. Disponibilidad y cambios",
+        intro:
+          "El servicio se ofrece \"tal cual\" y \"según disponibilidad\". Podemos actualizar funciones, precios, restringir accesos o discontinuar partes del servicio. Los cambios relevantes se comunicarán en la app o por email.",
+      },
+      {
+        heading: "8. Responsabilidades y límites",
+        intro:
+          "Buppi Baby es una herramienta informativa de seguimiento. No sustituye el diagnóstico, tratamiento o asesoramiento médico, nutricional o pediátrico. Las decisiones de salud deben tomarse con profesionales cualificados. En la máxima medida permitida por la ley aplicable, nuestra responsabilidad por daños indirectos, incidentales o consecuentes se limita al importe pagado por la suscripción en los últimos 12 meses.",
+      },
+      {
+        heading: "9. Terminación",
+        intro:
+          "Podemos suspender o cancelar tu cuenta por violar estos términos. Puedes cancelar tu cuenta cuando quieras en \"Eliminar cuenta\" dentro de la app.",
+      },
+      {
+        heading: "10. Ley aplicable",
+        intro:
+          "Estos términos se rigen por las leyes de la República Federativa de Brasil. Las partes eligen los tribunales de São Paulo/SP como foro exclusivo, salvo que la legislación de consumo disponga lo contrario.",
+      },
+    ],
+    contact: {
+      heading: "11. Contacto",
+      text: "¿Dudas sobre estos términos? Escribe a ",
+      email: "suporte@buppi.baby",
     },
   },
 };
