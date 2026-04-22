@@ -220,7 +220,7 @@ export const en: Messages = {
     contact: {
       heading: "9. Contact",
       text: "For privacy questions or to exercise your rights, contact us at ",
-      email: "privacidade@buppi.baby",
+      email: "privacy@buppi.baby",
     },
   },
   support: {
@@ -229,7 +229,7 @@ export const en: Messages = {
     intro: {
       before:
         "Need help? We're here. For questions, suggestions, or to report issues, reach out at ",
-      emailLabel: "suporte@buppi.baby",
+      emailLabel: "support@buppi.baby",
       after: ".",
     },
     faqHeading: "Frequently Asked Questions",
@@ -336,91 +336,74 @@ export const en: Messages = {
     contact: {
       heading: "7. Contact",
       text: "To request deletion by email or for questions, write to ",
-      email: "privacidade@buppi.baby",
+      email: "privacy@buppi.baby",
     },
   },
   terms: {
-    badge: "📜 TERMS OF USE",
-    title: "Terms of Use",
-    updated: "Last updated: April 21, 2026",
+    badge: "📜 EULA",
+    title: "End User License Agreement",
+    updated: "Last updated: April 22, 2026",
     intro:
-      "These Terms of Use govern access to and use of the Buppi Baby app. By creating an account, subscribing to a plan, or using any feature of the app, you confirm that you have read, understood, and agreed to these terms.",
+      "This End User License Agreement (\"Agreement\") is a legal agreement between you (\"User\") and Buppi (\"Developer\") governing your use of the Buppi mobile application (\"App\").",
     sections: [
       {
-        heading: "1. About the service",
+        heading: "1. License",
         intro:
-          "Buppi Baby is a baby tracking app (feeding, sleep, diapers, growth, milestones, and other activities). Some features are free; advanced functionality requires a paid subscription.",
+          "The App is licensed, not sold, to you. The Developer grants you a limited, non-exclusive, non-transferable, revocable license to use the App for your personal, non-commercial purposes, subject to this Agreement.",
       },
       {
-        heading: "2. Accounts",
-        intro:
-          "To use the app you create an account via Google or Apple. You are responsible for keeping your credentials secure and for any activity on your account. Accounts are personal and non-transferable.",
-      },
-      {
-        heading: "3. Plans and subscriptions",
-        intro:
-          "We offer auto-renewable subscription plans (monthly and annual) sold through the App Store (iOS) and Google Play (Android). The currently available plans — including name, duration, and price — are shown inside the app on the subscription screen and in the respective store listings before you confirm the purchase.",
-      },
-      {
-        heading: "4. Billing, renewal, and cancellation",
-        intro:
-          "Your subscription is processed through your App Store or Google Play account:",
+        heading: "2. Subscriptions",
+        intro: "The App may offer auto-renewable subscriptions.",
         items: [
-          { text: "Payment is charged to your account at purchase confirmation." },
-          {
-            text: "The subscription auto-renews at the end of each period (monthly or annual) for the same amount, unless canceled at least 24 hours before the end of the current period.",
-          },
-          {
-            text: "You can cancel at any time in your store account settings (iOS: Settings → Apple ID → Subscriptions; Android: Play Store → Subscriptions). Canceling stops renewal; access continues until the end of the paid period.",
-          },
-          {
-            text: "Refunds are governed by Apple's and Google's policies. We do not process refunds directly.",
-          },
-          {
-            text: "Any free trial periods, when offered, automatically convert to a paid subscription unless canceled before expiration.",
-          },
+          { text: "Payment will be charged to your Apple ID account at confirmation of purchase." },
+          { text: "Subscriptions automatically renew unless canceled at least 24 hours before the end of the current period." },
+          { text: "You can manage and cancel subscriptions in your account settings." },
         ],
       },
       {
-        heading: "5. Acceptable use",
-        intro: "You agree not to:",
-        items: [
-          { text: "Use the app for unlawful purposes or in ways that violate third-party rights." },
-          { text: "Attempt to obtain unauthorized access to systems, accounts, or data." },
-          { text: "Reverse-engineer, decompile, or distribute copies of the app." },
-          { text: "Enter false information or offensive/abusive content, or content that exposes third parties." },
-        ],
+        heading: "3. Responsibility",
+        intro:
+          "The App and its content are provided by the Developer. Apple Inc. is not responsible for the App, its content, or any maintenance or support services.",
       },
       {
-        heading: "6. Your data",
+        heading: "4. Maintenance and Support",
         intro:
-          "Your data and the baby data you log belong to you. We store it encrypted and process it as described in the Privacy Policy. You can export or delete your account at any time — see the Privacy and Delete Account pages.",
+          "The Developer is solely responsible for providing maintenance and support for the App. Apple has no obligation whatsoever to furnish any maintenance or support services.",
       },
       {
-        heading: "7. Availability and changes",
+        heading: "5. Warranty",
         intro:
-          "The service is provided \"as is\" and \"as available.\" We may update features, plan pricing, restrict access, or discontinue parts of the service. Material changes to these terms will be communicated in-app or by email.",
+          "The App is provided \"AS IS\" and \"AS AVAILABLE\" without warranties of any kind. To the maximum extent permitted by law, the Developer disclaims all warranties, whether express or implied.",
       },
       {
-        heading: "8. Disclaimers and liability",
+        heading: "6. Limitation of Liability",
         intro:
-          "Buppi Baby is an informational tracking tool. It does not replace medical, nutritional, or pediatric diagnosis, treatment, or advice. Health decisions should be made with qualified professionals. To the maximum extent permitted by applicable law, our liability for indirect, incidental, or consequential damages is limited to the amount paid for the subscription in the last 12 months.",
+          "To the extent permitted by law, the Developer shall not be liable for any indirect, incidental, or consequential damages arising from the use of the App.",
       },
       {
-        heading: "9. Termination",
+        heading: "7. Legal Compliance",
         intro:
-          "We may suspend or terminate your account for violations of these terms. You may terminate your account at any time via \"Delete account\" inside the app.",
+          "You agree to use the App in compliance with all applicable laws and regulations.",
       },
       {
-        heading: "10. Governing law",
+        heading: "8. Termination",
         intro:
-          "These terms are governed by the laws of the Federative Republic of Brazil. The parties elect the courts of São Paulo/SP as the exclusive forum, except where consumer legislation provides otherwise.",
+          "This license is effective until terminated. Your rights will terminate automatically if you fail to comply with any term of this Agreement.",
+      },
+      {
+        heading: "9. Third-Party Beneficiary",
+        intro:
+          "Apple Inc. and its subsidiaries are third-party beneficiaries of this Agreement and, upon your acceptance of this Agreement, will have the right to enforce this Agreement against you.",
+      },
+      {
+        heading: "10. Governing Law",
+        intro: "This Agreement shall be governed by the laws of Brazil.",
       },
     ],
     contact: {
       heading: "11. Contact",
-      text: "Questions about these terms? Write to ",
-      email: "suporte@buppi.baby",
+      text: "If you have any questions, contact: ",
+      email: "support@buppi.baby",
     },
   },
 };

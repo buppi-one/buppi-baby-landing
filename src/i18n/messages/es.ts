@@ -232,7 +232,7 @@ export const es: Messages = {
     contact: {
       heading: "9. Contacto",
       text: "Para preguntas sobre privacidad o para ejercer tus derechos, escríbenos a ",
-      email: "privacidade@buppi.baby",
+      email: "privacy@buppi.baby",
     },
   },
   support: {
@@ -241,7 +241,7 @@ export const es: Messages = {
     intro: {
       before:
         "¿Necesitas ayuda? Estamos aquí. Para preguntas, sugerencias o para reportar problemas, escríbenos a ",
-      emailLabel: "suporte@buppi.baby",
+      emailLabel: "support@buppi.baby",
       after: ".",
     },
     faqHeading: "Preguntas Frecuentes",
@@ -348,91 +348,74 @@ export const es: Messages = {
     contact: {
       heading: "7. Contacto",
       text: "Para solicitar la eliminación por email o para preguntas, escríbenos a ",
-      email: "privacidade@buppi.baby",
+      email: "privacy@buppi.baby",
     },
   },
   terms: {
-    badge: "📜 TÉRMINOS DE USO",
-    title: "Términos de Uso",
-    updated: "Última actualización: 21 de abril de 2026",
+    badge: "📜 EULA",
+    title: "Acuerdo de Licencia de Usuario Final",
+    updated: "Última actualización: 22 de abril de 2026",
     intro:
-      "Estos Términos de Uso rigen el acceso y uso de la aplicación Buppi Baby. Al crear una cuenta, suscribirte a un plan o utilizar cualquier función del app, declaras haber leído, entendido y aceptado estos términos.",
+      "Este Acuerdo de Licencia de Usuario Final (\"Acuerdo\") es un acuerdo legal entre usted (\"Usuario\") y Buppi (\"Desarrollador\") que rige el uso de la aplicación móvil Buppi (\"App\").",
     sections: [
       {
-        heading: "1. Sobre el servicio",
+        heading: "1. Licencia",
         intro:
-          "Buppi Baby es una aplicación de seguimiento de la rutina infantil (alimentación, sueño, pañales, crecimiento, logros y otras actividades). Parte de las funciones es gratuita; las funcionalidades avanzadas requieren suscripción de pago.",
+          "La App se le otorga bajo licencia, no se vende. El Desarrollador le concede una licencia limitada, no exclusiva, intransferible y revocable para usar la App con fines personales y no comerciales, sujeta a este Acuerdo.",
       },
       {
-        heading: "2. Cuenta",
-        intro:
-          "Para usar la app creas una cuenta con Google o Apple. Eres responsable de mantener tus credenciales seguras y de toda actividad realizada en tu cuenta. La cuenta es personal e intransferible.",
-      },
-      {
-        heading: "3. Planes y suscripciones",
-        intro:
-          "Ofrecemos planes de suscripción auto-renovable (mensuales y anuales) vendidos a través de la App Store (iOS) y Google Play (Android). Los planes disponibles actualmente — nombre, duración y precio — se muestran dentro de la app en la pantalla de suscripción y en las fichas de las tiendas antes de confirmar la compra.",
-      },
-      {
-        heading: "4. Facturación, renovación y cancelación",
-        intro:
-          "Tu suscripción se procesa en tu cuenta de App Store o Google Play:",
+        heading: "2. Suscripciones",
+        intro: "La App puede ofrecer suscripciones con renovación automática.",
         items: [
-          { text: "El pago se cobra al confirmar la compra." },
-          {
-            text: "La suscripción se renueva automáticamente al final de cada periodo (mensual o anual) por el mismo importe, salvo cancelación con al menos 24 horas de antelación al final del ciclo actual.",
-          },
-          {
-            text: "Puedes cancelar cuando quieras en los ajustes de tu cuenta (iOS: Ajustes → Apple ID → Suscripciones; Android: Play Store → Suscripciones). La cancelación detiene la renovación; el acceso continúa hasta el fin del periodo ya pagado.",
-          },
-          {
-            text: "Los reembolsos se rigen por las políticas de Apple y Google. No procesamos reembolsos directamente.",
-          },
-          {
-            text: "Los periodos de prueba gratuita, cuando se ofrecen, se convierten automáticamente en suscripción de pago si no se cancelan antes del vencimiento.",
-          },
+          { text: "El pago se cargará a su cuenta de Apple ID al confirmar la compra." },
+          { text: "Las suscripciones se renuevan automáticamente a menos que se cancelen al menos 24 horas antes del final del período vigente." },
+          { text: "Puede gestionar y cancelar suscripciones en la configuración de su cuenta." },
         ],
       },
       {
-        heading: "5. Uso aceptable",
-        intro: "Aceptas no:",
-        items: [
-          { text: "Usar la app con fines ilegales o que violen derechos de terceros." },
-          { text: "Intentar obtener acceso no autorizado a sistemas, cuentas o datos." },
-          { text: "Aplicar ingeniería inversa, descompilar o distribuir copias de la aplicación." },
-          { text: "Introducir información falsa o contenido ofensivo, abusivo o que exponga a terceros." },
-        ],
+        heading: "3. Responsabilidad",
+        intro:
+          "La App y su contenido son proporcionados por el Desarrollador. Apple Inc. no es responsable de la App, su contenido ni de ningún servicio de mantenimiento o soporte.",
       },
       {
-        heading: "6. Tus datos",
+        heading: "4. Mantenimiento y Soporte",
         intro:
-          "Tus datos y los de los bebés registrados te pertenecen. Los almacenamos cifrados y los procesamos conforme a la Política de Privacidad. Puedes exportar o eliminar tu cuenta cuando quieras (ver páginas de Privacidad y Eliminar cuenta).",
+          "El Desarrollador es el único responsable de proporcionar mantenimiento y soporte para la App. Apple no tiene ninguna obligación de proporcionar servicios de mantenimiento o soporte.",
       },
       {
-        heading: "7. Disponibilidad y cambios",
+        heading: "5. Garantía",
         intro:
-          "El servicio se ofrece \"tal cual\" y \"según disponibilidad\". Podemos actualizar funciones, precios, restringir accesos o discontinuar partes del servicio. Los cambios relevantes se comunicarán en la app o por email.",
+          "La App se proporciona \"TAL CUAL\" y \"SEGÚN DISPONIBILIDAD\" sin garantías de ningún tipo. En la máxima medida permitida por la ley, el Desarrollador renuncia a todas las garantías, ya sean expresas o implícitas.",
       },
       {
-        heading: "8. Responsabilidades y límites",
+        heading: "6. Limitación de Responsabilidad",
         intro:
-          "Buppi Baby es una herramienta informativa de seguimiento. No sustituye el diagnóstico, tratamiento o asesoramiento médico, nutricional o pediátrico. Las decisiones de salud deben tomarse con profesionales cualificados. En la máxima medida permitida por la ley aplicable, nuestra responsabilidad por daños indirectos, incidentales o consecuentes se limita al importe pagado por la suscripción en los últimos 12 meses.",
+          "En la medida permitida por la ley, el Desarrollador no será responsable de ningún daño indirecto, incidental o consecuente que surja del uso de la App.",
       },
       {
-        heading: "9. Terminación",
+        heading: "7. Cumplimiento Legal",
         intro:
-          "Podemos suspender o cancelar tu cuenta por violar estos términos. Puedes cancelar tu cuenta cuando quieras en \"Eliminar cuenta\" dentro de la app.",
+          "Usted acepta usar la App de conformidad con todas las leyes y regulaciones aplicables.",
       },
       {
-        heading: "10. Ley aplicable",
+        heading: "8. Terminación",
         intro:
-          "Estos términos se rigen por las leyes de la República Federativa de Brasil. Las partes eligen los tribunales de São Paulo/SP como foro exclusivo, salvo que la legislación de consumo disponga lo contrario.",
+          "Esta licencia es efectiva hasta su terminación. Sus derechos se rescindirán automáticamente si incumple cualquier término de este Acuerdo.",
+      },
+      {
+        heading: "9. Beneficiario Tercero",
+        intro:
+          "Apple Inc. y sus filiales son beneficiarias terceras de este Acuerdo y, al aceptar este Acuerdo, tendrán el derecho de hacer cumplir este Acuerdo en su contra.",
+      },
+      {
+        heading: "10. Ley Aplicable",
+        intro: "Este Acuerdo se rige por las leyes de Brasil.",
       },
     ],
     contact: {
       heading: "11. Contacto",
-      text: "¿Dudas sobre estos términos? Escribe a ",
-      email: "suporte@buppi.baby",
+      text: "Si tiene alguna pregunta, contáctenos: ",
+      email: "support@buppi.baby",
     },
   },
 };
