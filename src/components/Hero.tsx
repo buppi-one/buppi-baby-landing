@@ -31,6 +31,8 @@ export function Hero({ locale }: { locale: Locale }) {
             <img
               alt={m.imageAlt}
               src="/hero.webp"
+              srcSet="/hero-400.webp 400w, /hero.webp 800w"
+              sizes="(min-width: 1024px) 400px, min(100vw, 400px)"
               width={800}
               height={800}
               fetchPriority="high"
