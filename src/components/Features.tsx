@@ -1,6 +1,17 @@
+import { Icon, type IconName } from "@/components/Icon";
 import { getMessages, type Locale } from "@/i18n";
 
-const TIMELINE_STYLES = [
+type TimelineStyle = {
+  icon: IconName;
+  iconBg: string;
+  iconColor: string;
+  highlight: boolean;
+  muted: boolean;
+};
+
+type CardStyle = { icon: IconName; iconColor: string; bg: string };
+
+const TIMELINE_STYLES: readonly TimelineStyle[] = [
   {
     icon: "nights_stay",
     iconBg: "bg-lavender dark:bg-slate-800",
@@ -29,9 +40,9 @@ const TIMELINE_STYLES = [
     highlight: false,
     muted: true,
   },
-] as const;
+];
 
-const CARD_STYLES = [
+const CARD_STYLES: readonly CardStyle[] = [
   { icon: "bathtub", iconColor: "text-primary", bg: "bg-lavender dark:bg-slate-800" },
   {
     icon: "vaccines",
@@ -48,7 +59,7 @@ const CARD_STYLES = [
     iconColor: "text-primary",
     bg: "bg-primary/10 dark:bg-slate-800",
   },
-] as const;
+];
 
 export function Features({ locale }: { locale: Locale }) {
   const m = getMessages(locale).features;
@@ -73,9 +84,7 @@ export function Features({ locale }: { locale: Locale }) {
                   <div
                     className={`absolute -left-[53px] top-6 w-12 h-12 rounded-full ${style.iconBg} flex items-center justify-center border-4 border-white dark:border-background-dark z-10`}
                   >
-                    <span className={`material-icons-round ${style.iconColor}`}>
-                      {style.icon}
-                    </span>
+                    <Icon name={style.icon} className={style.iconColor} />
                   </div>
                   <div
                     className={
@@ -86,14 +95,14 @@ export function Features({ locale }: { locale: Locale }) {
                   >
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <h4 className="text-lg font-bold">{entry.title}</h4>
+                        <h3 className="text-lg font-bold">{entry.title}</h3>
                         <p className="text-slate-500">{entry.subtitle}</p>
                       </div>
                       <div className="text-right">
                         <p
                           className={
                             style.muted
-                              ? "font-medium text-slate-400"
+                              ? "font-medium text-slate-500 dark:text-slate-400"
                               : "font-medium text-slate-800 dark:text-white"
                           }
                         >
@@ -102,7 +111,7 @@ export function Features({ locale }: { locale: Locale }) {
                         <span
                           className={
                             style.muted
-                              ? "text-slate-400 text-sm"
+                              ? "text-slate-500 dark:text-slate-400 text-sm"
                               : "text-secondary text-sm font-medium"
                           }
                         >
@@ -121,12 +130,12 @@ export function Features({ locale }: { locale: Locale }) {
               return (
                 <div key={i} className={`p-6 ${style.bg} rounded-3xl text-center`}>
                   <div className="w-12 h-12 bg-white dark:bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
-                    <span className={`material-icons-round ${style.iconColor}`}>
-                      {style.icon}
-                    </span>
+                    <Icon name={style.icon} className={style.iconColor} />
                   </div>
-                  <h5 className="font-bold">{card.title}</h5>
-                  <p className="text-xs text-slate-500 mt-1">{card.subtitle}</p>
+                  <h3 className="font-bold">{card.title}</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                    {card.subtitle}
+                  </p>
                 </div>
               );
             })}

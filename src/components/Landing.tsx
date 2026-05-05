@@ -11,11 +11,13 @@ export function Landing({ locale }: { locale: Locale }) {
   return (
     <>
       <Nav locale={locale} />
-      <Hero locale={locale} />
-      <Features locale={locale} />
-      <Sharing locale={locale} />
-      <Stats locale={locale} />
-      <CTA locale={locale} />
+      <main>
+        <Hero locale={locale} />
+        <Features locale={locale} />
+        <Sharing locale={locale} />
+        <Stats locale={locale} />
+        <CTA locale={locale} />
+      </main>
       <Footer locale={locale} />
     </>
   );

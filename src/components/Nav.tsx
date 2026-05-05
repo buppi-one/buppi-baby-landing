@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Icon, type IconName } from "@/components/Icon";
 import {
   getMessages,
   LOCALES,
@@ -13,7 +14,7 @@ import {
 } from "@/i18n";
 
 type Theme = "light" | "dark" | "system";
-const THEME_ICONS: Record<Theme, string> = {
+const THEME_ICONS: Record<Theme, IconName> = {
   light: "light_mode",
   dark: "dark_mode",
   system: "contrast",
@@ -79,8 +80,19 @@ export function Nav({ locale }: { locale: Locale }) {
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <a href={localePath(locale, "/")} className="flex items-center">
-          {}
-          <img src="/logo-full.png" alt="Buppi Baby" className="h-10" />
+          <picture>
+            <source
+              type="image/webp"
+              srcSet="/logo-full.webp 1x, /logo-full-2x.webp 2x"
+            />
+            <img
+              src="/logo-full-fallback.png"
+              alt="Buppi Baby"
+              width={140}
+              height={73}
+              className="h-10 w-auto"
+            />
+          </picture>
         </a>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <a
@@ -147,9 +159,10 @@ export function Nav({ locale }: { locale: Locale }) {
               aria-label={m.themeAria}
               className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
             >
-              <span className="material-icons-round text-slate-600 dark:text-slate-300 text-xl">
-                {THEME_ICONS[theme]}
-              </span>
+              <Icon
+                name={THEME_ICONS[theme]}
+                className="text-slate-600 dark:text-slate-300 text-xl"
+              />
             </button>
             {themeOpen && (
               <div className="absolute right-0 top-12 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 py-2 min-w-[140px] z-50">
@@ -161,9 +174,7 @@ export function Nav({ locale }: { locale: Locale }) {
                       theme === t ? "text-primary font-medium" : ""
                     }`}
                   >
-                    <span className="material-icons-round text-lg">
-                      {THEME_ICONS[t]}
-                    </span>
+                    <Icon name={THEME_ICONS[t]} className="text-lg" />
                     {m.theme[t]}
                   </button>
                 ))}

@@ -1,3 +1,4 @@
+import { Icon } from "@/components/Icon";
 import { getMessages, type Locale } from "@/i18n";
 
 const LEGEND_COLORS = ["bg-[#60A5FA]", "bg-accent", "bg-primary"] as const;
@@ -20,20 +21,22 @@ export function Stats({ locale }: { locale: Locale }) {
           <div className="bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] shadow-xl border border-slate-100 dark:border-slate-700">
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                <span className="material-icons-round text-primary">
-                  nights_stay
-                </span>
+                <Icon name="nights_stay" className="text-primary" />
               </div>
               <h3 className="text-2xl font-bold">{m.sleep.title}</h3>
             </div>
             <div className="grid grid-cols-2 gap-4 mb-8">
               <div className="p-6 bg-lavender dark:bg-slate-900 rounded-3xl">
                 <p className="text-3xl font-bold mb-1">{m.sleep.avgValue}</p>
-                <p className="text-sm text-slate-500">{m.sleep.avgLabel}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  {m.sleep.avgLabel}
+                </p>
               </div>
               <div className="p-6 bg-lavender dark:bg-slate-900 rounded-3xl">
                 <p className="text-3xl font-bold mb-1">{m.sleep.totalValue}</p>
-                <p className="text-sm text-slate-500">{m.sleep.totalLabel}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  {m.sleep.totalLabel}
+                </p>
               </div>
             </div>
             <div className="space-y-4">
@@ -59,9 +62,7 @@ export function Stats({ locale }: { locale: Locale }) {
           <div className="bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] shadow-xl border border-slate-100 dark:border-slate-700">
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center">
-                <span className="material-icons-round text-secondary">
-                  child_care
-                </span>
+                <Icon name="child_care" className="text-secondary" />
               </div>
               <h3 className="text-2xl font-bold">{m.diaper.title}</h3>
             </div>
@@ -120,7 +121,9 @@ export function Stats({ locale }: { locale: Locale }) {
                     />
                     <span className="font-medium">{row.label}</span>
                   </div>
-                  <span className="text-slate-400">{row.pct}</span>
+                  <span className="text-slate-600 dark:text-slate-400">
+                    {row.pct}
+                  </span>
                 </div>
               ))}
             </div>

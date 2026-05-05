@@ -1,3 +1,4 @@
+import { Icon } from "@/components/Icon";
 import { getMessages, type Locale } from "@/i18n";
 
 export function Sharing({ locale }: { locale: Locale }) {
@@ -10,55 +11,58 @@ export function Sharing({ locale }: { locale: Locale }) {
             <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-2xl space-y-4 max-w-md mx-auto">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-bold">{m.card.title}</h3>
-                <button className="w-10 h-10 bg-primary/10 rounded-full text-primary flex items-center justify-center">
-                  <span className="material-icons-round">add</span>
+                <button
+                  type="button"
+                  aria-label={m.card.title}
+                  className="w-10 h-10 bg-primary/10 rounded-full text-primary flex items-center justify-center"
+                >
+                  <Icon name="add" />
                 </button>
               </div>
               <div className="p-4 bg-primary/5 dark:bg-primary/10 rounded-2xl border-2 border-primary/20 flex items-center gap-4">
                 <div className="w-14 h-14 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center shadow-sm">
-                  <span className="material-icons-round text-primary text-3xl">
-                    face
-                  </span>
+                  <Icon name="face" className="text-primary text-3xl" />
                 </div>
                 <div className="flex-1">
                   <p className="font-bold text-lg">{m.card.activeName}</p>
-                  <p className="text-sm text-slate-500">{m.card.activeDob}</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    {m.card.activeDob}
+                  </p>
                 </div>
-                <span className="material-icons-round text-primary">
-                  check_circle
-                </span>
+                <Icon
+                  name="check_circle"
+                  className="text-primary"
+                  title={m.card.sharedTag}
+                />
               </div>
               <div className="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 flex items-center gap-4">
                 <div className="w-14 h-14 bg-slate-50 dark:bg-slate-700 rounded-full flex items-center justify-center">
-                  <span className="material-icons-round text-slate-300 text-3xl">
-                    face
-                  </span>
+                  <Icon name="face" className="text-slate-400 text-3xl" />
                 </div>
                 <div className="flex-1">
                   <p className="font-bold text-lg text-slate-700 dark:text-slate-300">
                     {m.card.sharedName}
                   </p>
-                  <div className="flex items-center gap-1 text-slate-400 text-sm">
-                    <span className="material-icons-round text-xs">group</span>
+                  <div className="flex items-center gap-1 text-slate-600 dark:text-slate-400 text-sm">
+                    <Icon name="group" className="text-xs" />
                     <span>{m.card.sharedTag}</span>
                   </div>
                 </div>
               </div>
               <div className="p-4 bg-secondary/5 rounded-2xl border border-dashed border-secondary/40 flex items-center gap-4 cursor-pointer hover:bg-secondary/10 transition-colors">
                 <div className="w-12 h-12 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center">
-                  <span className="material-icons-round text-secondary">
-                    key
-                  </span>
+                  <Icon name="key" className="text-secondary" />
                 </div>
                 <div className="flex-1">
                   <p className="font-bold">{m.card.inviteTitle}</p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-600 dark:text-slate-400">
                     {m.card.inviteSubtitle}
                   </p>
                 </div>
-                <span className="material-icons-round text-slate-400">
-                  chevron_right
-                </span>
+                <Icon
+                  name="chevron_right"
+                  className="text-slate-500 dark:text-slate-400"
+                />
               </div>
             </div>
           </div>
@@ -73,7 +77,7 @@ export function Sharing({ locale }: { locale: Locale }) {
               {m.bullets.map((b) => (
                 <li key={b} className="flex items-center gap-3">
                   <span className="w-6 h-6 rounded-full bg-secondary/20 text-secondary flex items-center justify-center">
-                    <span className="material-icons-round text-sm">check</span>
+                    <Icon name="check" className="text-sm" />
                   </span>
                   <span className="font-medium">{b}</span>
                 </li>

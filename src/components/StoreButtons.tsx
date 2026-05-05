@@ -41,6 +41,8 @@ export function StoreButtons({
           <img
             src={`/badges/appstore-${locale}-white.svg`}
             alt={labels.apple}
+            width={120}
+            height={40}
             className={`${height} w-auto`}
           />
         ) : (
@@ -48,11 +50,15 @@ export function StoreButtons({
             <img
               src={`/badges/appstore-${locale}-black.svg`}
               alt={labels.apple}
+              width={120}
+              height={40}
               className={`${height} w-auto block dark:hidden`}
             />
             <img
               src={`/badges/appstore-${locale}-white.svg`}
               alt={labels.apple}
+              width={120}
+              height={40}
               className={`${height} w-auto hidden dark:block`}
             />
           </>
@@ -66,6 +72,8 @@ export function StoreButtons({
         <img
           src={`/badges/googleplay-${locale}.svg`}
           alt={labels.google}
+          width={135}
+          height={40}
           className={`${height} w-auto`}
         />
       </a>

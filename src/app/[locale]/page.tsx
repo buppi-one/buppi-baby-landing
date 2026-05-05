@@ -26,8 +26,25 @@ export async function generateMetadata({
     openGraph: {
       title: m.ogTitle,
       description: m.ogDescription,
-      images: ["/logo-full.png"],
+      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
       type: "website",
+      locale: locale.replace("-", "_"),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: m.ogTitle,
+      description: m.ogDescription,
+      images: ["/og-image.png"],
+    },
+    alternates: {
+      canonical: locale === "pt-BR" ? "/" : `/${locale}/`,
+      languages: {
+        "pt-BR": "/",
+        en: "/en/",
+        es: "/es/",
+        fr: "/fr/",
+        "x-default": "/",
+      },
     },
   };
 }
