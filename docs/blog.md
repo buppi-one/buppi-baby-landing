@@ -97,19 +97,34 @@ categoria inexistente, cover apontando pra arquivo que não existe, etc.).
 
 ### Categorias canônicas (escolher 1 por artigo)
 
-| Slug interno | pt-BR | EN | ES | FR |
-|---|---|---|---|---|
-| `pregnancy` | Gestação | Pregnancy | Embarazo | Grossesse |
-| `baby-care` | Cuidados do bebê | Baby care | Cuidados del bebé | Soins du bébé |
-| `development` | Desenvolvimento | Development | Desarrollo | Développement |
-| `sleep` | Sono | Sleep | Sueño | Sommeil |
-| `feeding` | Alimentação | Feeding | Alimentación | Alimentation |
-| `health` | Saúde | Health | Salud | Santé |
-| `news` | Novidades | News | News | Actualités |
+São **6 categorias**, na ordem em que aparecem no filtro do blog:
 
-A URL da categoria é traduzida (`/blog/categoria/cuidados-do-bebe/` em pt-BR vs
-`/en/blog/category/baby-care/` em EN). Tudo isso vem da configuração — você só precisa
-referenciar pelo slug interno em inglês.
+| # | Slug interno | pt-BR | EN | ES | FR |
+|---|---|---|---|---|---|
+| 1 | `sleep` | Sono | Sleep | Sueño | Sommeil |
+| 2 | `feeding` | Alimentação | Feeding | Alimentación | Alimentation |
+| 3 | `development` | Desenvolvimento | Development | Desarrollo | Développement |
+| 4 | `health` | Saúde | Health | Salud | Santé |
+| 5 | `expecting-and-new-parents` | Gestação e novos pais | Expecting & New Parents | Embarazo y nuevos padres | Grossesse et nouveaux parents |
+| 6 | `news` | Novidades | News | News | Actualités |
+
+A URL da categoria é **traduzida por idioma**:
+
+- pt-BR: `/blog/categoria/sono/`, `/blog/categoria/gestacao-e-novos-pais/`, etc.
+- EN: `/en/blog/category/sleep/`, `/en/blog/category/expecting-and-new-parents/`, etc.
+
+Você só precisa referenciar pelo **slug interno em inglês** no frontmatter — o resto é
+configurado em `src/lib/blog/categories.ts`.
+
+### Quando usar cada uma
+
+- **Sleep** — soneca, sono noturno, regressões, métodos de sleep training, transições
+- **Feeding** — amamentação, fórmula, introdução alimentar, alergias, BLW
+- **Development** — marcos motores, fala, cognitivo, brincadeiras por idade
+- **Health** — vacinas, doenças comuns, sinais de alerta, consultas
+- **Expecting & New Parents** — pré-natal, parto, primeiros meses, cuidados básicos do
+  recém-nascido, cólica, banho, troca de fralda, saúde mental dos pais
+- **News** — atualizações do app Buppi (releases, novas features)
 
 ### Tags
 
@@ -269,8 +284,8 @@ faq:
 ## 7. Referências científicas — formato padronizado
 
 Referências são **opcionais tecnicamente**, mas **fortemente recomendadas** em qualquer
-artigo das categorias `pregnancy`, `baby-care`, `development`, `sleep`, `feeding` e `health`.
-Em artigos de `news` (sobre o app), normalmente não se aplicam.
+artigo das categorias `sleep`, `feeding`, `development`, `health` e
+`expecting-and-new-parents`. Em artigos de `news` (sobre o app), normalmente não se aplicam.
 
 ```yaml
 references:

@@ -9,48 +9,6 @@ type CategoryMeta = {
 };
 
 export const CATEGORIES: Record<CategorySlug, CategoryMeta> = {
-  pregnancy: {
-    urlSlug: {
-      "pt-BR": "gestacao",
-      en: "pregnancy",
-      es: "embarazo",
-      fr: "grossesse",
-    },
-    label: {
-      "pt-BR": "Gestação",
-      en: "Pregnancy",
-      es: "Embarazo",
-      fr: "Grossesse",
-    },
-  },
-  "baby-care": {
-    urlSlug: {
-      "pt-BR": "cuidados-do-bebe",
-      en: "baby-care",
-      es: "cuidados-del-bebe",
-      fr: "soins-du-bebe",
-    },
-    label: {
-      "pt-BR": "Cuidados do bebê",
-      en: "Baby care",
-      es: "Cuidados del bebé",
-      fr: "Soins du bébé",
-    },
-  },
-  development: {
-    urlSlug: {
-      "pt-BR": "desenvolvimento",
-      en: "development",
-      es: "desarrollo",
-      fr: "developpement",
-    },
-    label: {
-      "pt-BR": "Desenvolvimento",
-      en: "Development",
-      es: "Desarrollo",
-      fr: "Développement",
-    },
-  },
   sleep: {
     urlSlug: {
       "pt-BR": "sono",
@@ -79,6 +37,20 @@ export const CATEGORIES: Record<CategorySlug, CategoryMeta> = {
       fr: "Alimentation",
     },
   },
+  development: {
+    urlSlug: {
+      "pt-BR": "desenvolvimento",
+      en: "development",
+      es: "desarrollo",
+      fr: "developpement",
+    },
+    label: {
+      "pt-BR": "Desenvolvimento",
+      en: "Development",
+      es: "Desarrollo",
+      fr: "Développement",
+    },
+  },
   health: {
     urlSlug: {
       "pt-BR": "saude",
@@ -91,6 +63,20 @@ export const CATEGORIES: Record<CategorySlug, CategoryMeta> = {
       en: "Health",
       es: "Salud",
       fr: "Santé",
+    },
+  },
+  "expecting-and-new-parents": {
+    urlSlug: {
+      "pt-BR": "gestacao-e-novos-pais",
+      en: "expecting-and-new-parents",
+      es: "embarazo-y-nuevos-padres",
+      fr: "grossesse-et-nouveaux-parents",
+    },
+    label: {
+      "pt-BR": "Gestação e novos pais",
+      en: "Expecting & New Parents",
+      es: "Embarazo y nuevos padres",
+      fr: "Grossesse et nouveaux parents",
     },
   },
   news: {

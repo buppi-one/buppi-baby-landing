@@ -4,12 +4,11 @@ import { join } from "node:path";
 const LOCALES = ["pt-BR", "en", "es", "fr"] as const;
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const VALID_CATEGORIES = [
-  "pregnancy",
-  "baby-care",
-  "development",
   "sleep",
   "feeding",
+  "development",
   "health",
+  "expecting-and-new-parents",
   "news",
 ] as const;
 
@@ -46,7 +45,7 @@ draft: true
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const id = args.id;
-  const category = args.category ?? "baby-care";
+  const category = args.category ?? "expecting-and-new-parents";
 
   if (!id) {
     console.error("Usage: npm run new-post -- --id=<article-id> [--category=<slug>]");

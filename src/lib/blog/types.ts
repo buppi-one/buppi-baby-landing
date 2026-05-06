@@ -1,12 +1,11 @@
 import type { Locale } from "@/i18n";
 
 export type CategorySlug =
-  | "pregnancy"
-  | "baby-care"
-  | "development"
   | "sleep"
   | "feeding"
+  | "development"
   | "health"
+  | "expecting-and-new-parents"
   | "news";
 
 export type FaqItem = {
