@@ -7,33 +7,12 @@ export function TermsContent({ locale }: { locale: Locale }) {
     <PolicyShell
       locale={locale}
       badge={m.badge}
+      badgeIcon="trophy"
       title={m.title}
       updated={m.updated}
-    >
-      <p>{m.intro}</p>
-
-      {m.sections.map((section) => (
-        <div key={section.heading}>
-          <h2>{section.heading}</h2>
-          {section.intro && <p>{section.intro}</p>}
-          {section.items && (
-            <ul>
-              {section.items.map((item, i) => (
-                <li key={i}>
-                  {item.bold && <strong>{item.bold}</strong>}
-                  {item.bold ? ` ${item.text}` : item.text}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
-
-      <h2>{m.contact.heading}</h2>
-      <p>
-        {m.contact.text}
-        <a href={`mailto:${m.contact.email}`}>{m.contact.email}</a>.
-      </p>
-    </PolicyShell>
+      intro={m.intro}
+      sections={m.sections}
+      contact={m.contact}
+    />
   );
 }
