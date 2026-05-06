@@ -40,6 +40,9 @@ export function Nav({ locale }: { locale: Locale }) {
   const [themeOpen, setThemeOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [pageAlternates, setPageAlternates] = useState<
+    Partial<Record<Locale, string>>
+  >({});
   const themeRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
 
@@ -54,6 +57,16 @@ export function Nav({ locale }: { locale: Locale }) {
     media.addEventListener("change", listener);
     return () => media.removeEventListener("change", listener);
   }, []);
+
+  useEffect(() => {
+    const map = (window as unknown as {
+      __pageAlternates?: Partial<Record<Locale, string>>;
+    }).__pageAlternates;
+    if (map) setPageAlternates(map);
+  }, [pathname]);
+
+  const hrefForLocale = (l: Locale): string =>
+    pageAlternates[l] ?? localePath(l, cleanPath);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -150,19 +163,11 @@ export function Nav({ locale }: { locale: Locale }) {
                 {LOCALES.map((l) => (
                   <a
                     key={l}
-                    href={localePath(l, cleanPath)}
-                    onClick={(e) => {
+                    href={hrefForLocale(l)}
+                    onClick={() => {
                       try {
                         localStorage.setItem("locale", l);
                       } catch {}
-                      const map = (window as unknown as {
-                        __pageAlternates?: Partial<Record<Locale, string>>;
-                      }).__pageAlternates;
-                      const override = map?.[l];
-                      if (override) {
-                        e.preventDefault();
-                        window.location.assign(override);
-                      }
                     }}
                     className={`block px-4 py-2 text-sm hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] transition-colors ${
                       locale === l
