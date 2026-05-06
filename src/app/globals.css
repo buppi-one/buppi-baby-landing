@@ -5,16 +5,42 @@
 @theme {
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-rounded: var(--font-quicksand), var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
 
-  --color-primary: #6056d7;
-  --color-secondary: #79d2b5;
+  /* Brand — lavender / mint / peach */
+  --color-primary: #ac92ee;
+  --color-primary-light: #d4d2f0;
+  --color-primary-dark: #6056d7;
+  --color-secondary: #92d6cf;
+  --color-secondary-dark: #5ba890;
   --color-accent: #ffb84d;
+  --color-accent-peach: #ffbfa5;
+  --color-ink: #42376b;
   --color-lavender: #f3f2ff;
-  --color-background-light: #fdf8f3;
-  --color-background-dark: #121212;
+
+  /* Surfaces — light */
+  --color-background-light: #faf9f6;
+  --color-background-soft: #fdf8f3;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f5f3ef;
+  --color-border-warm: #e8e6e0;
+  --color-separator-warm: #ddd9d0;
+
+  /* Surfaces — dark */
+  --color-background-dark: #181828;
+  --color-surface-dark: #1e1e32;
+  --color-surface-elevated-dark: #252542;
+  --color-border-dark: #2d2d4a;
+
+  /* Text — light */
+  --color-fg: #3d3d5c;
+  --color-fg-secondary: #6b6b8d;
+  --color-fg-muted: #a8a8c0;
 
   --radius: 1.5rem;
   --radius-large: 2.5rem;
+  --radius-xl: 2rem;
+  --radius-2xl: 2.5rem;
 }
 
 @layer base {
@@ -22,62 +48,98 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply font-sans antialiased text-slate-800 dark:text-slate-100 bg-background-light dark:bg-background-dark;
+    @apply font-sans antialiased;
+    color: var(--color-fg);
+    background: var(--color-background-light);
+  }
+  .dark body {
+    color: #ffffff;
+    background: var(--color-background-dark);
+  }
+  /* Optional AMOLED variant — hidden until exposed in UI. */
+  [data-theme="deepblack"] body {
+    color: #f0f0f0;
+    background: #000000;
   }
 }
 
 @layer components {
-  .timeline-line::before {
-    content: "";
-    position: absolute;
-    left: 23px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #e5e7eb;
-  }
-  .dark .timeline-line::before {
-    background: #374151;
-  }
+  /* Soft brand gradient used in the hero. */
   .bg-gradient-soft {
     background: linear-gradient(135deg, #f3f2ff 0%, #fdf8f3 100%);
   }
   .dark .bg-gradient-soft {
-    background: linear-gradient(135deg, #1e1b4b 0%, #121212 100%);
+    background: linear-gradient(135deg, #1e1b4b 0%, #181828 100%);
   }
 
+  /* Dreamier vertical gradient for the hero. */
+  .bg-gradient-dream {
+    background: linear-gradient(180deg, #e9d7ff 0%, #c9e8e2 45%, #fdf8f3 100%);
+  }
+  .dark .bg-gradient-dream {
+    background: linear-gradient(180deg, #1e1b4b 0%, #1c1c30 50%, #181828 100%);
+  }
+
+  /* Pill eyebrow / section tag. */
+  .eyebrow {
+    @apply inline-block rounded-full font-bold uppercase tracking-wider text-xs px-3 py-1.5;
+    background: rgba(146, 214, 207, 0.18);
+    color: var(--color-secondary-dark);
+  }
+  .dark .eyebrow {
+    background: rgba(146, 214, 207, 0.12);
+    color: var(--color-secondary);
+  }
+
+  /* Card surface used across sections. */
+  .card-soft {
+    background: var(--color-surface);
+    border-radius: var(--radius-2xl);
+    box-shadow: 0 10px 30px -12px rgba(66, 55, 107, 0.18);
+    border: 1px solid var(--color-border-warm);
+  }
+  .dark .card-soft {
+    background: var(--color-surface-dark);
+    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.45);
+    border-color: var(--color-border-dark);
+  }
+
+  /* Article reading typography (blog). */
   .article-body {
     font-size: 1.125rem;
     line-height: 1.75;
-    color: rgb(51 65 85);
+    color: var(--color-fg);
   }
   .dark .article-body {
-    color: rgb(203 213 225);
+    color: #cbd5e1;
   }
   .article-body > * + * {
     margin-top: 1.25rem;
   }
   .article-body h2 {
+    font-family: var(--font-display);
     font-size: 1.875rem;
     font-weight: 700;
     line-height: 1.25;
     margin-top: 3rem;
     margin-bottom: 0.5rem;
-    color: rgb(15 23 42);
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
   }
   .dark .article-body h2 {
-    color: rgb(255 255 255);
+    color: #ffffff;
   }
   .article-body h3 {
+    font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.3;
     margin-top: 2.25rem;
     margin-bottom: 0.5rem;
-    color: rgb(15 23 42);
+    color: var(--color-ink);
   }
   .dark .article-body h3 {
-    color: rgb(255 255 255);
+    color: #ffffff;
   }
   .article-body h2 .heading-anchor,
   .article-body h3 .heading-anchor {
@@ -85,17 +147,20 @@
     text-decoration: none;
   }
   .article-body strong {
-    color: rgb(15 23 42);
+    color: var(--color-ink);
     font-weight: 700;
   }
   .dark .article-body strong {
-    color: rgb(255 255 255);
+    color: #ffffff;
   }
   .article-body a {
-    color: var(--color-primary);
+    color: var(--color-primary-dark);
     text-decoration: underline;
     text-underline-offset: 2px;
-    font-weight: 500;
+    font-weight: 600;
+  }
+  .dark .article-body a {
+    color: var(--color-primary);
   }
   .article-body ul,
   .article-body ol {
@@ -113,7 +178,7 @@
   .article-body blockquote {
     border-left: 4px solid var(--color-primary);
     padding: 0.75rem 1.25rem;
-    background: rgb(243 242 255);
+    background: var(--color-lavender);
     border-radius: 0.75rem;
     font-style: italic;
   }
@@ -121,19 +186,20 @@
     background: rgb(30 27 75 / 0.5);
   }
   .article-body code:not(pre code) {
-    background: rgb(241 245 249);
-    color: var(--color-primary);
+    background: var(--color-surface-elevated);
+    color: var(--color-primary-dark);
     padding: 0.125rem 0.375rem;
     border-radius: 0.375rem;
     font-size: 0.95em;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   .dark .article-body code:not(pre code) {
-    background: rgb(30 41 59);
+    background: var(--color-surface-elevated-dark);
+    color: var(--color-primary);
   }
   .article-body pre {
-    background: rgb(15 23 42);
-    color: rgb(248 250 252);
+    background: #15152a;
+    color: #f8fafc;
     padding: 1.25rem;
     border-radius: 1rem;
     overflow-x: auto;
@@ -146,19 +212,19 @@
   }
   .article-body th,
   .article-body td {
-    border-bottom: 1px solid rgb(226 232 240);
+    border-bottom: 1px solid var(--color-border-warm);
     padding: 0.625rem 0.75rem;
     text-align: left;
   }
   .dark .article-body th,
   .dark .article-body td {
-    border-color: rgb(51 65 85);
+    border-color: var(--color-border-dark);
   }
   .article-body th {
     font-weight: 700;
-    background: rgb(248 250 252);
+    background: var(--color-surface-elevated);
   }
   .dark .article-body th {
-    background: rgb(15 23 42 / 0.5);
+    background: rgba(37, 37, 66, 0.6);
   }
 }

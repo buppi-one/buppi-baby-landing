@@ -9,3 +9,4 @@ out
 
 # generated from content/blog at build time
 public/blog
+_design-source
