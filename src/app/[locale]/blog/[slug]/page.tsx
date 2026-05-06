@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { Article } from "@/components/blog/Article";
 import { RedirectScript } from "@/components/blog/RedirectScript";
+import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { isLocale } from "@/i18n";
 import { getAlternatesMap, getArticle, getArticlesByLocale } from "@/lib/blog/loader";
 import { buildArticleMetadata } from "@/lib/blog/metadata";
@@ -46,6 +47,7 @@ export default async function LocalizedBlogArticlePage({
       <main>
         <RedirectScript articleId={article.id} alternates={getAlternatesMap()} />
         <Article article={article} />
+        <RelatedPosts current={article} />
       </main>
       <Footer locale={locale as RouteLocale} />
     </>

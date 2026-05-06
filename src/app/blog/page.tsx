@@ -18,6 +18,9 @@ export function generateMetadata(): Metadata {
         fr: "/fr/blog/",
         "x-default": "/blog/",
       },
+      types: {
+        "application/rss+xml": [{ url: "/blog/feed.xml", title: m.title }],
+      },
     },
   };
 }

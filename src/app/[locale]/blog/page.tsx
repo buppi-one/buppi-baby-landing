@@ -34,6 +34,11 @@ export async function generateMetadata({
         fr: "/fr/blog/",
         "x-default": "/blog/",
       },
+      types: {
+        "application/rss+xml": [
+          { url: `/${locale}/blog/feed.xml`, title: m.title },
+        ],
+      },
     },
   };
 }
