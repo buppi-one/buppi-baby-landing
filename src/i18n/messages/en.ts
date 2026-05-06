@@ -406,4 +406,15 @@ export const en: Messages = {
       email: "support@buppi.baby",
     },
   },
+  blog: {
+    title: "Blog",
+    description: "Practical content about pregnancy, sleep, feeding, and your baby's development.",
+    readingTime: (minutes) => `${minutes} min read`,
+    publishedOn: "Published on",
+    updatedOn: "Updated on",
+    backToBlog: "← Back to the blog",
+    categoryLabel: "Category",
+    relatedPosts: "Related articles",
+    empty: "No articles published yet.",
+  },
 };

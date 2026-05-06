@@ -138,4 +138,15 @@ export type Messages = {
       email: string;
     };
   };
+  blog: {
+    title: string;
+    description: string;
+    readingTime: (minutes: number) => string;
+    publishedOn: string;
+    updatedOn: string;
+    backToBlog: string;
+    categoryLabel: string;
+    relatedPosts: string;
+    empty: string;
+  };
 };

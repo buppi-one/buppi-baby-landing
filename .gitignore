@@ -6,3 +6,6 @@ out
 .DS_Store
 .pagespeed
 .cloudflare
+
+# generated from content/blog at build time
+public/blog

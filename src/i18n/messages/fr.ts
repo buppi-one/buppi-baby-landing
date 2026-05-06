@@ -429,4 +429,15 @@ export const fr: Messages = {
       email: "support@buppi.baby",
     },
   },
+  blog: {
+    title: "Blog",
+    description: "Contenu pratique sur la grossesse, le sommeil, l'alimentation et le développement du bébé.",
+    readingTime: (minutes) => `${minutes} min de lecture`,
+    publishedOn: "Publié le",
+    updatedOn: "Mis à jour le",
+    backToBlog: "← Retour au blog",
+    categoryLabel: "Catégorie",
+    relatedPosts: "Articles connexes",
+    empty: "Aucun article publié pour le moment.",
+  },
 };

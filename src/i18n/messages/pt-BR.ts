@@ -408,4 +408,15 @@ export const ptBR: Messages = {
       email: "suporte@buppi.baby",
     },
   },
+  blog: {
+    title: "Blog",
+    description: "Conteúdo prático sobre gestação, sono, alimentação e desenvolvimento do bebê.",
+    readingTime: (minutes) => `${minutes} min de leitura`,
+    publishedOn: "Publicado em",
+    updatedOn: "Atualizado em",
+    backToBlog: "← Voltar para o blog",
+    categoryLabel: "Categoria",
+    relatedPosts: "Artigos relacionados",
+    empty: "Nenhum artigo publicado ainda.",
+  },
 };
