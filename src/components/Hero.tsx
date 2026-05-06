@@ -167,7 +167,7 @@ function LiveActivityCard({ locale: _locale }: { locale: Locale }) {
         <button
           type="button"
           className="flex-1 py-1.5 rounded-lg text-white text-[11px] font-bold"
-          style={{ background: "var(--color-evt-sleep-night)" }}
+          style={{ background: "var(--color-secondary-dark)" }}
         >
           Acordou
         </button>

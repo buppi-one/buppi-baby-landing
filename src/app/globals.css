@@ -12,7 +12,7 @@
   --color-primary-light: #d4d2f0;
   --color-primary-dark: #6056d7;
   --color-secondary: #92d6cf;
-  --color-secondary-dark: #5ba890;
+  --color-secondary-dark: #2a8e7a;
   --color-accent: #ffb84d;
   --color-accent-peach: #ffbfa5;
   --color-ink: #42376b;
@@ -35,7 +35,7 @@
   /* Text — light */
   --color-fg: #3d3d5c;
   --color-fg-secondary: #6b6b8d;
-  --color-fg-muted: #a8a8c0;
+  --color-fg-muted: #7d7d9e;
 
   /* Event category colors (pastel — used in mockups) */
   --color-evt-nursing: #f6d38b;
