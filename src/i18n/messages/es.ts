@@ -11,29 +11,55 @@ export const es: Messages = {
   },
   nav: {
     features: "Funcionalidades",
-    sharing: "Compartir",
+    sharing: "Familia",
     stats: "Estadísticas",
     blog: "Blog",
-    download: "Descargar app",
+    download: "Descargar gratis",
+    signIn: "Iniciar sesión",
     themeAria: "Cambiar tema",
     languageAria: "Cambiar idioma",
     theme: { light: "Claro", dark: "Oscuro", system: "Sistema" },
   },
   hero: {
-    badge: "✨ CUIDADO 360 PARA TU BEBÉ",
-    titlePrefix: "La mejor app para seguir la ",
-    titleHighlight: "rutina",
-    titleSuffix: " de tu bebé!",
+    badge: "NUEVO",
+    badgeText: "Live Activity en la pantalla de bloqueo",
+    titlePrefix: "El compañero de rutina más ",
+    titleHighlight: "inteligente",
+    titleSuffix: " del bebé.",
     description:
-      "Simplifica la maternidad y la paternidad. Registra lactancia, sueño, pañales y mucho más en un solo lugar.",
+      "Registra lactancia, sueño y pañales en 1 toque. Buppi aprende el ritmo de tu bebé y predice la próxima siesta.",
     badgesNote: "Gratis para empezar • iOS y Android",
     imageAlt: "Bebé sonriendo",
+    bullets: [
+      "Gratis para empezar",
+      "iOS y Android",
+      "Sin anuncios",
+    ],
+    metrics: [
+      { value: "< 2s", label: "para registrar un evento" },
+      { value: "12+", label: "tipos de registro" },
+      { value: "6", label: "personas en el plan familiar" },
+      { value: "iOS · Android", label: "iPhone, iPad y Android" },
+    ],
     card: { tag: "TARDE", title: "Lactancia", subtitle: "Izquierdo • 44min" },
   },
   features: {
-    title: "Todo lo que necesitas registrar",
+    tag: "FUNCIONALIDADES",
+    title: "Pensado para los primeros mil días.",
     description:
       "Desde el primer día, sigue cada detalle del recorrido de tu pequeño con tarjetas intuitivas y una línea de tiempo organizada.",
+    blocks: [
+      { tag: "Sueño", title: "Ventanas previstas", desc: "Buppi observa el historial y te dice cuándo es probable que el bebé se canse." },
+      { tag: "Lactancia", title: "Cronómetro con lados", desc: "Sabe qué pecho empezó la última vez. Live Activity siempre a mano." },
+      { tag: "Pañales", title: "Registro en 1 toque", desc: "Pipí, caca, mixta. 2 segundos del desbloqueo a hecho." },
+      { tag: "Hitos", title: "Sin perder ninguno", desc: "Cada hito entra con fecha, foto y la edad exacta del bebé." },
+    ],
+    smallCards: [
+      { title: "Biberón", desc: "Volumen y fórmula" },
+      { title: "Crecimiento", desc: "Peso, altura, percentil" },
+      { title: "Baño", desc: "Higiene y temperatura" },
+      { title: "Paseos", desc: "Tiempo al aire libre" },
+    ],
     timeline: [
       {
         title: "Lactancia",
@@ -68,13 +94,24 @@ export const es: Messages = {
     ],
   },
   sharing: {
-    title: "Toda la familia conectada",
+    tag: "EN TIEMPO REAL",
+    title: "Toda la familia en la misma página.",
     description:
-      "Comparte los registros con tu pareja, abuelos o cuidadores en tiempo real. Cada persona puede tener su propio perfil y seguir la evolución del bebé.",
+      "Cuando cambias un pañal, todos lo ven. Cuando papá da el biberón, todos reaccionan. Sin grupos de WhatsApp, sin planillas.",
     bullets: [
       "Múltiples perfiles de bebés",
       "Sincronización instantánea en la nube",
-      "Invitaciones rápidas por código o enlace",
+      "Reacciones en los eventos de la familia",
+      "Permisos y privacidad por persona",
+    ],
+    feedTitle: "Actividad · Lina",
+    online: "{n} en línea",
+    reactQuick: "Reaccionar rápido",
+    feedItems: [
+      { who: "Marina", role: "mamá", action: "inició una siesta", detail: "14:18 · ventana esperada" },
+      { who: "Bruno", role: "papá", action: "amamantó a Lina", detail: "D 7min · I 8min · 13:16" },
+      { who: "Carol", role: "niñera", action: "cambió el pañal", detail: "pipí · 13:00" },
+      { who: "Abuela Alice", role: "abuela", action: "bañó a Lina", detail: "11:30 · 36°C" },
     ],
     card: {
       title: "Mis Bebés",
@@ -87,11 +124,15 @@ export const es: Messages = {
     },
   },
   stats: {
-    title: "Gráficos que cuentan historias",
+    tag: "ESTADÍSTICAS",
+    title: "Patrones claros, decisiones más ligeras.",
     description:
       "Entiende los patrones de sueño, alimentación y desarrollo de tu bebé a través de estadísticas detalladas y fáciles de leer.",
+    tabs: ["7 días", "30 días", "3 meses"],
     sleep: {
       title: "Resumen de Sueño",
+      mapTitle: "SUEÑO · MAPA DE 7 DÍAS",
+      mapTotal: "Total 13h54m",
       avgValue: "2h 44m",
       avgLabel: "Promedio diario",
       totalValue: "10",
@@ -99,20 +140,47 @@ export const es: Messages = {
       compareLabel: "Nocturno vs Diurno",
       night: "Nocturno: 44%",
       day: "Diurno: 56%",
+      legendSleeping: "Durmiendo",
+      legendNap: "Siesta",
     },
     diaper: {
       title: "Cambios de pañal",
+      todayLabel: "CAMBIOS · HOY",
       legend: [
-        { label: "4 Pipí", pct: "44%" },
-        { label: "1 Caca", pct: "12%" },
-        { label: "4 Ambos", pct: "44%" },
+        { label: "Pipí", pct: "4" },
+        { label: "Caca", pct: "1" },
+        { label: "Mixta", pct: "4" },
       ],
     },
+    nursing: {
+      title: "TOMAS · PROMEDIO",
+      value: "6,2",
+      desc: "veces al día · 14 min cada una",
+    },
+    milestones: {
+      title: "HITOS · ÚLTIMOS 90 DÍAS",
+      items: ["Sonrió", "Cabeza", "Sentó", "Gateó", "Caminó"],
+    },
+  },
+  faq: {
+    tag: "FAQ",
+    title: "Preguntas frecuentes",
+    items: [
+      { q: "¿Es realmente gratis?", a: "Sí. Las funciones esenciales — registro, línea de tiempo, 1 cuidador — son gratis para siempre." },
+      { q: "¿Funciona sin conexión?", a: "Sí. Todo lo que registras se guarda localmente y se sincroniza al volver a conectarse." },
+      { q: "¿Cuántas personas puedo añadir?", a: "Puedes añadir pareja, abuelos y niñera en el plan familiar — ideal para que todos sigan al bebé." },
+      { q: "¿Mis datos están seguros?", a: "Sí. Cifrado en tránsito y en reposo, cumplimos con los estándares LGPD y RGPD." },
+      { q: "¿Puedo cancelar cuando quiera?", a: "Sí. Sin multas, sin permanencia. Mantienes el acceso hasta el final del período pagado." },
+    ],
   },
   cta: {
-    title: "¿Listo para empezar?",
+    tag: "EMPIEZA AHORA",
+    title: "Buppi te espera en la próxima siesta.",
     description:
-      "Únete a miles de familias que han transformado la rutina de cuidados en un momento de tranquilidad.",
+      "Gratis para empezar. Funciona en iOS y Android. Sin anuncios, sin letra pequeña.",
+    cardTag: "HOY · LINA, 4 MESES",
+    cardTitle: "3 siestas, 6 tomas, 9 cambios.",
+    cardSub: "Un día bonito.",
   },
   footer: {
     description:

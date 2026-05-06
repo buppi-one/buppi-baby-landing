@@ -11,29 +11,55 @@ export const en: Messages = {
   },
   nav: {
     features: "Features",
-    sharing: "Sharing",
+    sharing: "Family",
     stats: "Stats",
     blog: "Blog",
-    download: "Get the app",
+    download: "Download free",
+    signIn: "Sign in",
     themeAria: "Toggle theme",
     languageAria: "Change language",
     theme: { light: "Light", dark: "Dark", system: "System" },
   },
   hero: {
-    badge: "✨ 360° BABY CARE",
-    titlePrefix: "The best app to track your baby's ",
-    titleHighlight: "routine",
-    titleSuffix: "!",
+    badge: "NEW",
+    badgeText: "Live Activity on the lock screen",
+    titlePrefix: "The most ",
+    titleHighlight: "intelligent",
+    titleSuffix: " baby routine companion.",
     description:
-      "Make parenthood simpler. Track feeding, sleep, diapers, and so much more — all in one place.",
+      "Log feeds, sleep, and diapers in one tap. Buppi learns your baby's rhythm and predicts the next nap.",
     badgesNote: "Free to get started • iOS and Android",
     imageAlt: "Smiling baby",
+    bullets: [
+      "Free to get started",
+      "iOS and Android",
+      "No ads",
+    ],
+    metrics: [
+      { value: "< 2s", label: "to log an event" },
+      { value: "12+", label: "event types" },
+      { value: "6", label: "people on the family plan" },
+      { value: "iOS · Android", label: "iPhone, iPad and Android" },
+    ],
     card: { tag: "AFTERNOON", title: "Feeding", subtitle: "Left • 44min" },
   },
   features: {
-    title: "Everything you need to track",
+    tag: "FEATURES",
+    title: "Built for the first thousand days.",
     description:
       "From day one, follow every detail of your little one's journey with intuitive cards and an organized timeline.",
+    blocks: [
+      { tag: "Sleep", title: "Predicted nap windows", desc: "Buppi reads the history and tells you when your baby will likely tire next." },
+      { tag: "Feeding", title: "Side-aware timer", desc: "Knows which side started last time. Live Activity always at hand." },
+      { tag: "Diapers", title: "One-tap logging", desc: "Pee, poo, mixed. 2 seconds from unlock to done." },
+      { tag: "Milestones", title: "Never miss one", desc: "Each milestone gets the date, photo and your baby's exact age." },
+    ],
+    smallCards: [
+      { title: "Bottle", desc: "Volume and formula" },
+      { title: "Growth", desc: "Weight, height, percentile" },
+      { title: "Bath", desc: "Hygiene and temperature" },
+      { title: "Walks", desc: "Outdoor time" },
+    ],
     timeline: [
       {
         title: "Feeding",
@@ -68,13 +94,24 @@ export const en: Messages = {
     ],
   },
   sharing: {
-    title: "The whole family connected",
+    tag: "REAL TIME",
+    title: "The whole family on the same page.",
     description:
-      "Share records with your partner, grandparents, or caregivers in real time. Everyone gets their own profile and can follow your baby's progress.",
+      "When you change a diaper, everyone sees it. When dad gives the bottle, everyone reacts. No WhatsApp groups, no spreadsheets.",
     bullets: [
       "Multiple baby profiles",
       "Instant cloud sync",
-      "Quick invites via code or link",
+      "Reactions on family events",
+      "Per-person permissions and privacy",
+    ],
+    feedTitle: "Activity · Lina",
+    online: "{n} online",
+    reactQuick: "Quick react",
+    feedItems: [
+      { who: "Marina", role: "mom", action: "started a nap", detail: "2:18 PM · expected window" },
+      { who: "Bruno", role: "dad", action: "fed Lina", detail: "R 7min · L 8min · 1:16 PM" },
+      { who: "Carol", role: "nanny", action: "changed diaper", detail: "pee · 1:00 PM" },
+      { who: "Grandma Alice", role: "grandma", action: "bathed Lina", detail: "11:30 AM · 36°C" },
     ],
     card: {
       title: "My Babies",
@@ -87,11 +124,15 @@ export const en: Messages = {
     },
   },
   stats: {
-    title: "Charts that tell stories",
+    tag: "STATS",
+    title: "Clear patterns, lighter decisions.",
     description:
       "Understand your baby's sleep, feeding, and growth patterns through detailed, easy-to-read statistics.",
+    tabs: ["7 days", "30 days", "3 months"],
     sleep: {
       title: "Sleep Summary",
+      mapTitle: "SLEEP · 7-DAY MAP",
+      mapTotal: "Total 13h54m",
       avgValue: "2h 44m",
       avgLabel: "Daily average",
       totalValue: "10",
@@ -99,20 +140,47 @@ export const en: Messages = {
       compareLabel: "Night vs Day",
       night: "Night: 44%",
       day: "Day: 56%",
+      legendSleeping: "Sleeping",
+      legendNap: "Nap",
     },
     diaper: {
       title: "Diaper Changes",
+      todayLabel: "CHANGES · TODAY",
       legend: [
-        { label: "4 Pee", pct: "44%" },
-        { label: "1 Poop", pct: "12%" },
-        { label: "4 Both", pct: "44%" },
+        { label: "Pee", pct: "4" },
+        { label: "Poo", pct: "1" },
+        { label: "Mixed", pct: "4" },
       ],
     },
+    nursing: {
+      title: "FEEDS · AVERAGE",
+      value: "6.2",
+      desc: "times a day · 14 min each",
+    },
+    milestones: {
+      title: "MILESTONES · LAST 90 DAYS",
+      items: ["Smiled", "Head up", "Sat", "Crawled", "Walked"],
+    },
+  },
+  faq: {
+    tag: "FAQ",
+    title: "Frequently asked questions",
+    items: [
+      { q: "Is it really free?", a: "Yes. The essentials — logging, timeline, 1 caregiver — are free forever." },
+      { q: "Does it work offline?", a: "Yes. Everything is stored locally and syncs as soon as you're back online." },
+      { q: "How many people can I add?", a: "You can add a partner, grandparents and a nanny on the family plan — perfect for everyone to follow along." },
+      { q: "Is my data safe?", a: "Yes. Encryption in transit and at rest, and we follow LGPD and GDPR-equivalent standards." },
+      { q: "Can I cancel anytime?", a: "You can. No fees, no commitment. You keep access until the end of the paid period." },
+    ],
   },
   cta: {
-    title: "Ready to get started?",
+    tag: "START NOW",
+    title: "Buppi will be there for the next nap.",
     description:
-      "Join thousands of families who've turned daily care into a moment of calm.",
+      "Free to get started. Works on iOS and Android. No ads, no fine print.",
+    cardTag: "TODAY · LINA, 4 MONTHS",
+    cardTitle: "3 naps, 6 feeds, 9 changes.",
+    cardSub: "A beautiful day.",
   },
   footer: {
     description:

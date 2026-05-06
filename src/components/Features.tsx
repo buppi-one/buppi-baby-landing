@@ -1,147 +1,282 @@
-import { Icon, type IconName } from "@/components/Icon";
+import { BIcon, type BIconName } from "@/components/BIcon";
 import { getMessages, type Locale } from "@/i18n";
 
-type TimelineStyle = {
-  icon: IconName;
-  iconBg: string;
-  iconColor: string;
-  highlight: boolean;
-  muted: boolean;
-};
+type FeatureBlockMockup = "sleep" | "nursing" | "diaper" | "milestones";
 
-type CardStyle = { icon: IconName; iconColor: string; bg: string };
-
-const TIMELINE_STYLES: readonly TimelineStyle[] = [
-  {
-    icon: "nights_stay",
-    iconBg: "bg-lavender dark:bg-slate-800",
-    iconColor: "text-primary",
-    highlight: false,
-    muted: false,
-  },
-  {
-    icon: "wb_sunny",
-    iconBg: "bg-accent/10",
-    iconColor: "text-accent",
-    highlight: false,
-    muted: true,
-  },
-  {
-    icon: "child_care",
-    iconBg: "bg-primary/10",
-    iconColor: "text-primary",
-    highlight: true,
-    muted: false,
-  },
-  {
-    icon: "bedtime",
-    iconBg: "bg-secondary/10",
-    iconColor: "text-secondary",
-    highlight: false,
-    muted: true,
-  },
+const BLOCK_CONFIG: Array<{
+  mockup: FeatureBlockMockup;
+  tagColor: string;
+}> = [
+  { mockup: "sleep", tagColor: "var(--color-evt-sleep)" },
+  { mockup: "nursing", tagColor: "var(--color-evt-nursing)" },
+  { mockup: "diaper", tagColor: "var(--color-evt-diaper)" },
+  { mockup: "milestones", tagColor: "var(--color-evt-milestone)" },
 ];
 
-const CARD_STYLES: readonly CardStyle[] = [
-  { icon: "bathtub", iconColor: "text-primary", bg: "bg-lavender dark:bg-slate-800" },
-  {
-    icon: "vaccines",
-    iconColor: "text-secondary",
-    bg: "bg-secondary/10 dark:bg-slate-800",
-  },
-  {
-    icon: "medication",
-    iconColor: "text-accent",
-    bg: "bg-accent/10 dark:bg-slate-800",
-  },
-  {
-    icon: "directions_walk",
-    iconColor: "text-primary",
-    bg: "bg-primary/10 dark:bg-slate-800",
-  },
+const SMALL_CARD_ICONS: Array<{ icon: BIconName; color: string }> = [
+  { icon: "bottle", color: "var(--color-evt-bottle)" },
+  { icon: "chart-bar", color: "var(--color-accent-peach)" },
+  { icon: "bath", color: "var(--color-evt-bath)" },
+  { icon: "walk", color: "var(--color-evt-walk)" },
 ];
 
 export function Features({ locale }: { locale: Locale }) {
   const m = getMessages(locale).features;
   return (
-    <section
-      className="py-24 bg-white dark:bg-background-dark"
-      id="funcionalidades"
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-4xl font-bold font-display mb-6">{m.title}</h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400">
-            {m.description}
-          </p>
+    <section id="funcionalidades" className="py-20 lg:py-28 bg-[var(--color-background-light)] dark:bg-[var(--color-background-dark)]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-14">
+        <div className="max-w-3xl mb-14">
+          <SectionTag color="var(--color-primary-dark)" bg="var(--color-lavender)">
+            {m.tag}
+          </SectionTag>
+          <h2 className="font-display font-bold tracking-tight leading-[1.05] mt-4 text-4xl lg:text-5xl text-[var(--color-ink)] dark:text-white">
+            {m.title}
+          </h2>
         </div>
-        <div className="grid lg:grid-cols-3 gap-12 items-start">
-          <div className="lg:col-span-2 space-y-6 timeline-line relative pl-16">
-            {m.timeline.map((entry, i) => {
-              const style = TIMELINE_STYLES[i];
-              return (
-                <div key={i} className="relative group">
-                  <div
-                    className={`absolute -left-[53px] top-6 w-12 h-12 rounded-full ${style.iconBg} flex items-center justify-center border-4 border-white dark:border-background-dark z-10`}
-                  >
-                    <Icon name={style.icon} className={style.iconColor} />
-                  </div>
-                  <div
-                    className={
-                      style.highlight
-                        ? "bg-white dark:bg-slate-800 p-6 rounded-3xl border-l-8 border-primary shadow-xl ring-1 ring-slate-100 dark:ring-slate-700"
-                        : "bg-background-light dark:bg-slate-900/50 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-shadow"
-                    }
-                  >
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h3 className="text-lg font-bold">{entry.title}</h3>
-                        <p className="text-slate-500">{entry.subtitle}</p>
-                      </div>
-                      <div className="text-right">
-                        <p
-                          className={
-                            style.muted
-                              ? "font-medium text-slate-500 dark:text-slate-400"
-                              : "font-medium text-slate-800 dark:text-white"
-                          }
-                        >
-                          {entry.time}
-                        </p>
-                        <span
-                          className={
-                            style.muted
-                              ? "text-slate-500 dark:text-slate-400 text-sm"
-                              : "text-secondary text-sm font-medium"
-                          }
-                        >
-                          {entry.tag}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+
+        <div className="grid lg:grid-cols-2 gap-5">
+          {m.blocks.map((block, i) => {
+            const cfg = BLOCK_CONFIG[i];
+            return (
+              <FeatureBlock
+                key={i}
+                tag={block.tag}
+                tagColor={cfg.tagColor}
+                title={block.title}
+                desc={block.desc}
+                mockup={cfg.mockup}
+              />
+            );
+          })}
+        </div>
+
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {m.smallCards.map((card, i) => {
+            const cfg = SMALL_CARD_ICONS[i];
+            return (
+              <div
+                key={i}
+                className="rounded-2xl p-5 bg-white dark:bg-[var(--color-surface-dark)] border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)]"
+              >
+                <div
+                  className="w-10 h-10 rounded-xl grid place-items-center mb-3"
+                  style={{ background: `${cfg.color}55`, color: cfg.color }}
+                >
+                  <BIcon name={cfg.icon} size={18} />
                 </div>
-              );
-            })}
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            {m.cards.map((card, i) => {
-              const style = CARD_STYLES[i];
-              return (
-                <div key={i} className={`p-6 ${style.bg} rounded-3xl text-center`}>
-                  <div className="w-12 h-12 bg-white dark:bg-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
-                    <Icon name={style.icon} className={style.iconColor} />
-                  </div>
-                  <h3 className="font-bold">{card.title}</h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
-                    {card.subtitle}
-                  </p>
+                <div className="text-sm font-bold text-[var(--color-ink)] dark:text-white">
+                  {card.title}
                 </div>
-              );
-            })}
-          </div>
+                <div className="text-xs text-[var(--color-fg-secondary)] dark:text-slate-400 mt-0.5">
+                  {card.desc}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
+  );
+}
+
+export function SectionTag({
+  color,
+  bg,
+  children,
+}: {
+  color: string;
+  bg: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-widest"
+      style={{ background: bg, color }}
+    >
+      <span
+        aria-hidden
+        className="w-1.5 h-1.5 rounded-full"
+        style={{ background: color }}
+      />
+      {children}
+    </span>
+  );
+}
+
+function FeatureBlock({
+  tag,
+  tagColor,
+  title,
+  desc,
+  mockup,
+}: {
+  tag: string;
+  tagColor: string;
+  title: string;
+  desc: string;
+  mockup: FeatureBlockMockup;
+}) {
+  const Mockup = MOCKUPS[mockup];
+  return (
+    <div className="rounded-3xl p-6 lg:p-8 bg-white dark:bg-[var(--color-surface-dark)] border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] grid sm:grid-cols-2 gap-6 items-center">
+      <div>
+        <span
+          className="inline-flex px-2.5 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase mb-3"
+          style={{ background: `${tagColor}55`, color: "var(--color-ink)" }}
+        >
+          {tag}
+        </span>
+        <h3 className="font-display font-bold tracking-tight text-xl lg:text-[22px] text-[var(--color-ink)] dark:text-white leading-tight">
+          {title}
+        </h3>
+        <p className="text-sm text-[var(--color-fg-secondary)] dark:text-slate-400 mt-2 leading-relaxed">
+          {desc}
+        </p>
+      </div>
+      <Mockup />
+    </div>
+  );
+}
+
+const MOCKUPS: Record<FeatureBlockMockup, () => React.ReactElement> = {
+  sleep: SleepWindowsMockup,
+  nursing: NursingMockup,
+  diaper: DiaperMockup,
+  milestones: MilestonesMockup,
+};
+
+function SleepWindowsMockup() {
+  const items = [
+    { l: "Soneca 1", s: "08:30 – 09:45", d: "feita", hi: false },
+    { l: "Soneca 2", s: "12:00 – 14:00", d: "feita", hi: false },
+    { l: "Soneca 3", s: "15:15 – 16:00", d: "sugerida", hi: true },
+  ];
+  return (
+    <div className="rounded-2xl p-4 bg-[var(--color-background-soft)] dark:bg-[var(--color-surface-elevated-dark)]">
+      {items.map((s, i) => (
+        <div
+          key={i}
+          className={`flex items-center justify-between py-2 ${
+            i < 2
+              ? "border-b border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)]"
+              : ""
+          }`}
+        >
+          <div>
+            <div className="text-xs font-bold text-[var(--color-ink)] dark:text-white">
+              {s.l}
+            </div>
+            <div className="font-mono text-[11px] text-[var(--color-fg-secondary)] dark:text-slate-400">
+              {s.s}
+            </div>
+          </div>
+          <span
+            className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest"
+            style={{
+              background: s.hi ? "var(--color-lavender)" : "rgba(146,214,207,0.25)",
+              color: s.hi
+                ? "var(--color-primary-dark)"
+                : "var(--color-secondary-dark)",
+            }}
+          >
+            {s.d}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function NursingMockup() {
+  return (
+    <div className="rounded-2xl p-4 bg-[var(--color-background-soft)] dark:bg-[var(--color-surface-elevated-dark)]">
+      <div className="flex items-baseline justify-between">
+        <div className="text-[11px] font-bold tracking-widest text-[var(--color-fg-secondary)]">
+          DIREITO · EM CURSO
+        </div>
+        <div className="font-mono font-bold text-xl text-[var(--color-ink)] dark:text-white">
+          08:29
+        </div>
+      </div>
+      <div className="flex gap-1.5 mt-3">
+        <div
+          className="flex-1 rounded-xl p-2.5"
+          style={{ background: "rgba(246,211,139,0.35)" }}
+        >
+          <div className="text-[10px] font-bold text-[var(--color-ink)]">Esquerdo</div>
+          <div className="font-mono font-bold text-sm mt-0.5 text-[var(--color-ink)]">
+            07:47
+          </div>
+        </div>
+        <div
+          className="flex-1 rounded-xl p-2.5 text-[#1a1525]"
+          style={{ background: "var(--color-evt-nursing)" }}
+        >
+          <div className="text-[10px] font-bold">Direito ●</div>
+          <div className="font-mono font-bold text-sm mt-0.5">08:29</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DiaperMockup() {
+  const items = [
+    { c: "var(--color-evt-bottle)", l: "Xixi", n: "4", I: "drop" as const },
+    { c: "var(--color-evt-nursing)", l: "Cocô", n: "1", I: "diaper" as const },
+    { c: "var(--color-evt-sleep)", l: "Mista", n: "4", I: "plus" as const },
+  ];
+  return (
+    <div className="rounded-2xl p-4 bg-[var(--color-background-soft)] dark:bg-[var(--color-surface-elevated-dark)] grid grid-cols-3 gap-2">
+      {items.map((d, i) => (
+        <div
+          key={i}
+          className="rounded-xl p-3 text-center bg-white dark:bg-[var(--color-surface-dark)]"
+        >
+          <div
+            className="w-7 h-7 rounded-lg grid place-items-center mx-auto mb-1.5"
+            style={{ background: `${d.c}66`, color: d.c }}
+          >
+            <BIcon name={d.I} size={14} />
+          </div>
+          <div className="font-mono font-bold text-lg text-[var(--color-ink)] dark:text-white">
+            {d.n}
+          </div>
+          <div className="text-[10px] font-semibold text-[var(--color-fg-secondary)] dark:text-slate-400">
+            {d.l}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function MilestonesMockup() {
+  const items: Array<{ ttl: string; d: string; I: BIconName; c: string }> = [
+    { ttl: "Sorriu pra mim", d: "3 meses · 12 dias", I: "smile", c: "var(--color-evt-milestone)" },
+    { ttl: "Levantou cabeça", d: "2 meses · 8 dias", I: "sparkle", c: "var(--color-primary)" },
+    { ttl: "Primeira gargalhada", d: "4 meses · 1 dia", I: "star", c: "var(--color-accent-peach)" },
+  ];
+  return (
+    <div className="rounded-2xl p-4 bg-[var(--color-background-soft)] dark:bg-[var(--color-surface-elevated-dark)]">
+      {items.map((m, i) => (
+        <div key={i} className="flex items-center gap-2.5 py-1.5">
+          <div
+            className="w-7 h-7 rounded-full grid place-items-center"
+            style={{ background: `${m.c}55`, color: m.c }}
+          >
+            <BIcon name={m.I} size={14} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-xs font-bold text-[var(--color-ink)] dark:text-white truncate">
+              {m.ttl}
+            </div>
+            <div className="text-[10px] text-[var(--color-fg-secondary)] dark:text-slate-400">
+              {m.d}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }

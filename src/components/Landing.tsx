@@ -1,4 +1,5 @@
 import { CTA } from "@/components/CTA";
+import { FaqLanding } from "@/components/FaqLanding";
 import { Features } from "@/components/Features";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -16,6 +17,7 @@ export function Landing({ locale }: { locale: Locale }) {
         <Features locale={locale} />
         <Sharing locale={locale} />
         <Stats locale={locale} />
+        <FaqLanding locale={locale} />
         <CTA locale={locale} />
       </main>
       <Footer locale={locale} />

@@ -4,6 +4,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import { BIcon } from "@/components/BIcon";
+import { CatPill, CoverPlaceholder } from "@/components/blog/CatPill";
 import { Faq } from "@/components/blog/Faq";
 import { References } from "@/components/blog/References";
 import { CATEGORIES } from "@/lib/blog/categories";
@@ -49,59 +51,95 @@ export function Article({ article }: { article: ArticleT }) {
   };
 
   return (
-    <article className="bg-background-light dark:bg-background-dark">
+    <article className="bg-[var(--color-background-light)] dark:bg-[var(--color-background-dark)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="max-w-3xl mx-auto px-6 py-12 lg:py-20">
-        <Link
-          href={localePath(article.locale, "/blog")}
-          className="inline-block text-sm text-primary hover:underline mb-8"
+
+      {/* Header — title + meta */}
+      <div className="max-w-3xl mx-auto px-6 lg:px-14 pt-12 lg:pt-16">
+        <nav
+          aria-label="breadcrumb"
+          className="flex items-center gap-2 text-[13px] text-[var(--color-fg-secondary)] dark:text-slate-400 mb-5"
         >
-          {m.blog.backToBlog}
-        </Link>
+          <Link
+            href={localePath(article.locale, "/blog")}
+            className="hover:text-[var(--color-ink)] dark:hover:text-white transition-colors"
+          >
+            {m.blog.title}
+          </Link>
+          <BIcon name="chev" size={11} className="text-[var(--color-fg-muted)]" />
+          <span className="text-[var(--color-fg)] dark:text-white">
+            {cat.label[article.locale]}
+          </span>
+        </nav>
 
-        <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs uppercase tracking-wider mb-4">
-          {cat.label[article.locale]}
-        </span>
+        <CatPill
+          category={article.frontmatter.category}
+          locale={article.locale}
+          asLink={false}
+        />
 
-        <h1 className="text-4xl lg:text-5xl font-bold font-display leading-tight mb-4">
+        <h1 className="font-display font-bold tracking-tight leading-[1.1] mt-5 mb-6 text-3xl lg:text-[48px] text-[var(--color-ink)] dark:text-white">
           {article.frontmatter.title}
         </h1>
 
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-6">
+        <p className="text-[19px] leading-relaxed text-[var(--color-fg-secondary)] dark:text-slate-400">
           {article.frontmatter.description}
         </p>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-500 dark:text-slate-400 mb-10">
-          <time dateTime={article.frontmatter.publishedAt}>
-            {m.blog.publishedOn}{" "}
-            {formatDate(article.frontmatter.publishedAt, article.locale)}
-          </time>
-          {isUpdated && article.frontmatter.updatedAt ? (
-            <time dateTime={article.frontmatter.updatedAt}>
-              · {m.blog.updatedOn}{" "}
-              {formatDate(article.frontmatter.updatedAt, article.locale)}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-7 pt-5 border-t border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] text-[13px] text-[var(--color-fg-secondary)] dark:text-slate-400">
+          <span className="inline-flex items-center gap-1.5">
+            <BIcon name="bell" size={13} />
+            <time dateTime={article.frontmatter.publishedAt}>
+              {m.blog.publishedOn}{" "}
+              <strong className="text-[var(--color-ink)] dark:text-white font-semibold">
+                {formatDate(article.frontmatter.publishedAt, article.locale)}
+              </strong>
             </time>
+          </span>
+          {isUpdated && article.frontmatter.updatedAt ? (
+            <>
+              <span className="w-1 h-1 rounded-full bg-[var(--color-fg-muted)]" />
+              <span className="inline-flex items-center gap-1.5">
+                <BIcon name="sparkle" size={13} />
+                <time dateTime={article.frontmatter.updatedAt}>
+                  {m.blog.updatedOn}{" "}
+                  <strong className="text-[var(--color-ink)] dark:text-white font-semibold">
+                    {formatDate(article.frontmatter.updatedAt, article.locale)}
+                  </strong>
+                </time>
+              </span>
+            </>
           ) : null}
-          <span>· {m.blog.readingTime(article.readingTimeMinutes)}</span>
+          <span className="w-1 h-1 rounded-full bg-[var(--color-fg-muted)]" />
+          <span>{m.blog.readingTime(article.readingTimeMinutes)}</span>
         </div>
+      </div>
 
+      {/* Cover */}
+      <div className="max-w-4xl mx-auto px-6 lg:px-14 mt-10">
         {cover ? (
-          <figure className="mb-12 -mx-6 lg:mx-0">
-            <div className="aspect-video lg:rounded-[2rem] overflow-hidden bg-slate-100 dark:bg-slate-800">
-              <img
-                src={cover}
-                alt={article.frontmatter.title}
-                className="w-full h-full object-cover"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </figure>
-        ) : null}
+          <div className="rounded-3xl overflow-hidden bg-[var(--color-background-soft)] dark:bg-[var(--color-surface-elevated-dark)]" style={{ aspectRatio: "16/9" }}>
+            <img
+              src={cover}
+              alt={article.frontmatter.title}
+              className="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        ) : (
+          <CoverPlaceholder
+            category={article.frontmatter.category}
+            height={320}
+          />
+        )}
+      </div>
 
+      {/* Body */}
+      <div className="max-w-3xl mx-auto px-6 lg:px-14 py-14 lg:py-16">
         <div className="article-body">
           <MDXRemote
             source={article.content}
@@ -109,10 +147,7 @@ export function Article({ article }: { article: ArticleT }) {
               mdxOptions: {
                 remarkPlugins: [
                   remarkGfm,
-                  [
-                    remarkRewriteRelativeImages,
-                    { articleId: article.id },
-                  ],
+                  [remarkRewriteRelativeImages, { articleId: article.id }],
                 ],
                 rehypePlugins: [
                   rehypeSlug,
@@ -171,4 +206,3 @@ export function Article({ article }: { article: ArticleT }) {
     </article>
   );
 }
-

@@ -19,22 +19,27 @@ export function Faq({ items, locale }: { items: FaqItem[]; locale: Locale }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <h2 className="text-2xl lg:text-3xl font-bold font-display mb-6">
+      <h2 className="font-display font-bold tracking-tight text-2xl lg:text-3xl mb-5 text-[var(--color-ink)] dark:text-white">
         {m.faqHeading}
       </h2>
-      <div className="divide-y divide-slate-200 dark:divide-slate-700 border-y border-slate-200 dark:border-slate-700">
+      <div className="flex flex-col gap-2.5">
         {items.map((item, i) => (
-          <details key={i} className="group py-4">
-            <summary className="cursor-pointer list-none flex items-start justify-between gap-4 text-base font-semibold text-slate-900 dark:text-white">
-              <span>{item.question}</span>
+          <details
+            key={i}
+            className="group rounded-2xl bg-white dark:bg-[var(--color-surface-dark)] border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] p-5 [&[open]_.faq-mark]:rotate-45"
+          >
+            <summary className="cursor-pointer list-none flex items-start justify-between gap-4">
+              <span className="text-[15px] font-bold text-[var(--color-ink)] dark:text-white">
+                {item.question}
+              </span>
               <span
                 aria-hidden
-                className="shrink-0 text-primary text-xl leading-none transition-transform group-open:rotate-45"
+                className="faq-mark text-[var(--color-fg-secondary)] text-lg leading-none transition-transform shrink-0"
               >
                 +
               </span>
             </summary>
-            <div className="pt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">
+            <div className="pt-3 text-[14px] leading-relaxed text-[var(--color-fg-secondary)] dark:text-slate-400">
               {item.answer}
             </div>
           </details>

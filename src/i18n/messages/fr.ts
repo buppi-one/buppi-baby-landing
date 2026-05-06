@@ -11,29 +11,55 @@ export const fr: Messages = {
   },
   nav: {
     features: "Fonctionnalités",
-    sharing: "Partage",
+    sharing: "Famille",
     stats: "Statistiques",
     blog: "Blog",
-    download: "Télécharger l'app",
+    download: "Télécharger gratuitement",
+    signIn: "Se connecter",
     themeAria: "Changer de thème",
     languageAria: "Changer de langue",
     theme: { light: "Clair", dark: "Sombre", system: "Système" },
   },
   hero: {
-    badge: "✨ SOIN 360 POUR VOTRE BÉBÉ",
-    titlePrefix: "La meilleure app pour suivre la ",
-    titleHighlight: "routine",
-    titleSuffix: " de votre bébé !",
+    badge: "NOUVEAU",
+    badgeText: "Live Activity sur l'écran verrouillé",
+    titlePrefix: "Le compagnon de routine le plus ",
+    titleHighlight: "intelligent",
+    titleSuffix: " de bébé.",
     description:
-      "Simplifiez la maternité et la paternité. Enregistrez l'allaitement, le sommeil, les couches et bien plus encore au même endroit.",
+      "Enregistrez l'allaitement, le sommeil et les couches en 1 toucher. Buppi apprend le rythme de votre bébé et prédit la prochaine sieste.",
     badgesNote: "Gratuit pour commencer • iOS et Android",
     imageAlt: "Bébé souriant",
+    bullets: [
+      "Gratuit pour commencer",
+      "iOS et Android",
+      "Sans publicité",
+    ],
+    metrics: [
+      { value: "< 2s", label: "pour enregistrer un événement" },
+      { value: "12+", label: "types d'événements" },
+      { value: "6", label: "personnes dans le plan famille" },
+      { value: "iOS · Android", label: "iPhone, iPad et Android" },
+    ],
     card: { tag: "APRÈS-MIDI", title: "Allaitement", subtitle: "Gauche • 44min" },
   },
   features: {
-    title: "Tout ce dont vous avez besoin pour suivre",
+    tag: "FONCTIONNALITÉS",
+    title: "Pensé pour les mille premiers jours.",
     description:
       "Dès le premier jour, suivez chaque détail du parcours de votre petit avec des cartes intuitives et une chronologie organisée.",
+    blocks: [
+      { tag: "Sommeil", title: "Fenêtres prévues", desc: "Buppi observe l'historique et vous dit quand bébé va probablement fatiguer." },
+      { tag: "Allaitement", title: "Chronomètre par côté", desc: "Sait quel sein a commencé la dernière fois. Live Activity toujours à portée." },
+      { tag: "Couches", title: "Enregistrement en 1 toucher", desc: "Pipi, caca, mixte. 2 secondes du déverrouillage à fait." },
+      { tag: "Étapes", title: "N'en manquez aucune", desc: "Chaque étape entre avec date, photo et l'âge exact du bébé." },
+    ],
+    smallCards: [
+      { title: "Biberon", desc: "Volume et formule" },
+      { title: "Croissance", desc: "Poids, taille, percentile" },
+      { title: "Bain", desc: "Hygiène et température" },
+      { title: "Promenades", desc: "Temps en plein air" },
+    ],
     timeline: [
       {
         title: "Allaitement",
@@ -68,13 +94,24 @@ export const fr: Messages = {
     ],
   },
   sharing: {
-    title: "Toute la famille connectée",
+    tag: "EN TEMPS RÉEL",
+    title: "Toute la famille sur la même page.",
     description:
-      "Partagez les enregistrements avec votre partenaire, les grands-parents ou les soignants en temps réel. Chaque personne a son propre profil et peut suivre l'évolution du bébé.",
+      "Quand vous changez une couche, tout le monde le voit. Quand papa donne le biberon, tout le monde réagit. Sans groupes WhatsApp, sans tableurs.",
     bullets: [
       "Plusieurs profils de bébés",
       "Synchronisation instantanée dans le cloud",
-      "Invitations rapides par code ou lien",
+      "Réactions sur les événements de la famille",
+      "Permissions et confidentialité par personne",
+    ],
+    feedTitle: "Activité · Lina",
+    online: "{n} en ligne",
+    reactQuick: "Réagir rapidement",
+    feedItems: [
+      { who: "Marina", role: "maman", action: "a commencé une sieste", detail: "14h18 · fenêtre attendue" },
+      { who: "Bruno", role: "papa", action: "a allaité Lina", detail: "D 7min · G 8min · 13h16" },
+      { who: "Carol", role: "nounou", action: "a changé la couche", detail: "pipi · 13h00" },
+      { who: "Mamie Alice", role: "grand-mère", action: "a donné le bain", detail: "11h30 · 36°C" },
     ],
     card: {
       title: "Mes Bébés",
@@ -87,11 +124,15 @@ export const fr: Messages = {
     },
   },
   stats: {
-    title: "Des graphiques qui racontent des histoires",
+    tag: "STATISTIQUES",
+    title: "Des tendances claires, des décisions plus légères.",
     description:
       "Comprenez les habitudes de sommeil, d'alimentation et de développement de votre bébé grâce à des statistiques détaillées et faciles à lire.",
+    tabs: ["7 jours", "30 jours", "3 mois"],
     sleep: {
       title: "Résumé du Sommeil",
+      mapTitle: "SOMMEIL · CARTE 7 JOURS",
+      mapTotal: "Total 13h54m",
       avgValue: "2h 44m",
       avgLabel: "Moyenne quotidienne",
       totalValue: "10",
@@ -99,20 +140,47 @@ export const fr: Messages = {
       compareLabel: "Nuit vs Jour",
       night: "Nuit : 44 %",
       day: "Jour : 56 %",
+      legendSleeping: "Endormi",
+      legendNap: "Sieste",
     },
     diaper: {
       title: "Changes de couche",
+      todayLabel: "CHANGES · AUJOURD'HUI",
       legend: [
-        { label: "4 Pipi", pct: "44 %" },
-        { label: "1 Caca", pct: "12 %" },
-        { label: "4 Les deux", pct: "44 %" },
+        { label: "Pipi", pct: "4" },
+        { label: "Caca", pct: "1" },
+        { label: "Mixte", pct: "4" },
       ],
     },
+    nursing: {
+      title: "TÉTÉES · MOYENNE",
+      value: "6,2",
+      desc: "fois par jour · 14 min chacune",
+    },
+    milestones: {
+      title: "ÉTAPES · 90 DERNIERS JOURS",
+      items: ["Souri", "Tête", "Assis", "À 4 pattes", "Marché"],
+    },
+  },
+  faq: {
+    tag: "FAQ",
+    title: "Questions fréquentes",
+    items: [
+      { q: "Est-ce vraiment gratuit ?", a: "Oui. Les fonctions essentielles — enregistrement, chronologie, 1 soignant — sont gratuites pour toujours." },
+      { q: "Ça fonctionne hors ligne ?", a: "Oui. Tout ce que vous enregistrez est stocké localement et se synchronise dès que vous êtes en ligne." },
+      { q: "Combien de personnes puis-je ajouter ?", a: "Vous pouvez ajouter partenaire, grands-parents et nounou dans le plan famille — idéal pour que tout le monde suive bébé." },
+      { q: "Mes données sont-elles sûres ?", a: "Oui. Chiffrement en transit et au repos, conformité avec le RGPD et standards équivalents." },
+      { q: "Puis-je annuler quand je veux ?", a: "Oui. Sans frais, sans engagement. Vous gardez l'accès jusqu'à la fin de la période payée." },
+    ],
   },
   cta: {
-    title: "Prêt à commencer ?",
+    tag: "COMMENCER MAINTENANT",
+    title: "Buppi vous attend pour la prochaine sieste.",
     description:
-      "Rejoignez des milliers de familles qui ont transformé la routine de soins en un moment de tranquillité.",
+      "Gratuit pour commencer. Fonctionne sur iOS et Android. Sans publicité, sans petits caractères.",
+    cardTag: "AUJOURD'HUI · LINA, 4 MOIS",
+    cardTitle: "3 siestes, 6 tétées, 9 changes.",
+    cardSub: "Une belle journée.",
   },
   footer: {
     description:
