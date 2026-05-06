@@ -37,15 +37,19 @@ todos marcados como `draft: true` e com a categoria preenchida.
 
 A partir daí:
 
-1. Escreva primeiro em **pt-BR** (o original).
-2. Traduza para os outros idiomas — copie a estrutura, adapte expressões idiomáticas, ajuste
+1. **Confira `docs/blog-content-plan.md`** — o artigo já está no plano? Se não, adicione
+   antes de escrever (evita duplicação e ajuda a planejar interlinks).
+2. Escreva primeiro em **pt-BR** (o original).
+3. Traduza para os outros idiomas — copie a estrutura, adapte expressões idiomáticas, ajuste
    slugs no frontmatter (ver §9).
-3. Adicione cover (opcional) e imagens (ver §5).
-4. Adicione FAQ (opcional) e referências (recomendado, ver §6 e §7).
-5. Quando estiver pronto, troque `draft: true` para `draft: false` em **todos os idiomas
+4. Adicione cover (opcional) e imagens (ver §5).
+5. Adicione FAQ (opcional) e referências (recomendado, ver §6 e §7).
+6. Quando estiver pronto, troque `draft: true` para `draft: false` em **todos os idiomas
    que vai publicar** (pode publicar parcial — ex: só pt-BR + en).
-6. Rode `npm run validate-blog` para conferir.
-7. Commit + push. O deploy acontece automaticamente.
+7. Rode `npm run validate-blog` para conferir.
+8. **Marque o artigo como publicado em `docs/blog-content-plan.md`** — troque `⬜` por
+   `✅ <data> (<idiomas>)` na linha correspondente. Ex: `✅ 2026-05-06 (4 idiomas)`.
+9. Commit + push. O deploy acontece automaticamente (com purge do Cloudflare).
 
 ---
 
@@ -475,6 +479,10 @@ Antes de trocar `draft: false`:
 - [ ] `npm run validate-blog` passa
 - [ ] `npm run build` passa local
 - [ ] Pré-visualizou em `npm run dev` em desktop e mobile
+
+### Plano de conteúdo
+- [ ] Linha do artigo em `docs/blog-content-plan.md` marcada como publicada
+      (`✅ <data> (<idiomas>)`) **antes** do push final
 
 ---
 
