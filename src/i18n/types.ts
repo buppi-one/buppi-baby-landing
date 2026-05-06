@@ -28,6 +28,7 @@ export type Messages = {
     features: string;
     sharing: string;
     stats: string;
+    blog: string;
     download: string;
     themeAria: string;
     languageAria: string;

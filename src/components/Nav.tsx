@@ -113,6 +113,12 @@ export function Nav({ locale }: { locale: Locale }) {
           >
             {m.stats}
           </a>
+          <a
+            className="hover:text-primary transition-colors"
+            href={localePath(locale, "/blog")}
+          >
+            {m.blog}
+          </a>
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="relative" ref={langRef}>

@@ -13,6 +13,7 @@ export const ptBR: Messages = {
     features: "Funcionalidades",
     sharing: "Compartilhamento",
     stats: "Estatísticas",
+    blog: "Blog",
     download: "Baixar app",
     themeAria: "Alternar tema",
     languageAria: "Alternar idioma",

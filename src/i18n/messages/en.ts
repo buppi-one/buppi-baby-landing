@@ -13,6 +13,7 @@ export const en: Messages = {
     features: "Features",
     sharing: "Sharing",
     stats: "Stats",
+    blog: "Blog",
     download: "Get the app",
     themeAria: "Toggle theme",
     languageAria: "Change language",

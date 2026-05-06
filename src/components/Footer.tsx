@@ -41,6 +41,14 @@ export function Footer({ locale }: { locale: Locale }) {
               <li>
                 <a
                   className="hover:text-primary transition-colors"
+                  href={localePath(locale, "/blog")}
+                >
+                  {getMessages(locale).blog.title}
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-primary transition-colors"
                   href={localePath(locale, "/privacy")}
                 >
                   {m.privacy}
