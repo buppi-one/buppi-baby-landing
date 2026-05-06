@@ -5,7 +5,8 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { CATEGORIES, categoryFromUrlSlug } from "@/lib/blog/categories";
 import { getArticlesByLocale } from "@/lib/blog/loader";
-import { isLocale } from "@/i18n";
+import { getMessages, isLocale, LOCALES, type Locale } from "@/i18n";
+import { pageMetadata } from "@/lib/metadata";
 
 const SUPPORTED = ["en", "es", "fr"] as const;
 type RouteLocale = (typeof SUPPORTED)[number];
@@ -34,19 +35,18 @@ export async function generateMetadata({
   const slug = categoryFromUrlSlug(locale, cat);
   if (!slug) return {};
   const meta = CATEGORIES[slug];
-  const languages: Record<string, string> = {};
-  for (const [loc, urlSlug] of Object.entries(meta.urlSlug)) {
-    languages[loc] =
-      loc === "pt-BR" ? `/blog/category/${urlSlug}/` : `/${loc}/blog/category/${urlSlug}/`;
+  const paths = {} as Record<Locale, string>;
+  for (const l of LOCALES) {
+    const localized = `/blog/category/${meta.urlSlug[l]}/`;
+    paths[l] = l === "pt-BR" ? localized : `/${l}${localized}`;
   }
-  languages["x-default"] = `/blog/category/${meta.urlSlug["pt-BR"]}/`;
-  return {
-    title: meta.label[locale],
-    alternates: {
-      canonical: `/${locale}/blog/category/${meta.urlSlug[locale]}/`,
-      languages,
-    },
-  };
+  const blog = getMessages(locale).blog;
+  return pageMetadata({
+    locale,
+    title: `${meta.label[locale]} — ${blog.title} · Buppi Baby`,
+    description: blog.description,
+    paths,
+  });
 }
 
 export default async function LocalizedCategoryPage({

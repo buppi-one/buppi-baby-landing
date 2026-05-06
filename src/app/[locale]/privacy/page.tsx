@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PrivacyContent } from "@/components/PrivacyContent";
 import { getMessages, isLocale } from "@/i18n";
+import { pageMetadata } from "@/lib/metadata";
 
 const SUPPORTED = ["en", "es", "fr"] as const;
 type RouteLocale = (typeof SUPPORTED)[number];
@@ -20,10 +21,12 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const m = getMessages(locale).privacy;
-  return {
+  return pageMetadata({
+    locale,
     title: `${m.title} — Buppi Baby`,
     description: m.intro,
-  };
+    path: "/privacy/",
+  });
 }
 
 export default async function LocalizedPrivacyPage({

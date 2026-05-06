@@ -3,21 +3,20 @@ import { BlogIndex } from "@/components/blog/BlogIndex";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { DEFAULT_LOCALE, getMessages } from "@/i18n";
+import { pageMetadata } from "@/lib/metadata";
 
 export function generateMetadata(): Metadata {
   const m = getMessages(DEFAULT_LOCALE).blog;
-  return {
-    title: m.title,
+  const meta = pageMetadata({
+    locale: DEFAULT_LOCALE,
+    title: `${m.title} — Buppi Baby`,
     description: m.description,
+    path: "/blog/",
+  });
+  return {
+    ...meta,
     alternates: {
-      canonical: "/blog/",
-      languages: {
-        "pt-BR": "/blog/",
-        en: "/en/blog/",
-        es: "/es/blog/",
-        fr: "/fr/blog/",
-        "x-default": "/blog/",
-      },
+      ...meta.alternates,
       types: {
         "application/rss+xml": [{ url: "/blog/feed.xml", title: m.title }],
       },

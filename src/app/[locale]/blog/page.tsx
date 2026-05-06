@@ -4,6 +4,7 @@ import { BlogIndex } from "@/components/blog/BlogIndex";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { getMessages, isLocale } from "@/i18n";
+import { pageMetadata } from "@/lib/metadata";
 
 const SUPPORTED = ["en", "es", "fr"] as const;
 type RouteLocale = (typeof SUPPORTED)[number];
@@ -22,18 +23,16 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const m = getMessages(locale).blog;
-  return {
-    title: m.title,
+  const meta = pageMetadata({
+    locale,
+    title: `${m.title} — Buppi Baby`,
     description: m.description,
+    path: "/blog/",
+  });
+  return {
+    ...meta,
     alternates: {
-      canonical: `/${locale}/blog/`,
-      languages: {
-        "pt-BR": "/blog/",
-        en: "/en/blog/",
-        es: "/es/blog/",
-        fr: "/fr/blog/",
-        "x-default": "/blog/",
-      },
+      ...meta.alternates,
       types: {
         "application/rss+xml": [
           { url: `/${locale}/blog/feed.xml`, title: m.title },
