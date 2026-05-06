@@ -149,5 +149,7 @@ export type Messages = {
     categoryLabel: string;
     relatedPosts: string;
     empty: string;
+    faqHeading: string;
+    referencesHeading: string;
   };
 };

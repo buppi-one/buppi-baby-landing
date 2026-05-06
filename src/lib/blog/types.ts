@@ -9,6 +9,20 @@ export type CategorySlug =
   | "health"
   | "news";
 
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+export type Reference = {
+  /** Title of the paper / page / book chapter. */
+  title: string;
+  /** Source line: "WHO, 2024" or "Acta Paediatrica, 2020 — Hjern A et al." */
+  source: string;
+  /** Optional URL or DOI. */
+  url?: string;
+};
+
 export type Frontmatter = {
   title: string;
   description: string;
@@ -19,6 +33,8 @@ export type Frontmatter = {
   slug?: string;
   cover?: string;
   draft?: boolean;
+  faq?: FaqItem[];
+  references?: Reference[];
 };
 
 export type Article = {

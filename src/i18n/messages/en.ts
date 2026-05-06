@@ -417,5 +417,7 @@ export const en: Messages = {
     categoryLabel: "Category",
     relatedPosts: "Related articles",
     empty: "No articles published yet.",
+    faqHeading: "Frequently asked questions",
+    referencesHeading: "References",
   },
 };

@@ -4,6 +4,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import { Faq } from "@/components/blog/Faq";
+import { References } from "@/components/blog/References";
 import { CATEGORIES } from "@/lib/blog/categories";
 import { formatDate } from "@/lib/blog/format";
 import { remarkRewriteRelativeImages } from "@/lib/blog/remark-images";
@@ -154,6 +156,17 @@ export function Article({ article }: { article: ArticleT }) {
             }}
           />
         </div>
+
+        {article.frontmatter.faq && article.frontmatter.faq.length > 0 ? (
+          <Faq items={article.frontmatter.faq} locale={article.locale} />
+        ) : null}
+
+        {article.frontmatter.references && article.frontmatter.references.length > 0 ? (
+          <References
+            items={article.frontmatter.references}
+            locale={article.locale}
+          />
+        ) : null}
       </div>
     </article>
   );

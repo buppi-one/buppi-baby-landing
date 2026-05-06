@@ -419,5 +419,7 @@ export const ptBR: Messages = {
     categoryLabel: "Categoria",
     relatedPosts: "Artigos relacionados",
     empty: "Nenhum artigo publicado ainda.",
+    faqHeading: "Perguntas frequentes",
+    referencesHeading: "Referências",
   },
 };

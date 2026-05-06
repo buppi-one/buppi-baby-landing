@@ -440,5 +440,7 @@ export const fr: Messages = {
     categoryLabel: "Catégorie",
     relatedPosts: "Articles connexes",
     empty: "Aucun article publié pour le moment.",
+    faqHeading: "Questions fréquentes",
+    referencesHeading: "Références",
   },
 };

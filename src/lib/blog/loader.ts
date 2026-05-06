@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 import { LOCALES, type Locale } from "@/i18n";
 import { isCategorySlug } from "./categories";
-import type { AlternatesMap, Article, Frontmatter } from "./types";
+import type { AlternatesMap, Article, FaqItem, Frontmatter, Reference } from "./types";
 
 const CONTENT_ROOT = join(process.cwd(), "content", "blog");
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -51,7 +51,59 @@ function parseFrontmatter(raw: Record<string, unknown>, source: string): Frontma
     return raw.tags.map((t, i) => assertString(t, `tags[${i}]`, source));
   })();
   const draft = raw.draft === undefined ? false : Boolean(raw.draft);
-  return { title, description, publishedAt, updatedAt, category, tags, slug, cover, draft };
+  const faq = raw.faq === undefined ? undefined : parseFaq(raw.faq, source);
+  const references =
+    raw.references === undefined ? undefined : parseReferences(raw.references, source);
+  return {
+    title,
+    description,
+    publishedAt,
+    updatedAt,
+    category,
+    tags,
+    slug,
+    cover,
+    draft,
+    faq,
+    references,
+  };
+}
+
+function parseFaq(value: unknown, source: string): FaqItem[] {
+  if (!Array.isArray(value)) {
+    throw new Error(`${source}: "faq" must be an array`);
+  }
+  return value.map((item, i) => {
+    if (typeof item !== "object" || item === null) {
+      throw new Error(`${source}: faq[${i}] must be an object`);
+    }
+    const obj = item as Record<string, unknown>;
+    return {
+      question: assertString(obj.question, `faq[${i}].question`, source),
+      answer: assertString(obj.answer, `faq[${i}].answer`, source),
+    };
+  });
+}
+
+function parseReferences(value: unknown, source: string): Reference[] {
+  if (!Array.isArray(value)) {
+    throw new Error(`${source}: "references" must be an array`);
+  }
+  return value.map((item, i) => {
+    if (typeof item !== "object" || item === null) {
+      throw new Error(`${source}: references[${i}] must be an object`);
+    }
+    const obj = item as Record<string, unknown>;
+    const url = obj.url === undefined ? undefined : assertString(obj.url, `references[${i}].url`, source);
+    if (url !== undefined && !/^https?:\/\//.test(url)) {
+      throw new Error(`${source}: references[${i}].url must be http(s)`);
+    }
+    return {
+      title: assertString(obj.title, `references[${i}].title`, source),
+      source: assertString(obj.source, `references[${i}].source`, source),
+      url,
+    };
+  });
 }
 
 function readArticleFile(articleId: string, fileName: string): Article | null {

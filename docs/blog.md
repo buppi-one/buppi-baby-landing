@@ -1,0 +1,506 @@
+# Blog — guia de criação e padrões editoriais
+
+Este documento cobre tudo o que você precisa pra publicar artigos no blog do Buppi Baby:
+estrutura de arquivos, padrões de escrita, formato de FAQ e referências, fluxo de tradução
+e checklist antes de publicar.
+
+> **Em resumo**: artigos vivem em `content/blog/{id}/{locale}.mdx`, têm slug específico por
+> idioma, podem incluir FAQ e referências estruturadas, e são validados no `npm run build`.
+
+---
+
+## Sumário
+
+1. [Como criar um novo artigo](#1-como-criar-um-novo-artigo)
+2. [Estrutura do frontmatter](#2-estrutura-do-frontmatter)
+3. [Categorias e tags](#3-categorias-e-tags)
+4. [Padrões de escrita](#4-padrões-de-escrita)
+5. [Imagens (cover e inline)](#5-imagens-cover-e-inline)
+6. [FAQ — formato padronizado](#6-faq--formato-padronizado)
+7. [Referências científicas — formato padronizado](#7-referências-científicas--formato-padronizado)
+8. [Tradução](#8-tradução)
+9. [Slug por idioma](#9-slug-por-idioma)
+10. [Drafts e publicação](#10-drafts-e-publicação)
+11. [Checklist antes de publicar](#11-checklist-antes-de-publicar)
+12. [Comandos úteis](#12-comandos-úteis)
+
+---
+
+## 1. Como criar um novo artigo
+
+```bash
+npm run new-post -- --id=como-introduzir-papinhas --category=feeding
+```
+
+Cria `content/blog/como-introduzir-papinhas/` com 4 arquivos `.mdx` (`pt-BR`, `en`, `es`, `fr`),
+todos marcados como `draft: true` e com a categoria preenchida.
+
+A partir daí:
+
+1. Escreva primeiro em **pt-BR** (o original).
+2. Traduza para os outros idiomas — copie a estrutura, adapte expressões idiomáticas, ajuste
+   slugs no frontmatter (ver §9).
+3. Adicione cover (opcional) e imagens (ver §5).
+4. Adicione FAQ (opcional) e referências (recomendado, ver §6 e §7).
+5. Quando estiver pronto, troque `draft: true` para `draft: false` em **todos os idiomas
+   que vai publicar** (pode publicar parcial — ex: só pt-BR + en).
+6. Rode `npm run validate-blog` para conferir.
+7. Commit + push. O deploy acontece automaticamente.
+
+---
+
+## 2. Estrutura do frontmatter
+
+```yaml
+---
+title: "Como acalmar um bebê com cólica"
+description: "Técnicas comprovadas para aliviar a cólica do bebê de 0 a 6 meses."
+publishedAt: 2026-05-05            # data de publicação (YYYY-MM-DD)
+updatedAt: 2026-06-12              # opcional — só se você revisar depois
+category: baby-care                # ver §3
+tags: [colica, recem-nascido]      # opcional, lista
+slug: how-to-soothe-baby-colic     # opcional — só em traduções, ver §9
+cover: ./cover.webp                # opcional — caminho relativo à pasta
+draft: false                       # true = só aparece em dev
+faq:                               # opcional — ver §6
+  - question: "..."
+    answer: "..."
+references:                        # opcional, recomendado — ver §7
+  - title: "..."
+    source: "..."
+    url: "https://..."
+---
+```
+
+### Regras
+
+| Campo | Obrigatório | Regra |
+|---|---|---|
+| `title` | sim | string não vazia |
+| `description` | sim | string — vai pro `<meta description>` e cards |
+| `publishedAt` | sim | YYYY-MM-DD |
+| `updatedAt` | não | YYYY-MM-DD, deve ser ≥ `publishedAt` |
+| `category` | sim | uma das 7 da §3 |
+| `tags` | não | array de slugs (`[a-z0-9-]+`) |
+| `slug` | não | só em traduções, override do nome da pasta — `[a-z0-9-]+` |
+| `cover` | não | caminho relativo começando com `./` |
+| `draft` | não | bool, default `false` |
+| `faq` | não | ver §6 |
+| `references` | não | ver §7 |
+
+`npm run validate-blog` falha o build se algo estiver inválido (slug duplicado, data malformada,
+categoria inexistente, cover apontando pra arquivo que não existe, etc.).
+
+---
+
+## 3. Categorias e tags
+
+### Categorias canônicas (escolher 1 por artigo)
+
+| Slug interno | pt-BR | EN | ES | FR |
+|---|---|---|---|---|
+| `pregnancy` | Gestação | Pregnancy | Embarazo | Grossesse |
+| `baby-care` | Cuidados do bebê | Baby care | Cuidados del bebé | Soins du bébé |
+| `development` | Desenvolvimento | Development | Desarrollo | Développement |
+| `sleep` | Sono | Sleep | Sueño | Sommeil |
+| `feeding` | Alimentação | Feeding | Alimentación | Alimentation |
+| `health` | Saúde | Health | Salud | Santé |
+| `news` | Novidades | News | News | Actualités |
+
+A URL da categoria é traduzida (`/blog/categoria/cuidados-do-bebe/` em pt-BR vs
+`/en/blog/category/baby-care/` em EN). Tudo isso vem da configuração — você só precisa
+referenciar pelo slug interno em inglês.
+
+### Tags
+
+- Lista livre, mas use **slug** (lowercase, hifenizado, sem acento): `colica`, não `cólica`.
+- Mantenha curtas (1–2 palavras).
+- Use as **mesmas tags** entre traduções do mesmo artigo (manter consistência).
+- Tags ainda não têm página própria — servem como metadado pra futuro filtro/related.
+
+---
+
+## 4. Padrões de escrita
+
+### Audiência
+
+Escrevemos para **mães, pais e cuidadores leigos**, não para profissionais de saúde. A pessoa
+que vai ler está no meio do caos da rotina com um bebê. Cada artigo precisa:
+
+- Resolver uma dúvida real
+- Ser lido em até 6–8 minutos
+- Dar pelo menos uma ação prática
+
+### Tom de voz
+
+- **Acolhedor, sem ser paternalista.** Trate quem lê como adulto inteligente que só não é
+  especialista no assunto.
+- **Direto.** Frases curtas. Parágrafos curtos. Sem rodeio.
+- **Honesto sobre limites.** Não temos certeza absoluta de tudo — quando o consenso médico
+  não é unânime, diga isso.
+- **Sem alarmismo.** A pessoa já está ansiosa. Não exagere riscos. Mas também não minimize
+  sinais que merecem atenção médica.
+
+### O que **evitar**
+
+- ❌ "Como toda mãe sabe…" — assume coisa de quem lê
+- ❌ "Especialistas afirmam que…" sem citar quem
+- ❌ Recomendações categóricas sobre tratamento ("dê tal medicamento") — sempre redirecione
+  pro pediatra
+- ❌ Linguagem de venda do app no meio do conteúdo. O artigo é editorial; o app entra em
+  CTAs, não no texto
+- ❌ Termos médicos sem explicação ("RGE" → "refluxo gastroesofágico, quando…")
+
+### O que **fazer**
+
+- ✅ Começar com a dúvida da pessoa: "Por que meu bebê chora à noite?"
+- ✅ Quebrar em **subseções com `##` e `###`** (ajuda leitura e SEO)
+- ✅ Usar **listas** quando for natural enumerar
+- ✅ Negritar **a palavra-chave** da frase, não a frase inteira
+- ✅ Citar fontes com link (no corpo do texto se for específico, no rodapé via `references`
+  para o conjunto)
+- ✅ Quando recomendar uma técnica, dizer **idade adequada** ("a partir de 6 meses…")
+- ✅ Avisar quando procurar pediatra: deixe um bloco `> **Importante**:` com sinais de alerta
+
+### Estrutura recomendada de um artigo
+
+```markdown
+[Parágrafo de abertura — 2–3 linhas que confirmam que o leitor está no lugar certo
+ e dizem o que o artigo entrega]
+
+## [Definir o problema]
+[O que é, por que acontece]
+
+## [Como resolver / o que fazer]
+### Técnica 1
+### Técnica 2
+### Técnica 3
+
+> **Importante**: [sinais que exigem pediatra]
+
+## [O que esperar / quando passa]
+[Tempo, evolução natural, quando se preocupar]
+```
+
+Depois disso vêm o FAQ (opcional) e as Referências (gerados pelo frontmatter, não escrevemos
+manualmente).
+
+### Tamanho
+
+- **Mínimo útil**: ~600 palavras (3–4 min de leitura). Abaixo disso o Google considera "thin
+  content".
+- **Sweet spot**: 1.000–1.500 palavras (5–7 min).
+- **Máximo razoável**: 2.500 palavras. Se passar, considere quebrar em série de artigos.
+
+### Imagens dentro do texto
+
+Use quando ajudam a compreensão (ex: ilustração de posição de amamentação). Não use só pra
+"quebrar texto" — fica ruído visual. Ver §5.
+
+---
+
+## 5. Imagens (cover e inline)
+
+Todas as imagens ficam na **mesma pasta do artigo** (`content/blog/{id}/`). O build copia
+automaticamente para `public/blog/{id}/` no `npm run build`.
+
+### Cover (opcional)
+
+```yaml
+cover: ./cover.webp
+```
+
+- **Aspecto recomendado**: 16:9 (ex: 1600×900)
+- **Formato**: WebP de preferência (JPG/PNG aceitos)
+- **Tamanho**: ≤ 200KB (otimize antes de subir — use [squoosh.app](https://squoosh.app/) ou `cwebp`)
+- **Sem texto na imagem** (ruim pra SEO e tradução)
+- Se o artigo não tiver cover, o card no listing usa um gradiente determinístico
+
+### Imagens dentro do texto
+
+Coloque o arquivo na mesma pasta e referencie com `./` no MDX:
+
+```markdown
+![Posição de amamentação correta](./posicao-amamentacao.webp)
+```
+
+O build reescreve `./posicao-amamentacao.webp` para `/blog/{id}/posicao-amamentacao.webp`
+e copia o arquivo. **Não use caminhos absolutos** (`/blog/...`) — quebra a portabilidade.
+
+### Direitos de imagem
+
+- ✅ Imagens próprias
+- ✅ Bancos free (Unsplash, Pexels) — créditos no rodapé do artigo se a licença pedir
+- ❌ Imagens com pessoas identificáveis sem release
+- ❌ Imagens de bancos pagos sem licença comprada
+
+---
+
+## 6. FAQ — formato padronizado
+
+FAQ é **opcional**, mas quando presente segue um formato fixo no frontmatter:
+
+```yaml
+faq:
+  - question: "Cólica do bebê é normal?"
+    answer: "Sim. Estima-se que 1 em cada 5 bebês saudáveis apresente episódios de cólica..."
+  - question: "Quando devo procurar o pediatra?"
+    answer: "Sempre que houver febre, vômito persistente, sangue nas fezes..."
+```
+
+### Por que estruturado e não dentro do MDX?
+
+- Renderiza com componente acordeão consistente (toggle pra abrir/fechar)
+- Gera **JSON-LD `FAQPage`** automaticamente — Google pode mostrar as perguntas direto na
+  página de resultados (ganho enorme de clique)
+- Garante consistência visual entre todos os artigos
+
+### Boas práticas pra escrever FAQ
+
+- **3–6 perguntas.** Menos que isso é raso, mais cansa.
+- **Pergunta no formato real**, como a pessoa digitaria no Google ("Bebê de 2 meses pode
+  comer fruta?"), não enxuta ("Frutas para 2 meses").
+- **Resposta direta na primeira frase.** Detalhes vêm depois.
+- **2–4 linhas por resposta.** Se for longa, vira parágrafo no corpo do artigo, não FAQ.
+- **Sem markdown na resposta** (texto plano apenas — JSON-LD não aceita formatação).
+
+---
+
+## 7. Referências científicas — formato padronizado
+
+Referências são **opcionais tecnicamente**, mas **fortemente recomendadas** em qualquer
+artigo das categorias `pregnancy`, `baby-care`, `development`, `sleep`, `feeding` e `health`.
+Em artigos de `news` (sobre o app), normalmente não se aplicam.
+
+```yaml
+references:
+  - title: "Infantile Colic: Recognition and Treatment"
+    source: "American Family Physician, 2015 — Johnson JD et al."
+    url: "https://www.aafp.org/pubs/afp/issues/2015/1001/p577.html"
+  - title: "Probiotics for the Treatment of Infantile Colic"
+    source: "Journal of Pharmacy Practice, 2017 — Harb T et al."
+    url: "https://pubmed.ncbi.nlm.nih.gov/27520492/"
+  - title: "Manual de Orientação"
+    source: "Sociedade Brasileira de Pediatria, 2023"
+    url: "https://www.sbp.com.br/..."
+```
+
+### Campos
+
+- **`title`** (obrigatório): título do artigo/livro/página
+- **`source`** (obrigatório): linha de fonte. Padrão: `"<Veículo/Editora>, <ano> — <Autores>"`
+- **`url`** (opcional, mas quase sempre presente): link direto. Deve começar com `http(s)://`
+
+### Fontes confiáveis (priorize nessa ordem)
+
+1. **Sociedades médicas e órgãos oficiais**:
+   - Sociedade Brasileira de Pediatria (SBP) — sbp.com.br
+   - American Academy of Pediatrics (AAP) — aap.org / publications.aap.org
+   - World Health Organization (WHO) — who.int
+   - NHS — nhs.uk
+   - Asociación Española de Pediatría (AEPED)
+   - Société Française de Pédiatrie
+2. **Periódicos peer-reviewed indexados** (PubMed, Cochrane, BMJ, JAMA Pediatrics, Pediatrics,
+   Acta Paediatrica)
+3. **Manuais e diretrizes clínicas** (Manual MSD, UpToDate quando público)
+4. **Sites de hospitais de referência** (Mayo Clinic, Cleveland Clinic, Hospital Israelita
+   Albert Einstein)
+
+### Evitar
+
+- ❌ Blogs pessoais sem credencial médica
+- ❌ Sites comerciais de marca de produto (fórmula, fralda) — conflito de interesse
+- ❌ Wikipedia (use como ponto de partida, mas linke a fonte primária dela)
+- ❌ Links que exigem login
+
+### Como buscar uma referência
+
+1. Identifique a **afirmação específica** que precisa de base ("20% dos bebês têm cólica")
+2. Procure no PubMed por "infantile colic prevalence"
+3. Pegue a **revisão sistemática mais recente** se houver, ou um artigo de sociedade médica
+4. Confirme que o número/conclusão do paper bate com o que você escreveu
+
+### Mesmo conjunto de referências entre traduções?
+
+**Sim, normalmente.** As fontes científicas internacionais (AAP, WHO) servem em todos os
+idiomas. **Adapte as fontes regionais por idioma**:
+
+- pt-BR: SBP
+- en: AAP, NHS
+- es: AEPED, Asociación Latinoamericana de Pediatría
+- fr: SFP, HAS (Haute Autorité de Santé)
+
+Se for adaptar, mantenha as 1–2 referências internacionais comuns e troque a regional.
+
+---
+
+## 8. Tradução
+
+### Workflow
+
+1. Escreva o original em **pt-BR**.
+2. Traduza pra `en`, `es`, `fr`. Não precisa publicar todos juntos — pode lançar pt-BR
+   primeiro e ir adicionando idiomas depois.
+3. Para cada tradução:
+   - Mesmo `category` e `tags`
+   - **`slug` próprio** no frontmatter (ver §9)
+   - Adapte FAQ se a pergunta não fizer sentido cultural (ex: legislação)
+   - Adapte 1–2 referências regionais
+
+### Verificar status de traduções
+
+```bash
+npm run translation-status
+```
+
+Mostra grade `artigo × idioma` com `✓` (publicado), `draft` ou `—` (não existe).
+
+### Artigos regionais (só pt-BR, por exemplo)
+
+Tudo bem ter artigo só em pt-BR (ex: "Como funciona a licença-maternidade no Brasil"). Basta
+não criar os arquivos `en.mdx` / `es.mdx` / `fr.mdx`. O sistema:
+
+- Gera só a rota pt-BR
+- Não inclui hreflang pros outros idiomas (não existem)
+- O redirect cross-locale fica inativo nesse artigo (não há slug equivalente em outros idiomas)
+
+---
+
+## 9. Slug por idioma
+
+O **nome da pasta** (`content/blog/<id>/`) é o slug em pt-BR (idioma default). Para os outros
+idiomas, sobrescreva no frontmatter:
+
+```yaml
+# en.mdx
+slug: how-to-soothe-baby-colic
+
+# es.mdx
+slug: como-calmar-colicos-bebe
+
+# fr.mdx
+slug: comment-apaiser-bebe-coliques
+```
+
+URLs resultantes:
+
+- `/blog/como-acalmar-bebe-colica/` (pt-BR usa o nome da pasta)
+- `/en/blog/how-to-soothe-baby-colic/`
+- `/es/blog/como-calmar-colicos-bebe/`
+- `/fr/blog/comment-apaiser-bebe-coliques/`
+
+### Regras
+
+- Slug em **lowercase, sem acento, com hífen**: `[a-z0-9]+(-[a-z0-9]+)*`
+- 3–6 palavras é o ideal
+- Inclua a **palavra-chave principal** do artigo no slug (ajuda SEO)
+- Slug é **permanente** — se mudar depois, quebra links externos. Mude só se for crítico, e
+  considere redirect.
+
+### Por que slug por idioma?
+
+SEO: `how-to-soothe-baby-colic` ranqueia muito melhor pra "soothe colic" do que
+`como-acalmar-bebe-colica`. Cada idioma tem o slug otimizado pro vocabulário do mercado
+local. Visitantes que clicam em link do idioma errado são automaticamente redirecionados se
+tiverem preferência salva (ver código em `src/components/blog/RedirectScript.tsx`).
+
+---
+
+## 10. Drafts e publicação
+
+- `draft: true` — artigo aparece **só em `npm run dev`**, nunca em produção
+- `draft: false` (ou ausente) — vai pra produção no próximo deploy
+
+Você pode ter um artigo com pt-BR publicado e en como draft (ainda em revisão) — funciona
+sem problema. O hreflang só inclui o idioma publicado.
+
+### Quando publicar?
+
+Ao trocar `draft: false` e fazer push pra `main`, o GitHub Actions roda em ~1 minuto:
+
+1. Build estático
+2. Deploy pro GitHub Pages
+3. **Purge automático do cache do Cloudflare** (todos os usuários veem a versão nova
+   imediatamente, sem precisar esperar TTL)
+
+---
+
+## 11. Checklist antes de publicar
+
+Antes de trocar `draft: false`:
+
+### Conteúdo
+- [ ] Título claro e específico (não vago)
+- [ ] Description com 130–160 caracteres (vai pro Google e cards)
+- [ ] Pelo menos 600 palavras de corpo
+- [ ] Subseções com `##` (não só parágrafos contínuos)
+- [ ] Pelo menos uma ação prática pra quem lê
+- [ ] Bloco de "quando procurar pediatra" se for assunto clínico
+- [ ] Sem termo médico sem explicação
+- [ ] Tom acolhedor, sem assumir conhecimento
+
+### Frontmatter
+- [ ] `title`, `description`, `publishedAt`, `category` preenchidos
+- [ ] `tags` (3–5 são suficientes)
+- [ ] `slug` no frontmatter de cada tradução não-pt-BR
+- [ ] `faq` se aplica ao tema (3–6 perguntas)
+- [ ] `references` com 2–4 fontes confiáveis (se categoria for de saúde/desenvolvimento)
+
+### Imagens
+- [ ] Cover otimizado (≤ 200KB, 16:9)
+- [ ] Imagens inline com `alt` descritivo (não "imagem 1")
+- [ ] Sem imagem com texto embutido
+
+### Tradução (se aplicável)
+- [ ] Tradução não literal — adaptada à expressão de cada idioma
+- [ ] Slug específico por idioma
+- [ ] Referência regional ajustada quando faz sentido
+
+### Validação
+- [ ] `npm run validate-blog` passa
+- [ ] `npm run build` passa local
+- [ ] Pré-visualizou em `npm run dev` em desktop e mobile
+
+---
+
+## 12. Comandos úteis
+
+```bash
+# Criar artigo novo (4 línguas, todas drafts)
+npm run new-post -- --id=<slug> [--category=<slug>]
+
+# Validar tudo (rodado automaticamente no build)
+npm run validate-blog
+
+# Ver status de tradução
+npm run translation-status
+
+# Servir local pra preview
+npm run dev
+# acessa http://localhost:3000/blog/
+
+# Build de produção
+npm run build
+```
+
+### Para preview específico
+
+- pt-BR: http://localhost:3000/blog/<slug>/
+- EN: http://localhost:3000/en/blog/<slug-en>/
+- ES: http://localhost:3000/es/blog/<slug-es>/
+- FR: http://localhost:3000/fr/blog/<slug-fr>/
+
+### Onde mexer no código (se precisar)
+
+| O que | Onde |
+|---|---|
+| Tipo de frontmatter | `src/lib/blog/types.ts` |
+| Categorias | `src/lib/blog/categories.ts` |
+| Validação | `src/lib/blog/validate.ts` |
+| Loader (lê MDX) | `src/lib/blog/loader.ts` |
+| Renderização do artigo | `src/components/blog/Article.tsx` |
+| FAQ | `src/components/blog/Faq.tsx` |
+| Referências | `src/components/blog/References.tsx` |
+| Card na listagem | `src/components/blog/ArticleCard.tsx` |
+| Estilos do corpo | `src/app/globals.css` (`.article-body`) |
+| Strings i18n | `src/i18n/messages/*.ts` (campo `blog`) |

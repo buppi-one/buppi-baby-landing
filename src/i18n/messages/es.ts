@@ -429,5 +429,7 @@ export const es: Messages = {
     categoryLabel: "Categoría",
     relatedPosts: "Artículos relacionados",
     empty: "Aún no hay artículos publicados.",
+    faqHeading: "Preguntas frecuentes",
+    referencesHeading: "Referencias",
   },
 };
