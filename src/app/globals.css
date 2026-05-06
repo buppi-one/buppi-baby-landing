@@ -37,10 +37,26 @@
   --color-fg-secondary: #6b6b8d;
   --color-fg-muted: #a8a8c0;
 
+  /* Event category colors (pastel — used in mockups) */
+  --color-evt-nursing: #f6d38b;
+  --color-evt-bottle: #a7c7e7;
+  --color-evt-sleep: #bfe3d0;
+  --color-evt-sleep-night: #7fbfaf;
+  --color-evt-diaper: #c9ccd6;
+  --color-evt-bath: #aee1e1;
+  --color-evt-food: #f7b7a3;
+  --color-evt-walk: #ddbea9;
+  --color-evt-milestone: #f3e9a6;
+
   --radius: 1.5rem;
   --radius-large: 2.5rem;
   --radius-xl: 2rem;
   --radius-2xl: 2.5rem;
+}
+
+@keyframes la-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
 @layer base {

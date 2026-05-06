@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Icon, type IconName } from "@/components/Icon";
+import { BIcon, type BIconName } from "@/components/BIcon";
 import {
   getMessages,
   LOCALES,
@@ -14,10 +14,10 @@ import {
 } from "@/i18n";
 
 type Theme = "light" | "dark" | "system";
-const THEME_ICONS: Record<Theme, IconName> = {
-  light: "light_mode",
-  dark: "dark_mode",
-  system: "contrast",
+const THEME_ICONS: Record<Theme, BIconName> = {
+  light: "sun",
+  dark: "moon",
+  system: "globe",
 };
 
 function applyTheme(theme: Theme) {
@@ -32,6 +32,7 @@ function applyTheme(theme: Theme) {
 
 export function Nav({ locale }: { locale: Locale }) {
   const m = getMessages(locale).nav;
+  const blogTitle = getMessages(locale).blog.title;
   const pathname = usePathname() || "/";
   const cleanPath = stripLocale(pathname);
 
@@ -45,12 +46,9 @@ export function Nav({ locale }: { locale: Locale }) {
     const saved = (localStorage.getItem("theme") as Theme) || "system";
     setTheme(saved);
     applyTheme(saved);
-
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     const listener = () => {
-      if ((localStorage.getItem("theme") as Theme) === "system") {
-        applyTheme("system");
-      }
+      if ((localStorage.getItem("theme") as Theme) === "system") applyTheme("system");
     };
     media.addEventListener("change", listener);
     return () => media.removeEventListener("change", listener);
@@ -58,12 +56,10 @@ export function Nav({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      if (themeRef.current && !themeRef.current.contains(e.target as Node)) {
+      if (themeRef.current && !themeRef.current.contains(e.target as Node))
         setThemeOpen(false);
-      }
-      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+      if (langRef.current && !langRef.current.contains(e.target as Node))
         setLangOpen(false);
-      }
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
@@ -77,75 +73,58 @@ export function Nav({ locale }: { locale: Locale }) {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href={localePath(locale, "/")} className="flex items-center">
-          <picture>
-            <source
-              type="image/webp"
-              srcSet="/logo-full.webp 1x, /logo-full-2x.webp 2x"
-            />
-            <img
-              src="/logo-full-fallback.png"
-              alt="Buppi Baby"
-              width={140}
-              height={73}
-              className="h-10 w-auto"
-            />
-          </picture>
-        </a>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a
-            className="hover:text-primary transition-colors"
-            href={`${localePath(locale, "/")}#funcionalidades`}
-          >
-            {m.features}
+    <nav className="sticky top-0 z-50 border-b border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] bg-[rgba(250,249,246,0.85)] dark:bg-[rgba(24,24,40,0.8)] backdrop-blur-xl">
+      <div className="max-w-7xl mx-auto px-6 lg:px-14 h-16 flex items-center justify-between">
+        <div className="flex items-center gap-8">
+          <a href={localePath(locale, "/")} className="flex items-center gap-2">
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/logo-full.webp 1x, /logo-full-2x.webp 2x"
+              />
+              <img
+                src="/logo-full-fallback.png"
+                alt="Buppi Baby"
+                width={140}
+                height={73}
+                className="h-9 w-auto"
+              />
+            </picture>
           </a>
-          <a
-            className="hover:text-primary transition-colors"
-            href={`${localePath(locale, "/")}#familia`}
-          >
-            {m.sharing}
-          </a>
-          <a
-            className="hover:text-primary transition-colors"
-            href={`${localePath(locale, "/")}#estatisticas`}
-          >
-            {m.stats}
-          </a>
-          <a
-            className="hover:text-primary transition-colors"
-            href={localePath(locale, "/blog")}
-          >
-            {m.blog}
-          </a>
+          <div className="hidden lg:flex items-center gap-7 text-sm font-medium text-[var(--color-fg-secondary)]">
+            <a className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
+              href={`${localePath(locale, "/")}#funcionalidades`}>
+              {m.features}
+            </a>
+            <a className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
+              href={`${localePath(locale, "/")}#familia`}>
+              {m.sharing}
+            </a>
+            <a className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
+              href={localePath(locale, "/blog")}>
+              {blogTitle}
+            </a>
+          </div>
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="relative" ref={langRef}>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setLangOpen((v) => !v);
-                setThemeOpen(false);
-              }}
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setLangOpen((v) => !v); setThemeOpen(false); }}
               aria-label={m.languageAria}
-              className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-lg leading-none"
+              className="w-9 h-9 rounded-full bg-white dark:bg-[var(--color-surface-dark)] border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] flex items-center justify-center hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] transition-colors text-base"
             >
               {LOCALE_FLAGS[locale]}
             </button>
             {langOpen && (
-              <div className="absolute right-0 top-12 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 py-2 min-w-[180px] z-50">
+              <div className="absolute right-0 top-11 bg-white dark:bg-[var(--color-surface-dark)] rounded-2xl shadow-xl border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] py-2 min-w-[180px] z-50">
                 {LOCALES.map((l) => (
                   <a
                     key={l}
-                    href={`${localePath(l, cleanPath)}`}
-                    onClick={() => {
-                      try {
-                        localStorage.setItem("locale", l);
-                      } catch {}
-                    }}
-                    className={`block px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors ${
-                      locale === l ? "text-primary font-semibold" : ""
+                    href={localePath(l, cleanPath)}
+                    onClick={() => { try { localStorage.setItem("locale", l); } catch {} }}
+                    className={`block px-4 py-2 text-sm hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] transition-colors ${
+                      locale === l ? "text-[var(--color-primary-dark)] dark:text-[var(--color-primary)] font-semibold" : ""
                     }`}
                   >
                     <span className="mr-2">{LOCALE_FLAGS[l]}</span>
@@ -157,30 +136,25 @@ export function Nav({ locale }: { locale: Locale }) {
           </div>
           <div className="relative" ref={themeRef}>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setThemeOpen((v) => !v);
-                setLangOpen(false);
-              }}
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setThemeOpen((v) => !v); setLangOpen(false); }}
               aria-label={m.themeAria}
-              className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+              className="w-9 h-9 rounded-full bg-white dark:bg-[var(--color-surface-dark)] border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] flex items-center justify-center hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] transition-colors text-[var(--color-fg-secondary)]"
             >
-              <Icon
-                name={THEME_ICONS[theme]}
-                className="text-slate-600 dark:text-slate-300 text-xl"
-              />
+              <BIcon name={THEME_ICONS[theme]} size={16} />
             </button>
             {themeOpen && (
-              <div className="absolute right-0 top-12 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 py-2 min-w-[140px] z-50">
+              <div className="absolute right-0 top-11 bg-white dark:bg-[var(--color-surface-dark)] rounded-2xl shadow-xl border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] py-2 min-w-[140px] z-50">
                 {(["light", "dark", "system"] as Theme[]).map((t) => (
                   <button
                     key={t}
+                    type="button"
                     onClick={() => chooseTheme(t)}
-                    className={`w-full px-4 py-2 text-left text-sm hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-3 transition-colors ${
-                      theme === t ? "text-primary font-medium" : ""
+                    className={`w-full px-4 py-2 text-left text-sm hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] flex items-center gap-3 transition-colors ${
+                      theme === t ? "text-[var(--color-primary-dark)] dark:text-[var(--color-primary)] font-medium" : ""
                     }`}
                   >
-                    <Icon name={THEME_ICONS[t]} className="text-lg" />
+                    <BIcon name={THEME_ICONS[t]} size={14} />
                     {m.theme[t]}
                   </button>
                 ))}
@@ -188,7 +162,7 @@ export function Nav({ locale }: { locale: Locale }) {
             )}
           </div>
           <a
-            className="bg-primary hover:bg-primary/90 text-white px-4 sm:px-6 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-primary/25 text-sm sm:text-base"
+            className="bg-[var(--color-primary-dark)] hover:opacity-90 text-white px-4 sm:px-5 py-2 rounded-xl font-semibold transition-all shadow-lg shadow-[var(--color-primary)]/25 text-sm"
             href={`${localePath(locale, "/")}#baixar`}
           >
             {m.download}
