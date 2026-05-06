@@ -192,17 +192,3 @@ export function getAlternatesMap(): AlternatesMap {
   return map;
 }
 
-/** locale → fully-resolved URL path, for the language switcher. */
-export function articleAlternateUrls(
-  articleId: string,
-): Partial<Record<Locale, string>> {
-  const slugMap = getAlternatesMap()[articleId] ?? {};
-  const out: Partial<Record<Locale, string>> = {};
-  for (const [loc, slug] of Object.entries(slugMap)) {
-    if (!slug) continue;
-    const localeKey = loc as Locale;
-    out[localeKey] =
-      localeKey === "pt-BR" ? `/blog/${slug}/` : `/${localeKey}/blog/${slug}/`;
-  }
-  return out;
-}

@@ -59,10 +59,20 @@ export function Nav({ locale }: { locale: Locale }) {
   }, []);
 
   useEffect(() => {
-    const map = (window as unknown as {
-      __pageAlternates?: Partial<Record<Locale, string>>;
-    }).__pageAlternates;
-    if (map) setPageAlternates(map);
+    const links = document.querySelectorAll<HTMLLinkElement>(
+      'link[rel="alternate"][hreflang]',
+    );
+    const map: Partial<Record<Locale, string>> = {};
+    links.forEach((link) => {
+      const lang = link.hreflang;
+      if (!lang || lang === "x-default") return;
+      if (!(LOCALES as readonly string[]).includes(lang)) return;
+      try {
+        const url = new URL(link.href, window.location.origin);
+        map[lang as Locale] = url.pathname + url.search + url.hash;
+      } catch {}
+    });
+    setPageAlternates(map);
   }, [pathname]);
 
   const hrefForLocale = (l: Locale): string =>

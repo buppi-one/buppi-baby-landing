@@ -3,12 +3,10 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { Article } from "@/components/blog/Article";
-import { LocaleAlternatesScript } from "@/components/blog/LocaleAlternatesScript";
 import { RedirectScript } from "@/components/blog/RedirectScript";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { DEFAULT_LOCALE } from "@/i18n";
 import {
-  articleAlternateUrls,
   getAlternatesMap,
   getArticle,
   getArticlesByLocale,
@@ -42,7 +40,6 @@ export default async function BlogArticlePage({
   if (!article) notFound();
   return (
     <>
-      <LocaleAlternatesScript alternates={articleAlternateUrls(article.id)} />
       <Nav locale={DEFAULT_LOCALE} />
       <main>
         <RedirectScript articleId={article.id} alternates={getAlternatesMap()} />
