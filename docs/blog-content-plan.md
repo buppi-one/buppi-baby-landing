@@ -33,7 +33,7 @@ nessa ordem (cobre os principais "primeiros 6 meses" do bebê).
 
 | # | Status | Categoria | Título | Slug | FAQ |
 |---|---|---|---|---|---|
-| 1 | ⬜ | sleep | Quanto tempo um bebê deve dormir por idade (recém-nascido a 2 anos) | `quanto-tempo-bebe-deve-dormir-por-idade` | ✅ |
+| 1 | ✅ 2026-05-06 (4 idiomas) | sleep | Quanto tempo um bebê deve dormir por idade (recém-nascido a 2 anos) | `quanto-tempo-bebe-deve-dormir-por-idade` | ✅ |
 | 2 | ⬜ | feeding | Amamentação nos primeiros dias: o que esperar | `amamentacao-primeiros-dias` | ✅ |
 | 3 | ⬜ | expecting-and-new-parents | Como se preparar para a chegada do bebê: checklist completo | `checklist-chegada-do-bebe` | ✅ |
 | 4 | ⬜ | sleep | Janelas de sono (wake windows): a tabela por idade | `janelas-de-sono-por-idade` | ✅ |
@@ -166,4 +166,4 @@ Em pt-BR + en. ES/FR podem rodar atrás (~2 semanas).
   esforço e ajuda a planejar interlinks)
 - Revisar a cada trimestre: o que ranqueou bem? o que precisa ser reescrito?
 
-Last updated: 2026-05-05
+Last updated: 2026-05-06
