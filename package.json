@@ -10,7 +10,9 @@
     "lint": "next lint",
     "prepare-blog": "npm run validate-blog && npm run copy-blog-assets",
     "validate-blog": "tsx src/lib/blog/validate.ts",
-    "copy-blog-assets": "tsx src/lib/blog/copy-assets.ts"
+    "copy-blog-assets": "tsx src/lib/blog/copy-assets.ts",
+    "new-post": "tsx src/lib/blog/new-post.ts",
+    "translation-status": "tsx src/lib/blog/translation-status.ts"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
