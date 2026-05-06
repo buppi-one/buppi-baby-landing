@@ -77,3 +77,22 @@ export function categoryFromUrlSlug(
   );
   return match ? match[0] : null;
 }
+
+/**
+ * locale → fully-resolved category URL for the language switcher.
+ * Used to swap to the right /blog/category/{slug}/ across locales.
+ */
+export function categoryAlternateUrls(
+  category: CategorySlug,
+): Record<Locale, string> {
+  const meta = CATEGORIES[category];
+  const out = {} as Record<Locale, string>;
+  for (const [loc, slug] of Object.entries(meta.urlSlug)) {
+    const localeKey = loc as Locale;
+    out[localeKey] =
+      localeKey === "pt-BR"
+        ? `/blog/category/${slug}/`
+        : `/${localeKey}/blog/category/${slug}/`;
+  }
+  return out;
+}

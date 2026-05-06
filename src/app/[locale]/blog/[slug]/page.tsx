@@ -3,10 +3,16 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { Article } from "@/components/blog/Article";
+import { LocaleAlternatesScript } from "@/components/blog/LocaleAlternatesScript";
 import { RedirectScript } from "@/components/blog/RedirectScript";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { isLocale } from "@/i18n";
-import { getAlternatesMap, getArticle, getArticlesByLocale } from "@/lib/blog/loader";
+import {
+  articleAlternateUrls,
+  getAlternatesMap,
+  getArticle,
+  getArticlesByLocale,
+} from "@/lib/blog/loader";
 import { buildArticleMetadata } from "@/lib/blog/metadata";
 
 const SUPPORTED = ["en", "es", "fr"] as const;
@@ -43,6 +49,7 @@ export default async function LocalizedBlogArticlePage({
   if (!article) notFound();
   return (
     <>
+      <LocaleAlternatesScript alternates={articleAlternateUrls(article.id)} />
       <Nav locale={locale as RouteLocale} />
       <main>
         <RedirectScript articleId={article.id} alternates={getAlternatesMap()} />

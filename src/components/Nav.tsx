@@ -151,10 +151,18 @@ export function Nav({ locale }: { locale: Locale }) {
                   <a
                     key={l}
                     href={localePath(l, cleanPath)}
-                    onClick={() => {
+                    onClick={(e) => {
                       try {
                         localStorage.setItem("locale", l);
                       } catch {}
+                      const map = (window as unknown as {
+                        __pageAlternates?: Partial<Record<Locale, string>>;
+                      }).__pageAlternates;
+                      const override = map?.[l];
+                      if (override) {
+                        e.preventDefault();
+                        window.location.assign(override);
+                      }
                     }}
                     className={`block px-4 py-2 text-sm hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] transition-colors ${
                       locale === l

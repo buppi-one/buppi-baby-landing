@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogIndex } from "@/components/blog/BlogIndex";
+import { LocaleAlternatesScript } from "@/components/blog/LocaleAlternatesScript";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
-import { CATEGORIES, categoryFromUrlSlug } from "@/lib/blog/categories";
+import {
+  CATEGORIES,
+  categoryAlternateUrls,
+  categoryFromUrlSlug,
+} from "@/lib/blog/categories";
 import { getArticlesByLocale } from "@/lib/blog/loader";
 import { isLocale } from "@/i18n";
 
@@ -60,6 +65,7 @@ export default async function LocalizedCategoryPage({
   if (!slug) notFound();
   return (
     <>
+      <LocaleAlternatesScript alternates={categoryAlternateUrls(slug)} />
       <Nav locale={locale as RouteLocale} />
       <main>
         <BlogIndex
