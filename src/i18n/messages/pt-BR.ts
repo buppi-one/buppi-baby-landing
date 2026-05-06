@@ -166,11 +166,12 @@ export const ptBR: Messages = {
     tag: "FAQ",
     title: "Perguntas frequentes",
     items: [
-      { q: "É realmente grátis?", a: "Sim. As funções essenciais — registro, linha do tempo, 1 cuidador — são gratuitas para sempre." },
-      { q: "Funciona offline?", a: "Sim. Tudo que você registra fica salvo localmente e sincroniza quando voltar à internet." },
-      { q: "Quantas pessoas posso adicionar?", a: "Você pode adicionar parceiro(a), avós e babá no plano família — ideal para todo mundo acompanhar." },
+      { q: "É realmente grátis?", a: "Sim. O plano gratuito tem registro completo (sono, mama, fralda, marcos), linha do tempo e estatísticas básicas — tudo armazenado localmente no aparelho. Não tem cuidadores adicionais nem backup na nuvem." },
+      { q: "Como funcionam os planos Duo e Circle?", a: "O Duo libera você + 1 pessoa (parceiro, parceira) e o Circle libera você + 5 pessoas (família estendida, avós, babá, pediatra). Os dois planos pagos sincronizam tudo na nuvem com backup automático." },
+      { q: "O que tem de iPhone-exclusivo?", a: "No iPhone você tem Live Activity na Dynamic Island (cronômetros e alertas mostrados sempre na tela), widgets na tela inicial e na tela de bloqueio. Ainda não temos no Android — está no roadmap." },
+      { q: "Funciona offline?", a: "Sim. No plano grátis, todo o registro acontece local, sem internet. Nos planos pagos você ganha sincronização e backup na nuvem além disso." },
       { q: "Meus dados estão seguros?", a: "Sim. Criptografia em trânsito e em repouso, servidores no Brasil, conformidade com LGPD." },
-      { q: "Posso cancelar quando quiser?", a: "Pode. Sem multa, sem fidelidade. Você mantém acesso até o fim do período pago." },
+      { q: "Posso cancelar quando quiser?", a: "Pode. Sem multa, sem fidelidade. Você mantém acesso até o fim do período pago e os dados continuam disponíveis no plano grátis." },
     ],
   },
   cta: {

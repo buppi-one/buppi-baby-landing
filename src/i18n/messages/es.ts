@@ -166,11 +166,12 @@ export const es: Messages = {
     tag: "FAQ",
     title: "Preguntas frecuentes",
     items: [
-      { q: "¿Es realmente gratis?", a: "Sí. Las funciones esenciales — registro, línea de tiempo, 1 cuidador — son gratis para siempre." },
-      { q: "¿Funciona sin conexión?", a: "Sí. Todo lo que registras se guarda localmente y se sincroniza al volver a conectarse." },
-      { q: "¿Cuántas personas puedo añadir?", a: "Puedes añadir pareja, abuelos y niñera en el plan familiar — ideal para que todos sigan al bebé." },
+      { q: "¿Es realmente gratis?", a: "Sí. El plan gratuito incluye registro completo (sueño, tomas, pañales, hitos), línea de tiempo y estadísticas básicas — todo guardado localmente en el dispositivo. No incluye cuidadores adicionales ni copia de seguridad en la nube." },
+      { q: "¿Cómo funcionan los planes Duo y Circle?", a: "Duo habilita tú + 1 persona (pareja). Circle habilita tú + 5 personas (familia extendida — abuelos, niñera, pediatra). Los dos planes pagos sincronizan todo en la nube con copia automática." },
+      { q: "¿Qué es exclusivo de iPhone?", a: "En iPhone tienes Live Activity en la Dynamic Island (cronómetros y alertas siempre visibles), widgets en la pantalla de inicio y en la pantalla de bloqueo. Los equivalentes para Android están en la hoja de ruta." },
+      { q: "¿Funciona sin conexión?", a: "Sí. En el plan gratuito todo el registro funciona sin internet. Los planes pagos añaden sincronización y copia de seguridad en la nube." },
       { q: "¿Mis datos están seguros?", a: "Sí. Cifrado en tránsito y en reposo, cumplimos con los estándares LGPD y RGPD." },
-      { q: "¿Puedo cancelar cuando quiera?", a: "Sí. Sin multas, sin permanencia. Mantienes el acceso hasta el final del período pagado." },
+      { q: "¿Puedo cancelar cuando quiera?", a: "Sí. Sin multas, sin permanencia. Mantienes el acceso hasta el final del período pagado; tus datos siguen disponibles en el plan gratuito." },
     ],
   },
   cta: {

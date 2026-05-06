@@ -166,11 +166,12 @@ export const fr: Messages = {
     tag: "FAQ",
     title: "Questions fréquentes",
     items: [
-      { q: "Est-ce vraiment gratuit ?", a: "Oui. Les fonctions essentielles — enregistrement, chronologie, 1 soignant — sont gratuites pour toujours." },
-      { q: "Ça fonctionne hors ligne ?", a: "Oui. Tout ce que vous enregistrez est stocké localement et se synchronise dès que vous êtes en ligne." },
-      { q: "Combien de personnes puis-je ajouter ?", a: "Vous pouvez ajouter partenaire, grands-parents et nounou dans le plan famille — idéal pour que tout le monde suive bébé." },
-      { q: "Mes données sont-elles sûres ?", a: "Oui. Chiffrement en transit et au repos, conformité avec le RGPD et standards équivalents." },
-      { q: "Puis-je annuler quand je veux ?", a: "Oui. Sans frais, sans engagement. Vous gardez l'accès jusqu'à la fin de la période payée." },
+      { q: "Est-ce vraiment gratuit ?", a: "Oui. Le plan gratuit inclut l'enregistrement complet (sommeil, tétées, couches, étapes), la chronologie et les statistiques basiques — tout stocké localement sur l'appareil. Il n'inclut pas de soignants supplémentaires ni la sauvegarde dans le cloud." },
+      { q: "Comment fonctionnent les plans Duo et Circle ?", a: "Duo débloque vous + 1 personne (partenaire). Circle débloque vous + 5 personnes (famille élargie — grands-parents, nounou, pédiatre). Les deux plans payants synchronisent tout dans le cloud avec sauvegarde automatique." },
+      { q: "Qu'est-ce qui est exclusif à l'iPhone ?", a: "Sur iPhone, vous avez la Live Activity dans la Dynamic Island (chronomètres et alertes toujours visibles), des widgets sur l'écran d'accueil et sur l'écran verrouillé. Les équivalents Android sont sur la feuille de route." },
+      { q: "Ça fonctionne hors ligne ?", a: "Oui. Sur le plan gratuit, tout l'enregistrement fonctionne hors ligne. Les plans payants ajoutent la synchronisation et la sauvegarde dans le cloud." },
+      { q: "Mes données sont-elles sûres ?", a: "Oui. Chiffrement en transit et au repos, conformité avec le RGPD et les standards équivalents." },
+      { q: "Puis-je annuler quand je veux ?", a: "Oui. Sans frais, sans engagement. Vous gardez l'accès jusqu'à la fin de la période payée ; vos données restent disponibles sur le plan gratuit." },
     ],
   },
   cta: {

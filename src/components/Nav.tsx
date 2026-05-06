@@ -39,6 +39,7 @@ export function Nav({ locale }: { locale: Locale }) {
   const [theme, setTheme] = useState<Theme>("system");
   const [themeOpen, setThemeOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const themeRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
 
@@ -72,6 +73,32 @@ export function Nav({ locale }: { locale: Locale }) {
     setThemeOpen(false);
   };
 
+  const navLinks = (
+    <>
+      <a
+        className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
+        href={`${localePath(locale, "/")}#funcionalidades`}
+        onClick={() => setMobileOpen(false)}
+      >
+        {m.features}
+      </a>
+      <a
+        className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
+        href={`${localePath(locale, "/")}#familia`}
+        onClick={() => setMobileOpen(false)}
+      >
+        {m.sharing}
+      </a>
+      <a
+        className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
+        href={localePath(locale, "/blog")}
+        onClick={() => setMobileOpen(false)}
+      >
+        {blogTitle}
+      </a>
+    </>
+  );
+
   return (
     <nav className="sticky top-0 z-50 border-b border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] bg-[rgba(250,249,246,0.85)] dark:bg-[rgba(24,24,40,0.8)] backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-6 lg:px-14 h-16 flex items-center justify-between">
@@ -91,26 +118,28 @@ export function Nav({ locale }: { locale: Locale }) {
               />
             </picture>
           </a>
-          <div className="hidden lg:flex items-center gap-7 text-sm font-medium text-[var(--color-fg-secondary)]">
-            <a className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
-              href={`${localePath(locale, "/")}#funcionalidades`}>
-              {m.features}
-            </a>
-            <a className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
-              href={`${localePath(locale, "/")}#familia`}>
-              {m.sharing}
-            </a>
-            <a className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
-              href={localePath(locale, "/blog")}>
-              {blogTitle}
-            </a>
+          <div className="hidden md:flex items-center gap-5 lg:gap-7 text-sm font-medium text-[var(--color-fg-secondary)]">
+            {navLinks}
           </div>
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
+          <button
+            type="button"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label="Menu"
+            aria-expanded={mobileOpen}
+            className="md:hidden w-9 h-9 rounded-full bg-white dark:bg-[var(--color-surface-dark)] border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] flex items-center justify-center hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] transition-colors text-[var(--color-fg-secondary)]"
+          >
+            <BIcon name={mobileOpen ? "plus" : "menu"} size={16} className={mobileOpen ? "rotate-45" : ""} />
+          </button>
           <div className="relative" ref={langRef}>
             <button
               type="button"
-              onClick={(e) => { e.stopPropagation(); setLangOpen((v) => !v); setThemeOpen(false); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setLangOpen((v) => !v);
+                setThemeOpen(false);
+              }}
               aria-label={m.languageAria}
               className="w-9 h-9 rounded-full bg-white dark:bg-[var(--color-surface-dark)] border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] flex items-center justify-center hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] transition-colors text-base"
             >
@@ -122,9 +151,15 @@ export function Nav({ locale }: { locale: Locale }) {
                   <a
                     key={l}
                     href={localePath(l, cleanPath)}
-                    onClick={() => { try { localStorage.setItem("locale", l); } catch {} }}
+                    onClick={() => {
+                      try {
+                        localStorage.setItem("locale", l);
+                      } catch {}
+                    }}
                     className={`block px-4 py-2 text-sm hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] transition-colors ${
-                      locale === l ? "text-[var(--color-primary-dark)] dark:text-[var(--color-primary)] font-semibold" : ""
+                      locale === l
+                        ? "text-[var(--color-primary-dark)] dark:text-[var(--color-primary)] font-semibold"
+                        : ""
                     }`}
                   >
                     <span className="mr-2">{LOCALE_FLAGS[l]}</span>
@@ -137,7 +172,11 @@ export function Nav({ locale }: { locale: Locale }) {
           <div className="relative" ref={themeRef}>
             <button
               type="button"
-              onClick={(e) => { e.stopPropagation(); setThemeOpen((v) => !v); setLangOpen(false); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setThemeOpen((v) => !v);
+                setLangOpen(false);
+              }}
               aria-label={m.themeAria}
               className="w-9 h-9 rounded-full bg-white dark:bg-[var(--color-surface-dark)] border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] flex items-center justify-center hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] transition-colors text-[var(--color-fg-secondary)]"
             >
@@ -151,7 +190,9 @@ export function Nav({ locale }: { locale: Locale }) {
                     type="button"
                     onClick={() => chooseTheme(t)}
                     className={`w-full px-4 py-2 text-left text-sm hover:bg-[var(--color-surface-elevated)] dark:hover:bg-[var(--color-surface-elevated-dark)] flex items-center gap-3 transition-colors ${
-                      theme === t ? "text-[var(--color-primary-dark)] dark:text-[var(--color-primary)] font-medium" : ""
+                      theme === t
+                        ? "text-[var(--color-primary-dark)] dark:text-[var(--color-primary)] font-medium"
+                        : ""
                     }`}
                   >
                     <BIcon name={THEME_ICONS[t]} size={14} />
@@ -162,13 +203,29 @@ export function Nav({ locale }: { locale: Locale }) {
             )}
           </div>
           <a
-            className="bg-[var(--color-primary-dark)] hover:opacity-90 text-white px-4 sm:px-5 py-2 rounded-xl font-semibold transition-all shadow-lg shadow-[var(--color-primary)]/25 text-sm"
+            className="hidden sm:inline-flex bg-[var(--color-primary-dark)] hover:opacity-90 text-white px-4 sm:px-5 py-2 rounded-xl font-semibold transition-all shadow-lg shadow-[var(--color-primary)]/25 text-sm items-center"
             href={`${localePath(locale, "/")}#baixar`}
           >
             {m.download}
           </a>
         </div>
       </div>
+
+      {/* Mobile menu drawer */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] bg-white dark:bg-[var(--color-surface-dark)]">
+          <div className="px-6 py-5 flex flex-col gap-4 text-base font-medium text-[var(--color-fg)] dark:text-white">
+            {navLinks}
+            <a
+              className="sm:hidden mt-2 inline-flex bg-[var(--color-primary-dark)] hover:opacity-90 text-white px-5 py-2.5 rounded-xl font-semibold text-sm justify-center"
+              href={`${localePath(locale, "/")}#baixar`}
+              onClick={() => setMobileOpen(false)}
+            >
+              {m.download}
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

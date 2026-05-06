@@ -166,11 +166,12 @@ export const en: Messages = {
     tag: "FAQ",
     title: "Frequently asked questions",
     items: [
-      { q: "Is it really free?", a: "Yes. The essentials — logging, timeline, 1 caregiver — are free forever." },
-      { q: "Does it work offline?", a: "Yes. Everything is stored locally and syncs as soon as you're back online." },
-      { q: "How many people can I add?", a: "You can add a partner, grandparents and a nanny on the family plan — perfect for everyone to follow along." },
+      { q: "Is it really free?", a: "Yes. The free plan includes full event logging (sleep, feeds, diapers, milestones), timeline and basic stats — all stored locally on the device. It does not include extra caregivers or cloud backup." },
+      { q: "How do the Duo and Circle plans work?", a: "Duo unlocks you + 1 person (partner). Circle unlocks you + 5 people (extended family — grandparents, nanny, pediatrician). Both paid plans sync everything to the cloud with automatic backup." },
+      { q: "What's iPhone-exclusive?", a: "On iPhone you get Live Activity in the Dynamic Island (timers and alerts always visible), home-screen widgets and lock-screen widgets. Android equivalents are on the roadmap." },
+      { q: "Does it work offline?", a: "Yes. On the free plan, all logging works offline-only. The paid plans add cloud sync and backup on top." },
       { q: "Is my data safe?", a: "Yes. Encryption in transit and at rest, and we follow LGPD and GDPR-equivalent standards." },
-      { q: "Can I cancel anytime?", a: "You can. No fees, no commitment. You keep access until the end of the paid period." },
+      { q: "Can I cancel anytime?", a: "You can. No fees, no commitment. You keep access until the end of the paid period; your data stays available on the free plan." },
     ],
   },
   cta: {
