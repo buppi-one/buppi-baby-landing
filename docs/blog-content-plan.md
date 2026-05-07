@@ -41,7 +41,7 @@ nessa ordem (cobre os principais "primeiros 6 meses" do bebê).
 | 6 | ✅ 2026-05-07 (4 idiomas) | health | Calendário de vacinas do bebê no primeiro ano (Brasil) | `calendario-vacinas-primeiro-ano` | ✅ |
 | 7 | ✅ 2026-05-07 (4 idiomas) | development | Marcos do desenvolvimento: o que esperar mês a mês (0-12) | `marcos-desenvolvimento-mes-a-mes` | ✅ |
 | 8 | ✅ 2026-05-07 (4 idiomas) | sleep | Regressão do sono dos 4 meses: por que acontece e como passar | `regressao-sono-4-meses` | ✅ |
-| 9 | ✅ 2026-05-07 (4 idiomas) | expecting-and-new-parents | Sinais de que o bebê está com cólica (e o que fazer) | `sinais-de-colica-no-bebe` | ✅ |
+| 9 | ❌ removido — duplicava `como-acalmar-bebe-colica` (que já cobre identificação + tratamento) | expecting-and-new-parents | Sinais de que o bebê está com cólica (e o que fazer) | `sinais-de-colica-no-bebe` | — |
 | 10 | ✅ 2026-05-07 (4 idiomas) | feeding | Como saber se o bebê está mamando o suficiente | `bebe-mamando-o-suficiente` | ✅ |
 
 ---
