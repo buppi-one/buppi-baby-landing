@@ -45,7 +45,10 @@ export const metadata: Metadata = {
   },
 };
 
-const localeInit = `(function(){try{var p=location.pathname;if(/^\\/(en|es|fr)(\\/|$)/.test(p))return;var supported=['en','es','fr'];var stored=localStorage.getItem('locale');if(!stored||supported.indexOf(stored)===-1)return;var stripped=p==='/'?'':p.replace(/\\/$/,'');location.replace('/'+stored+stripped+'/'+location.search+location.hash);}catch(e){}})();`;
+// Auto-redirect to the user's stored locale on first paint. Skips blog
+// article and category pages because their slugs differ per locale — those
+// are handled by the per-article RedirectScript which has the slug map.
+const localeInit = `(function(){try{var p=location.pathname;if(/^\\/(en|es|fr)(\\/|$)/.test(p))return;if(/^\\/blog\\/[^\\/]/.test(p))return;var supported=['en','es','fr'];var stored=localStorage.getItem('locale');if(!stored||supported.indexOf(stored)===-1)return;var stripped=p==='/'?'':p.replace(/\\/$/,'');location.replace('/'+stored+stripped+'/'+location.search+location.hash);}catch(e){}})();`;
 const themeInit = `(function(){try{var t=localStorage.getItem('theme')||'system';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d)document.documentElement.classList.add('dark');}catch(e){}})();`;
 
 export default function RootLayout({
