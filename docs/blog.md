@@ -229,11 +229,84 @@ automaticamente para `public/blog/{id}/` no `npm run build`.
 cover: ./cover.webp
 ```
 
-- **Aspecto recomendado**: 16:9 (ex: 1600×900)
-- **Formato**: WebP de preferência (JPG/PNG aceitos)
-- **Tamanho**: ≤ 200KB (otimize antes de subir — use [squoosh.app](https://squoosh.app/) ou `cwebp`)
-- **Sem texto na imagem** (ruim pra SEO e tradução)
-- Se o artigo não tiver cover, o card no listing usa um gradiente determinístico
+- **Aspecto**: 16:9 (1200×630 é o tamanho de referência — bate com o OG image padrão)
+- **Formato**: **WebP** sempre. PNG/JPG aceitos mas pesam 5–30× mais
+- **Tamanho final**: ≤ 50 KB depois de otimizar (não 200 KB — esse era o limite antigo)
+- **Sem texto na imagem** (ruim pra SEO, tradução e dark mode)
+- Se o artigo não tiver cover, o card no listing usa um gradiente determinístico baseado
+  na categoria (visualmente coerente, não fica vazio)
+
+### Workflow recomendado: gerar com Codex + otimizar
+
+Pra cada artigo novo:
+
+#### 1. Peça pro Codex gerar a imagem
+
+Abra o Codex (CLI ou web), passe o conteúdo do artigo e use este prompt como base:
+
+````
+Você está criando a imagem de capa pra um artigo de blog do Buppi Baby
+(app de baby tracker).
+
+ARTIGO:
+"""
+[cole o título + os 2 primeiros parágrafos do artigo]
+"""
+
+Categoria: [sleep / feeding / development / health / expecting-and-new-parents / news]
+
+Requisitos da imagem:
+- 1200 × 630 pixels (proporção 16:9, padrão OpenGraph)
+- SEM texto na imagem
+- Estilo: livre — escolha o que mais combina com o tema (foto, ilustração,
+  aquarela, digital art, line art, colagem...). Pode misturar também.
+- Sensação: calma, acolhedora, parental — nada clínico ou comercial agressivo
+- Paleta da marca como referência (não obrigatório aplicar todas):
+  lavanda suave (#ac92ee), mint (#92d6cf), pêssego (#ffbfa5), creme (#faf9f6).
+  Use 2–3 cores principais. Se for foto, busque luz natural quente.
+- Composição: sujeito principal claramente identificável, espaço respiratório,
+  pode ter elementos decorativos sutis
+- Foco no sujeito que evoca o tema, sem ser literal demais (ex: pra um artigo de
+  sono, uma luazinha + bebê adormecido funciona melhor que uma cama detalhada)
+
+Salve como `cover.png` na pasta `content/blog/<id>/` do artigo.
+````
+
+Ajuste o prompt se o tema pedir algo específico (ex: artigo de família mostrar
+silhuetas de mais de uma pessoa).
+
+#### 2. Otimize o PNG pra WebP
+
+PNGs de IA costumam vir com 800 KB–2 MB. Sempre converte:
+
+```bash
+cd content/blog/<id>
+cwebp -q 78 cover.png -o cover.webp
+rm cover.png
+```
+
+- `-q 78` é o sweet-spot pra ilustração — abaixo disso aparecem artefatos
+- O resultado normalmente fica entre 25 e 50 KB
+- Se o cover for fotográfico, use `-q 82` (foto perde qualidade visível mais rápido) e
+  considere `-resize 1200 0` se vier maior que isso
+
+#### 3. Referencie no frontmatter
+
+Em **todos** os 4 arquivos (`pt-BR.mdx`, `en.mdx`, `es.mdx`, `fr.mdx`):
+
+```yaml
+cover: ./cover.webp
+```
+
+O `./` é obrigatório — o validator falha sem ele. O build copia o arquivo pra
+`public/blog/{id}/cover.webp` e a `<img>` resultante usa essa URL.
+
+#### 4. Confira
+
+```bash
+npm run validate-blog   # garante que cover existe e tem prefixo ./
+npm run dev             # acesse o artigo e veja o cover renderizando
+```
 
 ### Imagens dentro do texto
 
@@ -246,8 +319,12 @@ Coloque o arquivo na mesma pasta e referencie com `./` no MDX:
 O build reescreve `./posicao-amamentacao.webp` para `/blog/{id}/posicao-amamentacao.webp`
 e copia o arquivo. **Não use caminhos absolutos** (`/blog/...`) — quebra a portabilidade.
 
+Mesma regra de otimização: gere/baixe a imagem, converta pra WebP com `cwebp`, descarte
+o original.
+
 ### Direitos de imagem
 
+- ✅ Imagens geradas por IA (Codex/DALL-E/etc.) — preferência sempre
 - ✅ Imagens próprias
 - ✅ Bancos free (Unsplash, Pexels) — créditos no rodapé do artigo se a licença pedir
 - ❌ Imagens com pessoas identificáveis sem release
@@ -356,63 +433,112 @@ Se for adaptar, mantenha as 1–2 referências internacionais comuns e troque a 
 ## 7.5 Call-to-actions no meio do artigo
 
 Pra puxar o leitor pro app no meio da leitura, use o componente `<Cta />` em
-qualquer ponto do MDX:
+qualquer ponto do MDX. O id é um identificador do CTA cadastrado no registry,
+e o componente busca o copy traduzido pro idioma do artigo automaticamente:
 
 ```mdx
-## Como o sono se distribui ao longo do dia
+## Os 5 S de Karp
 
-[parágrafo introduzindo o assunto]
+O método combina cinco gatilhos que recriam o ambiente uterino...
 
-<Cta id="sleep-windows" />
+### 1. Swaddle
+[detalhes]
 
-[continua o conteúdo]
+### 2. Side/Stomach
+[detalhes]
+
+[... continuação das técnicas ...]
+
+<Cta id="health-symptoms" />
+
+## O que NÃO fazer
+
+[próxima seção]
 ```
 
-Os CTAs vivem em `src/lib/blog/ctas.ts` — todos cadastrados, traduzidos
-nos 4 idiomas, com ícone e variante de cor. Para mudar o copy de um CTA,
-edite o registry uma vez e todos os artigos que referenciam atualizam.
+O resultado: um card no meio do artigo com ícone, título, body curto e botão de
+download — em pt-BR/en/es/fr automaticamente conforme o locale.
 
 ### Por que registry e não MDX puro
 
-- 1 lugar pra editar copy de CTA, em vez de procurar artigo por artigo
-- Tradução centralizada (4 idiomas no mesmo bloco)
-- Build falha se você referenciar um id que não existe (`npm run validate-blog`)
+- **DRY**: 1 lugar pra editar o copy do CTA, em vez de buscar artigo por artigo
+- **Tradução centralizada**: 4 idiomas no mesmo bloco
+- **Validação no build**: `npm run validate-blog` falha se você referenciar um id
+  que não existe — e mostra a lista dos válidos no erro
+- **Type-safe**: `CtaId` é union literal, autocomplete no editor se um dia o autor
+  escrever direto em TS
 
-### Catálogo atual
+### Catálogo atual (15 CTAs)
 
-| ID | Quando usar |
-|---|---|
-| `sleep-windows` | sono em geral, janelas, soneca |
-| `sleep-pediatrician` | artigos clínicos, levar dados ao pediatra |
-| `sleep-routine` | construção de rotina, hábitos |
-| `sleep-regression` | regressão, distúrbio, mudança de padrão |
-| `feeds-side-tracker` | amamentação, qual seio começou |
-| `feeds-supply` | produção, "está mamando o suficiente?" |
-| `feeds-night-cluster` | cluster feeding, mamadas noturnas |
-| `feeds-bottle` | mamadeira, fórmula, ordenha |
-| `diaper-onetap` | fralda em geral, registro rápido |
-| `diaper-health` | cor do cocô, frequência, sinal de saúde |
-| `milestones-keep` | marcos, conquistas, primeiro algo |
-| `family-realtime` | compartilhamento, feed familiar |
-| `family-grandparents` | avós, família estendida |
-| `health-symptoms` | cólica, refluxo, alergia, padrões clínicos |
-| `download` | genérico (variante "featured", maior, com fundo escuro) |
+| ID | Quando usar | Variante |
+|---|---|---|
+| `sleep-windows` | sono geral, janelas, sonecas | primary |
+| `sleep-pediatrician` | levar dados ao pediatra | accent |
+| `sleep-routine` | construção de rotina, hábitos | primary |
+| `sleep-regression` | regressão, mudança de padrão | secondary |
+| `feeds-side-tracker` | amamentação, qual seio começou | secondary |
+| `feeds-supply` | "está mamando o suficiente?" | primary |
+| `feeds-night-cluster` | cluster feeding, mamadas noturnas | secondary |
+| `feeds-bottle` | mamadeira, fórmula, ordenha | primary |
+| `diaper-onetap` | fralda em geral, registro rápido | accent |
+| `diaper-health` | cor do cocô, frequência, sinal clínico | accent |
+| `milestones-keep` | marcos, conquistas, primeiro algo | primary |
+| `family-realtime` | compartilhamento, feed familiar | secondary |
+| `family-grandparents` | avós, família estendida | secondary |
+| `health-symptoms` | cólica, refluxo, alergia — registrar pra mostrar pediatra | accent |
+| `download` | genérico, **estilo "featured"** (card grande de fundo escuro) | primary |
 
 ### Como escolher o CTA certo
 
-- Use **1-2 CTAs por artigo**, não mais. Se forçar muito, deixa de funcionar.
-- Posicione **entre seções** — depois que o leitor consumiu uma ideia, antes
-  de começar a próxima.
-- Pegue o CTA mais **específico ao gancho do parágrafo anterior**. Ex: depois
-  de uma seção sobre regressão de sono, `sleep-regression` bate melhor que
-  `sleep-windows`.
+- **1–2 CTAs por artigo, não mais.** Se forçar, perde o efeito e cansa o leitor.
+- **Posicione entre seções** — depois do leitor consumir uma ideia, antes da próxima.
+  Nunca no meio de um parágrafo.
+- **Pegue o mais específico ao gancho do parágrafo anterior.** Ex: depois de uma
+  seção sobre regressão de sono, `sleep-regression` bate melhor que `sleep-windows`.
+- **Use `download` (featured) só uma vez por artigo**, e geralmente no fim — é o card
+  grande, não cabe duas vezes.
+- **Não use o mesmo CTA duas vezes** no mesmo artigo.
 
 ### Adicionar um CTA novo
 
-Edite `src/lib/blog/ctas.ts`, adicione uma entrada nova com `icon`, `variant`
-(`primary`/`secondary`/`accent`), `style?` (`compact` default ou `featured`)
-e `content` em pt-BR/en/es/fr. Use ids curtos no formato `area-angle`
-(ex: `sleep-routine`, `feeds-bottle`).
+Os 15 CTAs cobrem os principais ângulos. Mas se você precisa de um gancho diferente
+(ex: artigo sobre amamentação noturna que pede algo mais específico que `feeds-night-cluster`),
+adicione no registry:
+
+1. Abra `src/lib/blog/ctas.ts`
+2. Adicione uma entrada nova com:
+   - `icon`: nome de um BIcon (ver `src/components/BIcon.tsx`)
+   - `variant`: `"primary"` (lavanda) / `"secondary"` (mint) / `"accent"` (peach)
+   - `style?`: `"compact"` (default — card horizontal) ou `"featured"` (card grande, fundo escuro)
+   - `content`: 4 entradas (`pt-BR`/`en`/`es`/`fr`) com `title`, `body`, `cta`
+3. Use id no formato `area-angle` (ex: `sleep-night-routine`, `feeds-tandem-nursing`)
+4. `npm run validate-blog` confirma que tudo bate
+
+Exemplo de entrada:
+
+```ts
+"sleep-newborn-day-night": {
+  icon: "moon",
+  variant: "primary",
+  content: {
+    "pt-BR": {
+      title: "Inverter o dia e a noite é fase",
+      body: "O Buppi mostra a distribuição do sono em 24h e ajuda a identificar quando o ritmo circadiano começa a se firmar.",
+      cta: "Baixar grátis",
+    },
+    en: { title: "...", body: "...", cta: "..." },
+    es: { ... },
+    fr: { ... },
+  },
+},
+```
+
+### Onde o link do botão aponta
+
+Por padrão, todos os CTAs vão pra `/#baixar` (ou `/{locale}/#baixar` em outros idiomas).
+Pra um CTA específico apontar pra outro lugar (ex: deep link do app, página específica),
+adicione `href: "/algum-caminho/"` na definição. Não há suporte ainda pra deep links
+universais — quando tiver, é uma mudança no helper só.
 
 ---
 
