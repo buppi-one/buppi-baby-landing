@@ -511,5 +511,14 @@ export const fr: Messages = {
     empty: "Aucun article publié pour le moment.",
     faqHeading: "Questions fréquentes",
     referencesHeading: "Références",
+    share: {
+      heading: "Partager cet article",
+      whatsapp: "Partager sur WhatsApp",
+      x: "Partager sur X (Twitter)",
+      mail: "Partager par e-mail",
+      copyLink: "Copier le lien",
+      linkCopied: "Lien copié !",
+      native: "Plus d'options",
+    },
   },
 };

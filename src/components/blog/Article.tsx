@@ -9,6 +9,7 @@ import { CatPill, CoverPlaceholder } from "@/components/blog/CatPill";
 import { Cta } from "@/components/blog/Cta";
 import { Faq } from "@/components/blog/Faq";
 import { References } from "@/components/blog/References";
+import { ShareBar } from "@/components/blog/ShareBar";
 import { CATEGORIES } from "@/lib/blog/categories";
 import { formatDate } from "@/lib/blog/format";
 import { remarkRewriteRelativeImages } from "@/lib/blog/remark-images";
@@ -141,7 +142,13 @@ export function Article({ article }: { article: ArticleT }) {
 
       {/* Body */}
       <div className="max-w-3xl mx-auto px-6 lg:px-14 py-14 lg:py-16">
-        <div className="article-body">
+        <ShareBar
+          url={url}
+          title={article.frontmatter.title}
+          locale={article.locale}
+          variant="compact"
+        />
+        <div className="article-body mt-10">
           <MDXRemote
             source={article.content}
             options={{
@@ -206,6 +213,13 @@ export function Article({ article }: { article: ArticleT }) {
             locale={article.locale}
           />
         ) : null}
+
+        <ShareBar
+          url={url}
+          title={article.frontmatter.title}
+          locale={article.locale}
+          variant="full"
+        />
       </div>
     </article>
   );

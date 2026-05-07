@@ -188,5 +188,14 @@ export type Messages = {
     empty: string;
     faqHeading: string;
     referencesHeading: string;
+    share: {
+      heading: string;             // "Compartilhar este artigo"
+      whatsapp: string;            // aria-label "Compartilhar no WhatsApp"
+      x: string;                   // aria-label "Compartilhar no X"
+      mail: string;                // aria-label "Compartilhar por e-mail"
+      copyLink: string;            // "Copiar link"
+      linkCopied: string;          // "Link copiado!"
+      native: string;              // "Mais opções"
+    };
   };
 };

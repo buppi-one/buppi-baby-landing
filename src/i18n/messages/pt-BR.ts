@@ -490,5 +490,14 @@ export const ptBR: Messages = {
     empty: "Nenhum artigo publicado ainda.",
     faqHeading: "Perguntas frequentes",
     referencesHeading: "Referências",
+    share: {
+      heading: "Compartilhar este artigo",
+      whatsapp: "Compartilhar no WhatsApp",
+      x: "Compartilhar no X (Twitter)",
+      mail: "Compartilhar por e-mail",
+      copyLink: "Copiar link",
+      linkCopied: "Link copiado!",
+      native: "Mais opções",
+    },
   },
 };

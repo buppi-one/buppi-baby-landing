@@ -488,5 +488,14 @@ export const en: Messages = {
     empty: "No articles published yet.",
     faqHeading: "Frequently asked questions",
     referencesHeading: "References",
+    share: {
+      heading: "Share this article",
+      whatsapp: "Share on WhatsApp",
+      x: "Share on X (Twitter)",
+      mail: "Share by email",
+      copyLink: "Copy link",
+      linkCopied: "Link copied!",
+      native: "More options",
+    },
   },
 };

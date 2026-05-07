@@ -500,5 +500,14 @@ export const es: Messages = {
     empty: "Aún no hay artículos publicados.",
     faqHeading: "Preguntas frecuentes",
     referencesHeading: "Referencias",
+    share: {
+      heading: "Compartir este artículo",
+      whatsapp: "Compartir en WhatsApp",
+      x: "Compartir en X (Twitter)",
+      mail: "Compartir por correo",
+      copyLink: "Copiar enlace",
+      linkCopied: "¡Enlace copiado!",
+      native: "Más opciones",
+    },
   },
 };
