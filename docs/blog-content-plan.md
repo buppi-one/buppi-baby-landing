@@ -36,13 +36,13 @@ nessa ordem (cobre os principais "primeiros 6 meses" do bebê).
 | 1 | ✅ 2026-05-06 (4 idiomas) | sleep | Quanto tempo um bebê deve dormir por idade (recém-nascido a 2 anos) | `quanto-tempo-bebe-deve-dormir-por-idade` | ✅ |
 | 2 | ✅ 2026-05-07 (4 idiomas) | feeding | Amamentação nos primeiros dias: o que esperar | `amamentacao-primeiros-dias` | ✅ |
 | 3 | ✅ 2026-05-07 (4 idiomas) | expecting-and-new-parents | Como se preparar para a chegada do bebê: checklist completo | `checklist-chegada-do-bebe` | ✅ |
-| 4 | ⬜ | sleep | Janelas de sono (wake windows): a tabela por idade | `janelas-de-sono-por-idade` | ✅ |
-| 5 | ⬜ | feeding | Introdução alimentar aos 6 meses: BLW vs papinha tradicional | `introducao-alimentar-6-meses-blw-vs-papinha` | ✅ |
-| 6 | ⬜ | health | Calendário de vacinas do bebê no primeiro ano (Brasil) | `calendario-vacinas-primeiro-ano` | ✅ |
-| 7 | ⬜ | development | Marcos do desenvolvimento: o que esperar mês a mês (0-12) | `marcos-desenvolvimento-mes-a-mes` | ✅ |
-| 8 | ⬜ | sleep | Regressão do sono dos 4 meses: por que acontece e como passar | `regressao-sono-4-meses` | ✅ |
-| 9 | ⬜ | expecting-and-new-parents | Sinais de que o bebê está com cólica (e o que fazer) | `sinais-de-colica-no-bebe` | ✅ |
-| 10 | ⬜ | feeding | Como saber se o bebê está mamando o suficiente | `bebe-mamando-o-suficiente` | ✅ |
+| 4 | ✅ 2026-05-07 (4 idiomas) | sleep | Janelas de sono (wake windows): a tabela por idade | `janelas-de-sono-por-idade` | ✅ |
+| 5 | ✅ 2026-05-07 (4 idiomas) | feeding | Introdução alimentar aos 6 meses: BLW vs papinha tradicional | `introducao-alimentar-6-meses-blw-vs-papinha` | ✅ |
+| 6 | ✅ 2026-05-07 (4 idiomas) | health | Calendário de vacinas do bebê no primeiro ano (Brasil) | `calendario-vacinas-primeiro-ano` | ✅ |
+| 7 | ✅ 2026-05-07 (4 idiomas) | development | Marcos do desenvolvimento: o que esperar mês a mês (0-12) | `marcos-desenvolvimento-mes-a-mes` | ✅ |
+| 8 | ✅ 2026-05-07 (4 idiomas) | sleep | Regressão do sono dos 4 meses: por que acontece e como passar | `regressao-sono-4-meses` | ✅ |
+| 9 | ✅ 2026-05-07 (4 idiomas) | expecting-and-new-parents | Sinais de que o bebê está com cólica (e o que fazer) | `sinais-de-colica-no-bebe` | ✅ |
+| 10 | ✅ 2026-05-07 (4 idiomas) | feeding | Como saber se o bebê está mamando o suficiente | `bebe-mamando-o-suficiente` | ✅ |
 
 ---
 
