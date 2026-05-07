@@ -1,10 +1,12 @@
 import { existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
+import { CTA_IDS } from "./ctas";
 import { loadAllArticles } from "./loader";
 import type { Article } from "./types";
 
 const TAG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}(T.+)?$/;
+const CTA_REF_RE = /<Cta\s+(?:[^>]*?\s+)?id=["']([^"']+)["']/g;
 
 function checkDate(value: string, field: string, source: string, errors: string[]) {
   if (!ISO_DATE_RE.test(value)) {
@@ -45,6 +47,18 @@ function checkArticle(article: Article, errors: string[]) {
       if (!existsSync(coverPath)) {
         errors.push(`${source}: cover file not found at ${coverPath}`);
       }
+    }
+  }
+
+  // <Cta id="..."/> references must point at a known CTA in the registry.
+  CTA_REF_RE.lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = CTA_REF_RE.exec(article.content)) !== null) {
+    const id = match[1];
+    if (!(CTA_IDS as readonly string[]).includes(id)) {
+      errors.push(
+        `${source}: <Cta id="${id}"> not found in CTA registry. Valid ids: ${CTA_IDS.join(", ")}`,
+      );
     }
   }
 }

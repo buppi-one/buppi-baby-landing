@@ -6,6 +6,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { BIcon } from "@/components/BIcon";
 import { CatPill, CoverPlaceholder } from "@/components/blog/CatPill";
+import { Cta } from "@/components/blog/Cta";
 import { Faq } from "@/components/blog/Faq";
 import { References } from "@/components/blog/References";
 import { CATEGORIES } from "@/lib/blog/categories";
@@ -188,6 +189,9 @@ export function Article({ article }: { article: ArticleT }) {
                   />
                 );
               },
+              Cta: (props: { id: string }) => (
+                <Cta id={props.id} locale={article.locale} />
+              ),
             }}
           />
         </div>

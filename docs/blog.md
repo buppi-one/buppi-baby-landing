@@ -353,6 +353,69 @@ Se for adaptar, mantenha as 1–2 referências internacionais comuns e troque a 
 
 ---
 
+## 7.5 Call-to-actions no meio do artigo
+
+Pra puxar o leitor pro app no meio da leitura, use o componente `<Cta />` em
+qualquer ponto do MDX:
+
+```mdx
+## Como o sono se distribui ao longo do dia
+
+[parágrafo introduzindo o assunto]
+
+<Cta id="sleep-windows" />
+
+[continua o conteúdo]
+```
+
+Os CTAs vivem em `src/lib/blog/ctas.ts` — todos cadastrados, traduzidos
+nos 4 idiomas, com ícone e variante de cor. Para mudar o copy de um CTA,
+edite o registry uma vez e todos os artigos que referenciam atualizam.
+
+### Por que registry e não MDX puro
+
+- 1 lugar pra editar copy de CTA, em vez de procurar artigo por artigo
+- Tradução centralizada (4 idiomas no mesmo bloco)
+- Build falha se você referenciar um id que não existe (`npm run validate-blog`)
+
+### Catálogo atual
+
+| ID | Quando usar |
+|---|---|
+| `sleep-windows` | sono em geral, janelas, soneca |
+| `sleep-pediatrician` | artigos clínicos, levar dados ao pediatra |
+| `sleep-routine` | construção de rotina, hábitos |
+| `sleep-regression` | regressão, distúrbio, mudança de padrão |
+| `feeds-side-tracker` | amamentação, qual seio começou |
+| `feeds-supply` | produção, "está mamando o suficiente?" |
+| `feeds-night-cluster` | cluster feeding, mamadas noturnas |
+| `feeds-bottle` | mamadeira, fórmula, ordenha |
+| `diaper-onetap` | fralda em geral, registro rápido |
+| `diaper-health` | cor do cocô, frequência, sinal de saúde |
+| `milestones-keep` | marcos, conquistas, primeiro algo |
+| `family-realtime` | compartilhamento, feed familiar |
+| `family-grandparents` | avós, família estendida |
+| `health-symptoms` | cólica, refluxo, alergia, padrões clínicos |
+| `download` | genérico (variante "featured", maior, com fundo escuro) |
+
+### Como escolher o CTA certo
+
+- Use **1-2 CTAs por artigo**, não mais. Se forçar muito, deixa de funcionar.
+- Posicione **entre seções** — depois que o leitor consumiu uma ideia, antes
+  de começar a próxima.
+- Pegue o CTA mais **específico ao gancho do parágrafo anterior**. Ex: depois
+  de uma seção sobre regressão de sono, `sleep-regression` bate melhor que
+  `sleep-windows`.
+
+### Adicionar um CTA novo
+
+Edite `src/lib/blog/ctas.ts`, adicione uma entrada nova com `icon`, `variant`
+(`primary`/`secondary`/`accent`), `style?` (`compact` default ou `featured`)
+e `content` em pt-BR/en/es/fr. Use ids curtos no formato `area-angle`
+(ex: `sleep-routine`, `feeds-bottle`).
+
+---
+
 ## 8. Tradução
 
 ### Workflow
