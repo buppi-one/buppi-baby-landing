@@ -34,7 +34,7 @@ nessa ordem (cobre os principais "primeiros 6 meses" do bebê).
 | # | Status | Categoria | Título | Slug | FAQ |
 |---|---|---|---|---|---|
 | 1 | ✅ 2026-05-06 (4 idiomas) | sleep | Quanto tempo um bebê deve dormir por idade (recém-nascido a 2 anos) | `quanto-tempo-bebe-deve-dormir-por-idade` | ✅ |
-| 2 | ⬜ | feeding | Amamentação nos primeiros dias: o que esperar | `amamentacao-primeiros-dias` | ✅ |
+| 2 | ✅ 2026-05-07 (4 idiomas) | feeding | Amamentação nos primeiros dias: o que esperar | `amamentacao-primeiros-dias` | ✅ |
 | 3 | ⬜ | expecting-and-new-parents | Como se preparar para a chegada do bebê: checklist completo | `checklist-chegada-do-bebe` | ✅ |
 | 4 | ⬜ | sleep | Janelas de sono (wake windows): a tabela por idade | `janelas-de-sono-por-idade` | ✅ |
 | 5 | ⬜ | feeding | Introdução alimentar aos 6 meses: BLW vs papinha tradicional | `introducao-alimentar-6-meses-blw-vs-papinha` | ✅ |
