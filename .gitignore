@@ -10,3 +10,11 @@ out
 # generated from content/blog at build time
 public/blog
 _design-source
+
+# Claude Code — personal/transient (project-scoped skills are committed)
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
+AGENTS.md
+
+# IDE
+.idea/
