@@ -52,7 +52,7 @@ Aprofundando cada categoria, começando a explorar long-tail.
 
 | # | Status | Categoria | Título | Slug |
 |---|---|---|---|---|
-| 11 | ⬜ | sleep | Soneca do bebê: quantas, quanto tempo, em que horários | `soneca-do-bebe-guia` |
+| 11 | ✅ 2026-05-11 (4 idiomas) | sleep | Soneca do bebê: quantas, quanto tempo, em que horários | `soneca-do-bebe-guia` |
 | 12 | ⬜ | sleep | Como criar uma rotina de sono que funciona | `como-criar-rotina-de-sono` |
 | 13 | ⬜ | feeding | Tabela de quantidade de fórmula por idade | `quantidade-de-formula-por-idade` |
 | 14 | ⬜ | feeding | Cluster feeding: por que o bebê quer mamar o tempo todo | `cluster-feeding-explicado` |
