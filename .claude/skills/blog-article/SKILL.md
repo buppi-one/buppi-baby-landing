@@ -94,7 +94,34 @@ If you can't find a high-quality reference for a claim, **soften the claim**
 or remove it. Don't lower the source bar to keep an unsupported claim.
 
 When in doubt, search PubMed (`pubmed.ncbi.nlm.nih.gov`) or the AAP/WHO/SBP/CDC
-sites directly. Verify each URL is reachable before committing.
+sites directly.
+
+### Verify every reference URL points to the ACTUAL paper (mandatory)
+
+A URL returning HTTP 200 is **not** proof the citation is correct. Past audit
+found three references where the URL was live but pointed to a *completely
+different paper* than the title/authors claimed (a peanut-allergy URL that
+resolved to an Alzheimer's paper, an AAP article ID that resolved to "Equipment
+for Ground Ambulances"). This is the worst failure mode — a fabricated citation
+that looks legitimate.
+
+For **every** reference before committing:
+
+1. **Prefer stable PubMed URLs** for journal papers: `pubmed.ncbi.nlm.nih.gov/<PMID>/`.
+   Publisher URLs (Oxford, Elsevier/ScienceDirect, AAP, Wiley) rot and reuse
+   article IDs. PubMed IDs are permanent.
+2. **Open the URL and confirm the page title matches the cited paper's title
+   and authors.** Don't trust that you "remember" the URL — look.
+3. If you cannot verify a paper exists with that exact title/authors, **do not
+   invent a plausible URL**. Remove the citation or replace it with one you
+   verified.
+4. Run `npx tsx scripts/audit-references.ts` after writing the article — it
+   HTTP-checks every reference and flags soft 404s (200 + "page not found"
+   body). Remaining 403s from known publishers (NEJM, AAP, AASM, Wiley, HAS)
+   are anti-bot blocks, not real breakage — those are acceptable.
+
+Never write a citation from memory of "a paper that probably exists." Either
+verify it or omit it.
 
 ## Gemini review
 
