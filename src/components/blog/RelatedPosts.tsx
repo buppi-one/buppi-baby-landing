@@ -12,12 +12,44 @@ const HEADINGS: Record<Locale, string> = {
   fr: "Continuer à lire",
 };
 
+// Deterministic 32-bit hash used to a) shuffle the candidate pool stably and
+// b) rotate a different window for each source article. Combined with the
+// rotation step below this gives provably uniform internal-link coverage:
+// in a pool of N candidates picking MAX, each candidate appears as "related"
+// from exactly MAX/N share of source articles — instead of always the same
+// 3 newest in the category, which leaves older posts under-linked.
+function hash(seed: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
 export function RelatedPosts({ current }: { current: Article }) {
-  const others = getArticlesByLocale(current.locale)
+  // Pool = every other article in the same category, in stable hash order.
+  // Tag overlap intentionally NOT scored — it concentrates links on a few
+  // densely-tagged posts and starves outliers (e.g. a regression-of-sleep
+  // article shares only "sono" while siblings share "sono/rotina/recem-nascido"
+  // and would always lose). Within a category everything is "related enough"
+  // for the reader; the bigger win is uniform link distribution for SEO.
+  const pool = getArticlesByLocale(current.locale)
     .filter(
       (a) => a.id !== current.id && a.frontmatter.category === current.frontmatter.category,
     )
-    .slice(0, MAX);
+    .sort((a, b) => hash(a.id) - hash(b.id));
+
+  if (pool.length === 0) return null;
+
+  // Rotate the pool so each source post starts at a different index.
+  // Every candidate appears in exactly MAX/pool.length share of source articles
+  // when the rotation offsets hit each index — provably uniform inbound links.
+  const start = hash(current.id) % pool.length;
+  const others: Article[] = [];
+  for (let i = 0; i < pool.length && others.length < MAX; i++) {
+    others.push(pool[(start + i) % pool.length]);
+  }
 
   if (others.length === 0) return null;
 
