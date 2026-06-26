@@ -57,7 +57,7 @@ Aprofundando cada categoria, começando a explorar long-tail.
 | 13 | ✅ 2026-06-09 (4 idiomas) | feeding | Tabela de quantidade de fórmula por idade | `quantidade-de-formula-por-idade` |
 | 14 | ✅ 2026-06-11 (4 idiomas) | feeding | Cluster feeding: por que o bebê quer mamar o tempo todo | `cluster-feeding-explicado` |
 | 15 | ✅ 2026-06-23 (4 idiomas) | development | Tummy time: por que importa, como fazer e por quanto tempo | `tummy-time-guia-completo` |
-| 16 | ⬜ | expecting-and-new-parents | Os primeiros 30 dias com o recém-nascido: guia de sobrevivência | `primeiros-30-dias-recem-nascido` |
+| 16 | ✅ 2026-06-26 (4 idiomas) | expecting-and-new-parents | Os primeiros 30 dias com o recém-nascido: guia de sobrevivência | `primeiros-30-dias-recem-nascido` |
 | 17 | ⬜ | health | Febre no bebê: quando se preocupar e quando ligar pro pediatra | `febre-no-bebe-quando-se-preocupar` |
 | 18 | ⬜ | sleep | Sono compartilhado (cama compartilhada): riscos e diretrizes | `cama-compartilhada-riscos-diretrizes` |
 | 19 | ⬜ | feeding | Refluxo no bebê: sinais, manejo e quando virar refluxo patológico | `refluxo-no-bebe-sinais-manejo` |
