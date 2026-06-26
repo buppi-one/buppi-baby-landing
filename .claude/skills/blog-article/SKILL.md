@@ -1,6 +1,6 @@
 ---
 name: blog-article
-description: Use this skill to author a new Buppi Baby blog post end-to-end (pt-BR draft → Gemini review → Codex cover → translate to en/es/fr → validate, build, commit, push). Invoke when the user asks to "criar um artigo", "escrever um post", "publicar o próximo da lista", or any equivalent.
+description: Use this skill to author a new Buppi Baby blog post end-to-end (pt-BR draft → AI peer review (Antigravity `agy`) → Codex cover → translate to en/es/fr → validate, build, commit, push). Invoke when the user asks to "criar um artigo", "escrever um post", "publicar o próximo da lista", or any equivalent.
 ---
 
 # Authoring a Buppi Baby blog article
@@ -18,7 +18,7 @@ read it whenever a detail is unclear.
    other locale is a translation of this one. Write it under
    `content/blog/<id>/pt-BR.mdx`.
 
-3. **Send the pt-BR draft to Gemini for review** (mandatory — see §"Gemini review"
+3. **Send the pt-BR draft for AI peer review** (mandatory — see §"AI review"
    below). Apply meaningful feedback before moving on.
 
 4. **Generate the cover with Codex** (see §"Codex cover" below). Optimize to webp.
@@ -123,40 +123,50 @@ For **every** reference before committing:
 Never write a citation from memory of "a paper that probably exists." Either
 verify it or omit it.
 
-## Gemini review
+## AI review (Antigravity `agy`)
 
-After the pt-BR draft is saved, run:
+The old `gemini` CLI is **deprecated** — Google retired the free
+"Gemini Code Assist for individuals" tier and the binary now exits with
+`IneligibleTierError`. Use the **Antigravity CLI (`agy`)** instead. It runs a
+single prompt non-interactively with `--print` (alias `-p` / `--prompt`).
+
+**CRITICAL: pipe the prompt via STDIN, not as a positional argument.** `agy` is
+an agentic, workspace-aware assistant — if you pass the prompt as a positional
+arg it gets dropped, and the agent wanders off exploring the repo / its own docs
+and answers a different question (or hangs past `--print-timeout`). Piping via
+stdin is the only reliable way to get a clean review. Verified:
+`echo "Diga apenas BANANA" | agy --print` → `BANANA`.
+
+After the pt-BR draft is saved, run the review by piping instructions + article
+into `agy` on stdin:
 
 ```bash
-gemini -p "$(cat <<'PROMPT'
-Aja como um revisor pediátrico crítico. Leia o artigo abaixo (em português) e
-aponte:
-
-1. Imprecisões clínicas ou afirmações que precisam de fonte
-2. Generalizações arriscadas ("sempre", "nunca") que deveriam ser mais nuançadas
-3. Buracos no conteúdo (perguntas óbvias do leitor que ficam sem resposta)
-4. Sugestões de melhorias estruturais
-
-Seja específico — cite o trecho exato do artigo. Não reescreva, só aponte.
-NÃO comente questões de estilo/gramática. Foque em conteúdo e correção factual.
-
-Resposta em português, no máximo 400 palavras.
-
-ARTIGO:
-$(cat content/blog/<id>/pt-BR.mdx)
-PROMPT
-)"
+{ printf 'Aja como revisor pediátrico crítico. Aponte: (1) imprecisões clínicas ou afirmações sem fonte; (2) generalizações arriscadas (sempre/nunca) a nuançar; (3) buracos de conteúdo (dúvidas óbvias do leitor sem resposta); (4) melhorias estruturais. Cite o trecho exato. Não reescreva. Ignore estilo/gramática. Português, máx 400 palavras.\n\nARTIGO:\n'; \
+  cat content/blog/<id>/pt-BR.mdx; } \
+  | agy --print --print-timeout 5m
 ```
 
-Read Gemini's response carefully:
+Notes on `agy`:
+
+- **Always feed the prompt on stdin** (see above). Do NOT use `--new-project`
+  (it triggers a "what do you want to build?" project-setup tangent).
+- `agy models` lists what's available (Gemini 3.5 Flash, Gemini 3.1 Pro,
+  Claude Sonnet/Opus, GPT-OSS). The default (Gemini 3.5 Flash) gives a solid
+  pediatric review. The `--model "Gemini 3.x ... (High)"` display-name flag is
+  unreliable (it silently falls back to the default); just use the default.
+- Run it with `run_in_background: true` (the review can take 1–4 min) and read
+  the output when it finishes. Output is buffered — nothing prints until done.
+- `agy` is at `~/.local/bin/agy` (installed by Antigravity.app).
+
+Read the reviewer's response carefully:
 
 - **Apply factually-grounded corrections** to the pt-BR draft
 - **Ignore style nitpicks** (we own the voice)
-- **Push back via the user** if Gemini disagrees with a clinical claim that's
-  actually well-sourced — the user makes the final call
+- **Push back via the user** if the reviewer disagrees with a clinical claim
+  that's actually well-sourced — the user makes the final call
 
-If Gemini surfaces something significant, mention it briefly to the user before
-applying the change.
+If the review surfaces something significant, mention it briefly to the user
+before applying the change.
 
 ## Codex cover
 
@@ -248,7 +258,7 @@ Edit `docs/blog-content-plan.md`: change the row's status column from `⬜` to
   it the validator fails silently for some locales
 - Don't draft directly in en — the en version inevitably ends up shorter and
   less culturally grounded. Always pt-BR first.
-- Don't skip Gemini review — even when the article feels solid. Catches
+- Don't skip the AI review (`agy`) — even when the article feels solid. Catches
   factual issues before they ship to thousands of parents.
 - Don't reuse the same CTA id twice in one article
 - One CTA `featured` (= `download`) per article max, and only at the end
