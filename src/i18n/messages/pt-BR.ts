@@ -18,7 +18,24 @@ export const ptBR: Messages = {
     signIn: "Entrar",
     themeAria: "Alternar tema",
     languageAria: "Alternar idioma",
+    searchAria: "Buscar no blog",
     theme: { light: "Claro", dark: "Escuro", system: "Sistema" },
+  },
+  search: {
+    placeholder: "Buscar artigos…",
+    hint: "Digite para buscar nos artigos do blog.",
+    empty: "Nenhum resultado para",
+    resultsAria: "Resultados da busca",
+    close: "Fechar busca",
+    unavailable:
+      "A busca fica disponível no site publicado (precisa do build de produção).",
+  },
+  blogTeaser: {
+    tag: "DO BLOG",
+    title: "Aprenda enquanto cuida",
+    description:
+      "Guias práticos sobre sono, amamentação, desenvolvimento e saúde — escritos com base em fontes confiáveis.",
+    viewAll: "Ver todos os artigos",
   },
   hero: {
     badge: "NOVO",

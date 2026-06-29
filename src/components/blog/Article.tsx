@@ -53,7 +53,12 @@ export function Article({ article }: { article: ArticleT }) {
   };
 
   return (
-    <article className="bg-[var(--color-background-light)] dark:bg-[var(--color-background-dark)]">
+    <article
+      className="bg-[var(--color-background-light)] dark:bg-[var(--color-background-dark)]"
+      data-pagefind-body
+      data-pagefind-filter={`language:${article.locale}`}
+      data-pagefind-meta={`category:${cat.label[article.locale]}`}
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -130,6 +135,7 @@ export function Article({ article }: { article: ArticleT }) {
               className="w-full h-full object-cover"
               loading="eager"
               decoding="async"
+              data-pagefind-meta="image[src], image_alt[alt]"
             />
           </div>
         ) : (

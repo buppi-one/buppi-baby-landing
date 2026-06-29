@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BIcon, type BIconName } from "@/components/BIcon";
+import { BlogSearch } from "@/components/blog/BlogSearch";
 import {
   getMessages,
   LOCALES,
@@ -155,6 +156,7 @@ export function Nav({ locale }: { locale: Locale }) {
           >
             <BIcon name={mobileOpen ? "plus" : "menu"} size={16} className={mobileOpen ? "rotate-45" : ""} />
           </button>
+          <BlogSearch locale={locale} />
           <div className="relative" ref={langRef}>
             <button
               type="button"

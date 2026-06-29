@@ -5,7 +5,9 @@
   "scripts": {
     "predev": "npm run prepare-blog",
     "dev": "next dev",
-    "build": "npm run prepare-blog && next build",
+    "build": "npm run prepare-blog && next build && npm run fix-html-lang && npm run build-search",
+    "fix-html-lang": "tsx scripts/fix-html-lang.ts",
+    "build-search": "pagefind --site out",
     "start": "next start",
     "lint": "next lint",
     "prepare-blog": "npm run validate-blog && npm run copy-blog-assets",
@@ -32,6 +34,7 @@
     "@types/node": "^22.15.3",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "pagefind": "^1.5.2",
     "tailwindcss": "^4.1.4",
     "tsx": "^4.21.0",
     "typescript": "^5.8.3"

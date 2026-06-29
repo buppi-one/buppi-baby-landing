@@ -33,7 +33,22 @@ export type Messages = {
     signIn: string;
     themeAria: string;
     languageAria: string;
+    searchAria: string;
     theme: { light: string; dark: string; system: string };
+  };
+  search: {
+    placeholder: string;          // input placeholder
+    hint: string;                 // empty-state helper text
+    empty: string;                // "no results for" prefix (query appended)
+    resultsAria: string;          // aria-label for results list
+    close: string;                // aria-label for close button
+    unavailable: string;          // dev-only fallback when index is missing
+  };
+  blogTeaser: {
+    tag: string;                  // small pill, e.g. "FROM THE BLOG"
+    title: string;
+    description: string;
+    viewAll: string;              // "See all articles"
   };
   hero: {
     badge: string;             // "NEW" pill

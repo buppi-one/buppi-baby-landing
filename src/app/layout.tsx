@@ -57,7 +57,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className={`${outfit.variable} ${quicksand.variable}`}>
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${outfit.variable} ${quicksand.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: localeInit }} />
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />

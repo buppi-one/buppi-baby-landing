@@ -18,7 +18,24 @@ export const fr: Messages = {
     signIn: "Se connecter",
     themeAria: "Changer de thème",
     languageAria: "Changer de langue",
+    searchAria: "Rechercher dans le blog",
     theme: { light: "Clair", dark: "Sombre", system: "Système" },
+  },
+  search: {
+    placeholder: "Rechercher des articles…",
+    hint: "Tapez pour rechercher dans les articles du blog.",
+    empty: "Aucun résultat pour",
+    resultsAria: "Résultats de recherche",
+    close: "Fermer la recherche",
+    unavailable:
+      "La recherche est disponible sur le site publié (elle nécessite le build de production).",
+  },
+  blogTeaser: {
+    tag: "DU BLOG",
+    title: "Apprenez en prenant soin",
+    description:
+      "Des guides pratiques sur le sommeil, l'alimentation, le développement et la santé — rédigés à partir de sources fiables.",
+    viewAll: "Voir tous les articles",
   },
   hero: {
     badge: "NOUVEAU",
