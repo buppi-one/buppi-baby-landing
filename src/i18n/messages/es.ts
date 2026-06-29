@@ -18,7 +18,24 @@ export const es: Messages = {
     signIn: "Iniciar sesión",
     themeAria: "Cambiar tema",
     languageAria: "Cambiar idioma",
+    searchAria: "Buscar en el blog",
     theme: { light: "Claro", dark: "Oscuro", system: "Sistema" },
+  },
+  search: {
+    placeholder: "Buscar artículos…",
+    hint: "Escribe para buscar en los artículos del blog.",
+    empty: "Sin resultados para",
+    resultsAria: "Resultados de la búsqueda",
+    close: "Cerrar búsqueda",
+    unavailable:
+      "La búsqueda está disponible en el sitio publicado (necesita el build de producción).",
+  },
+  blogTeaser: {
+    tag: "DEL BLOG",
+    title: "Aprende mientras cuidas",
+    description:
+      "Guías prácticas sobre sueño, alimentación, desarrollo y salud — escritas a partir de fuentes confiables.",
+    viewAll: "Ver todos los artículos",
   },
   hero: {
     badge: "NUEVO",

@@ -18,7 +18,24 @@ export const en: Messages = {
     signIn: "Sign in",
     themeAria: "Toggle theme",
     languageAria: "Change language",
+    searchAria: "Search the blog",
     theme: { light: "Light", dark: "Dark", system: "System" },
+  },
+  search: {
+    placeholder: "Search articles…",
+    hint: "Type to search the blog articles.",
+    empty: "No results for",
+    resultsAria: "Search results",
+    close: "Close search",
+    unavailable:
+      "Search is available on the published site (it needs the production build).",
+  },
+  blogTeaser: {
+    tag: "FROM THE BLOG",
+    title: "Learn while you care",
+    description:
+      "Practical guides on sleep, feeding, development and health — written from trustworthy sources.",
+    viewAll: "See all articles",
   },
   hero: {
     badge: "NEW",

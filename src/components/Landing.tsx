@@ -6,6 +6,7 @@ import { Hero } from "@/components/Hero";
 import { Nav } from "@/components/Nav";
 import { Sharing } from "@/components/Sharing";
 import { Stats } from "@/components/Stats";
+import { BlogTeaser } from "@/components/blog/BlogTeaser";
 import type { Locale } from "@/i18n";
 
 export function Landing({ locale }: { locale: Locale }) {
@@ -17,6 +18,7 @@ export function Landing({ locale }: { locale: Locale }) {
         <Features locale={locale} />
         <Sharing locale={locale} />
         <Stats locale={locale} />
+        <BlogTeaser locale={locale} />
         <FaqLanding locale={locale} />
         <CTA locale={locale} />
       </main>
