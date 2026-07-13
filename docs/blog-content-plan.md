@@ -61,7 +61,7 @@ Aprofundando cada categoria, começando a explorar long-tail.
 | 17 | ✅ 2026-06-30 (4 idiomas) | health | Febre no bebê: quando se preocupar e quando ligar pro pediatra | `febre-no-bebe-quando-se-preocupar` |
 | 18 | ✅ 2026-07-06 (4 idiomas) | sleep | Sono compartilhado (cama compartilhada): riscos e diretrizes | `cama-compartilhada-riscos-diretrizes` |
 | 19 | ✅ 2026-07-07 (4 idiomas) | feeding | Refluxo no bebê: sinais, manejo e quando virar refluxo patológico | `refluxo-no-bebe-sinais-manejo` |
-| 20 | ⬜ | expecting-and-new-parents | Como escolher o pediatra do seu filho | `como-escolher-pediatra` |
+| 20 | ✅ 2026-07-13 (4 idiomas) | expecting-and-new-parents | Como escolher o pediatra do seu filho | `como-escolher-pediatra` |
 
 ---
 
