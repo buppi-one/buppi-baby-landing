@@ -9,8 +9,8 @@ const STATIC_PATHS = ["/", "/privacy", "/terms", "/support", "/delete-account", 
 export const dynamic = "force-static";
 
 function urlFor(locale: Locale, path: string): string {
-  const lp = localePath(locale, path);
-  return `${BASE_URL}${lp === "/" ? "" : lp}/`;
+  // localePath already returns a single trailing slash (or "/" for the root).
+  return `${BASE_URL}${localePath(locale, path)}`;
 }
 
 type Entry = MetadataRoute.Sitemap[number];

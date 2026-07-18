@@ -193,9 +193,27 @@ export function Article({ article }: { article: ArticleT }) {
               a: ({ href, ...props }) => {
                 const external =
                   typeof href === "string" && /^https?:\/\//.test(href);
+                // Normalize internal links to a trailing slash: the site uses
+                // `trailingSlash: true`, so an inline MDX link like
+                // `/blog/slug` would 301-redirect (Search Console flags it as
+                // "Page with redirect"). Leave external links and anchors alone.
+                let normalized = href;
+                if (
+                  typeof href === "string" &&
+                  href.startsWith("/") &&
+                  !href.startsWith("//")
+                ) {
+                  const [beforeHash, hash] = href.split("#");
+                  const [path, query] = beforeHash.split("?");
+                  const withSlash = path.endsWith("/") ? path : `${path}/`;
+                  normalized =
+                    withSlash +
+                    (query ? `?${query}` : "") +
+                    (hash ? `#${hash}` : "");
+                }
                 return (
                   <a
-                    href={href}
+                    href={normalized}
                     target={external ? "_blank" : undefined}
                     rel={external ? "noopener noreferrer" : undefined}
                     {...props}

@@ -21,15 +21,20 @@ export function isLocale(value: string): value is Locale {
 }
 
 /**
- * Default locale lives at the root (/, /privacy). Other locales are prefixed.
- *   localePath('pt-BR', '/privacy') → '/privacy'
- *   localePath('en', '/privacy')    → '/en/privacy'
- *   localePath('en', '/')           → '/en'
+ * Default locale lives at the root (/, /privacy/). Other locales are prefixed.
+ * Always returns a canonical path with a single trailing slash — the site uses
+ * Next's `trailingSlash: true`, so a link without it 301-redirects, which shows
+ * up in Search Console as "Page with redirect".
+ *   localePath('pt-BR', '/privacy') → '/privacy/'
+ *   localePath('en', '/privacy')    → '/en/privacy/'
+ *   localePath('en', '/')           → '/en/'
+ *   localePath('pt-BR', '/')        → '/'
  */
 export function localePath(locale: Locale, path: string): string {
-  const clean = path === "/" ? "" : path;
-  if (locale === DEFAULT_LOCALE) return clean || "/";
-  return `/${locale}${clean}`;
+  const trimmed = path.replace(/^\/+|\/+$/g, ""); // drop leading/trailing slashes
+  const prefix = locale === DEFAULT_LOCALE ? "" : `/${locale}`;
+  const full = trimmed ? `${prefix}/${trimmed}` : prefix;
+  return `${full}/`;
 }
 
 /** Strip a leading locale prefix from a pathname. */
