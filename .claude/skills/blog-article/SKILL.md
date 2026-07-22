@@ -127,36 +127,44 @@ verify it or omit it.
 
 The old `gemini` CLI is **deprecated** — Google retired the free
 "Gemini Code Assist for individuals" tier and the binary now exits with
-`IneligibleTierError`. Use the **Antigravity CLI (`agy`)** instead. It runs a
-single prompt non-interactively with `--print` (alias `-p` / `--prompt`).
+`IneligibleTierError`. Use the **Antigravity CLI (`agy`)** instead.
 
-**CRITICAL: pipe the prompt via STDIN, not as a positional argument.** `agy` is
-an agentic, workspace-aware assistant — if you pass the prompt as a positional
-arg it gets dropped, and the agent wanders off exploring the repo / its own docs
-and answers a different question (or hangs past `--print-timeout`). Piping via
-stdin is the only reliable way to get a clean review. Verified:
-`echo "Diga apenas BANANA" | agy --print` → `BANANA`.
+**The invocation changed after an Antigravity auto-update (July 2026).** Two
+things that USED to work now break:
 
-After the pt-BR draft is saved, run the review by piping instructions + article
-into `agy` on stdin:
+1. **`--print` takes the prompt as its VALUE, not via stdin.** The old stdin
+   form (`… | agy --print`) now errors with `flag needs an argument: -print`.
+2. **Do NOT pass `--print-timeout`.** With it, agy frequently fixates on that
+   flag and answers a generic question *about* `--print-timeout` instead of
+   reviewing the article. The default timeout (5m) is fine — just omit the flag.
+
+The reliable form: write instructions + article to a file, then pass the file
+contents as the `--print` value:
 
 ```bash
-{ printf 'Aja como revisor pediátrico crítico. Aponte: (1) imprecisões clínicas ou afirmações sem fonte; (2) generalizações arriscadas (sempre/nunca) a nuançar; (3) buracos de conteúdo (dúvidas óbvias do leitor sem resposta); (4) melhorias estruturais. Cite o trecho exato. Não reescreva. Ignore estilo/gramática. Português, máx 400 palavras.\n\nARTIGO:\n'; \
-  cat content/blog/<id>/pt-BR.mdx; } \
-  | agy --print --print-timeout 5m
+{ printf 'Aja como revisor pediátrico crítico de um artigo sobre <TEMA>. Aponte: (1) imprecisões clínicas ou afirmações sem fonte; (2) generalizações arriscadas (sempre/nunca) a nuançar; (3) buracos de conteúdo (dúvidas óbvias do leitor sem resposta); (4) melhorias estruturais. Cite o trecho exato. Não reescreva. Ignore estilo/gramática. Português, máx 400 palavras.\n\n=== ARTIGO ===\n'; \
+  cat content/blog/<id>/pt-BR.mdx; } > /tmp/agy-prompt.txt
+agy --print "$(cat /tmp/agy-prompt.txt)"
 ```
 
 Notes on `agy`:
 
-- **Always feed the prompt on stdin** (see above). Do NOT use `--new-project`
-  (it triggers a "what do you want to build?" project-setup tangent).
-- `agy models` lists what's available (Gemini 3.5 Flash, Gemini 3.1 Pro,
-  Claude Sonnet/Opus, GPT-OSS). The default (Gemini 3.5 Flash) gives a solid
-  pediatric review. The `--model "Gemini 3.x ... (High)"` display-name flag is
-  unreliable (it silently falls back to the default); just use the default.
-- Run it with `run_in_background: true` (the review can take 1–4 min) and read
-  the output when it finishes. Output is buffered — nothing prints until done.
-- `agy` is at `~/.local/bin/agy` (installed by Antigravity.app).
+- **Prompt goes as the `--print` value** (see above), NOT stdin, and **without
+  `--print-timeout`**. Do NOT use `--new-project` (it triggers a "what do you
+  want to build?" project-setup tangent).
+- **It's still flaky.** If the output talks about CLI flags / `--print-timeout`
+  / "what would you like to build" instead of the pediatric review, just re-run
+  it. If it keeps wandering after ~2 retries, do a careful clinical self-review
+  instead and tell the user agy was unreliable — don't block the pipeline on it
+  (same fallback as when `gemini` was down).
+- `agy models` lists what's available (Gemini 3.5 Flash default, Gemini 3.1 Pro,
+  Claude Sonnet/Opus, GPT-OSS). The `--model "…(High)"` display-name flag is
+  unreliable (silently falls back to the default); just use the default.
+- Runs in ~1–3 min; safe with `run_in_background: true`. Output is buffered —
+  nothing prints until it finishes.
+- `agy` is at `~/.local/bin/agy` (installed by Antigravity.app, which
+  **auto-updates** — its CLI behavior may shift again; if the command errors,
+  check `agy --help` for the current flag semantics).
 
 Read the reviewer's response carefully:
 
