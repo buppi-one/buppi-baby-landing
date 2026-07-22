@@ -75,7 +75,7 @@ Onde entram os **artigos de feature do Buppi** + mais long-tail.
 | 22 | ⏭️ pulado — sobre o app (a pedido) | feeding | Como o Buppi facilita o registro de mamadas e dá insights | `usar-buppi-registro-mamadas` | feature |
 | 23 | ⏭️ pulado — sobre o app (a pedido) | health | Como organizar vacinas e consultas no Buppi | `usar-buppi-vacinas-e-consultas` | feature |
 | 24 | ✅ 2026-07-20 (4 idiomas) | sleep | Sono do bebê com 2 meses: cronograma e o que esperar | `sono-bebe-2-meses` | long-tail |
-| 25 | ⬜ | sleep | Sono do bebê com 3 meses: cronograma e o que esperar | `sono-bebe-3-meses` | long-tail |
+| 25 | ✅ 2026-07-22 (4 idiomas) | sleep | Sono do bebê com 3 meses: cronograma e o que esperar | `sono-bebe-3-meses` | long-tail |
 | 26 | ⬜ | sleep | Sono do bebê com 6 meses: cronograma e o que esperar | `sono-bebe-6-meses` | long-tail |
 | 27 | ⬜ | development | Marcos do desenvolvimento aos 6 meses | `marcos-desenvolvimento-6-meses` | long-tail |
 | 28 | ⬜ | development | Marcos do desenvolvimento aos 12 meses | `marcos-desenvolvimento-12-meses` | long-tail |
