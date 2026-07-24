@@ -78,7 +78,7 @@ Onde entram os **artigos de feature do Buppi** + mais long-tail.
 | 25 | ✅ 2026-07-22 (4 idiomas) | sleep | Sono do bebê com 3 meses: cronograma e o que esperar | `sono-bebe-3-meses` | long-tail |
 | 26 | ✅ 2026-07-23 (4 idiomas) | sleep | Sono do bebê com 6 meses: cronograma e o que esperar | `sono-bebe-6-meses` | long-tail |
 | 27 | ✅ 2026-07-23 (4 idiomas) | development | Marcos do desenvolvimento aos 6 meses | `marcos-desenvolvimento-6-meses` | long-tail |
-| 28 | ⬜ | development | Marcos do desenvolvimento aos 12 meses | `marcos-desenvolvimento-12-meses` | long-tail |
+| 28 | ✅ 2026-07-24 (4 idiomas) | development | Marcos do desenvolvimento aos 12 meses | `marcos-desenvolvimento-12-meses` | long-tail |
 | 29 | ⬜ | expecting-and-new-parents | Saúde mental no pós-parto: depressão e baby blues | `saude-mental-pos-parto` | evergreen |
 | 30 | ⏭️ pulado — sobre o app (a pedido) | news | Buppi 1.0: o que mudou e o que vem por aí | `buppi-1-0-novidades` | news |
 
