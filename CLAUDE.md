@@ -86,9 +86,35 @@ Run periodically (say monthly). Ranking well but not getting clicks is a
 **Don't** change slugs when optimizing titles — that breaks URLs and the hreflang
 graph. Title/description only.
 
+### On-site behaviour — Cloudflare Web Analytics
+
+GSC covers **acquisition** (how people find us in search). For **on-site
+behaviour** (which pages get read, visits vs. pageviews, referrers, countries,
+devices) use Cloudflare Web Analytics. The beacon is **auto-injected by
+Cloudflare at the edge** — there is nothing in the repo to install, and it's
+cookieless (no consent banner).
+
+Pull it from the terminal with `scripts/cf-analytics.ts`, which queries the CF
+GraphQL Analytics API using `$CLOUDFLARE_TOKEN` (needs **Account Analytics ·
+Read** on the *Búzios Homes* account, where the `buppi.baby` zone lives). RUM
+data is near-real-time (no multi-day lag).
+
+```bash
+npx tsx scripts/cf-analytics.ts overview [days]    # totals + top pages/referrers/countries/devices
+npx tsx scripts/cf-analytics.ts pages [days]       # top pages by views
+npx tsx scripts/cf-analytics.ts referrers [days]   # where visits come from
+npx tsx scripts/cf-analytics.ts countries [days]   # by country
+```
+
+`days` defaults to 7. Read GSC and CF together: GSC says *what to write and
+which titles to sharpen*; CF confirms *whether the change actually moved
+reading behaviour*.
+
 ### Guardrails
 
 - The key file is a credential: keep it under `credentials/` (gitignored).
 - GSC/GA reads are read-only; nothing here writes to Google.
+- `CLOUDFLARE_TOKEN` is a personal secret (lives in `~/.zshrc`, never committed);
+  the CF analytics read is read-only too.
 - Reddit/backlinks do **not** boost ranking (nofollow) — SEO leverage is content
   + hreflang + topical authority, not link-dropping.
