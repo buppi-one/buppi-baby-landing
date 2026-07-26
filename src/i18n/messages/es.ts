@@ -14,6 +14,7 @@ export const es: Messages = {
     sharing: "Familia",
     stats: "Estadísticas",
     blog: "Blog",
+    tools: "Herramientas",
     download: "Descargar gratis",
     signIn: "Iniciar sesión",
     themeAria: "Cambiar tema",
@@ -36,6 +37,15 @@ export const es: Messages = {
     description:
       "Guías prácticas sobre sueño, alimentación, desarrollo y salud — escritas a partir de fuentes confiables.",
     viewAll: "Ver todos los artículos",
+  },
+  tools: {
+    badge: "Herramientas",
+    title: "Herramientas para el día a día",
+    description:
+      "Calculadoras simples y confiables para las dudas más comunes — basadas en fuentes oficiales, siempre remitiendo al pediatra.",
+    open: "Abrir",
+    relatedArticle: "Lee la guía completa",
+    backToTools: "Todas las herramientas",
   },
   hero: {
     badge: "NUEVO",

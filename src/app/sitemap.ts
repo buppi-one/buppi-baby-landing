@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { CATEGORIES } from "@/lib/blog/categories";
 import { getAllArticles, getArticlesByLocale } from "@/lib/blog/loader";
+import { TOOLS, toolPaths } from "@/lib/tools/registry";
 import { LOCALES, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n";
 
 const BASE_URL = "https://buppi.baby";
-const STATIC_PATHS = ["/", "/privacy", "/terms", "/support", "/delete-account", "/blog"];
+const STATIC_PATHS = ["/", "/privacy", "/terms", "/support", "/delete-account", "/blog", "/ferramentas"];
 
 export const dynamic = "force-static";
 
@@ -84,7 +85,32 @@ function articleEntries(): Entry[] {
   return out;
 }
 
+function toolEntries(lastModified: Date): Entry[] {
+  const out: Entry[] = [];
+  for (const tool of TOOLS) {
+    const paths = toolPaths(tool); // per-locale, already prefixed + trailing slash
+    const languages: Record<string, string> = {};
+    for (const l of LOCALES) languages[l] = `${BASE_URL}${paths[l]}`;
+    languages["x-default"] = `${BASE_URL}${paths[DEFAULT_LOCALE]}`;
+    for (const l of LOCALES) {
+      out.push({
+        url: `${BASE_URL}${paths[l]}`,
+        lastModified,
+        changeFrequency: "monthly",
+        priority: 0.7,
+        alternates: { languages },
+      });
+    }
+  }
+  return out;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return [...staticEntries(now), ...categoryEntries(now), ...articleEntries()];
+  return [
+    ...staticEntries(now),
+    ...categoryEntries(now),
+    ...toolEntries(now),
+    ...articleEntries(),
+  ];
 }

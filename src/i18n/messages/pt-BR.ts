@@ -14,6 +14,7 @@ export const ptBR: Messages = {
     sharing: "Família",
     stats: "Estatísticas",
     blog: "Blog",
+    tools: "Ferramentas",
     download: "Baixar grátis",
     signIn: "Entrar",
     themeAria: "Alternar tema",
@@ -36,6 +37,15 @@ export const ptBR: Messages = {
     description:
       "Guias práticos sobre sono, amamentação, desenvolvimento e saúde — escritos com base em fontes confiáveis.",
     viewAll: "Ver todos os artigos",
+  },
+  tools: {
+    badge: "Ferramentas",
+    title: "Ferramentas para o dia a dia",
+    description:
+      "Calculadoras simples e confiáveis para as dúvidas mais comuns — baseadas em fontes oficiais, sempre com deferência ao pediatra.",
+    open: "Abrir",
+    relatedArticle: "Leia o guia completo",
+    backToTools: "Todas as ferramentas",
   },
   hero: {
     badge: "NOVO",

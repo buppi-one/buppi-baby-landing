@@ -29,6 +29,7 @@ export type Messages = {
     sharing: string;
     stats: string;
     blog: string;
+    tools: string;
     download: string;
     signIn: string;
     themeAria: string;
@@ -49,6 +50,14 @@ export type Messages = {
     title: string;
     description: string;
     viewAll: string;              // "See all articles"
+  };
+  tools: {
+    badge: string;                // small pill, e.g. "FERRAMENTAS"
+    title: string;                // hub H1
+    description: string;          // hub lede
+    open: string;                 // card CTA, "Abrir"
+    relatedArticle: string;       // link to the related guide
+    backToTools: string;          // "Todas as ferramentas"
   };
   hero: {
     badge: string;             // "NEW" pill

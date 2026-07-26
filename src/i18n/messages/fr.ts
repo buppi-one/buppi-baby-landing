@@ -14,6 +14,7 @@ export const fr: Messages = {
     sharing: "Famille",
     stats: "Statistiques",
     blog: "Blog",
+    tools: "Outils",
     download: "Télécharger gratuitement",
     signIn: "Se connecter",
     themeAria: "Changer de thème",
@@ -36,6 +37,15 @@ export const fr: Messages = {
     description:
       "Des guides pratiques sur le sommeil, l'alimentation, le développement et la santé — rédigés à partir de sources fiables.",
     viewAll: "Voir tous les articles",
+  },
+  tools: {
+    badge: "Outils",
+    title: "Outils du quotidien",
+    description:
+      "Des calculateurs simples et fiables pour les questions les plus courantes — basés sur des sources officielles, renvoyant toujours au pédiatre.",
+    open: "Ouvrir",
+    relatedArticle: "Lire le guide complet",
+    backToTools: "Tous les outils",
   },
   hero: {
     badge: "NOUVEAU",

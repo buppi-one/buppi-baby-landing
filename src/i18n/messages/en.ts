@@ -14,6 +14,7 @@ export const en: Messages = {
     sharing: "Family",
     stats: "Stats",
     blog: "Blog",
+    tools: "Tools",
     download: "Download free",
     signIn: "Sign in",
     themeAria: "Toggle theme",
@@ -36,6 +37,15 @@ export const en: Messages = {
     description:
       "Practical guides on sleep, feeding, development and health — written from trustworthy sources.",
     viewAll: "See all articles",
+  },
+  tools: {
+    badge: "Tools",
+    title: "Everyday tools",
+    description:
+      "Simple, trustworthy calculators for the most common questions — based on official sources, always deferring to your pediatrician.",
+    open: "Open",
+    relatedArticle: "Read the full guide",
+    backToTools: "All tools",
   },
   hero: {
     badge: "NEW",
