@@ -115,7 +115,7 @@ Newborn (semanal):
 
 1º ano (mensal — alguns já estão na Wave 3):
 - ⬜ Mês 3 (Wave 3 #25)
-- ⬜ Mês 4 — `sono-bebe-4-meses`
+- ✅ 2026-07-27 (4 idiomas) — Mês 4 — `sono-bebe-4-meses` (a regressão dos 4 meses)
 - ⬜ Mês 5 — `sono-bebe-5-meses`
 - ⬜ Mês 7 — `sono-bebe-7-meses`
 - ⬜ Mês 8 — `sono-bebe-8-meses`
