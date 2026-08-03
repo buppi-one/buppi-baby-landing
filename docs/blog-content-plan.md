@@ -117,7 +117,7 @@ Newborn (semanal):
 - ⬜ Mês 3 (Wave 3 #25)
 - ✅ 2026-07-27 (4 idiomas) — Mês 4 — `sono-bebe-4-meses` (a regressão dos 4 meses)
 - ✅ 2026-07-27 (4 idiomas) — Mês 5 — `sono-bebe-5-meses`
-- ⬜ Mês 7 — `sono-bebe-7-meses`
+- ✅ 2026-07-27 (4 idiomas) — Mês 7 — `sono-bebe-7-meses`
 - ⬜ Mês 8 — `sono-bebe-8-meses`
 - ⬜ Mês 9 — `sono-bebe-9-meses`
 - ⬜ Mês 10 — `sono-bebe-10-meses`
