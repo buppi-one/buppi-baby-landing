@@ -54,6 +54,11 @@ export const metadata: Metadata = {
 const localeInit = `(function(){try{var p=location.pathname;if(/^\\/(en|es|fr)(\\/|$)/.test(p))return;if(/^\\/blog\\/[^\\/]/.test(p))return;var supported=['en','es','fr'];var stored=localStorage.getItem('locale');if(!stored||supported.indexOf(stored)===-1)return;var stripped=p==='/'?'':p.replace(/\\/$/,'');location.replace('/'+stored+stripped+'/'+location.search+location.hash);}catch(e){}})();`;
 const themeInit = `(function(){try{var t=localStorage.getItem('theme')||'system';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d)document.documentElement.classList.add('dark');}catch(e){}})();`;
 
+// GA4 — "Buppi Baby Web" stream on the app's Firebase-linked property.
+// Captures UTM parameters from paid traffic (Meta ads) natively.
+const GA_ID = "G-HMTMN5BRLT";
+const gaInit = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`;
+
 export default function RootLayout({
   children,
 }: {
@@ -68,6 +73,8 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: localeInit }} />
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+        <script dangerouslySetInnerHTML={{ __html: gaInit }} />
       </head>
       <body>{children}</body>
     </html>
