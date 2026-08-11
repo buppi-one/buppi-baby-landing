@@ -1,0 +1,101 @@
+/**
+ * Instagram carousel publisher (Graph API content publishing).
+ *
+ * Publishes a carousel of already-public image URLs with a caption to the
+ * @buppi.baby Instagram Business account.
+ *
+ * The Graph API can ONLY fetch images from public HTTPS URLs — it has no binary
+ * image upload for feed posts. So the slides must be hosted somewhere public
+ * (Cloudflare R2, the site's /public, etc.) BEFORE calling this.
+ *
+ * Env (from ~/.zshrc, like CLOUDFLARE_TOKEN — never committed):
+ *   IG_BUSINESS_ACCOUNT_ID, IG_ACCESS_TOKEN
+ *
+ * Usage (caption on stdin, image URLs as args):
+ *   npx tsx scripts/instagram/caption.ts sono-bebe-4-meses pt-BR \
+ *     | npx tsx scripts/instagram/ig-publish.ts \
+ *         https://.../slide-01.png https://.../slide-02.png ...
+ *
+ * Add --dry-run to build the containers and stop before publishing.
+ */
+const V = "v21.0";
+const BASE = `https://graph.facebook.com/${V}`;
+
+async function post(path: string, body: Record<string, string>): Promise<any> {
+  const res = await fetch(`${BASE}/${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(body).toString(),
+  });
+  const json = await res.json();
+  if (json.error) throw new Error(`Graph API: ${json.error.message} (code ${json.error.code})`);
+  return json;
+}
+
+function readStdin(): Promise<string> {
+  return new Promise((resolve) => {
+    let data = "";
+    if (process.stdin.isTTY) return resolve("");
+    process.stdin.setEncoding("utf8");
+    process.stdin.on("data", (c) => (data += c));
+    process.stdin.on("end", () => resolve(data));
+  });
+}
+
+async function main() {
+  const args = process.argv.slice(2);
+  const dryRun = args.includes("--dry-run");
+  const images = args.filter((a) => /^https:\/\//.test(a));
+  const igId = process.env.IG_BUSINESS_ACCOUNT_ID;
+  const token = process.env.IG_ACCESS_TOKEN;
+
+  if (!igId || !token) {
+    console.error("Faltam IG_BUSINESS_ACCOUNT_ID e/ou IG_ACCESS_TOKEN no ambiente (source ~/.zshrc).");
+    process.exit(1);
+  }
+  if (images.length < 2 || images.length > 10) {
+    console.error(`Um carrossel precisa de 2 a 10 imagens (recebi ${images.length}). Passe as URLs públicas como argumentos.`);
+    process.exit(1);
+  }
+  const caption = (await readStdin()).trim();
+  if (!caption) console.warn("⚠️  Sem legenda (stdin vazio) — vai postar sem texto.");
+
+  console.log(`Publicando carrossel de ${images.length} imagens em @buppi.baby…\n`);
+
+  // 1) one container per image
+  const childIds: string[] = [];
+  for (let i = 0; i < images.length; i++) {
+    const r = await post(`${igId}/media`, { image_url: images[i], is_carousel_item: "true", access_token: token });
+    childIds.push(r.id);
+    console.log(`  ✓ item ${i + 1}/${images.length} (container ${r.id})`);
+  }
+
+  // 2) carousel container
+  const carousel = await post(`${igId}/media`, {
+    media_type: "CAROUSEL",
+    children: childIds.join(","),
+    caption,
+    access_token: token,
+  });
+  console.log(`  ✓ carrossel montado (container ${carousel.id})`);
+
+  if (dryRun) {
+    console.log("\n--dry-run: parei antes de publicar. Container pronto:", carousel.id);
+    return;
+  }
+
+  // 3) publish
+  const published = await post(`${igId}/media_publish`, { creation_id: carousel.id, access_token: token });
+  console.log(`\n✅ Publicado! media id: ${published.id}`);
+
+  // best-effort permalink
+  const link = await fetch(`${BASE}/${published.id}?fields=permalink&access_token=${token}`)
+    .then((r) => r.json())
+    .catch(() => null);
+  if (link?.permalink) console.log(`🔗 ${link.permalink}`);
+}
+
+main().catch((e) => {
+  console.error("\n❌ " + e.message);
+  process.exit(1);
+});
