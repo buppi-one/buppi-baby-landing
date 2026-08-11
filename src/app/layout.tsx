@@ -18,6 +18,9 @@ const quicksand = Quicksand({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://buppi.baby"),
+  // iOS Safari Smart App Banner: native one-tap "View in App Store" strip.
+  // Keeps ad traffic (which must land on the site) one tap from the store.
+  itunes: { appId: "6759115928" },
   title: "Buppi Baby - Cuidado Completo para o seu Bebê",
   description:
     "Registre sono, amamentação, fraldas e marcos do desenvolvimento do seu bebê. Simples, bonito e gratuito.",
