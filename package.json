@@ -30,11 +30,15 @@
     "shiki": "^4.0.2"
   },
   "devDependencies": {
+    "@fontsource/outfit": "^5.3.0",
+    "@fontsource/quicksand": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/postcss": "^4.1.4",
     "@types/node": "^22.15.3",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "pagefind": "^1.5.2",
+    "satori": "^0.29.0",
     "tailwindcss": "^4.1.4",
     "tsx": "^4.21.0",
     "typescript": "^5.8.3"

@@ -21,3 +21,6 @@ AGENTS.md
 
 # Service-account key (GA4 + Search Console) — NEVER commit
 /credentials/
+
+# Instagram carousel output (generated)
+scripts/instagram/out/
