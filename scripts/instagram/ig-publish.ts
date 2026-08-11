@@ -32,6 +32,45 @@ async function post(path: string, body: Record<string, string>): Promise<any> {
   return json;
 }
 
+/**
+ * Publish a carousel of public image URLs + caption to an IG Business account.
+ * Returns { id, permalink } (permalink best-effort). Reusable from other scripts.
+ */
+export async function publishCarousel(
+  igId: string,
+  token: string,
+  images: string[],
+  caption: string,
+  opts: { dryRun?: boolean; log?: (m: string) => void } = {},
+): Promise<{ id: string; permalink?: string }> {
+  const log = opts.log ?? (() => {});
+  if (images.length < 2 || images.length > 10) {
+    throw new Error(`Um carrossel precisa de 2 a 10 imagens (recebi ${images.length}).`);
+  }
+  const childIds: string[] = [];
+  for (let i = 0; i < images.length; i++) {
+    const r = await post(`${igId}/media`, { image_url: images[i], is_carousel_item: "true", access_token: token });
+    childIds.push(r.id);
+    log(`  ✓ item ${i + 1}/${images.length} (container ${r.id})`);
+  }
+  const carousel = await post(`${igId}/media`, {
+    media_type: "CAROUSEL",
+    children: childIds.join(","),
+    caption,
+    access_token: token,
+  });
+  log(`  ✓ carrossel montado (container ${carousel.id})`);
+  if (opts.dryRun) {
+    log(`  --dry-run: parei antes de publicar. Container: ${carousel.id}`);
+    return { id: carousel.id };
+  }
+  const published = await post(`${igId}/media_publish`, { creation_id: carousel.id, access_token: token });
+  const link = await fetch(`${BASE}/${published.id}?fields=permalink&access_token=${token}`)
+    .then((r) => r.json())
+    .catch(() => null);
+  return { id: published.id, permalink: link?.permalink };
+}
+
 function readStdin(): Promise<string> {
   return new Promise((resolve) => {
     let data = "";
@@ -61,41 +100,16 @@ async function main() {
   if (!caption) console.warn("⚠️  Sem legenda (stdin vazio) — vai postar sem texto.");
 
   console.log(`Publicando carrossel de ${images.length} imagens em @buppi.baby…\n`);
-
-  // 1) one container per image
-  const childIds: string[] = [];
-  for (let i = 0; i < images.length; i++) {
-    const r = await post(`${igId}/media`, { image_url: images[i], is_carousel_item: "true", access_token: token });
-    childIds.push(r.id);
-    console.log(`  ✓ item ${i + 1}/${images.length} (container ${r.id})`);
+  const r = await publishCarousel(igId, token, images, caption, { dryRun, log: (m) => console.log(m) });
+  if (!dryRun) {
+    console.log(`\n✅ Publicado! media id: ${r.id}`);
+    if (r.permalink) console.log(`🔗 ${r.permalink}`);
   }
-
-  // 2) carousel container
-  const carousel = await post(`${igId}/media`, {
-    media_type: "CAROUSEL",
-    children: childIds.join(","),
-    caption,
-    access_token: token,
-  });
-  console.log(`  ✓ carrossel montado (container ${carousel.id})`);
-
-  if (dryRun) {
-    console.log("\n--dry-run: parei antes de publicar. Container pronto:", carousel.id);
-    return;
-  }
-
-  // 3) publish
-  const published = await post(`${igId}/media_publish`, { creation_id: carousel.id, access_token: token });
-  console.log(`\n✅ Publicado! media id: ${published.id}`);
-
-  // best-effort permalink
-  const link = await fetch(`${BASE}/${published.id}?fields=permalink&access_token=${token}`)
-    .then((r) => r.json())
-    .catch(() => null);
-  if (link?.permalink) console.log(`🔗 ${link.permalink}`);
 }
 
-main().catch((e) => {
-  console.error("\n❌ " + e.message);
-  process.exit(1);
-});
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((e) => {
+    console.error("\n❌ " + e.message);
+    process.exit(1);
+  });
+}

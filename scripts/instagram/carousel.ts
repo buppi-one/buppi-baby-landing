@@ -241,7 +241,9 @@ async function main() {
   const slug = locale === "pt-BR" ? id : String(data.slug ?? id);
   const url = locale === "pt-BR" ? `buppi.baby/blog/${slug}` : `buppi.baby/${locale}/blog/${slug}`;
 
-  const outdir = join(HERE, "out", `${id}-${locale}`);
+  // Slides live under public/ so they deploy with the site and are reachable at
+  // https://buppi.baby/ig/<id>-<locale>/slide-NN.png (the Graph API fetches them).
+  const outdir = join(ROOT, "public", "ig", `${id}-${locale}`);
   mkdirSync(outdir, { recursive: true });
 
   const fonts: Font[] = [

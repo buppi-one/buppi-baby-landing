@@ -230,10 +230,23 @@ Translate from the (final) pt-BR file. Per-locale quirks:
 ```bash
 npm run validate-blog            # must say "X published, 0 drafts"
 npm run build                    # must succeed
-git add content/blog/<id>/ docs/blog-content-plan.md
+npx tsx scripts/instagram/carousel.ts <id> pt-BR   # generate IG slides → public/ig/<id>-pt-BR/
+git add content/blog/<id>/ docs/blog-content-plan.md public/ig/<id>-pt-BR/
 git commit                       # see commit message conventions below
 git push origin main
 ```
+
+### Instagram carousel (automatic)
+
+Generating the pt-BR slides and committing them under `public/ig/<id>-pt-BR/`
+is what opts the article into the **Instagram auto-post**. After the site
+deploys, the `instagram` job in `deploy.yml` finds any pt-BR article that has
+slides in `public/ig/` and is **not** yet in `scripts/instagram/posted.json`,
+builds the caption, publishes the carousel to **@buppi.baby**, and records it in
+the ledger. So: **generate slides + commit = it will be posted**; no slides =
+not posted. Only pt-BR is auto-posted (one account, Brazil-first). A published
+IG post can't be edited/replaced via API, so if you later correct the article
+the job only warns (it detects the content-hash change) — it won't repost.
 
 Commit message format (mirror recent commits):
 

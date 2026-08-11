@@ -62,3 +62,46 @@ jobs:
             -H "Content-Type: application/json" \
             --data '{"purge_everything":true}' \
             | jq -r '"purge: success=\(.success) errors=\(.errors | length)"'
+
+  # Publish pending article carousels to Instagram (after the slides are live).
+  # A pt-BR article is posted only if its slides exist under public/ig/ and it is
+  # not yet in scripts/instagram/posted.json. Best-effort: won't fail the deploy.
+  instagram:
+    needs: deploy
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Post pending carousels
+        env:
+          IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          if [ -z "$IG_ACCESS_TOKEN" ] || [ -z "$IG_BUSINESS_ACCOUNT_ID" ]; then
+            echo "::warning::IG_ACCESS_TOKEN / IG_BUSINESS_ACCOUNT_ID not set — skipping Instagram publish"
+            exit 0
+          fi
+          npx tsx scripts/instagram/post-articles.ts
+
+      - name: Commit ledger if changed
+        run: |
+          if ! git diff --quiet -- scripts/instagram/posted.json; then
+            git config user.name "buppi-bot"
+            git config user.email "bot@buppi.baby"
+            git add scripts/instagram/posted.json
+            git commit -m "chore(instagram): update posted ledger [skip ci]"
+            git push
+          else
+            echo "ledger unchanged"
+          fi
