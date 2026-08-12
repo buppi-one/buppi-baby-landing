@@ -60,7 +60,10 @@ const GA_ID = "G-HMTMN5BRLT";
 // app_store_click is registered as a GA4 key event (conversion) — delegated
 // listener so every store badge/CTA on the site reports without per-component
 // wiring. GA4 sends it via beacon, so outbound navigation doesn't lose it.
-const gaInit = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');document.addEventListener('click',function(e){var t=e.target;var a=t&&t.closest?t.closest('a[href]'):null;if(!a)return;var h=a.href||'';var s=h.indexOf('apps.apple.com')>-1?'app_store':h.indexOf('play.google.com')>-1?'play_store':null;if(s)gtag('event','app_store_click',{store:s,link_url:h});});`;
+// Instagram/Facebook's iOS in-app browser silently swallows apps.apple.com
+// navigations (App Store hand-off is blocked), so there we rewrite the click
+// to the itms-apps:// scheme, which those webviews do allow.
+const gaInit = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');document.addEventListener('click',function(e){var t=e.target;var a=t&&t.closest?t.closest('a[href]'):null;if(!a)return;var h=a.href||'';var s=h.indexOf('apps.apple.com')>-1?'app_store':h.indexOf('play.google.com')>-1?'play_store':null;if(!s)return;var ua=navigator.userAgent||'';var inApp=/Instagram|FBAN|FBAV|FB_IAB/.test(ua);var iOS=/iPhone|iPad|iPod/.test(ua);var via=s;if(s==='app_store'&&inApp&&iOS){e.preventDefault();via='app_store_itms';}gtag('event','app_store_click',{store:s,link_url:h,via:via});if(via==='app_store_itms'){location.href=h.replace('https://apps.apple.com','itms-apps://apps.apple.com');}});`;
 
 export default function RootLayout({
   children,
