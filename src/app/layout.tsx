@@ -57,7 +57,10 @@ const themeInit = `(function(){try{var t=localStorage.getItem('theme')||'system'
 // GA4 — "Buppi Baby Web" stream on the app's Firebase-linked property.
 // Captures UTM parameters from paid traffic (Meta ads) natively.
 const GA_ID = "G-HMTMN5BRLT";
-const gaInit = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`;
+// app_store_click is registered as a GA4 key event (conversion) — delegated
+// listener so every store badge/CTA on the site reports without per-component
+// wiring. GA4 sends it via beacon, so outbound navigation doesn't lose it.
+const gaInit = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');document.addEventListener('click',function(e){var t=e.target;var a=t&&t.closest?t.closest('a[href]'):null;if(!a)return;var h=a.href||'';var s=h.indexOf('apps.apple.com')>-1?'app_store':h.indexOf('play.google.com')>-1?'play_store':null;if(s)gtag('event','app_store_click',{store:s,link_url:h});});`;
 
 export default function RootLayout({
   children,
