@@ -32,6 +32,39 @@ async function post(path: string, body: Record<string, string>): Promise<any> {
   return json;
 }
 
+async function get(path: string, params: Record<string, string>): Promise<any> {
+  const res = await fetch(`${BASE}/${path}?${new URLSearchParams(params).toString()}`);
+  const json = await res.json();
+  if (json.error) throw new Error(`Graph API: ${json.error.message} (code ${json.error.code})`);
+  return json;
+}
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * A carousel container must finish processing before it can be published;
+ * publishing too early throws "Media ID is not available (code 9007)". Poll its
+ * status_code until FINISHED (throwing on ERROR/EXPIRED).
+ */
+async function waitForFinished(
+  containerId: string,
+  token: string,
+  log: (m: string) => void,
+  tries = 20,
+  delayMs = 3000,
+): Promise<void> {
+  for (let i = 0; i < tries; i++) {
+    const r = await get(containerId, { fields: "status_code", access_token: token });
+    if (r.status_code === "FINISHED") return;
+    if (r.status_code === "ERROR" || r.status_code === "EXPIRED") {
+      throw new Error(`Container ${containerId} ficou com status ${r.status_code}.`);
+    }
+    log(`  … processando (${r.status_code ?? "?"}) [${i + 1}/${tries}]`);
+    await sleep(delayMs);
+  }
+  throw new Error(`Container ${containerId} não ficou pronto a tempo.`);
+}
+
 /**
  * Publish a carousel of public image URLs + caption to an IG Business account.
  * Returns { id, permalink } (permalink best-effort). Reusable from other scripts.
@@ -64,7 +97,24 @@ export async function publishCarousel(
     log(`  --dry-run: parei antes de publicar. Container: ${carousel.id}`);
     return { id: carousel.id };
   }
-  const published = await post(`${igId}/media_publish`, { creation_id: carousel.id, access_token: token });
+  log(`  ⏳ aguardando o Instagram processar o carrossel…`);
+  await waitForFinished(carousel.id, token, log);
+  // Even after FINISHED, publish can briefly race (9007) — retry a few times.
+  let published: any;
+  for (let attempt = 0; ; attempt++) {
+    try {
+      published = await post(`${igId}/media_publish`, { creation_id: carousel.id, access_token: token });
+      break;
+    } catch (e) {
+      const msg = (e as Error).message;
+      if (attempt < 4 && /9007|not available/i.test(msg)) {
+        log(`  … ainda não publicável, tentando de novo [${attempt + 1}/4]`);
+        await sleep(4000);
+        continue;
+      }
+      throw e;
+    }
+  }
   const link = await fetch(`${BASE}/${published.id}?fields=permalink&access_token=${token}`)
     .then((r) => r.json())
     .catch(() => null);
