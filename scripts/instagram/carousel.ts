@@ -98,7 +98,8 @@ function coverImageDataUri(id: string, w: number, ht: number): string | null {
   }
 }
 
-/** Trim to <= max chars, cutting at a sentence or word boundary. */
+/** Normalize whitespace. Truncation is a last resort (see fitText); the cap here
+ *  is a generous safety net so a runaway string can never overflow the canvas. */
 function trim(text: string, max: number): string {
   const t = text.replace(/\s+/g, " ").trim();
   if (t.length <= max) return t;
@@ -107,6 +108,40 @@ function trim(text: string, max: number): string {
   if (lastPeriod > max * 0.55) return slice.slice(0, lastPeriod + 1);
   const lastSpace = slice.lastIndexOf(" ");
   return slice.slice(0, lastSpace > 0 ? lastSpace : max).trim() + "…";
+}
+
+const PAD = 96;
+const CONTENT_W = W - PAD * 2; // usable text width on a padded slide
+
+/** Estimate how many lines `text` wraps to at a given font size, by packing
+ *  words into a line-width budget. `factor` ≈ average glyph width / font size
+ *  (Quicksand bold is wider than Outfit body). */
+function estLines(text: string, fontSize: number, factor: number, boxW = CONTENT_W): number {
+  const cpl = Math.max(6, Math.floor(boxW / (fontSize * factor)));
+  let lines = 1;
+  let cur = 0;
+  for (const w of text.split(/\s+/)) {
+    const len = w.length + 1;
+    if (cur > 0 && cur + len > cpl) {
+      lines++;
+      cur = len;
+    } else {
+      cur += len;
+    }
+  }
+  return lines;
+}
+
+/** Pick the largest font size in [min, max] whose wrapped height fits `availH`.
+ *  This fills the available space instead of truncating — text shrinks to fit. */
+function fitFont(
+  text: string,
+  opts: { max: number; min: number; factor: number; lineHeight: number; availH: number; boxW?: number },
+): number {
+  for (let fs = opts.max; fs > opts.min; fs -= 2) {
+    if (estLines(text, fs, opts.factor, opts.boxW) * fs * opts.lineHeight <= opts.availH) return fs;
+  }
+  return opts.min;
 }
 
 // ---------- slide templates ----------
@@ -126,17 +161,20 @@ const IMG_H = 648;
 function coverSlide(title: string, category: string, locale: string, coverUri: string | null): Node {
   // Text-only fallback (no article cover)
   if (!coverUri) {
+    const titleFont = fitFont(title, { max: 82, min: 54, factor: 0.6, lineHeight: 1.1, availH: H - 192 - 66 - 50 - 40, boxW: W - 192 });
     return h(
       "div",
       { display: "flex", flexDirection: "column", width: W, height: H, padding: 96, backgroundColor: C.lavender, backgroundImage: `linear-gradient(160deg, ${C.lavender} 0%, ${C.creamSoft} 62%, ${C.cream} 100%)`, justifyContent: "space-between", fontFamily: "Quicksand" },
       [
         h("div", { display: "flex", alignSelf: "flex-start", backgroundColor: C.mint, color: C.ink, fontSize: 34, fontWeight: 700, padding: "16px 34px", borderRadius: 999 }, category),
-        h("div", { display: "flex", fontSize: 82, fontWeight: 700, color: C.ink, lineHeight: 1.08, letterSpacing: -1 }, title),
+        h("div", { display: "flex", fontSize: titleFont, fontWeight: 700, color: C.ink, lineHeight: 1.1, letterSpacing: -1 }, title),
         swipeRow(locale, C.primaryDark, C.fgSecondary),
       ],
     );
   }
   // Article cover art as a top band, title panel below
+  const panelH = H - IMG_H; // 702
+  const titleFont = fitFont(title, { max: 70, min: 46, factor: 0.6, lineHeight: 1.12, availH: panelH - 176 - 90 - 50 - 16, boxW: W - 176 });
   return h(
     "div",
     { display: "flex", flexDirection: "column", width: W, height: H, backgroundColor: C.lavender, fontFamily: "Quicksand" },
@@ -148,7 +186,7 @@ function coverSlide(title: string, category: string, locale: string, coverUri: s
         [
           h("div", { display: "flex", flexDirection: "column" }, [
             h("div", { display: "flex", alignSelf: "flex-start", backgroundColor: C.mint, color: C.ink, fontSize: 32, fontWeight: 700, padding: "14px 30px", borderRadius: 999, marginBottom: 30 }, category),
-            h("div", { display: "flex", fontSize: 70, fontWeight: 700, color: C.ink, lineHeight: 1.1, letterSpacing: -1 }, title),
+            h("div", { display: "flex", fontSize: titleFont, fontWeight: 700, color: C.ink, lineHeight: 1.12, letterSpacing: -1 }, title),
           ]),
           swipeRow(locale, C.primaryDark, C.fgSecondary),
         ],
@@ -158,6 +196,21 @@ function coverSlide(title: string, category: string, locale: string, coverUri: s
 }
 
 function tipSlide(index: number, total: number, question: string, answer: string, category: string): Node {
+  // Adaptive sizing: fill the slide instead of truncating. Question keeps its
+  // presence (shrinks only if very long); the answer then takes whatever
+  // vertical space is left, shrinking to fit rather than getting cut with "…".
+  const headerH = 74 + 56; // number chip row + its margin
+  const qMB = 40; // gap under the question
+  const footerH = 44 + 24; // "buppi.baby" line + breathing room
+  const qLH = 1.14;
+  const aLH = 1.44;
+
+  const qFont = fitFont(question, { max: 60, min: 46, factor: 0.6, lineHeight: qLH, availH: 4 * 60 * qLH });
+  const qHeight = estLines(question, qFont, 0.6) * qFont * qLH;
+
+  const availAnswer = H - PAD * 2 - headerH - qHeight - qMB - footerH;
+  const aFont = fitFont(answer, { max: 44, min: 30, factor: 0.53, lineHeight: aLH, availH: availAnswer });
+
   return h(
     "div",
     {
@@ -165,7 +218,7 @@ function tipSlide(index: number, total: number, question: string, answer: string
       flexDirection: "column",
       width: W,
       height: H,
-      padding: 96,
+      padding: PAD,
       backgroundColor: C.cream,
       justifyContent: "flex-start",
       fontFamily: "Quicksand",
@@ -175,9 +228,11 @@ function tipSlide(index: number, total: number, question: string, answer: string
         h("div", { display: "flex", alignItems: "center", justifyContent: "center", width: 74, height: 74, borderRadius: 999, backgroundColor: C.primary, color: C.white, fontSize: 38, fontWeight: 700 }, String(index)),
         h("div", { display: "flex", fontSize: 30, fontWeight: 700, color: C.fgSecondary, letterSpacing: 1 }, `${index}/${total} · ${category}`),
       ]),
-      h("div", { display: "flex", fontSize: 60, fontWeight: 700, color: C.primaryDark, lineHeight: 1.12, marginBottom: 40, letterSpacing: -0.5 }, question),
-      h("div", { display: "flex", fontSize: 40, fontWeight: 500, color: C.fg, lineHeight: 1.42, fontFamily: "Outfit" }, answer),
-      h("div", { display: "flex", flexGrow: 1 }, ""),
+      // Question + answer, vertically centered in the space between header and footer.
+      h("div", { display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "center" }, [
+        h("div", { display: "flex", fontSize: qFont, fontWeight: 700, color: C.primaryDark, lineHeight: qLH, marginBottom: qMB, letterSpacing: -0.5 }, question),
+        h("div", { display: "flex", fontSize: aFont, fontWeight: 500, color: C.fg, lineHeight: aLH, fontFamily: "Outfit" }, answer),
+      ]),
       h("div", { display: "flex", fontSize: 32, fontWeight: 700, color: C.mintDark }, "buppi.baby"),
     ],
   );
@@ -255,10 +310,10 @@ async function main() {
   ];
 
   const coverUri = coverImageDataUri(id, W, IMG_H);
-  const slides: Node[] = [coverSlide(trim(title, 90), catLabel, locale, coverUri)];
+  const slides: Node[] = [coverSlide(trim(title, 120), catLabel, locale, coverUri)];
   const total = faq.length;
   faq.forEach((item, i) => {
-    slides.push(tipSlide(i + 1, total, trim(item.question, 90), trim(item.answer, 260), catLabel));
+    slides.push(tipSlide(i + 1, total, trim(item.question, 160), trim(item.answer, 600), catLabel));
   });
   slides.push(ctaSlide(READ_MORE[locale] ?? READ_MORE["pt-BR"], url, CTA_APP[locale] ?? CTA_APP["pt-BR"]));
 
