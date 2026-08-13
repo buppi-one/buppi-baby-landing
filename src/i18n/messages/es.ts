@@ -224,7 +224,7 @@ export const es: Messages = {
   privacy: {
     badge: "🔒 PRIVACIDAD",
     title: "Política de Privacidad",
-    updated: "Última actualización: 12 de febrero de 2026",
+    updated: "Última actualización: 13 de agosto de 2026",
     intro:
       "Tu privacidad es importante para nosotros. Esta Política de Privacidad explica cómo Buppi Baby recopila, usa y protege tu información personal.",
     sections: [
@@ -280,7 +280,30 @@ export const es: Messages = {
         ],
       },
       {
-        heading: "4. Almacenamiento y Seguridad",
+        heading: "4. Asistente de IA (Buppi)",
+        intro:
+          "La aplicación ofrece un asistente opcional con inteligencia artificial para resolver dudas sobre tu bebé. Al usarlo:",
+        items: [
+          {
+            bold: "Qué se envía:",
+            text: "Tu mensaje y un contexto reducido del bebé (nombre, edad y los registros necesarios para responder a tu pregunta)",
+          },
+          {
+            bold: "Procesamiento:",
+            text: "Los mensajes son procesados por Anthropic (modelo Claude), que actúa como encargado del tratamiento y no utiliza estos datos para entrenar sus modelos",
+          },
+          {
+            bold: "Historial de conversaciones:",
+            text: "Guardamos las conversaciones para mejorar la calidad y la seguridad del asistente. Puedes solicitar su eliminación en cualquier momento por el correo de contacto",
+          },
+          {
+            bold: "Uso limitado:",
+            text: "El asistente es un recurso informativo y educativo. No realiza diagnósticos ni sustituye la orientación del pediatra",
+          },
+        ],
+      },
+      {
+        heading: "5. Almacenamiento y Seguridad",
         intro: "Tus datos se almacenan de forma segura usando:",
         items: [
           {
@@ -293,7 +316,7 @@ export const es: Messages = {
         ],
       },
       {
-        heading: "5. Tus Derechos",
+        heading: "6. Tus Derechos",
         intro: "Tienes derecho a:",
         items: [
           { bold: "Acceder", text: "a tus datos personales" },
@@ -307,12 +330,12 @@ export const es: Messages = {
         ],
       },
       {
-        heading: "6. Datos de Niños",
+        heading: "7. Datos de Niños",
         intro:
           "Buppi Baby está destinado a padres y cuidadores adultos. No recopilamos intencionalmente información de niños menores de 13 años como usuarios de la app. Los datos del bebé son proporcionados y controlados por los padres/responsables.",
       },
       {
-        heading: "7. Cookies y Tecnologías Similares",
+        heading: "8. Cookies y Tecnologías Similares",
         intro: "Usamos tecnologías de almacenamiento local para:",
         items: [
           { text: "Mantenerte conectado" },
@@ -321,13 +344,13 @@ export const es: Messages = {
         ],
       },
       {
-        heading: "8. Cambios en esta Política",
+        heading: "9. Cambios en esta Política",
         intro:
           "Podemos actualizar esta política periódicamente. Te notificaremos sobre cambios significativos a través de la app o por email.",
       },
     ],
     contact: {
-      heading: "9. Contacto",
+      heading: "10. Contacto",
       text: "Para preguntas sobre privacidad o para ejercer tus derechos, escríbenos a ",
       email: "privacy@buppi.baby",
     },
