@@ -309,10 +309,13 @@ async function main() {
     font("Outfit-600.woff", "Outfit", 600),
   ];
 
+  // Instagram carousels allow at most 10 images. Keep cover + up to 8 FAQ + CTA.
+  const MAX_FAQ = 8;
+  const faqShown = faq.slice(0, MAX_FAQ);
   const coverUri = coverImageDataUri(id, W, IMG_H);
   const slides: Node[] = [coverSlide(trim(title, 120), catLabel, locale, coverUri)];
-  const total = faq.length;
-  faq.forEach((item, i) => {
+  const total = faqShown.length;
+  faqShown.forEach((item, i) => {
     slides.push(tipSlide(i + 1, total, trim(item.question, 160), trim(item.answer, 600), catLabel));
   });
   slides.push(ctaSlide(READ_MORE[locale] ?? READ_MORE["pt-BR"], url, CTA_APP[locale] ?? CTA_APP["pt-BR"]));
