@@ -239,14 +239,22 @@ git push origin main
 ### Instagram carousel (automatic)
 
 Generating the pt-BR slides and committing them under `public/ig/<id>-pt-BR/`
-is what opts the article into the **Instagram auto-post**. After the site
-deploys, the `instagram` job in `deploy.yml` finds any pt-BR article that has
-slides in `public/ig/` and is **not** yet in `scripts/instagram/posted.json`,
-builds the caption, publishes the carousel to **@buppi.baby**, and records it in
-the ledger. So: **generate slides + commit = it will be posted**; no slides =
-not posted. Only pt-BR is auto-posted (one account, Brazil-first). A published
-IG post can't be edited/replaced via API, so if you later correct the article
-the job only warns (it detects the content-hash change) — it won't repost.
+is what opts the article into the **Instagram auto-post**. Posting is handled by
+a **daily scheduled workflow** (`.github/workflows/instagram-daily.yml`), NOT by
+the deploy — `deploy.yml` only hosts the slides at buppi.baby. The cron posts
+**one carousel per day, oldest `publishedAt` first**, picking the oldest pt-BR
+article that has slides and isn't yet in `scripts/instagram/posted.json`.
+
+So: **generate slides + commit = it enters the queue** and is posted on its turn
+(a brand-new article has the newest date, so it sits at the BACK of the queue —
+during a backlog it waits; once the backlog clears, new articles post ~next day).
+To post one immediately, bypass the schedule:
+`npx tsx scripts/instagram/post-articles.ts <id> --limit 1` (IG_* in env).
+
+Only pt-BR is posted (one account, Brazil-first). The carousel is capped at 10
+images (cover + up to 8 FAQ + CTA). A published IG post can't be edited/replaced
+via API, so if you later correct the article the job only warns (it detects the
+content-hash change) — it won't repost.
 
 Commit message format (mirror recent commits):
 
@@ -257,7 +265,7 @@ content(blog): publish "<short title>" (4 locales)
 
 Cover generated via Codex and optimized to <N>KB webp. Plan #<N> marked done.
 
-Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
 ```
 
 After push, the GitHub Pages workflow auto-deploys (~1–2 min) and Cloudflare
