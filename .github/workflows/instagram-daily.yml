@@ -1,0 +1,58 @@
+name: Instagram daily
+
+# Posts ONE article carousel per day to @buppi.baby — the oldest article whose
+# slides exist under public/ig/ and that isn't in scripts/instagram/posted.json.
+# Slides are pre-generated and hosted at buppi.baby (deploy.yml). When the queue
+# is empty it simply does nothing; a newly published article joins the queue and
+# gets posted on the next run automatically.
+#
+# Pause: disable this workflow in the GitHub Actions tab (or comment `schedule`).
+
+on:
+  schedule:
+    - cron: "0 13 * * *" # 13:00 UTC = 10:00 America/Sao_Paulo
+  workflow_dispatch: # lets you run it on demand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-daily
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Post the next carousel (oldest unposted)
+        env:
+          IG_BUSINESS_ACCOUNT_ID: ${{ secrets.IG_BUSINESS_ACCOUNT_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          if [ -z "$IG_ACCESS_TOKEN" ] || [ -z "$IG_BUSINESS_ACCOUNT_ID" ]; then
+            echo "::warning::IG_ACCESS_TOKEN / IG_BUSINESS_ACCOUNT_ID not set — skipping"
+            exit 0
+          fi
+          npx tsx scripts/instagram/post-articles.ts --limit 1
+
+      - name: Commit ledger / report
+        run: |
+          if ! git diff --quiet -- scripts/instagram/posted.json; then
+            git config user.name "buppi-bot"
+            git config user.email "bot@buppi.baby"
+            git add scripts/instagram/posted.json
+            git commit -m "chore(instagram): daily post [skip ci]"
+            git push
+          else
+            echo "::notice::Nada postado hoje — fila vazia ou nada novo. Publique um artigo para reabastecer."
+          fi

@@ -1,32 +1,35 @@
 # Instagram auto-post (@buppi.baby)
 
-Turns a blog article into a **carousel** and posts it to Instagram. The gate is
-simple: **if an article's slides exist under `public/ig/<id>-pt-BR/`, it gets
-posted; if not, nothing happens.** Generating the slides is the opt-in.
+Turns blog articles into **carousels** and posts them to Instagram, **one per
+day, oldest first**, on a schedule. The gate is simple: **an article is a
+candidate only if its slides exist under `public/ig/<id>-pt-BR/`.** Generating
+the slides is the opt-in.
 
 Only **pt-BR** is posted (one account, Brazil focus). Posts are tracked in
 `posted.json` so nothing is ever posted twice.
 
-## The flow (new article)
+## The flow
 
 ```
-write article ──► generate slides ──► git push ──► GitHub Actions
-  (/blog-article    (carousel.ts,        (main)      deploy → slides live
-   does this          committed to                   → instagram job posts
-   automatically)     public/ig/)                    → commits posted.json
+generate slides ──► git push ──► deploy.yml hosts them at buppi.baby
+ (carousel.ts →                        │
+  public/ig/)                          ▼
+                        instagram-daily.yml (cron, 1×/day)
+                        posts the OLDEST unposted candidate
+                        → commits posted.json  [skip ci]
 ```
 
-- **Via `/blog-article`:** slides are generated and committed automatically —
-  you do nothing extra, blog + Instagram ship together.
-- **By hand:** run the one command below to generate + commit slides.
+- **`deploy.yml`** only builds + hosts the slides — it does **not** post.
+- **`instagram-daily.yml`** is the sole poster: daily, it posts exactly one
+  carousel (`post-articles.ts --limit 1`), the oldest article with slides not
+  yet in the ledger.
+- **Queue empty?** The daily run does nothing (logs a notice). Publish a new
+  article (slides committed) and it joins the queue — posted on the next run.
+- **Pause:** disable *Instagram daily* in the repo's Actions tab.
+- Run it now instead of waiting: Actions tab → *Instagram daily* → *Run
+  workflow* (or `gh workflow run instagram-daily.yml`).
 
-After the push, the `instagram` job in `.github/workflows/deploy.yml` runs
-`post-articles.ts` (after deploy, so the slide URLs are already live). It's
-best-effort — it never fails the deploy.
-
-## Daily posting (working through the backlog)
-
-Post one per day, oldest first. See the queue and what's next:
+## Working the queue
 
 ```bash
 npx tsx scripts/instagram/queue.ts            # full catalog + status
@@ -34,17 +37,19 @@ npx tsx scripts/instagram/queue.ts --pending  # only what's left
 npx tsx scripts/instagram/queue.ts --next     # just the next id
 ```
 
-Then generate + commit that article's slides (the queue prints these exact
-commands for the next item):
+Generate + commit an article's slides so it enters the queue:
 
 ```bash
 npx tsx scripts/instagram/carousel.ts <id> pt-BR
 git add public/ig/<id>-pt-BR/
-git commit -m "chore(instagram): slides <id>"
-git push
+git commit -m "chore(instagram): slides <id>" && git push
 ```
 
-The CI posts it after the deploy. Re-run `queue.ts` to confirm it flipped to ✅.
+Post the next one immediately (bypass the schedule), locally:
+
+```bash
+npx tsx scripts/instagram/post-articles.ts --limit 1   # needs IG_* in env
+```
 
 Status markers: ✅ posted (in the ledger) · 🟡 slides ready, not posted yet ·
 ⬜ nothing generated yet.
