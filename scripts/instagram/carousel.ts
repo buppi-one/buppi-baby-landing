@@ -12,7 +12,7 @@
  *
  * Output: scripts/instagram/out/<id>-<locale>/slide-NN.png
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, rmSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -195,7 +195,7 @@ function coverSlide(title: string, category: string, locale: string, coverUri: s
   );
 }
 
-function tipSlide(index: number, total: number, question: string, answer: string, category: string): Node {
+function tipSlide(index: number, total: number, question: string, answer: string, category: string, headerRight?: string): Node {
   // Adaptive sizing: fill the slide instead of truncating. Question keeps its
   // presence (shrinks only if very long); the answer then takes whatever
   // vertical space is left, shrinking to fit rather than getting cut with "…".
@@ -226,7 +226,7 @@ function tipSlide(index: number, total: number, question: string, answer: string
     [
       h("div", { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 56 }, [
         h("div", { display: "flex", alignItems: "center", justifyContent: "center", width: 74, height: 74, borderRadius: 999, backgroundColor: C.primary, color: C.white, fontSize: 38, fontWeight: 700 }, String(index)),
-        h("div", { display: "flex", fontSize: 30, fontWeight: 700, color: C.fgSecondary, letterSpacing: 1 }, `${index}/${total} · ${category}`),
+        h("div", { display: "flex", fontSize: 30, fontWeight: 700, color: C.fgSecondary, letterSpacing: 1 }, headerRight ?? `${index}/${total} · ${category}`),
       ]),
       // Question + answer, vertically centered in the space between header and footer.
       h("div", { display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "center" }, [
@@ -234,6 +234,62 @@ function tipSlide(index: number, total: number, question: string, answer: string
         h("div", { display: "flex", fontSize: aFont, fontWeight: 500, color: C.fg, lineHeight: aLH, fontFamily: "Outfit" }, answer),
       ]),
       h("div", { display: "flex", fontSize: 32, fontWeight: 700, color: C.mintDark }, "buppi.baby"),
+    ],
+  );
+}
+
+/** Calendar/table slide: an age (or row) label + a list of items. Used when an
+ *  article's frontmatter has an `instagram.format: calendar` spec — so the
+ *  carousel delivers the actual calendar the title promises, not the FAQ. */
+function calendarSlide(index: number, total: number, label: string, items: string[], category: string): Node {
+  const n = items.length;
+  const itemFs = n <= 2 ? 46 : n === 3 ? 42 : 38;
+  return h(
+    "div",
+    { display: "flex", flexDirection: "column", width: W, height: H, padding: PAD, backgroundColor: C.cream, justifyContent: "flex-start", fontFamily: "Quicksand" },
+    [
+      h("div", { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 56 }, [
+        h("div", { display: "flex", alignItems: "center", justifyContent: "center", width: 74, height: 74, borderRadius: 999, backgroundColor: C.primary, color: C.white, fontSize: 38, fontWeight: 700 }, String(index)),
+        h("div", { display: "flex", fontSize: 30, fontWeight: 700, color: C.fgSecondary, letterSpacing: 1 }, `${index}/${total} · ${category}`),
+      ]),
+      // Age/row label + its items, vertically centered.
+      h("div", { display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "center" }, [
+        h("div", { display: "flex", alignSelf: "flex-start", backgroundColor: C.mint, color: C.ink, fontSize: 44, fontWeight: 700, padding: "14px 36px", borderRadius: 999, marginBottom: 46 }, label),
+        h(
+          "div",
+          { display: "flex", flexDirection: "column" },
+          items.map((it) =>
+            h("div", { display: "flex", alignItems: "flex-start", marginBottom: 22 }, [
+              h("div", { display: "flex", width: 18, height: 18, borderRadius: 999, backgroundColor: C.mintDark, marginTop: itemFs * 0.34, marginRight: 24, flexShrink: 0 }, ""),
+              h("div", { display: "flex", flexGrow: 1, fontSize: itemFs, fontWeight: 500, color: C.fg, lineHeight: 1.28, fontFamily: "Outfit" }, it),
+            ]),
+          ),
+        ),
+      ]),
+      h("div", { display: "flex", fontSize: 32, fontWeight: 700, color: C.mintDark }, "buppi.baby"),
+    ],
+  );
+}
+
+/** Table slide: the whole calendar/reference as a compact zebra table (label |
+ *  items). Used for `instagram.format: table` — one slide fits ~8 rows. */
+function tableSlide(rows: { label: string; items: string[] }[], index: number, total: number, title: string, category: string): Node {
+  const PADT = 64;
+  return h(
+    "div",
+    { display: "flex", flexDirection: "column", width: W, height: H, padding: PADT, backgroundColor: C.cream, justifyContent: "flex-start", fontFamily: "Quicksand" },
+    [
+      h("div", { display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 34 }, [
+        h("div", { display: "flex", fontSize: 48, fontWeight: 700, color: C.ink, lineHeight: 1.08, letterSpacing: -0.5, maxWidth: 720 }, title),
+        h("div", { display: "flex", backgroundColor: C.mint, color: C.ink, fontSize: 26, fontWeight: 700, padding: "10px 24px", borderRadius: 999 }, total > 1 ? `${category} · ${index}/${total}` : category),
+      ]),
+      h("div", { display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "center" }, rows.map((r, i) =>
+        h("div", { display: "flex", alignItems: "center", backgroundColor: i % 2 ? C.white : C.creamSoft, borderRadius: 18, padding: "18px 24px", marginBottom: 10, border: `1px solid #efe7dd` }, [
+          h("div", { display: "flex", width: 210, flexShrink: 0, fontSize: 33, fontWeight: 700, color: C.primaryDark }, r.label),
+          h("div", { display: "flex", flexGrow: 1, fontSize: 27, fontWeight: 500, color: C.fg, lineHeight: 1.26, fontFamily: "Outfit" }, r.items.join(" · ")),
+        ]),
+      )),
+      h("div", { display: "flex", fontSize: 30, fontWeight: 700, color: C.mintDark, marginTop: 16 }, "buppi.baby"),
     ],
   );
 }
@@ -300,6 +356,11 @@ async function main() {
   // https://buppi.baby/ig/<id>-<locale>/slide-NN.png (the Graph API fetches them).
   const outdir = join(ROOT, "public", "ig", `${id}-${locale}`);
   mkdirSync(outdir, { recursive: true });
+  // Clear stale slides so a shorter carousel (e.g. switching to a table format)
+  // doesn't leave orphaned images behind.
+  for (const f of readdirSync(outdir)) {
+    if (/^slide-\d+\.png$/.test(f)) rmSync(join(outdir, f));
+  }
 
   const fonts: Font[] = [
     font("Quicksand-500.woff", "Quicksand", 500),
@@ -309,15 +370,44 @@ async function main() {
     font("Outfit-600.woff", "Outfit", 600),
   ];
 
-  // Instagram carousels allow at most 10 images. Keep cover + up to 8 FAQ + CTA.
-  const MAX_FAQ = 8;
-  const faqShown = faq.slice(0, MAX_FAQ);
+  // Instagram carousels allow at most 10 images (cover + up to 8 content + CTA).
+  const MAX_CONTENT = 8;
   const coverUri = coverImageDataUri(id, W, IMG_H);
   const slides: Node[] = [coverSlide(trim(title, 120), catLabel, locale, coverUri)];
-  const total = faqShown.length;
-  faqShown.forEach((item, i) => {
-    slides.push(tipSlide(i + 1, total, trim(item.question, 160), trim(item.answer, 600), catLabel));
-  });
+
+  // Curated post spec (optional): `instagram.format` picks a template so the
+  // carousel delivers the article's real payload, not just the first FAQs.
+  const ig = (data.instagram ?? {}) as {
+    format?: string;
+    hook?: string;
+    slides?: { label?: string; items?: string[] }[];
+  };
+  const rows = Array.isArray(ig.slides)
+    ? ig.slides.map((s) => ({ label: String(s.label ?? ""), items: (s.items ?? []).map(String) }))
+    : [];
+
+  if (ig.format === "table" && rows.length >= 2) {
+    const PER = 8; // rows per table slide
+    const pages = Math.ceil(Math.min(rows.length, 16) / PER);
+    for (let p = 0; p < Math.min(rows.length, 16); p += PER) {
+      slides.push(tableSlide(rows.slice(p, p + PER), Math.floor(p / PER) + 1, pages, ig.hook ?? trim(title, 60), catLabel));
+    }
+  } else if (ig.format === "calendar" && rows.length >= 2) {
+    const spec = rows.slice(0, MAX_CONTENT);
+    spec.forEach((s, i) => {
+      slides.push(calendarSlide(i + 1, spec.length, s.label, s.items, catLabel));
+    });
+  } else if (ig.format === "steps" && rows.length >= 2) {
+    const spec = rows.slice(0, MAX_CONTENT);
+    spec.forEach((s, i) => {
+      slides.push(tipSlide(i + 1, spec.length, s.label, s.items.join(" "), catLabel, `PASSO ${i + 1} DE ${spec.length}`));
+    });
+  } else {
+    const faqShown = faq.slice(0, MAX_CONTENT);
+    faqShown.forEach((item, i) => {
+      slides.push(tipSlide(i + 1, faqShown.length, trim(item.question, 160), trim(item.answer, 600), catLabel));
+    });
+  }
   slides.push(ctaSlide(READ_MORE[locale] ?? READ_MORE["pt-BR"], url, CTA_APP[locale] ?? CTA_APP["pt-BR"]));
 
   for (let i = 0; i < slides.length; i++) {

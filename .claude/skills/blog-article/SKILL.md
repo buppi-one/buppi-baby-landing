@@ -256,6 +256,30 @@ images (cover + up to 8 FAQ + CTA). A published IG post can't be edited/replaced
 via API, so if you later correct the article the job only warns (it detects the
 content-hash change) — it won't repost.
 
+**Curate the carousel format.** By default the carousel is the cover + first
+FAQs (`tips` format), which fits Q&A/advice articles. But when the TITLE promises
+a specific payload (a calendar, a table, a how-to), the FAQ misses it — deliver
+the real thing by adding an `instagram:` block to the pt-BR frontmatter (right
+after `draft: false`). The generator (`carousel.ts`) dispatches on `format`:
+
+- `table` — a whole reference/schedule on ONE slide (vaccine calendar,
+  formula-by-age, a sleep schedule). Each `slides` entry is a row.
+- `calendar` — one phase/age per slide (up to 8).
+- `steps` — a numbered how-to; `label` = step title, `items: ["one sentence"]`.
+- (omit the block → `tips`/FAQ fallback.)
+
+Use ONLY facts from the article — match numbers exactly. Keep it to cover + ≤8 +
+CTA (IG's 10 max). Example:
+
+```yaml
+instagram:
+  format: table
+  hook: "Fórmula por idade (ml)"      # short cover-ish promise
+  slides:
+    - label: "2 meses"
+      items: ["120 a 150 ml/mamada", "700 a 950 ml/dia"]
+```
+
 Commit message format (mirror recent commits):
 
 ```
