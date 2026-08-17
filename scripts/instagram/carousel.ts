@@ -380,11 +380,13 @@ async function main() {
   const ig = (data.instagram ?? {}) as {
     format?: string;
     hook?: string;
+    faqCount?: number;
     slides?: { label?: string; items?: string[] }[];
   };
   const rows = Array.isArray(ig.slides)
     ? ig.slides.map((s) => ({ label: String(s.label ?? ""), items: (s.items ?? []).map(String) }))
     : [];
+  const curated = (ig.format === "table" || ig.format === "calendar" || ig.format === "steps") && rows.length >= 2;
 
   if (ig.format === "table" && rows.length >= 2) {
     const PER = 8; // rows per table slide
@@ -401,6 +403,19 @@ async function main() {
     const spec = rows.slice(0, MAX_CONTENT);
     spec.forEach((s, i) => {
       slides.push(tipSlide(i + 1, spec.length, s.label, s.items.join(" "), catLabel, `PASSO ${i + 1} DE ${spec.length}`));
+    });
+  }
+
+  if (curated) {
+    // Append a few FAQ slides after the curated payload, so table/steps posts
+    // keep the useful Q&A too. Fill the remaining slide budget, default cap 3
+    // (override per-article with instagram.faqCount).
+    const used = slides.length - 1; // minus the cover
+    const room = Math.max(0, MAX_CONTENT - used);
+    const cap = typeof ig.faqCount === "number" ? ig.faqCount : 3;
+    const faqAppend = faq.slice(0, Math.min(room, cap));
+    faqAppend.forEach((item, i) => {
+      slides.push(tipSlide(i + 1, faqAppend.length, trim(item.question, 160), trim(item.answer, 600), catLabel, `DÚVIDA ${i + 1}/${faqAppend.length}`));
     });
   } else {
     const faqShown = faq.slice(0, MAX_CONTENT);
