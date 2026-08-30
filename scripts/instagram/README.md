@@ -97,3 +97,10 @@ manual, in the app). So:
   `posted.json`; the next run reposts it.
 - **Deleting the post in-app** doesn't remove the ledger entry, so it won't be
   reposted. Remove the entry manually if you want it back.
+
+## Never recommend medications
+
+Slides and captions are generated from the article (title, FAQ, `instagram:` spec),
+so the blog's hard rule applies here too: no drug names, classes-as-advice or doses
+— ever. `npm run validate-blog` blocks it at the source; if a post slips through,
+delete it in-app and remove its ledger entry so the fixed version reposts.

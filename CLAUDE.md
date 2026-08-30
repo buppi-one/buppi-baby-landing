@@ -118,3 +118,21 @@ reading behaviour*.
   the CF analytics read is read-only too.
 - Reddit/backlinks do **not** boost ranking (nofollow) — SEO leverage is content
   + hreflang + topical authority, not link-dropping.
+
+## 🚫 Regra inegociável: NUNCA recomendar medicamentos
+
+Em **nenhum** artigo, FAQ, legenda, slide de Instagram ou ferramenta, e em
+**nenhuma hipótese**, o Buppi recomenda, indica ou sugere medicamentos —
+nem nome (genérico ou marca), nem classe em tom de indicação ("antitérmico",
+"antiespasmódico"), nem dose ("mg", "UI", "gotas", "mg/kg"). Isso inclui
+suplementos com dose (vitamina D), probióticos com cepa nomeada e remédios de
+venda livre. A única mensagem permitida é: **"só com orientação do pediatra"**.
+
+- Informar que um remédio *não* funciona ou *não* deve ser dado é aceitável,
+  mas sem nomear o produto ("remédios que reduzem o ácido do estômago", não
+  "omeprazol"). Citação bibliográfica em `references:` pode conter nomes.
+- **Trava mecânica:** `npm run validate-blog` (roda no `build`) falha com
+  `NUNCA recomendar medicamentos` se encontrar nome/classe/dose — em qualquer
+  idioma, no frontmatter (FAQ, spec do Instagram) e no corpo. Não contorne a
+  trava reescrevendo a regex; reescreva o texto.
+- Ao traduzir, revisar ou reforçar artigos antigos, aplique a mesma régua.

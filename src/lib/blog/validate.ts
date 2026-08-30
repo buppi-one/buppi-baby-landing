@@ -63,6 +63,45 @@ function checkArticle(article: Article, errors: string[]) {
   }
 }
 
+// ── Editorial safety: NEVER recommend medications ─────────────────────────
+// Hard rule (see CLAUDE.md "Nunca recomendar medicamentos"): no article, FAQ or
+// Instagram spec may name a drug, a drug class used as a recommendation, or a
+// dose. Everything medication-related must defer to the pediatrician. The scan
+// covers the whole frontmatter (faq, instagram spec, tags…) and the body.
+const MEDICATION_PATTERNS: { re: RegExp; why: string }[] = [
+  {
+    why: "drug/brand/strain name",
+    re: /\b(paracetamol|paracétamol|acetaminof[eé]n[oe]?|acetaminophen|acétaminophène|dipirona|dipyrone|metamizol|ibuprofen[oe]?|ibuprofène|aspirina|aspirine?|ácido acetilsalicílico|simeticona|simethicone|siméticone|dimeticona|omeprazol[e]?|oméprazole|ranitidin[ae]|domperidon[ae]|amoxicilin[ae]|amoxicillin|azitromicina|azithromycin|prednisolon[ae]|cetirizin[ae]|loratadin[ae]|dexclorfeniramina|tylenol|novalgina|advil|alivium|luftal|dramin|buscopan|lactobacillus|reuteri|dsm\s?17938)\b/iu,
+  },
+  {
+    why: "drug class phrased as a recommendation",
+    re: /\b(antit[ée]rmicos?|antipir[ée]ticos?|antipyretics?|antipyrétiques?|febr[ií]fugos?|fever reducers?|antiespasm[óo]dicos?|antispasmodics?|antispasmodiques?)\b/iu,
+  },
+  {
+    why: "dose (number + mg/mcg/UI/gotas)",
+    re: /\b\d+(?:[.,]\d+)?\s?(?:mg|mcg|µg|ui|iu|gotas|drops|gouttes)\b|\bmg\s?\/\s?kg\b/iu,
+  },
+];
+
+function checkNoMedications(article: Article, errors: string[]) {
+  const { source, frontmatter, content } = article;
+  // References are citations (a paper title may name a drug) — not recommendations.
+  const { references: _refs, ...fm } = frontmatter as Record<string, unknown>;
+  const haystack = `${JSON.stringify(fm)}\n${content}`;
+  const lines = haystack.split("\n");
+  for (const { re, why } of MEDICATION_PATTERNS) {
+    lines.forEach((line, i) => {
+      const m = line.match(re);
+      if (m) {
+        errors.push(
+          `${source}: NUNCA recomendar medicamentos — ${why} "${m[0]}" (line ~${i + 1}). ` +
+            `Rewrite to defer to the pediatrician without naming drugs or doses.`,
+        );
+      }
+    });
+  }
+}
+
 function checkSlugUniqueness(articles: Article[], errors: string[]) {
   const seen = new Map<string, string>();
   for (const a of articles) {
@@ -84,6 +123,7 @@ function main() {
 
   for (const article of articles) {
     checkArticle(article, errors);
+    checkNoMedications(article, errors);
   }
   checkSlugUniqueness(articles, errors);
 

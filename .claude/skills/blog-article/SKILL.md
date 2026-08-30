@@ -66,6 +66,17 @@ Body conventions:
   a locale-appropriate authority (e.g. SBP for pt-BR, AEP for es, HAS for fr,
   CDC/AAP for en) — keep the international ones (WHO, AAP) consistent
 
+## 🚫 Never recommend medications (hard rule)
+
+No article, FAQ answer, Instagram spec/caption or tool may name a drug (generic
+or brand), a drug class used as advice ("antitérmico"), a probiotic strain, or a
+dose ("mg", "UI", "gotas", "mg/kg") — including supplements like vitamin D. The
+only allowed message is *"só com orientação do pediatra"*. Saying a medicine
+does **not** work / should **not** be given is fine, but without naming it.
+`npm run validate-blog` enforces this (`NUNCA recomendar medicamentos`) across
+all locales, frontmatter and body — if it fails, rewrite the copy, never the
+regex. Citation titles in `references:` are exempt.
+
 ## Reference quality bar
 
 **Always cite authoritative sources. Never cite blogs or little-known websites.**
