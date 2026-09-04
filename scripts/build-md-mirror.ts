@@ -22,6 +22,13 @@ const prefix = (l: Loc) => (l === "pt-BR" ? "" : `/${l}`);
 
 const TODAY = new Date().toISOString().slice(0, 10);
 
+/** gray-matter parses dates as Date objects; normalize either shape to YYYY-MM-DD. */
+function isoDate(v: unknown): string {
+  if (v instanceof Date) return v.toISOString().slice(0, 10);
+  if (typeof v === "string" && /^\d{4}-\d{2}-\d{2}/.test(v)) return v.slice(0, 10);
+  return TODAY;
+}
+
 /** YAML frontmatter block agents read as document metadata (no scraping). */
 function fm(meta: { title: string; description?: string; canonical: string; updated?: string }) {
   const esc = (s: string) => JSON.stringify(s);
@@ -130,7 +137,7 @@ function main() {
           title: String(data.title),
           description: String(data.description ?? ""),
           canonical: `${BASE}${path}`,
-          updated: String(data.updatedAt ?? data.publishedAt ?? TODAY).slice(0, 10),
+          updated: isoDate(data.updatedAt ?? data.publishedAt),
         }) +
         `# ${data.title}\n\n> ${data.description}\n>\n> Canonical: ${BASE}${path}\n\n${mdxToMd(content)}${faqMd}\n`;
       write(path, md);

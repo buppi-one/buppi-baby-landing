@@ -45,6 +45,9 @@ export async function generateMetadata({
         fr: "/fr/",
         "x-default": "/",
       },
+      types: {
+        "text/markdown": locale === "pt-BR" ? "/index.md" : `/${locale}/index.md`,
+      },
     },
   };
 }

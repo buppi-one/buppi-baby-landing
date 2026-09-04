@@ -12,6 +12,7 @@ export const metadata: Metadata = {
       fr: "/fr/",
       "x-default": "/",
     },
+    types: { "text/markdown": "/index.md" },
   },
   openGraph: {
     title: getMessages(DEFAULT_LOCALE).meta.ogTitle,
