@@ -63,7 +63,11 @@ export function pageMetadata({
   return {
     title,
     description,
-    alternates: { canonical, languages },
+    alternates: {
+      canonical,
+      languages,
+      types: { "text/markdown": `${canonical}index.md` },
+    },
     openGraph: {
       type: "website",
       title,

@@ -58,7 +58,15 @@ for (const p of ["about", "en/about", "es/about", "fr/about"]) {
 for (const p of ["index.md", "en/index.md", "blog/quantidade-de-formula-por-idade/index.md", "en/blog/how-much-formula-by-age/index.md", "blog/index.md", "en/blog/index.md", "ferramentas/index.md", "privacy/index.md"]) {
   const f = join(OUT, p);
   if (!existsSync(f)) { errors.push(`md mirror ausente: ${p}`); continue; }
-  must(readFileSync(f, "utf8").startsWith("# "), `md mirror sem H1: ${p}`);
+  const md = readFileSync(f, "utf8");
+  must(md.startsWith("---\n"), `md mirror sem frontmatter: ${p}`);
+  must(/\n---\n\n# /.test(md), `md mirror sem H1 após frontmatter: ${p}`);
+}
+must(existsSync(join(OUT, "blog", "llms.txt")), "blog/llms.txt seccional ausente");
+{
+  const robots = readFileSync(join(OUT, "robots.txt"), "utf8");
+  must(/User-agent: GPTBot\nAllow: \//.test(robots), "robots.txt sem Allow explícito p/ GPTBot");
+  must(robots.includes("Content-Signal:"), "robots.txt sem Content-Signal");
 }
 
 if (errors.length) {

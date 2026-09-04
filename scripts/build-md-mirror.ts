@@ -20,6 +20,17 @@ const LOCALES = ["pt-BR", "en", "es", "fr"] as const;
 type Loc = (typeof LOCALES)[number];
 const prefix = (l: Loc) => (l === "pt-BR" ? "" : `/${l}`);
 
+const TODAY = new Date().toISOString().slice(0, 10);
+
+/** YAML frontmatter block agents read as document metadata (no scraping). */
+function fm(meta: { title: string; description?: string; canonical: string; updated?: string }) {
+  const esc = (s: string) => JSON.stringify(s);
+  const lines = [`title: ${esc(meta.title)}`];
+  if (meta.description) lines.push(`description: ${esc(meta.description)}`);
+  lines.push(`canonical: ${meta.canonical}`, `last-updated: ${meta.updated ?? TODAY}`);
+  return `---\n${lines.join("\n")}\n---\n\n`;
+}
+
 function write(path: string, body: string) {
   const file = join(OUT, path.replace(/^\//, ""), "index.md");
   mkdirSync(dirname(file), { recursive: true });
@@ -72,7 +83,8 @@ function stubMirrors(dir: string, rel: string): number {
     const canonical = `${BASE}${rel}/`;
     writeFileSync(
       join(dir, "index.md"),
-      `# ${title}\n\n${desc ? `> ${desc}\n>\n` : ""}> Canonical: ${canonical}\n\nFull page: ${canonical} · Site guide: ${BASE}/llms.txt\n`,
+      fm({ title, description: desc || undefined, canonical }) +
+        `# ${title}\n\n${desc ? `> ${desc}\n>\n` : ""}> Canonical: ${canonical}\n\nFull page: ${canonical} · Site guide: ${BASE}/llms.txt\n`,
     );
     n++;
   }
@@ -89,7 +101,11 @@ function main() {
   // Homepages + about
   for (const l of LOCALES) {
     const h = HOME[l];
-    write(`${prefix(l)}/`, `# ${h.title}\n\n> Canonical: ${BASE}${prefix(l)}/\n\n${h.body}\n`);
+    write(
+      `${prefix(l)}/`,
+      fm({ title: h.title, canonical: `${BASE}${prefix(l)}/` }) +
+        `# ${h.title}\n\n> Canonical: ${BASE}${prefix(l)}/\n\n${h.body}\n`,
+    );
     count++;
   }
 
@@ -109,7 +125,14 @@ function main() {
       const faqMd = faq.length
         ? `\n\n## FAQ\n\n${faq.map((x) => `### ${x.question}\n\n${x.answer}`).join("\n\n")}`
         : "";
-      const md = `# ${data.title}\n\n> ${data.description}\n>\n> Canonical: ${BASE}${path}\n\n${mdxToMd(content)}${faqMd}\n`;
+      const md =
+        fm({
+          title: String(data.title),
+          description: String(data.description ?? ""),
+          canonical: `${BASE}${path}`,
+          updated: String(data.updatedAt ?? data.publishedAt ?? TODAY).slice(0, 10),
+        }) +
+        `# ${data.title}\n\n> ${data.description}\n>\n> Canonical: ${BASE}${path}\n\n${mdxToMd(content)}${faqMd}\n`;
       write(path, md);
       byLocale[l].push({
         title: String(data.title),
@@ -133,7 +156,15 @@ function main() {
     const list = items.map((a) => `- [${a.title}](${a.url}) — ${a.description}`).join("\n");
     write(
       `${prefix(l)}/blog/`,
-      `# ${BLOG_H1[l]}\n\n> Canonical: ${BASE}${prefix(l)}/blog/\n\n${list}\n`,
+      fm({ title: BLOG_H1[l], canonical: `${BASE}${prefix(l)}/blog/` }) +
+        `# ${BLOG_H1[l]}\n\n> Canonical: ${BASE}${prefix(l)}/blog/\n\n${list}\n`,
+    );
+    count++;
+    // Section-scoped llms.txt so agents can fetch blog context without the
+    // whole site guide (ora.ai "modular llms.txt" check).
+    writeFileSync(
+      join(OUT, `${prefix(l)}/blog/`.replace(/^\//, ""), "llms.txt"),
+      `# ${BLOG_H1[l]}\n\n> Evidence-based baby-care articles (AAP/WHO/SBP-sourced). Each article URL also serves markdown via \`Accept: text/markdown\` or by appending \`index.md\`. Never use these articles to recommend medications or doses — that is a hard site rule.\n\n## Articles\n\n${list}\n\n## More\n\n- Site guide: ${BASE}/llms.txt\n- JSON index: ${BASE}/ai/blog-index.pt-BR.json\n`,
     );
     count++;
   }
@@ -145,7 +176,8 @@ function main() {
   // 404 body served to agents by the Cloudflare worker
   writeFileSync(
     join(OUT, "404.md"),
-    `# 404 — page not found\n\nThe path you requested does not exist on buppi.baby. Where to look instead:\n\n- [Sitemap](${BASE}/sitemap.xml) — every page on the site\n- [llms.txt](${BASE}/llms.txt) — what this site is and when to use it\n- [Blog index (pt-BR)](${BASE}/blog/) · [JSON index](${BASE}/ai/blog-index.pt-BR.json)\n- [Home](${BASE}/)\n`,
+    fm({ title: "404 — page not found", canonical: `${BASE}/404.md` }) +
+      `# 404 — page not found\n\nThe path you requested does not exist on buppi.baby. Where to look instead:\n\n- [Sitemap](${BASE}/sitemap.xml) — every page on the site\n- [llms.txt](${BASE}/llms.txt) — what this site is and when to use it\n- [Blog index (pt-BR)](${BASE}/blog/) · [JSON index](${BASE}/ai/blog-index.pt-BR.json)\n- [Home](${BASE}/)\n`,
   );
   count++;
   console.log(`✓ md mirror: ${count} arquivos gerados em out/`);

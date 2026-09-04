@@ -23,6 +23,7 @@ export function SiteJsonLd({ locale }: { locale: Locale }) {
         email: "suporte@buppi.baby",
         sameAs: [
           "https://www.instagram.com/buppi.baby/",
+          "https://github.com/buppi-one",
           STORE_LINKS.appStore,
           STORE_LINKS.playStore,
         ],

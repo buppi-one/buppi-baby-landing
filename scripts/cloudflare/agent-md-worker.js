@@ -21,6 +21,10 @@
 
 const MD_TYPE = "text/markdown; charset=utf-8";
 
+// AI crawlers that get markdown even when asking for HTML (never search
+// engine indexers — Googlebot/Bingbot stay untouched, so no cloaking risk).
+const MD_BOT_UA = /GPTBot|ClaudeBot|Claude-User|PerplexityBot|OAI-SearchBot|DeepSeekBot|ora-agent/i;
+
 function wantsMarkdown(accept) {
   if (!accept) return false;
   // text/markdown must be present and preferred over text/html.
@@ -38,11 +42,16 @@ function mirrorPathFor(pathname) {
   return null;
 }
 
-function withVaryAccept(response) {
+function withVaryAccept(response, mirrorPath) {
   const r = new Response(response.body, response);
   const vary = r.headers.get("Vary");
   if (!vary) r.headers.set("Vary", "Accept");
   else if (!/(^|,\s*)accept(\s*,|$)/i.test(vary)) r.headers.set("Vary", vary + ", Accept");
+  // RFC 8288 Link headers: sitemap + the page's markdown twin.
+  r.headers.set(
+    "Link",
+    `</sitemap.xml>; rel="sitemap", <${mirrorPath}>; rel="alternate"; type="text/markdown"`,
+  );
   return r;
 }
 
@@ -70,13 +79,17 @@ export default {
 
     if (request.method === "GET" || request.method === "HEAD") {
       const mirrorPath = mirrorPathFor(url.pathname);
-      if (mirrorPath && wantsMarkdown(request.headers.get("Accept"))) {
+      const wantsMd =
+        wantsMarkdown(request.headers.get("Accept")) ||
+        url.searchParams.get("mode") === "agent" ||
+        MD_BOT_UA.test(request.headers.get("User-Agent") || "");
+      if (mirrorPath && wantsMd) {
         return serveMarkdown(request, url, mirrorPath);
       }
       const res = await fetch(request);
       const type = res.headers.get("Content-Type") || "";
       // Only HTML pages are negotiable — declare it.
-      if (mirrorPath && type.includes("text/html")) return withVaryAccept(res);
+      if (mirrorPath && type.includes("text/html")) return withVaryAccept(res, mirrorPath);
       return res;
     }
 

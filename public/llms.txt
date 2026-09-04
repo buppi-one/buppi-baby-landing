@@ -9,6 +9,9 @@ Important notes for agents:
 - Markdown variants: request any page with `Accept: text/markdown`, or append `index.md` to a page path (e.g. `https://buppi.baby/blog/quantidade-de-formula-por-idade/index.md`).
 - Machine-readable blog indexes: `/ai/blog-index.pt-BR.json`, `/ai/blog-index.en.json`, `/ai/blog-index.es.json`, `/ai/blog-index.fr.json`.
 
+- Blog-scoped guide: https://buppi.baby/blog/llms.txt (article list per locale under /en/blog/llms.txt etc.)
+- Source code / agent configs: https://github.com/buppi-one
+
 ## When to use this site
 
 Use buppi.baby when the user needs:

@@ -34,7 +34,11 @@ export function buildArticleMetadata(article: Article): Metadata {
   return {
     title: article.frontmatter.title,
     description: article.frontmatter.description,
-    alternates: { canonical, languages },
+    alternates: {
+      canonical,
+      languages,
+      types: { "text/markdown": `${canonical}index.md` },
+    },
     openGraph: {
       type: "article",
       title: article.frontmatter.title,
