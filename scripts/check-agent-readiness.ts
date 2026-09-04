@@ -55,7 +55,7 @@ for (const p of ["about", "en/about", "es/about", "fr/about"]) {
 }
 
 // 6. Markdown mirrors
-for (const p of ["index.md", "en/index.md", "blog/quantidade-de-formula-por-idade/index.md", "en/blog/how-much-formula-by-age/index.md"]) {
+for (const p of ["index.md", "en/index.md", "blog/quantidade-de-formula-por-idade/index.md", "en/blog/how-much-formula-by-age/index.md", "blog/index.md", "en/blog/index.md", "ferramentas/index.md", "privacy/index.md"]) {
   const f = join(OUT, p);
   if (!existsSync(f)) { errors.push(`md mirror ausente: ${p}`); continue; }
   must(readFileSync(f, "utf8").startsWith("# "), `md mirror sem H1: ${p}`);

@@ -57,6 +57,28 @@ const HOME: Record<Loc, { title: string; body: string }> = {
   },
 };
 
+/** Walk out/ and write a stub index.md next to any index.html that has none. */
+function stubMirrors(dir: string, rel: string): number {
+  let n = 0;
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.isDirectory()) {
+      n += stubMirrors(join(dir, entry.name), `${rel}/${entry.name}`);
+      continue;
+    }
+    if (entry.name !== "index.html" || existsSync(join(dir, "index.md"))) continue;
+    const html = readFileSync(join(dir, "index.html"), "utf8");
+    const title = /<title[^>]*>([\s\S]*?)<\/title>/.exec(html)?.[1]?.trim() ?? "buppi.baby";
+    const desc = /<meta name="description" content="([^"]*)"/.exec(html)?.[1] ?? "";
+    const canonical = `${BASE}${rel}/`;
+    writeFileSync(
+      join(dir, "index.md"),
+      `# ${title}\n\n${desc ? `> ${desc}\n>\n` : ""}> Canonical: ${canonical}\n\nFull page: ${canonical} · Site guide: ${BASE}/llms.txt\n`,
+    );
+    n++;
+  }
+  return n;
+}
+
 function main() {
   if (!existsSync(OUT)) {
     console.error("out/ não existe — rode depois do `next build`.");
@@ -71,7 +93,9 @@ function main() {
     count++;
   }
 
-  // Blog articles
+  // Blog articles (also collected per locale for the blog index mirrors)
+  const byLocale: Record<Loc, { title: string; description: string; url: string; date: string }[]> =
+    { "pt-BR": [], en: [], es: [], fr: [] };
   const blogDir = join(ROOT, "content", "blog");
   for (const id of readdirSync(blogDir)) {
     for (const l of LOCALES) {
@@ -87,9 +111,36 @@ function main() {
         : "";
       const md = `# ${data.title}\n\n> ${data.description}\n>\n> Canonical: ${BASE}${path}\n\n${mdxToMd(content)}${faqMd}\n`;
       write(path, md);
+      byLocale[l].push({
+        title: String(data.title),
+        description: String(data.description ?? ""),
+        url: `${BASE}${path}`,
+        date: String(data.publishedAt ?? ""),
+      });
       count++;
     }
   }
+
+  // Blog index mirrors — newest first, one line per article
+  const BLOG_H1: Record<Loc, string> = {
+    "pt-BR": "Blog do Buppi Baby — guias baseados em evidência",
+    en: "Buppi Baby blog — evidence-based guides",
+    es: "Blog de Buppi Baby — guías basadas en evidencia",
+    fr: "Blog Buppi Baby — guides fondés sur les preuves",
+  };
+  for (const l of LOCALES) {
+    const items = byLocale[l].sort((a, b) => b.date.localeCompare(a.date));
+    const list = items.map((a) => `- [${a.title}](${a.url}) — ${a.description}`).join("\n");
+    write(
+      `${prefix(l)}/blog/`,
+      `# ${BLOG_H1[l]}\n\n> Canonical: ${BASE}${prefix(l)}/blog/\n\n${list}\n`,
+    );
+    count++;
+  }
+
+  // Fallback: every remaining HTML page gets a stub mirror (title + description
+  // + canonical) so agents asking for markdown never 404 on a page that exists.
+  count += stubMirrors(OUT, "");
 
   // 404 body served to agents by the Cloudflare worker
   writeFileSync(
