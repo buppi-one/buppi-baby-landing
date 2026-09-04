@@ -68,6 +68,14 @@ export function Footer({ locale }: { locale: Locale }) {
               <li>
                 <a
                   className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
+                  href={localePath(locale, "/about")}
+                >
+                  {m.about}
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
                   href={localePath(locale, "/privacy")}
                 >
                   {m.privacy}

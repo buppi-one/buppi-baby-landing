@@ -151,11 +151,24 @@ export type Messages = {
     description: string;
     quickLinks: string;
     home: string;
+    about: string;
     privacy: string;
     terms: string;
     support: string;
     deleteAccount: string;
     copyright: string;
+  };
+  about: {
+    badge: string;
+    title: string;
+    updated: string;
+    intro: string;
+    sections: PrivacySection[];
+    contact: {
+      heading: string;
+      text: string;
+      email: string;
+    };
   };
   privacy: {
     badge: string;

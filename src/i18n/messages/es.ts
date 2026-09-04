@@ -215,11 +215,45 @@ export const es: Messages = {
       "La aplicación más completa e intuitiva para seguir el desarrollo de tu bebé. Hecha por padres para padres.",
     quickLinks: "Enlaces rápidos",
     home: "Inicio",
+    about: "Acerca de",
     privacy: "Privacidad",
     terms: "Términos",
     support: "Soporte",
     deleteAccount: "Eliminar cuenta",
     copyright: "© 2026 Buppi Baby. Todos los derechos reservados.",
+  },
+  about: {
+    badge: "Acerca de",
+    title: "Acerca de Buppi Baby",
+    updated: "Actualizado en septiembre de 2026",
+    intro:
+      "Buppi Baby es una aplicación gratuita para iOS y Android que ayuda a madres, padres y cuidadores a acompañar la rutina del bebé — sueño, lactancia, biberones, pañales, salud, crecimiento e hitos — con registros de un toque, sincronizados entre todas las personas que cuidan al mismo niño.",
+    sections: [
+      {
+        heading: "Qué hacemos",
+        intro:
+          "La app aprende el ritmo de tu bebé observando su historial real de registros y predice la próxima siesta, muestra el cronómetro en la pantalla de bloqueo (Live Activity) y convierte los datos en estadísticas fáciles de leer: mapas de sueño, curvas de crecimiento según el estándar de la OMS e hitos por edad. Todo diseñado para reducir la carga mental de quien cuida — registrar toma menos de dos segundos.",
+      },
+      {
+        heading: "Quiénes somos",
+        intro:
+          "Buppi Baby se desarrolla de forma independiente en Brasil, por padres y para padres. Además de la app, mantenemos un blog gratuito en cuatro idiomas (portugués, inglés, español y francés) con guías prácticas sobre sueño, alimentación, salud y desarrollo del bebé — todas escritas a partir de fuentes como la Organización Mundial de la Salud (OMS), la Academia Americana de Pediatría (AAP) y la Sociedad Brasileña de Pediatría (SBP).",
+      },
+      {
+        heading: "Nuestros principios",
+        items: [
+          { bold: "La evidencia primero.", text: "Cada guía del blog cita las fuentes en las que se basa — nada de suposiciones." },
+          { bold: "Nunca recomendamos medicamentos.", text: "Ningún contenido de Buppi indica un medicamento, clase o dosis. Esa decisión siempre es del pediatra." },
+          { bold: "Privacidad.", text: "Los datos de tu bebé te pertenecen. No vendemos datos ni mostramos anuncios." },
+          { bold: "Gratis para empezar.", text: "Lo esencial de la app es gratuito; las funciones familiares avanzadas son opcionales." },
+        ],
+      },
+    ],
+    contact: {
+      heading: "Habla con nosotros",
+      text: "Dudas, sugerencias, prensa o alianzas:",
+      email: "suporte@buppi.baby",
+    },
   },
   privacy: {
     badge: "🔒 PRIVACIDAD",

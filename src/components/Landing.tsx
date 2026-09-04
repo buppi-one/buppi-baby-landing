@@ -7,11 +7,13 @@ import { Nav } from "@/components/Nav";
 import { Sharing } from "@/components/Sharing";
 import { Stats } from "@/components/Stats";
 import { BlogTeaser } from "@/components/blog/BlogTeaser";
+import { SiteJsonLd } from "@/components/SiteJsonLd";
 import type { Locale } from "@/i18n";
 
 export function Landing({ locale }: { locale: Locale }) {
   return (
     <>
+      <SiteJsonLd locale={locale} />
       <Nav locale={locale} />
       <main>
         <Hero locale={locale} />

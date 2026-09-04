@@ -124,6 +124,14 @@ export default function NotFound() {
                 ))}
               </div>
             </div>
+
+            <p className="mt-8 text-[11px] leading-relaxed text-[var(--color-fg-muted)]">
+              Agentes e robôs: este endereço realmente não existe (HTTP 404). Continue por{" "}
+              <a href="/sitemap.xml" className="underline">/sitemap.xml</a>,{" "}
+              <a href="/llms.txt" className="underline">/llms.txt</a>,{" "}
+              <Link href="/blog/" className="underline">/blog/</Link> ou o índice JSON em{" "}
+              <a href="/ai/blog-index.pt-BR.json" className="underline">/ai/blog-index.pt-BR.json</a>.
+            </p>
           </div>
 
           {/* Right — illustration */}

@@ -5,7 +5,7 @@
   "scripts": {
     "predev": "npm run prepare-blog",
     "dev": "next dev",
-    "build": "npm run prepare-blog && next build && npm run fix-html-lang && npm run build-search",
+    "build": "npm run prepare-blog && next build && npm run fix-html-lang && npm run build-search && npm run build-md-mirror && npm run check-agent-readiness",
     "fix-html-lang": "tsx scripts/fix-html-lang.ts",
     "build-search": "pagefind --site out",
     "start": "next start",
@@ -15,7 +15,9 @@
     "validate-blog": "tsx src/lib/blog/validate.ts",
     "copy-blog-assets": "tsx src/lib/blog/copy-assets.ts",
     "new-post": "tsx src/lib/blog/new-post.ts",
-    "translation-status": "tsx src/lib/blog/translation-status.ts"
+    "translation-status": "tsx src/lib/blog/translation-status.ts",
+    "build-md-mirror": "tsx scripts/build-md-mirror.ts",
+    "check-agent-readiness": "tsx scripts/check-agent-readiness.ts"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

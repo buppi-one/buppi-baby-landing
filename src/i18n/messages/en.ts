@@ -215,11 +215,45 @@ export const en: Messages = {
       "The most complete and intuitive app to follow your baby's development. Built by parents, for parents.",
     quickLinks: "Quick Links",
     home: "Home",
+    about: "About",
     privacy: "Privacy",
     terms: "Terms",
     support: "Support",
     deleteAccount: "Delete account",
     copyright: "© 2026 Buppi Baby. All rights reserved.",
+  },
+  about: {
+    badge: "About",
+    title: "About Buppi Baby",
+    updated: "Updated September 2026",
+    intro:
+      "Buppi Baby is a free iOS and Android app that helps parents and caregivers track a baby's routine — sleep, breastfeeding, bottles, diapers, health, growth and milestones — with one-tap logging, synced across everyone caring for the same child.",
+    sections: [
+      {
+        heading: "What we do",
+        intro:
+          "The app learns your baby's rhythm from their real logged history to predict the next nap, shows a live timer on the lock screen (Live Activity), and turns the data into easy-to-read statistics: sleep maps, WHO-standard growth curves and milestones by age. Everything is designed to lower a caregiver's mental load — logging takes under two seconds.",
+      },
+      {
+        heading: "Who we are",
+        intro:
+          "Buppi Baby is built independently in Brazil, by parents, for parents. Beyond the app, we maintain a free blog in four languages (Portuguese, English, Spanish and French) with practical guides on baby sleep, feeding, health and development — all written from sources such as the World Health Organization (WHO), the American Academy of Pediatrics (AAP) and the Brazilian Society of Pediatrics (SBP).",
+      },
+      {
+        heading: "Our principles",
+        items: [
+          { bold: "Evidence first.", text: "Every blog guide cites the sources it is based on — no guesswork." },
+          { bold: "We never recommend medications.", text: "No Buppi content suggests a drug, class or dose. That decision always belongs to the pediatrician." },
+          { bold: "Privacy.", text: "Your baby's data belongs to you. We don't sell data and we don't show ads." },
+          { bold: "Free to start.", text: "The app's essentials are free; advanced family features are optional." },
+        ],
+      },
+    ],
+    contact: {
+      heading: "Talk to us",
+      text: "Questions, suggestions, press or partnerships:",
+      email: "suporte@buppi.baby",
+    },
   },
   privacy: {
     badge: "🔒 PRIVACY",
