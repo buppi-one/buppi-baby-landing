@@ -258,7 +258,7 @@ export const fr: Messages = {
   privacy: {
     badge: "🔒 CONFIDENTIALITÉ",
     title: "Politique de Confidentialité",
-    updated: "Dernière mise à jour : 13 août 2026",
+    updated: "Dernière mise à jour : 15 septembre 2026",
     intro:
       "Votre vie privée est importante pour nous. Cette Politique de Confidentialité explique comment Buppi Baby collecte, utilise et protège vos informations personnelles.",
     sections: [
@@ -273,11 +273,15 @@ export const fr: Messages = {
           },
           {
             bold: "Données du bébé :",
-            text: "Nom, date de naissance, sexe",
+            text: "Nom, date de naissance, sexe et la photo que vous choisissez",
+          },
+          {
+            bold: "Photos :",
+            text: "Votre photo de profil, celle du bébé et les photos jointes aux enregistrements (facultatif)",
           },
           {
             bold: "Enregistrements d'activités :",
-            text: "Allaitement, sommeil, couches, alimentation et autres événements que vous enregistrez",
+            text: "Allaitement, sommeil, couches, alimentation, bain, croissance, température, médicaments, consultations et autres événements que vous enregistrez, y compris des informations de santé du bébé",
           },
           {
             bold: "Données d'utilisation :",
@@ -290,12 +294,16 @@ export const fr: Messages = {
         intro: "Nous utilisons vos informations pour :",
         items: [
           { text: "Fournir et maintenir le service de l'application" },
-          { text: "Synchroniser vos données entre appareils" },
+          { text: "Conserver une sauvegarde de vos enregistrements sur notre serveur, pour tous les comptes (gratuits compris), afin de restaurer vos données et de changer d'appareil" },
+          { text: "Synchroniser vos données entre appareils et entre les personnes de votre abonnement" },
           {
             text: "Permettre le partage avec d'autres soignants (lorsque vous l'autorisez)",
           },
           {
             text: "Améliorer notre application et développer de nouvelles fonctionnalités",
+          },
+          {
+            text: "Calibrer les analyses de l'app (par exemple, les plages typiques de sommeil et d'alimentation par âge) à partir de données agrégées et anonymisées de tous les bébés. Aucun enregistrement individuel n'est exposé, vendu ou utilisé pour vous identifier, vous ou votre bébé",
           },
           {
             text: "Envoyer des notifications liées à l'application (rappels, etc.)",
@@ -308,10 +316,10 @@ export const fr: Messages = {
           "Nous ne vendons pas vos informations personnelles. Nous ne partageons des données qu'avec :",
         items: [
           {
-            text: "D'autres soignants que vous invitez à suivre votre bébé",
+            text: "D'autres soignants que vous invitez : les personnes de votre abonnement, qui enregistrent avec vous, et les observateurs, qui suivent seulement. Les deux voient les enregistrements du bébé, y compris ceux de santé. Vous choisissez qui inviter et pouvez révoquer l'accès à tout moment",
           },
           {
-            text: "Des prestataires de service qui nous aident à exploiter l'app (Supabase, Google Cloud)",
+            text: "Des prestataires de service qui nous aident à exploiter l'app : Supabase (base de données et authentification), Cloudflare (stockage des photos), Google Cloud (notifications et statistiques d'usage), RevenueCat (abonnements), Sentry (rapports d'erreurs) et Expo (envoi de notifications)",
           },
           { text: "Lorsque la loi l'exige" },
         ],
@@ -350,6 +358,9 @@ export const fr: Messages = {
           {
             text: "Accès restreint aux utilisateurs autorisés via Row Level Security",
           },
+          {
+            text: "Photos dans un stockage privé (Cloudflare R2), jamais accessibles publiquement : chaque affichage passe par un lien signé et temporaire, généré uniquement pour les personnes ayant accès au bébé",
+          },
         ],
       },
       {
@@ -365,6 +376,10 @@ export const fr: Messages = {
           {
             bold: "Exporter",
             text: "vos données dans un format lisible",
+          },
+          {
+            bold: "Quitter",
+            text: "un abonnement partagé ou cesser de suivre un bébé à tout moment",
           },
           {
             bold: "Révoquer",
@@ -419,7 +434,7 @@ export const fr: Messages = {
       },
       {
         q: "Puis-je l'utiliser sur plusieurs appareils ?",
-        a: "Oui, connectez-vous avec le même compte et tout se synchronise automatiquement.",
+        a: "Oui. Avec l'offre gratuite, un appareil à la fois : en vous connectant sur un nouvel appareil, vous y transférez votre compte et vos données sont restaurées. Les offres payantes gardent deux appareils synchronisés en temps réel.",
       },
       {
         q: "L'application fonctionne-t-elle hors ligne ?",
@@ -519,7 +534,7 @@ export const fr: Messages = {
   terms: {
     badge: "📜 EULA",
     title: "Contrat de Licence Utilisateur Final",
-    updated: "Dernière mise à jour : 22 avril 2026",
+    updated: "Dernière mise à jour : 15 septembre 2026",
     intro:
       "Ce Contrat de Licence Utilisateur Final (« Contrat ») est un accord légal entre vous (« Utilisateur ») et Buppi (« Développeur ») régissant votre utilisation de l'application mobile Buppi (« App »).",
     sections: [
@@ -532,53 +547,58 @@ export const fr: Messages = {
         heading: "2. Abonnements",
         intro: "L'App peut proposer des abonnements à renouvellement automatique.",
         items: [
-          { text: "Le paiement sera prélevé sur votre compte Apple ID à la confirmation de l'achat." },
+          { text: "Le paiement sera prélevé sur votre compte Apple ID ou Google Play à la confirmation de l'achat." },
           { text: "Les abonnements se renouvellent automatiquement sauf annulation au moins 24 heures avant la fin de la période en cours." },
           { text: "Vous pouvez gérer et annuler vos abonnements dans les paramètres de votre compte." },
         ],
       },
       {
-        heading: "3. Responsabilité",
+        heading: "3. Comptes, Partage et Soignants",
+        intro:
+          "Les enregistrements du bébé sont fournis et contrôlés par le responsable légal qui a créé le profil. En invitant d'autres personnes — pour enregistrer ensemble (abonnement) ou seulement suivre (observateur) — vous déclarez avoir l'autorité de partager ces informations, y compris les données de santé du bébé, et vous êtes responsable des personnes invitées. Les données sont stockées sur notre serveur pour tous les comptes, avec sauvegarde, et peuvent être utilisées sous forme agrégée et anonymisée pour améliorer l'App, conformément à la Politique de Confidentialité.",
+      },
+      {
+        heading: "4. Responsabilité",
         intro:
           "L'App et son contenu sont fournis par le Développeur. Apple Inc. n'est pas responsable de l'App, de son contenu ni d'aucun service de maintenance ou de support.",
       },
       {
-        heading: "4. Maintenance et Support",
+        heading: "5. Maintenance et Support",
         intro:
           "Le Développeur est seul responsable de la maintenance et du support de l'App. Apple n'a aucune obligation de fournir des services de maintenance ou de support.",
       },
       {
-        heading: "5. Garantie",
+        heading: "6. Garantie",
         intro:
           "L'App est fournie « EN L'ÉTAT » et « SELON DISPONIBILITÉ » sans garantie d'aucune sorte. Dans la mesure maximale permise par la loi, le Développeur décline toute garantie, expresse ou implicite.",
       },
       {
-        heading: "6. Limitation de Responsabilité",
+        heading: "7. Limitation de Responsabilité",
         intro:
           "Dans la mesure permise par la loi, le Développeur ne saurait être tenu responsable de dommages indirects, accessoires ou consécutifs découlant de l'utilisation de l'App.",
       },
       {
-        heading: "7. Conformité Légale",
+        heading: "8. Conformité Légale",
         intro:
           "Vous acceptez d'utiliser l'App en conformité avec toutes les lois et réglementations applicables.",
       },
       {
-        heading: "8. Résiliation",
+        heading: "9. Résiliation",
         intro:
           "Cette licence est valable jusqu'à sa résiliation. Vos droits prendront fin automatiquement si vous ne respectez pas les termes du présent Contrat.",
       },
       {
-        heading: "9. Bénéficiaire Tiers",
+        heading: "10. Bénéficiaire Tiers",
         intro:
           "Apple Inc. et ses filiales sont des bénéficiaires tiers du présent Contrat et, dès votre acceptation, auront le droit de faire respecter ce Contrat à votre encontre.",
       },
       {
-        heading: "10. Loi Applicable",
+        heading: "11. Loi Applicable",
         intro: "Le présent Contrat est régi par les lois du Brésil.",
       },
     ],
     contact: {
-      heading: "11. Contact",
+      heading: "12. Contact",
       text: "Pour toute question, contactez-nous : ",
       email: "support@buppi.baby",
     },

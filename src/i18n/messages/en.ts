@@ -258,7 +258,7 @@ export const en: Messages = {
   privacy: {
     badge: "🔒 PRIVACY",
     title: "Privacy Policy",
-    updated: "Last updated: August 13, 2026",
+    updated: "Last updated: September 15, 2026",
     intro:
       "Your privacy matters to us. This Privacy Policy explains how Buppi Baby collects, uses, and protects your personal information.",
     sections: [
@@ -270,10 +270,11 @@ export const en: Messages = {
             bold: "Account information:",
             text: "Email and name (when you create an account)",
           },
-          { bold: "Baby data:", text: "Name, date of birth, gender" },
+          { bold: "Baby data:", text: "Name, date of birth, gender, and the photo you choose" },
+          { bold: "Photos:", text: "Your profile photo, the baby's, and photos attached to records (optional)" },
           {
             bold: "Activity records:",
-            text: "Feeding, sleep, diapers, meals, and other events you log",
+            text: "Feeding, sleep, diapers, meals, baths, growth, temperature, medication, doctor visits and other events you log — including the baby's health information",
           },
           { bold: "Usage data:", text: "How you interact with the app" },
         ],
@@ -283,9 +284,11 @@ export const en: Messages = {
         intro: "We use your information to:",
         items: [
           { text: "Provide and maintain the app service" },
-          { text: "Sync your data across devices" },
+          { text: "Keep a backup of your records on our server, for every account (free included), so you can restore your data and switch devices" },
+          { text: "Sync your data across devices and between the people on your plan" },
           { text: "Allow sharing with other caregivers (when you authorize it)" },
           { text: "Improve our app and develop new features" },
+          { text: "Calibrate the app's analyses (for example, typical sleep and feeding ranges by age) using aggregated, anonymized data from all babies. No individual record is exposed, sold, or used to identify you or your baby" },
           { text: "Send app-related notifications (reminders, etc.)" },
         ],
       },
@@ -294,9 +297,9 @@ export const en: Messages = {
         intro:
           "We don't sell your personal information. We only share data:",
         items: [
-          { text: "With other caregivers you invite to follow your baby" },
+          { text: "With other caregivers you invite: people on your plan, who log together with you, and viewers, who only follow along. Both see the baby's records, including health ones. You choose whom to invite and can revoke access at any time" },
           {
-            text: "With service providers that help us operate the app (Supabase, Google Cloud)",
+            text: "With service providers that help us operate the app: Supabase (database and authentication), Cloudflare (photo storage), Google Cloud (notifications and usage analytics), RevenueCat (subscriptions), Sentry (error reports) and Expo (push delivery)",
           },
           { text: "When required by law" },
         ],
@@ -335,6 +338,9 @@ export const en: Messages = {
           {
             text: "Restricted access to authorized users only via Row Level Security",
           },
+          {
+            text: "Photos in private storage (Cloudflare R2), never publicly accessible: every view uses a signed, short-lived link generated only for people with access to the baby",
+          },
         ],
       },
       {
@@ -345,6 +351,10 @@ export const en: Messages = {
           { bold: "Correct", text: "inaccurate information" },
           { bold: "Delete", text: "your account and all associated data" },
           { bold: "Export", text: "your data in a readable format" },
+          {
+            bold: "Leave",
+            text: "a shared plan or stop following a baby at any time",
+          },
           {
             bold: "Revoke",
             text: "access from other caregivers at any time",
@@ -398,7 +408,7 @@ export const en: Messages = {
       },
       {
         q: "Can I use it on more than one device?",
-        a: "Yes, sign in with the same account and everything syncs automatically.",
+        a: "Yes. On the free plan, one device at a time: when you sign in on a new device you transfer your account to it and your data is restored. Paid plans keep two devices in sync in real time.",
       },
       {
         q: "Does the app work offline?",
@@ -496,7 +506,7 @@ export const en: Messages = {
   terms: {
     badge: "📜 EULA",
     title: "End User License Agreement",
-    updated: "Last updated: April 22, 2026",
+    updated: "Last updated: September 15, 2026",
     intro:
       "This End User License Agreement (\"Agreement\") is a legal agreement between you (\"User\") and Buppi (\"Developer\") governing your use of the Buppi mobile application (\"App\").",
     sections: [
@@ -509,53 +519,58 @@ export const en: Messages = {
         heading: "2. Subscriptions",
         intro: "The App may offer auto-renewable subscriptions.",
         items: [
-          { text: "Payment will be charged to your Apple ID account at confirmation of purchase." },
+          { text: "Payment will be charged to your Apple ID or Google Play account at confirmation of purchase." },
           { text: "Subscriptions automatically renew unless canceled at least 24 hours before the end of the current period." },
           { text: "You can manage and cancel subscriptions in your account settings." },
         ],
       },
       {
-        heading: "3. Responsibility",
+        heading: "3. Accounts, Sharing and Caregivers",
+        intro:
+          "The baby's records are provided and controlled by the legal guardian who created the profile. By inviting others — to log together (plan) or only to follow (viewer) — you declare that you have the authority to share that information, including the baby's health data, and you are responsible for whom you invite. Data is stored on our server for every account, with backups, and may be used in aggregated, anonymized form to improve the App, as described in the Privacy Policy.",
+      },
+      {
+        heading: "4. Responsibility",
         intro:
           "The App and its content are provided by the Developer. Apple Inc. is not responsible for the App, its content, or any maintenance or support services.",
       },
       {
-        heading: "4. Maintenance and Support",
+        heading: "5. Maintenance and Support",
         intro:
           "The Developer is solely responsible for providing maintenance and support for the App. Apple has no obligation whatsoever to furnish any maintenance or support services.",
       },
       {
-        heading: "5. Warranty",
+        heading: "6. Warranty",
         intro:
           "The App is provided \"AS IS\" and \"AS AVAILABLE\" without warranties of any kind. To the maximum extent permitted by law, the Developer disclaims all warranties, whether express or implied.",
       },
       {
-        heading: "6. Limitation of Liability",
+        heading: "7. Limitation of Liability",
         intro:
           "To the extent permitted by law, the Developer shall not be liable for any indirect, incidental, or consequential damages arising from the use of the App.",
       },
       {
-        heading: "7. Legal Compliance",
+        heading: "8. Legal Compliance",
         intro:
           "You agree to use the App in compliance with all applicable laws and regulations.",
       },
       {
-        heading: "8. Termination",
+        heading: "9. Termination",
         intro:
           "This license is effective until terminated. Your rights will terminate automatically if you fail to comply with any term of this Agreement.",
       },
       {
-        heading: "9. Third-Party Beneficiary",
+        heading: "10. Third-Party Beneficiary",
         intro:
           "Apple Inc. and its subsidiaries are third-party beneficiaries of this Agreement and, upon your acceptance of this Agreement, will have the right to enforce this Agreement against you.",
       },
       {
-        heading: "10. Governing Law",
+        heading: "11. Governing Law",
         intro: "This Agreement shall be governed by the laws of Brazil.",
       },
     ],
     contact: {
-      heading: "11. Contact",
+      heading: "12. Contact",
       text: "If you have any questions, contact: ",
       email: "support@buppi.baby",
     },
