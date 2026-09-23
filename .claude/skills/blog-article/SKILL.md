@@ -192,6 +192,11 @@ before applying the change.
 Use Codex via CLI to generate a 1200×630 cover. Always run with `--sandbox
 workspace-write` so it can save the PNG into the article folder.
 
+**Model gotcha (Sep 2026):** the `~/.codex/config.toml` default (`gpt-5.4`) is
+rejected by ChatGPT accounts ("model is not supported"). Pass `-m gpt-5.5`
+explicitly; if that also 400s, probe with a cheap
+`codex exec -m <model> --sandbox read-only "responda só: ok"` before the real run.
+
 ```bash
 codex exec --sandbox workspace-write "Você está criando a imagem de capa pra um artigo de blog do Buppi Baby (app de baby tracker).
 
