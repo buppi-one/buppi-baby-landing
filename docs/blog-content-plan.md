@@ -146,6 +146,34 @@ Toddler:
 
 ---
 
+## Wave 4 — clusters validados pelo GSC + playbook de referência (set/2026)
+
+Estruturada em 2026-09-23 cruzando o GSC (28d: 70k impressões, 88% na página de
+fórmula, queries por idade na posição 8–10 com 0 cliques) com o playbook do
+nappi.app/blog (séries por idade, artigos-tabela de referência, comparativos
+"best apps", split de fórmula em artigos por mês). Ordem = potencial de clique.
+
+**Regra anti-canibalização:** os artigos por idade respondem UMA idade a fundo
+(por mamada, por dia, por peso, sinais) e linkam de volta pro pilar
+`quantidade-de-formula-por-idade`, que segue sendo o hub com a tabela geral.
+
+| # | Status | Categoria | Título | Slug | Racional |
+|---|---|---|---|---|---|
+| 1 | ⬜ | feeding | Quantos ml de fórmula toma um bebê de 1 mês? | `formula-bebe-1-mes` | maior cluster do GSC (~800+ imp/28d reportadas, pos 8–10, 0 clique) |
+| 2 | ⬜ | feeding | Quantas latas de fórmula um bebê gasta por mês? (com calculadora) | `latas-de-formula-por-mes` | cluster próprio no GSC (193+ imp, pos 7–8); intenção de custo, converte |
+| 3 | ⬜ | feeding | Quantos ml de fórmula toma um bebê de 2 meses? | `formula-bebe-2-meses` | 2º maior cluster por idade do GSC |
+| 4 | ⬜ | health | Fraldas molhadas por dia: tabela de hidratação do recém-nascido | `fraldas-molhadas-por-dia` | artigo-tabela (playbook nappi); vira carrossel table no IG; liga ao tracking de fraldas do app |
+| 5 | ⬜ | feeding | Quantos ml de fórmula toma um bebê de 3 e 4 meses? | `formula-bebe-3-4-meses` | fecha o trio de idades com volume no GSC |
+| 6 | ⬜ | news | Melhores apps para acompanhar a rotina do bebê (comparativo honesto) | `melhores-apps-rotina-bebe` | playbook nappi ("Using nappi"); intenção comercial direta; só pt-BR primeiro |
+| 7 | ⬜ | development | Curva de crescimento do bebê: como ler peso e altura (percentis OMS) | `curva-de-crescimento-bebe` | referência evergreen; conecta ao tracking de crescimento do app |
+| 8 | ⬜ | sleep | Sono do recém-nascido: semanas 1 a 4 | `sono-bebe-semana-1` (série) | preenche o buraco 0–2 meses da série de sono (nappi cobre 1–18m) |
+
+Depois da Wave 4, avaliar: série de gravidez semana a semana (nappi faz 12–40 —
+29 artigos, só compensa com o funil de gestante maduro) e marcos mês a mês
+(já listados na long-tail series).
+
+---
+
 ## Cadência prática sugerida
 
 | Mês | Wave principal | Long-tail extra | Total publicados |
