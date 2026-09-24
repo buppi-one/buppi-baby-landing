@@ -18,19 +18,20 @@ read it whenever a detail is unclear.
    other locale is a translation of this one. Write it under
    `content/blog/<id>/pt-BR.mdx`.
 
-3. **Send the pt-BR draft for AI peer review** (mandatory — see §"AI review"
-   below). Apply meaningful feedback before moving on.
+3. **Dual AI review loop on the pt-BR draft** (mandatory — see §"AI review"
+   below): send to BOTH `agy` and Codex in parallel, apply grounded feedback,
+   resend to both, and repeat until BOTH approve (or the loop caps out).
 
-4. **Generate the cover with Codex** (see §"Codex cover" below). Optimize to webp.
+4. **Translate to en, es, fr** (in this order). Then run the SAME dual review
+   loop on each translation (fidelity + clinical accuracy in that language).
 
-5. **Wire `cover: ./cover.webp` in the pt-BR frontmatter.**
+5. **Only after all approvals: generate the cover with Codex** (see §"Codex
+   cover" below). Optimize to webp and add `cover: ./cover.webp` to all four
+   frontmatters.
 
-6. **Translate to en, es, fr** (in this order, all in one go). Add
-   `cover: ./cover.webp` to each translated frontmatter.
+6. **Validate + build + commit + push.**
 
-7. **Validate + build + commit + push.**
-
-8. **Mark the row in `docs/blog-content-plan.md`** as
+7. **Mark the row in `docs/blog-content-plan.md`** as
    `✅ <YYYY-MM-DD> (4 idiomas)`.
 
 ## Drafting the pt-BR article
@@ -134,7 +135,31 @@ For **every** reference before committing:
 Never write a citation from memory of "a paper that probably exists." Either
 verify it or omit it.
 
-## AI review (Antigravity `agy`)
+## AI review — dupla revisão em loop (agy + Codex)
+
+**O protocolo (obrigatório para o pt-BR E para cada tradução):**
+
+1. **Rodada 1**: envie o texto em paralelo para DOIS revisores independentes:
+   - **`agy`** (Antigravity/Gemini) — invocação abaixo.
+   - **Codex** (`codex exec -m gpt-5.5 --sandbox read-only "<prompt>"`) — mesmo
+     prompt de revisor pediátrico crítico, com o artigo embutido no prompt.
+2. **Aplique** as correções factualmente fundamentadas dos dois (ignore
+   nitpicks de estilo; conflitos entre revisores: decida pela fonte, não pelo
+   revisor).
+3. **Rodada N+1**: reenvie o texto ATUALIZADO aos dois com o pedido explícito:
+   "Os problemas apontados foram tratados? Liste apenas problemas CRÍTICOS
+   remanescentes (clínicos, legais ou factuais). Se não houver nenhum, responda
+   exatamente APROVADO." 
+4. **Loop até os dois responderem APROVADO.** Cap de 3 rodadas: se após a 3ª um
+   revisor ainda apontar algo não-crítico ou contraditório, decida com base nas
+   fontes, registre a divergência no commit e siga — não trave o pipeline.
+5. Só depois das aprovações: capa, validação, publicação.
+
+**Nas traduções**, o prompt de revisão pede além do clínico: fidelidade ao
+pt-BR (números idênticos!), naturalidade no idioma e adequação das referências
+regionais.
+
+### Invocação do `agy` (Antigravity)
 
 The old `gemini` CLI is **deprecated** — Google retired the free
 "Gemini Code Assist for individuals" tier and the binary now exits with

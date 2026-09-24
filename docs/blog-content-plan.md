@@ -164,9 +164,10 @@ nappi.app/blog (séries por idade, artigos-tabela de referência, comparativos
 | 3 | ⬜ | feeding | Quantos ml de fórmula toma um bebê de 2 meses? | `formula-bebe-2-meses` | 2º maior cluster por idade do GSC |
 | 4 | ⬜ | health | Fraldas molhadas por dia: tabela de hidratação do recém-nascido | `fraldas-molhadas-por-dia` | artigo-tabela (playbook nappi); vira carrossel table no IG; liga ao tracking de fraldas do app |
 | 5 | ⬜ | feeding | Quantos ml de fórmula toma um bebê de 3 e 4 meses? | `formula-bebe-3-4-meses` | fecha o trio de idades com volume no GSC |
-| 6 | ⬜ | news | Melhores apps para acompanhar a rotina do bebê (comparativo honesto) | `melhores-apps-rotina-bebe` | playbook nappi ("Using nappi"); intenção comercial direta; só pt-BR primeiro |
-| 7 | ⬜ | development | Curva de crescimento do bebê: como ler peso e altura (percentis OMS) | `curva-de-crescimento-bebe` | referência evergreen; conecta ao tracking de crescimento do app |
-| 8 | ⬜ | sleep | Sono do recém-nascido: semanas 1 a 4 | `sono-bebe-semana-1` (série) | preenche o buraco 0–2 meses da série de sono (nappi cobre 1–18m) |
+| 6 | ⬜ | development | Curva de crescimento do bebê: como ler peso e altura (percentis OMS) | `curva-de-crescimento-bebe` | referência evergreen; conecta ao tracking de crescimento do app |
+| 7 | ⬜ | sleep | Sono do recém-nascido: semanas 1 a 4 | `sono-bebe-semana-1` (série) | preenche o buraco 0–2 meses da série de sono (nappi cobre 1–18m) |
+
+Removido a pedido (2026-09-24): comparativo de apps e qualquer artigo sobre o próprio app — foco em conteúdo geral.
 
 Depois da Wave 4, avaliar: série de gravidez semana a semana (nappi faz 12–40 —
 29 artigos, só compensa com o funil de gestante maduro) e marcos mês a mês
