@@ -11,6 +11,7 @@ import { Faq } from "@/components/blog/Faq";
 import { References } from "@/components/blog/References";
 import { ShareBar } from "@/components/blog/ShareBar";
 import { FormulaCalculator } from "@/components/tools/FormulaCalculator";
+import { CansCalculator } from "@/components/tools/CansCalculator";
 import { CATEGORIES } from "@/lib/blog/categories";
 import { formatDate } from "@/lib/blog/format";
 import { remarkRewriteRelativeImages } from "@/lib/blog/remark-images";
@@ -223,6 +224,9 @@ export function Article({ article }: { article: ArticleT }) {
               },
               Cta: (props: { id: string }) => (
                 <Cta id={props.id} locale={article.locale} />
+              ),
+              CansCalculator: () => (
+                <CansCalculator locale={article.locale} />
               ),
               FormulaCalculator: () => (
                 <FormulaCalculator locale={article.locale} />
