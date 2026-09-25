@@ -161,7 +161,7 @@ nappi.app/blog (séries por idade, artigos-tabela de referência, comparativos
 |---|---|---|---|---|---|
 | 1 | ✅ 2026-09-23 (4 idiomas) | feeding | Quantos ml de fórmula toma um bebê de 1 mês? | `formula-bebe-1-mes` | maior cluster do GSC (~800+ imp/28d reportadas, pos 8–10, 0 clique) |
 | 2 | ✅ 2026-09-24 (4 idiomas) | feeding | Quantas latas de fórmula um bebê gasta por mês? (com calculadora) | `latas-de-formula-por-mes` | cluster próprio no GSC (193+ imp, pos 7–8); intenção de custo, converte |
-| 3 | ⬜ | feeding | Quantos ml de fórmula toma um bebê de 2 meses? | `formula-bebe-2-meses` | 2º maior cluster por idade do GSC |
+| 3 | ✅ 2026-09-25 (4 idiomas) | feeding | Quantos ml de fórmula toma um bebê de 2 meses? | `formula-bebe-2-meses` | 2º maior cluster por idade do GSC |
 | 4 | ⬜ | health | Fraldas molhadas por dia: tabela de hidratação do recém-nascido | `fraldas-molhadas-por-dia` | artigo-tabela (playbook nappi); vira carrossel table no IG; liga ao tracking de fraldas do app |
 | 5 | ⬜ | feeding | Quantos ml de fórmula toma um bebê de 3 e 4 meses? | `formula-bebe-3-4-meses` | fecha o trio de idades com volume no GSC |
 | 6 | ⬜ | development | Curva de crescimento do bebê: como ler peso e altura (percentis OMS) | `curva-de-crescimento-bebe` | referência evergreen; conecta ao tracking de crescimento do app |
