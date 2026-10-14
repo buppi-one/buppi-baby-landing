@@ -165,7 +165,7 @@ nappi.app/blog (séries por idade, artigos-tabela de referência, comparativos
 | 4 | ✅ 2026-10-06 (4 idiomas) | health | Fraldas molhadas por dia: tabela de hidratação do recém-nascido | `fraldas-molhadas-por-dia` | artigo-tabela (playbook nappi); vira carrossel table no IG; liga ao tracking de fraldas do app |
 | 5 | ✅ 2026-10-05 (4 idiomas) | feeding | Quantos ml de fórmula toma um bebê de 3 e 4 meses? | `formula-bebe-3-4-meses` | fecha o trio de idades com volume no GSC |
 | 6 | ✅ 2026-10-14 (4 idiomas) | development | Curva de crescimento do bebê: como ler peso e altura (percentis OMS) | `curva-de-crescimento-bebe` | referência evergreen; conecta ao tracking de crescimento do app |
-| 7 | ✅ 2026-10-14 (4 idiomas, capa pendente) | sleep | Sono do recém-nascido: semanas 1 a 4 | `sono-bebe-semana-1` (série) | preenche o buraco 0–2 meses da série de sono (nappi cobre 1–18m) |
+| 7 | ✅ 2026-10-14 (4 idiomas) | sleep | Sono do recém-nascido: semanas 1 a 4 | `sono-bebe-semana-1` (série) | preenche o buraco 0–2 meses da série de sono (nappi cobre 1–18m) |
 
 Removido a pedido (2026-09-24): comparativo de apps e qualquer artigo sobre o próprio app — foco em conteúdo geral.
 
