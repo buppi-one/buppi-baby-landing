@@ -1,0 +1,118 @@
+---
+title: "Curva de crecimiento del bebé: cómo leer peso, talla y percentil"
+description: "Cómo leer la curva de crecimiento del bebé (estándares OMS): qué es el percentil, cuánto peso gana el bebé por mes, por qué el P3 puede ser tan sano como el P97 y qué cambios en la curva merecen atención."
+publishedAt: 2026-10-14
+category: development
+cover: ./cover.webp
+slug: curva-de-crecimiento-bebe
+tags: [crecimiento, percentiles, desarrollo, peso]
+faq:
+  - question: "¿Qué significa el percentil del bebé?"
+    answer: "El percentil compara a tu bebé con la referencia de la OMS para la misma edad y sexo: estar en el percentil 25 de peso significa que, de cada 100 bebés sanos, unos 25 pesan menos y 75 pesan más. No es nota ni ranking: el P3 y el P97 pueden ser igual de sanos. Lo que el pediatra evalúa no es el número aislado, sino si el bebé sigue su PROPIO canal de crecimiento a lo largo de los controles. (En la libreta de salud la misma curva también aparece en puntaje z — los diagnósticos formales usan los cortes de -2 y -3 desviaciones estándar; percentil y puntaje z son dos reglas del mismo mapa.)"
+  - question: "¿Cuánto peso gana el bebé por mes?"
+    answer: "Como regla práctica de consultorio (la OMS publica tablas de velocidad detalladas, con dispersión amplia): el mes 1 es el más intenso (mediana por encima de 800 g); de 1 a 3 meses, unos 700 a 900 g por mes (20 a 30 g/día); de 3 a 6 meses, 450 a 600 g por mes; de 6 a 9 meses, 300 a 450 g; de 9 a 12 meses, 200 a 400 g. La desaceleración a lo largo del año es esperada y sana. Recuerda también la pérdida fisiológica de la primera semana (por encima de ~7% suele motivar una evaluación más cuidadosa de la lactancia, y por encima del 10%, evaluación adicional sin demora), recuperada en general entre el día 10 y 14 — y la ganancia diaria se cuenta desde el punto mínimo."
+  - question: "Mi bebé está en el percentil 10. ¿Debo preocuparme?"
+    answer: "Un percentil bajo estable suele ser solo el tamaño de ese bebé — la genética cuenta mucho, sobre todo después de los 6 meses (antes pesa más el ambiente intrauterino). Lo que merece investigación no es estar en el P10, sino cruzar líneas de percentil hacia abajo de forma sostenida, dejar de ganar peso o que el peso se despegue de la talla. Quien distingue la variación normal (incluidos los ajustes fisiológicos de catch-up/catch-down entre los 6 y 24 meses) de un problema es el pediatra, con la curva completa en mano."
+  - question: "¿El bebé de fórmula crece distinto al de pecho?"
+    answer: "Los estándares de la OMS se construyeron con bebés amamantados — es el crecimiento considerado ideal. Estudios observacionales muestran que los bebés de fórmula tienden, en promedio, a ganar peso algo más rápido en el segundo semestre — una tendencia de grupo, no una regla individual — lo que refuerza la alimentación responsiva (respetar la saciedad) para que la tendencia no se vuelva exceso. La curva de referencia es la misma para todos."
+  - question: "¿Cada cuánto pesar y medir al bebé?"
+    answer: "En los controles de rutina. Pesar en casa cada semana (o cada día) genera más ansiedad que información: las fluctuaciones diarias de pañal, toma y básculas distintas engañan. La tendencia de meses es lo que importa — básculas distintas en días distintos no son comparables. La excepción real: cuando el pediatra pide control de peso más frecuente (un recién nacido con dificultad para ganar, por ejemplo) — ahí es con su orientación, técnica y báscula."
+  - question: "¿Y los bebés prematuros?"
+    answer: "Los prematuros tienen lectura propia: trazar la edad cronológica en la curva común genera falsas alarmas. Se usa la edad corregida (descontando las semanas que faltaron para 40) en las curvas de la OMS — en general hasta los 2 años — y, en el período neonatal, curvas específicas de prematuros (como Intergrowth-21st o Fenton), según el servicio. Si tu bebé nació antes de término, pregunta siempre qué edad y qué curva se están usando."
+references:
+  - title: "Child growth standards"
+    source: "Organización Mundial de la Salud (OMS)"
+    url: "https://www.who.int/tools/child-growth-standards"
+  - title: "Understanding Growth Charts: A Parent's Guide to Percentiles & Z-Scores"
+    source: "American Academy of Pediatrics — HealthyChildren.org"
+    url: "https://www.healthychildren.org/English/health-issues/conditions/Glands-Growth-Disorders/Pages/growth-charts-by-the-numbers.aspx"
+  - title: "Obter a Caderneta da Criança"
+    source: "Gobierno Federal de Brasil — Gov.br"
+    url: "https://www.gov.br/pt-br/servicos/obter-a-caderneta-da-crianca"
+  - title: "WHO Child Growth Standards: Methods and development"
+    source: "Organización Mundial de la Salud (OMS), 2006"
+    url: "https://www.who.int/publications/i/item/924154693X"
+---
+
+import { Cta } from "@/components/blog";
+
+Pocas cosas generan tanta ansiedad de control como una frase suelta sobre el percentil: "está en el P15". ¿Es alto? ¿Bajo? ¿Es una nota? Respira: **el percentil no es un ranking, y la curva de crecimiento no es un examen**. Es un mapa — y esta guía enseña a leer el mapa como lo lee el pediatra: qué es el percentil, cuánto gana de verdad el bebé por mes, por qué un P3 estable puede estar perfecto y qué movimientos de la curva son los que de verdad merecen atención.
+
+## Qué es la curva (y qué no es)
+
+Las curvas usadas en los controles son los **estándares de crecimiento de la OMS**, construidos siguiendo a miles de bebés sanos, amamantados, de seis países. Describen **cómo crecen los bebés sanos**, por edad y sexo, en cuatro medidas principales: **peso**, **talla/longitud**, **perímetro cefálico** e **IMC**.
+
+Lo que la curva **no** es:
+
+- **No es meta**: el P50 no es "lo correcto" — es solo el medio de la distribución.
+- **No es nota**: el P97 no es "mejor" que el P15.
+- **No es diagnóstico**: un punto aislado dice poco; la **trayectoria** dice mucho más — leída junto con la edad gestacional, la historia clínica y la calidad de las mediciones.
+
+## El percentil, traducido
+
+Estar en el **percentil 25 de peso** significa: de cada 100 bebés sanos de la misma edad y sexo, ~25 pesan menos y ~75 pesan más que el tuyo. Solo eso.
+
+La pregunta correcta nunca es "¿en qué percentil está?", sino "**¿está siguiendo su canal?**". Un bebé que vive y crece en el P10 puede estar tan sano como uno que habita el P85 — cada uno en su carril, **siempre que** la trayectoria, las proporciones entre medidas y el examen clínico acompañen (la palabra final es siempre de la consulta).
+
+Y un detalle de línea de tiempo que evita sustos: **en los primeros meses, el tamaño refleja más la vida intrauterina que la genética**. El "canal de la familia" se encuentra típicamente entre los 6 y los 24 meses, en ajustes fisiológicos de *catch-up* (bebés que nacieron pequeños acelerando) o *catch-down* (bebés grandes desacelerando) — cruces de canal **en esa ventana y contexto** pueden ser perfectamente normales, y es el pediatra quien los distingue de un problema.
+
+## Cuánto gana el bebé, de verdad
+
+Rangos prácticos de consultorio (reglas de cabecera de la puericultura — la OMS publica tablas de *velocidad* detalladas por sexo e intervalo, con dispersión mucho más amplia; la lectura fina es siempre del pediatra):
+
+| Fase | Ganancia de peso típica | Talla |
+| --- | --- | --- |
+| 1ª semana | pérdida fisiológica (ver nota abajo) | — |
+| 2ª semana a 1 mes | ~25 a 35 g/día desde el punto mínimo — el mes 1 es el más intenso (la mediana OMS supera los 800 g en el mes) | ~3,5 a 4 cm en el mes |
+| 1 a 3 meses | ~700 a 900 g/mes (20–30 g/día) | ~3 a 3,5 cm/mes |
+| 3 a 6 meses | ~450 a 600 g/mes | ~2 cm/mes |
+| 6 a 9 meses | ~300 a 450 g/mes | ~1,5 cm/mes |
+| 9 a 12 meses | ~200 a 400 g/mes | ~1,2 cm/mes |
+
+**Sobre la 1ª semana**: la pérdida fisiológica existe, pero tiene regla — pérdidas **por encima de ~7%** suelen motivar una evaluación más cuidadosa del agarre y las tomas (según la edad en días y el contexto clínico), y **por encima del 10%**, evaluación adicional sin demora; la recuperación del peso de nacimiento se espera hacia el día 10–14. La ganancia diaria "de tabla" se cuenta **desde el punto mínimo** (el nadir), no desde el peso de nacimiento.
+
+Dos lecturas que calman:
+
+- **La desaceleración es lo esperado**: el bebé no "dejó de crecer bien" a los 8 meses — toda la curva desacelera. Como aproximación poblacional (no meta individual), el peso de nacimiento suele **triplicarse** en el primer año y la talla crecer ~50% — casi todo concentrado en el primer semestre.
+- **El perímetro cefálico tiene curva propia** e importa tanto como el peso — es el crecimiento del cerebro medido por fuera. Quien interpreta es siempre el pediatra.
+
+<Cta id="milestones-keep" />
+
+## Los movimientos de curva que merecen atención
+
+La curva se vuelve tema de investigación cuando la **trayectoria** cambia, no cuando el número es "bajo" o "alto". Los patrones que el pediatra mira de cerca:
+
+- **Cruzar líneas hacia abajo de forma sostenida**: la referencia clínica clásica es el cruce de **dos líneas principales** de la curva (ej.: del P50 a por debajo del P15, camino al P3) — señal de evaluación, no diagnóstico.
+- **Estancarse**: ganancia nula entre pesadas en los primeros meses es investigación activa — un bebé pequeño no espera 30 días parado a que alguien mire.
+- **Despegue entre medidas**: peso cayendo con talla preservada (o al revés), o perímetro cefálico saliéndose de su canal — cada combinación cuenta una historia distinta.
+- **Subida muy rápida** también es conversación: cruzar canales hacia arriba en el primer año, sobre todo con fórmula, pide una mirada a volúmenes y alimentación responsiva.
+
+Y el contrapunto que evita sustos: **caídas pequeñas y transitorias ocurren** — enfermedad en la semana de la pesada, báscula distinta, pañal lleno. Un punto aislado rara vez es tendencia — lo que cuenta es el patrón a lo largo de los controles. Por eso la regla de oro: comparar **la curva entera**, nunca dos pesadas aisladas.
+
+## Prematuros: otra curva, otra edad
+
+Para los prematuros, **trazar la edad cronológica en la curva común genera falsas alarmas**: se usa la **edad corregida** (descontando las semanas que faltaron para 40) en las curvas de la OMS — en general hasta los 2 años — y, en el período neonatal, curvas específicas de prematuros (como Intergrowth-21st o Fenton), según el servicio. Si tu bebé nació antes de término, la lectura de la curva es un capítulo propio de la consulta — pregunta siempre qué edad y qué curva se están usando.
+
+Un detalle técnico que cambia números: hasta los 2 años la **longitud se mide acostado** (después, talla de pie — que mide ~0,7 cm menos), y medir a un bebé que se retuerce tiene error real — un motivo más para no comparar medidas de fuentes distintas.
+
+## Pesar en casa: menos es más
+
+La tentación de pesar cada semana (o cada día) es comprensible — y contraproducente:
+
+- Básculas distintas varían entre sí más que la ganancia de una semana.
+- El pañal, una toma reciente y la hora del día mueven decenas o cientos de gramos.
+- El resultado es ansiedad sin información: la tendencia que importa aparece en **semanas y meses**, en los controles, con la misma báscula y técnica.
+
+Excepción real: cuando el pediatra pide control de peso más frecuente (RN con dificultad para ganar, por ejemplo) — ahí es con su orientación, técnica y báscula.
+
+## La libreta de salud es el documento de la curva
+
+En Brasil, la curva vive en la **Caderneta da Criança** — el documento del Ministerio de Salud que todo bebé recibe en la maternidad, con las curvas de la OMS impresas para registrar peso, talla, perímetro cefálico e IMC en cada control; en otros países, la libreta o la ficha del pediatra cumple el mismo papel. Tres hábitos de oro: **llevarla a cada control**, verificar que los puntos quedaron anotados, y fotografiar las páginas de vez en cuando (respaldo).
+
+> **Busca al pediatra sin esperar el próximo control de rutina si**: el bebé dejó de ganar peso de forma clara, perdió peso fuera de la primera semana de vida, los pañales mojados disminuyeron a la par, o lo notas apático y comiendo mucho menos. La curva es herramienta de seguimiento — las señales agudas no esperan el próximo punto del gráfico.
+
+## El gráfico solo funciona con puntos — registra entre controles
+
+La curva oficial se traza en los controles, pero el contexto que explica cada punto — cómo anduvieron las tomas, el sueño, los pañales en esas semanas — es lo que convierte un "bajó medio canal" en diagnóstico rápido o en falsa alarma descartada. Registrar la rutina día a día (tomas, pañales, sueño, y el peso cuando el pediatra lo pida) llega a la consulta como la historia completa detrás del gráfico.
+
+<Cta id="download" />
