@@ -36,17 +36,19 @@ export function Cta({ id, locale }: { id: string; locale: Locale }) {
   const styles = VARIANT_STYLES[def.variant];
   const href = def.href ?? `${localePath(locale, "/")}#baixar`;
   if (def.style === "featured") {
-    return <CtaFeatured def={def} content={content} styles={styles} href={href} />;
+    return <CtaFeatured id={id} def={def} content={content} styles={styles} href={href} />;
   }
-  return <CtaCompact def={def} content={content} styles={styles} href={href} />;
+  return <CtaCompact id={id} def={def} content={content} styles={styles} href={href} />;
 }
 
 function CtaCompact({
+  id,
   def,
   content,
   styles,
   href,
 }: {
+  id: string;
   def: CtaDef;
   content: { title: string; body: string; cta: string };
   styles: (typeof VARIANT_STYLES)[CtaVariant];
@@ -70,6 +72,7 @@ function CtaCompact({
       </div>
       <a
         href={href}
+        data-cta={id}
         className="inline-flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--color-ink)] text-[var(--color-background-light)] text-sm font-semibold hover:opacity-90 transition-opacity self-stretch sm:self-center justify-center"
       >
         {content.cta}
@@ -79,11 +82,13 @@ function CtaCompact({
 }
 
 function CtaFeatured({
+  id,
   def,
   content,
   styles,
   href,
 }: {
+  id: string;
   def: CtaDef;
   content: { title: string; body: string; cta: string };
   styles: (typeof VARIANT_STYLES)[CtaVariant];
@@ -118,6 +123,7 @@ function CtaFeatured({
         </div>
         <a
           href={href}
+          data-cta={id}
           className="inline-flex shrink-0 items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"
           style={{ background: styles.accentBar, color: "var(--color-ink)" }}
         >
