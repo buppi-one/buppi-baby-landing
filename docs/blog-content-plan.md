@@ -92,7 +92,7 @@ Específicos do Brasil. Lançar conforme demanda, **não criar arquivos `en.mdx`
 |---|---|---|---|
 | ✅ 2026-08-13 (pt-BR) | expecting-and-new-parents | Licença-maternidade e paternidade no Brasil: tudo o que você precisa saber | `licenca-maternidade-paternidade-brasil` |
 | ✅ 2026-09-04 (4 idiomas) | health | SUS x rede privada: como funciona o pré-natal no Brasil | `pre-natal-sus-vs-privado` |
-| ⬜ | feeding | Bancos de leite humano no Brasil: como doar e como receber | `bancos-de-leite-humano-brasil` |
+| ✅ 2026-10-17 (só pt-BR, capa pendente) | feeding | Bancos de leite humano no Brasil: como doar e como receber | `bancos-de-leite-humano-brasil` |
 | ⬜ | expecting-and-new-parents | Documentos do recém-nascido: registro civil, CPF, plano de saúde | `documentos-do-recem-nascido` |
 
 ---
