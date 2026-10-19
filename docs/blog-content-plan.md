@@ -110,17 +110,17 @@ Newborn (semanal):
 - ⏭️ coberto pelo guia semanas 1–4 — `sono-bebe-semana-2`
 - ⏭️ coberto pelo guia semanas 1–4 — `sono-bebe-semana-3`
 - ⏭️ coberto pelo guia semanas 1–4 — `sono-bebe-semana-4`
-- ⬜ Semana 6 — `sono-bebe-semana-6`
-- ⬜ Semana 8 — `sono-bebe-semana-8`
+- ⏭️ coberto por `sono-bebe-2-meses` (semanas 5–8) — `sono-bebe-semana-6`
+- ⏭️ coberto por `sono-bebe-2-meses` (semanas 5–8) — `sono-bebe-semana-8`
 
 1º ano (mensal — alguns já estão na Wave 3):
-- ⬜ Mês 3 (Wave 3 #25)
+- ✅ 2026-07-22 (4 idiomas) — Mês 3 — `sono-bebe-3-meses` (já existia; linha estava desatualizada)
 - ✅ 2026-07-27 (4 idiomas) — Mês 4 — `sono-bebe-4-meses` (a regressão dos 4 meses)
 - ✅ 2026-07-27 (4 idiomas) — Mês 5 — `sono-bebe-5-meses`
 - ✅ 2026-07-27 (4 idiomas) — Mês 7 — `sono-bebe-7-meses`
 - ✅ 2026-07-27 (4 idiomas) — Mês 8 — `sono-bebe-8-meses`
 - ✅ 2026-08-05 (4 idiomas) — Mês 9 — `sono-bebe-9-meses`
-- ⬜ Mês 10 — `sono-bebe-10-meses`
+- ✅ 2026-10-19 (4 idiomas) — Mês 10 — `sono-bebe-10-meses`
 - ⬜ Mês 11 — `sono-bebe-11-meses`
 - ⬜ Mês 12 — `sono-bebe-12-meses`
 
