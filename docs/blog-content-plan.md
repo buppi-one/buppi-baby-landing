@@ -122,7 +122,7 @@ Newborn (semanal):
 - ✅ 2026-08-05 (4 idiomas) — Mês 9 — `sono-bebe-9-meses`
 - ✅ 2026-10-19 (4 idiomas) — Mês 10 — `sono-bebe-10-meses`
 - ✅ 2026-10-19 (4 idiomas) — Mês 11 — `sono-bebe-11-meses`
-- ⬜ Mês 12 — `sono-bebe-12-meses`
+- ✅ 2026-10-19 (4 idiomas) — Mês 12 — `sono-bebe-12-meses`
 
 Toddler:
 - ⬜ Mês 15 — `sono-bebe-15-meses`
