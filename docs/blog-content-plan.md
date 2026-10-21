@@ -167,7 +167,7 @@ nappi.app/blog (séries por idade, artigos-tabela de referência, comparativos
 | 6 | ✅ 2026-10-14 (4 idiomas) | development | Curva de crescimento do bebê: como ler peso e altura (percentis OMS) | `curva-de-crescimento-bebe` | referência evergreen; conecta ao tracking de crescimento do app |
 | 7 | ✅ 2026-10-14 (4 idiomas) | sleep | Sono do recém-nascido: semanas 1 a 4 | `sono-bebe-semana-1` (série) | preenche o buraco 0–2 meses da série de sono (nappi cobre 1–18m) |
 | 8 | ✅ 2026-10-21 (4 idiomas) | feeding | Quantos ml mama um recém-nascido? Tabela dia a dia (0 a 30 dias) | `quantos-ml-mama-recem-nascido` | cluster GSC por DIAS (~280 imp/28d, pos 5–7, 0 clique: "bebê de 15/20/24/9/5 dias mama quantos ml") — ninguém cobre granularidade de dias |
-| 9 | ⬜ | feeding | Quantos ml de fórmula toma um bebê de 5 e 6 meses? | `formula-bebe-5-6-meses` | ~260 imp/28d ("5 meses mama quantos ml" 135, "6 meses" 71); fecha a série por idade até a introdução alimentar |
+| 9 | ✅ 2026-10-21 (4 idiomas) | feeding | Quantos ml de fórmula toma um bebê de 5 e 6 meses? | `formula-bebe-5-6-meses` | ~260 imp/28d ("5 meses mama quantos ml" 135, "6 meses" 71); fecha a série por idade até a introdução alimentar |
 | 10 | ✅ 2026-10-21 (reforço no hub, 4 idiomas) | feeding | Tabela peso→ml explícita no hub `quantidade-de-formula-por-idade` | — | query "tabela de ml de leite para bebê por peso" (111 imp, pos 8.6) — hub tem a regra 150 ml/kg mas não a tabela por peso |
 
 Removido a pedido (2026-09-24): comparativo de apps e qualquer artigo sobre o próprio app — foco em conteúdo geral.
