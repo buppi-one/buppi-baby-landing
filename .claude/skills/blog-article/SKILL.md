@@ -18,20 +18,34 @@ read it whenever a detail is unclear.
    other locale is a translation of this one. Write it under
    `content/blog/<id>/pt-BR.mdx`.
 
-3. **Dual AI review loop on the pt-BR draft** (mandatory — see §"AI review"
+3. **Humanizer pass (mandatory)**: invoke the **`humanizer-ptbr`** skill
+   (user-level, `~/.claude/skills/humanizer-ptbr`) and apply it to the pt-BR
+   draft in "modo embutido" BEFORE the AI review — write with it in mind from
+   the start and sweep the draft for the tells it lists (não-é-X-é-Y, fechos de
+   uma linha, tríades forçadas, travessões como conector, vocabulário-tell,
+   rótulos em negrito, inflação). Never change clinical facts or numbers while
+   humanizing. Apply the same pass to each translation (the structural tells
+   carry over across languages; the English `humanizer` vocabulary applies to
+   en). Legacy articles: when touching an already-published article for any
+   other reason (title CTR pass, reinforcement, corrections), run the same
+   sweep on the sections you touch — that's how the back catalog gets
+   humanized gradually, per the user's standing request (2026-10-21).
+
+4. **Dual AI review loop on the pt-BR draft** (mandatory — see §"AI review"
    below): send to BOTH `agy` and Codex in parallel, apply grounded feedback,
    resend to both, and repeat until BOTH approve (or the loop caps out).
 
-4. **Translate to en, es, fr** (in this order). Then run the SAME dual review
-   loop on each translation (fidelity + clinical accuracy in that language).
+5. **Translate to en, es, fr** (in this order), humanizer pass included. Then
+   run the SAME dual review loop on each translation (fidelity + clinical
+   accuracy in that language).
 
-5. **Only after all approvals: generate the cover with Codex** (see §"Codex
+6. **Only after all approvals: generate the cover with Codex** (see §"Codex
    cover" below). Optimize to webp and add `cover: ./cover.webp` to all four
    frontmatters.
 
-6. **Validate + build + commit + push.**
+7. **Validate + build + commit + push.**
 
-7. **Mark the row in `docs/blog-content-plan.md`** as
+8. **Mark the row in `docs/blog-content-plan.md`** as
    `✅ <YYYY-MM-DD> (4 idiomas)`.
 
 ## Drafting the pt-BR article
