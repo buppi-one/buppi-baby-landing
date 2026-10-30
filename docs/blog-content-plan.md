@@ -172,6 +172,38 @@ nappi.app/blog (séries por idade, artigos-tabela de referência, comparativos
 
 Removido a pedido (2026-09-24): comparativo de apps e qualquer artigo sobre o próprio app — foco em conteúdo geral.
 
+---
+
+## Wave 5 — perguntas reais ao Buppi Assist × GSC (out/2026)
+
+Estruturada em 2026-10-30 a partir de 547 perguntas de 97 usuários ao Assist
+(tabela `ai_chat_messages`, 12/08–30/10, ranking por usuários distintos)
+cruzadas com 90 dias de GSC. Análise completa no artefato Traycer
+`ranking-perguntas-assist-2026-10`.
+
+**O que o cruzamento mostrou:** temas numéricos de sono/alimentação ranqueiam
+(janela de sono: 2,4k impr., pos 19). Temas de saúde/sintoma não ranqueiam: a
+página de cólica teve 0 impressões em 90 dias, febre pt-BR teve 11 e refluxo
+está na pos 76. Por isso a prioridade é sono comportamental e alimentação.
+Saúde fica por último.
+
+| # | Status | Categoria | Título | Slug | Racional |
+|---|---|---|---|---|---|
+| 1 | ⬜ | feeding | De quanto em quanto tempo o bebê mama? Intervalos por idade (peito e fórmula) | `intervalo-entre-mamadas-por-idade` | 7 usuários no Assist; GSC já mostra demanda (22 queries, 130 imp, pos 10 — "bebê 4 meses mama de quanto em quanto tempo fórmula" pos 6,6) caindo no hub → descanibaliza. Incluir "devo acordar o bebê pra mamar?" |
+| 2 | ⬜ | sleep | Bebê só dorme no colo: como fazer a transferência pro berço | `bebe-so-dorme-no-colo` | 7 usuários (tema espontâneo nº 2, com dorme mamando/associação peito-sono); 0 visibilidade no GSC hoje = terreno livre dentro do cluster de sono |
+| 3 | ⬜ | sleep | Bebê acorda muito à noite: quantas vezes é normal por idade | `bebe-acorda-muito-a-noite` | 8 usuários (tema nº 1); GSC: "quantas vezes um bebê de 5 meses acorda à noite" pos 6, es "se despierta cada hora" pos 90. Seção "acorda cedo demais" (mais 2 usuários) |
+| 4 | ⬜ | sleep | Que horas o bebê deve dormir? Horário ideal por idade | `que-horas-bebe-deve-dormir` | 6 usuários + chip mais usado (14 usuários); GSC "que horas o bebê deve dormir a noite" pos 64, "bedtime for N month old" pos 83–97 sem página-alvo |
+| 5 | ⬜ (reforço, 4 idiomas, es primeiro) | sleep | H2 "Bebê dorme muito: é normal?" em `sono-bebe-2-meses`, `-4-meses`, `-5-meses` | — | 3 usuários; GSC es "mi bebé de 4 meses duerme mucho" (73 imp em `/es/blog/sueno-bebe-4-meses/`, pos 55–77) |
+| 6 | ⬜ (reforço, 4 idiomas) | sleep | H2 "Quantas vezes acorda à noite" com número nas páginas mensais de sono + seção "soneca de 30 minutos" no `soneca-do-bebe-guia` | — | sustenta o #3; sonecas curtas = 6 usuários + chip de duração da soneca (10) |
+| 7 | ⬜ | development | Saltos de desenvolvimento: o que a ciência diz | `saltos-de-desenvolvimento` | 4 usuários; GSC já traz "salto de desenvolvimento N meses sono" às páginas de sono 7–11m (pos 2–15). Cuidado: o conceito "wonder weeks" tem pouca evidência, então o texto parte do que é comprovado |
+| 8 | ⬜ | sleep | Bebê que só quer colo: é normal? Quando investigar | `bebe-so-quer-colo` | 6 usuários; 0 GSC |
+| 9 | ⬜ | sleep | Quarto do bebê: temperatura, luz, ventilador e posição segura pra dormir | `ambiente-seguro-sono-bebe` | 4 usuários (bruços, ventilador, umidificador, elevar berço, calor) |
+| 10 | ⬜ | feeding | Estou com pouco leite? Sinais reais e sinais falsos | `pouco-leite-sinais` | 4 usuários; 0 GSC |
+| 11 | ⬜ | health | Disquesia × cólica e quantos dias o bebê pode ficar sem fazer cocô | `disquesia-coco-do-bebe` | 6 usuários, mas tema de saúde (YMYL) com 0 GSC e padrão da cólica = baixo retorno orgânico; útil pro Assist linkar. Risco alto na regra de medicamentos |
+
+Fora do blog (sinais de produto do Assist): link de artigo que não abriu,
+confusão soneca × sono noturno, pedidos de rotina pronta e de lembrete de soneca.
+
 Depois da Wave 4, avaliar: série de gravidez semana a semana (nappi faz 12–40 —
 29 artigos, só compensa com o funil de gestante maduro) e marcos mês a mês
 (já listados na long-tail series).
@@ -198,4 +230,4 @@ Em pt-BR + en. ES/FR podem rodar atrás (~2 semanas).
   esforço e ajuda a planejar interlinks)
 - Revisar a cada trimestre: o que ranqueou bem? o que precisa ser reescrito?
 
-Last updated: 2026-05-06
+Last updated: 2026-10-30
