@@ -18,15 +18,18 @@ read it whenever a detail is unclear.
    other locale is a translation of this one. Write it under
    `content/blog/<id>/pt-BR.mdx`.
 
-3. **Humanizer pass (mandatory)**: invoke the **`humanizer-ptbr`** skill
-   (user-level, `~/.claude/skills/humanizer-ptbr`) and apply it to the pt-BR
-   draft in "modo embutido" BEFORE the AI review — write with it in mind from
-   the start and sweep the draft for the tells it lists (não-é-X-é-Y, fechos de
-   uma linha, tríades forçadas, travessões como conector, vocabulário-tell,
-   rótulos em negrito, inflação). Never change clinical facts or numbers while
-   humanizing. Apply the same pass to each translation (the structural tells
-   carry over across languages; the English `humanizer` vocabulary applies to
-   en). Legacy articles: when touching an already-published article for any
+3. **Humanizer pass (mandatory, EVERY new article, no exceptions)**: actually
+   invoke the skills with the Skill tool — don't just "keep them in mind":
+   - **`/humanizer-ptbr`** (`~/.claude/skills/humanizer-ptbr`) on the pt-BR
+     draft, in "modo embutido", BEFORE the AI review.
+   - **`/humanizer`** (`~/.claude/skills/humanizer`) on the **en** translation,
+     and its structural rules (not-X-but-Y, one-line closers, forced triads,
+     em/en dashes as connectors, bold labels, inflation) on **es** and **fr**.
+
+   Sweep for the tells they list (não-é-X-é-Y, fechos de uma linha, tríades
+   forçadas, travessões como conector, vocabulário-tell, rótulos em negrito,
+   inflação). Never change clinical facts, numbers, links or frontmatter
+   (FAQ/YAML) semantics while humanizing. Legacy articles: when touching an already-published article for any
    other reason (title CTR pass, reinforcement, corrections), run the same
    sweep on the sections you touch — that's how the back catalog gets
    humanized gradually, per the user's standing request (2026-10-21).
@@ -35,7 +38,8 @@ read it whenever a detail is unclear.
    below): send to BOTH `agy` and Codex in parallel, apply grounded feedback,
    resend to both, and repeat until BOTH approve (or the loop caps out).
 
-5. **Translate to en, es, fr** (in this order), humanizer pass included. Then
+5. **Translate to en, es, fr** (in this order), then the humanizer pass from
+   step 3 on each (`/humanizer` for en; its structural rules for es/fr). Then
    run the SAME dual review loop on each translation (fidelity + clinical
    accuracy in that language).
 
