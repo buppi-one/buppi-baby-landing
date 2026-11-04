@@ -200,6 +200,7 @@ Saúde fica por último.
 | 9 | ⬜ | sleep | Quarto do bebê: temperatura, luz, ventilador e posição segura pra dormir | `ambiente-seguro-sono-bebe` | 4 usuários (bruços, ventilador, umidificador, elevar berço, calor) |
 | 10 | ⬜ | feeding | Estou com pouco leite? Sinais reais e sinais falsos | `pouco-leite-sinais` | 4 usuários; 0 GSC |
 | 11 | ⬜ | health | Disquesia × cólica e quantos dias o bebê pode ficar sem fazer cocô | `disquesia-coco-do-bebe` | 6 usuários, mas tema de saúde (YMYL) com 0 GSC e padrão da cólica = baixo retorno orgânico; útil pro Assist linkar. Risco alto na regra de medicamentos |
+| 12 | ✅ 2026-11-04 (4 idiomas) | feeding | Bebê não quer comer e só quer peito: o que fazer | `bebe-nao-quer-comer` | Pedido do Thiago em 03/11. Recusa da comida entre 6 e 12 meses, ordem entre peito e refeição, texturas, ferro e sinais de alerta. Complementa a seção de recusa de `introducao-alimentar-6-meses-blw-vs-papinha`, que agora linka aqui |
 
 Fora do blog (sinais de produto do Assist): link de artigo que não abriu,
 confusão soneca × sono noturno, pedidos de rotina pronta e de lembrete de soneca.
@@ -230,4 +231,4 @@ Em pt-BR + en. ES/FR podem rodar atrás (~2 semanas).
   esforço e ajuda a planejar interlinks)
 - Revisar a cada trimestre: o que ranqueou bem? o que precisa ser reescrito?
 
-Last updated: 2026-10-30
+Last updated: 2026-11-04
