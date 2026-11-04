@@ -4,7 +4,8 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 import { LOCALES, type Locale } from "@/i18n";
 import { isCategorySlug } from "./categories";
-import type { AlternatesMap, Article, FaqItem, Frontmatter, Reference } from "./types";
+import { GUIDE_PHASES } from "./types";
+import type { AlternatesMap, Article, FaqItem, Frontmatter, GuidePhase, Reference } from "./types";
 
 const CONTENT_ROOT = join(process.cwd(), "content", "blog");
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -54,6 +55,8 @@ function parseFrontmatter(raw: Record<string, unknown>, source: string): Frontma
   const faq = raw.faq === undefined ? undefined : parseFaq(raw.faq, source);
   const references =
     raw.references === undefined ? undefined : parseReferences(raw.references, source);
+  const guidePhases =
+    raw.guidePhases === undefined ? undefined : parseGuidePhases(raw.guidePhases, source);
   return {
     title,
     description,
@@ -66,7 +69,22 @@ function parseFrontmatter(raw: Record<string, unknown>, source: string): Frontma
     draft,
     faq,
     references,
+    guidePhases,
   };
+}
+
+function parseGuidePhases(value: unknown, source: string): GuidePhase[] {
+  if (!Array.isArray(value) || value.length === 0) {
+    throw new Error(`${source}: "guidePhases" must be a non-empty array`);
+  }
+  return value.map((p, i) => {
+    if (typeof p !== "string" || !(GUIDE_PHASES as readonly string[]).includes(p)) {
+      throw new Error(
+        `${source}: guidePhases[${i}] "${String(p)}" is not a known phase (${GUIDE_PHASES.join(", ")})`,
+      );
+    }
+    return p as GuidePhase;
+  });
 }
 
 function parseFaq(value: unknown, source: string): FaqItem[] {

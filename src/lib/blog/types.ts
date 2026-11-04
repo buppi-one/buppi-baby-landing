@@ -22,6 +22,23 @@ export type Reference = {
   url?: string;
 };
 
+/**
+ * The Buppi app's developmental phases (growthStages.ts GROWTH_STAGES ids).
+ * A post carrying `guidePhases` is an in-app guide: the app's Bebê › Guias
+ * screen lists it for babies currently in one of these phases.
+ */
+export const GUIDE_PHASES = [
+  "newborn",
+  "stage_1_3m",
+  "stage_4_6m",
+  "stage_7_9m",
+  "stage_10_12m",
+  "stage_13_18m",
+  "stage_19_24m",
+  "stage_2_3y",
+] as const;
+export type GuidePhase = (typeof GUIDE_PHASES)[number];
+
 export type Frontmatter = {
   title: string;
   description: string;
@@ -34,6 +51,8 @@ export type Frontmatter = {
   draft?: boolean;
   faq?: FaqItem[];
   references?: Reference[];
+  /** Present = this post is an in-app guide for these phases. */
+  guidePhases?: GuidePhase[];
 };
 
 export type Article = {

@@ -8,6 +8,11 @@
  *
  * Output: public/ai/blog-index.<locale>.json  (shipped as /ai/blog-index.<locale>.json)
  * Runs via `npm run build-ai-index` (wired into prepare-blog).
+ *
+ * It also emits guides-index.<locale>.json: the posts carrying `guidePhases`,
+ * which the Buppi app's Bebê › Guias screen lists per developmental phase.
+ * The app fetches the article body from the published Markdown mirror
+ * (/blog/<slug>/index.md), so this index only carries metadata + FAQ + refs.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -33,6 +38,14 @@ interface AiIndexEntry {
   updatedAt?: string;
   faq: { question: string; answer: string }[];
   references: { title: string; source: string; url?: string }[];
+}
+
+interface GuideIndexEntry extends AiIndexEntry {
+  /** growthStages phase ids this guide is listed under in the app. */
+  phases: string[];
+  /** The published Markdown mirror the app renders. */
+  mdUrl: string;
+  readingTimeMinutes: number;
 }
 
 function build() {
@@ -61,9 +74,30 @@ function build() {
     const payload = { generatedAt: new Date().toISOString(), locale, count: entries.length, posts: entries };
     writeFileSync(join(outDir, `blog-index.${locale}.json`), JSON.stringify(payload));
     total += entries.length;
-    console.log(`[build-ai-index] ${locale}: ${entries.length} posts`);
+
+    const guides: GuideIndexEntry[] = articles
+      .filter((a) => a.locale === locale && a.frontmatter.guidePhases?.length)
+      .sort((a, b) => a.slug.localeCompare(b.slug))
+      .map((a) => ({
+        slug: a.slug,
+        title: a.frontmatter.title,
+        description: a.frontmatter.description,
+        category: a.frontmatter.category,
+        tags: a.frontmatter.tags ?? [],
+        url: urlFor(locale, a.slug),
+        mdUrl: `${urlFor(locale, a.slug)}index.md`,
+        publishedAt: a.frontmatter.publishedAt,
+        updatedAt: a.frontmatter.updatedAt,
+        faq: a.frontmatter.faq ?? [],
+        references: a.frontmatter.references ?? [],
+        phases: a.frontmatter.guidePhases ?? [],
+        readingTimeMinutes: a.readingTimeMinutes,
+      }));
+    const guidesPayload = { generatedAt: new Date().toISOString(), locale, count: guides.length, guides };
+    writeFileSync(join(outDir, `guides-index.${locale}.json`), JSON.stringify(guidesPayload));
+    console.log(`[build-ai-index] ${locale}: ${entries.length} posts, ${guides.length} guides`);
   }
-  console.log(`[build-ai-index] wrote ${LOCALES.length} files, ${total} entries → public/ai/`);
+  console.log(`[build-ai-index] wrote ${LOCALES.length * 2} files, ${total} entries → public/ai/`);
 }
 
 build();
