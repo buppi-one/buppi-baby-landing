@@ -190,7 +190,7 @@ Saúde fica por último.
 | # | Status | Categoria | Título | Slug | Racional |
 |---|---|---|---|---|---|
 | 1 | ✅ 2026-10-30 (4 idiomas) | feeding | De quanto em quanto tempo o bebê mama? Intervalos por idade (peito e fórmula) | `intervalo-entre-mamadas-por-idade` | 7 usuários no Assist, vários amamentando ("mama a cada 1h de madrugada"); a intenção é FREQUÊNCIA, não volume, e por isso o artigo é separado do hub. GSC: 22 queries/130 imp, pos 10, todas caindo no hub por falta de página melhor. Anti-canibalização: o hub mantém o VOLUME e reduz o FAQ de intervalo a 1 linha + link; os mensais de fórmula mantêm o intervalo da idade e linkam aqui. Cobrir livre demanda × mamadeira, cluster feeding, acordar pra mamar, noite |
-| 2 | ⬜ | sleep | Bebê só dorme no colo: como fazer a transferência pro berço | `bebe-so-dorme-no-colo` | 7 usuários (tema espontâneo nº 2, com dorme mamando/associação peito-sono); 0 visibilidade no GSC hoje = terreno livre dentro do cluster de sono |
+| 2 | ✅ 2026-11-05 (4 idiomas) | sleep | Bebê só dorme no colo: como fazer a transferência pro berço | `bebe-so-dorme-no-colo` | 7 usuários (tema espontâneo nº 2, com dorme mamando/associação peito-sono); 0 visibilidade no GSC hoje = terreno livre dentro do cluster de sono |
 | 3 | ⬜ | sleep | Bebê acorda muito à noite: quantas vezes é normal por idade | `bebe-acorda-muito-a-noite` | 8 usuários (tema nº 1); GSC: "quantas vezes um bebê de 5 meses acorda à noite" pos 6, es "se despierta cada hora" pos 90. Seção "acorda cedo demais" (mais 2 usuários) |
 | 4 | ⬜ | sleep | Que horas o bebê deve dormir? Horário ideal por idade | `que-horas-bebe-deve-dormir` | 6 usuários + chip mais usado (14 usuários); GSC "que horas o bebê deve dormir a noite" pos 64, "bedtime for N month old" pos 83–97 sem página-alvo |
 | 5 | ⬜ (reforço, 4 idiomas, es primeiro) | sleep | H2 "Bebê dorme muito: é normal?" em `sono-bebe-2-meses`, `-4-meses`, `-5-meses` | — | 3 usuários; GSC es "mi bebé de 4 meses duerme mucho" (73 imp em `/es/blog/sueno-bebe-4-meses/`, pos 55–77) |
@@ -231,4 +231,4 @@ Em pt-BR + en. ES/FR podem rodar atrás (~2 semanas).
   esforço e ajuda a planejar interlinks)
 - Revisar a cada trimestre: o que ranqueou bem? o que precisa ser reescrito?
 
-Last updated: 2026-11-04
+Last updated: 2026-11-05
