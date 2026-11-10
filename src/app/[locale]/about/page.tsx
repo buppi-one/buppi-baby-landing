@@ -23,7 +23,7 @@ export async function generateMetadata({
   const m = getMessages(locale).about;
   return pageMetadata({
     locale,
-    title: `${m.title} — Buppi Baby`,
+    title: m.title,
     description: m.intro,
     path: "/about/",
   });

@@ -5,7 +5,13 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { CATEGORIES, categoryFromUrlSlug } from "@/lib/blog/categories";
 import { getArticlesByLocale } from "@/lib/blog/loader";
-import { DEFAULT_LOCALE, getMessages, LOCALES, type Locale } from "@/i18n";
+import {
+  DEFAULT_LOCALE,
+  getMessages,
+  localePath,
+  LOCALES,
+  type Locale,
+} from "@/i18n";
 import { pageMetadata } from "@/lib/metadata";
 
 export const dynamicParams = false;
@@ -60,7 +66,15 @@ export default async function CategoryPage({
           heading={CATEGORIES[slug].label[DEFAULT_LOCALE]}
         />
       </main>
-      <Footer locale={DEFAULT_LOCALE} />
+      <Footer
+        locale={DEFAULT_LOCALE}
+        alternates={Object.fromEntries(
+          LOCALES.map((l) => [
+            l,
+            localePath(l, `/blog/category/${CATEGORIES[slug].urlSlug[l]}`),
+          ]),
+        )}
+      />
     </>
   );
 }

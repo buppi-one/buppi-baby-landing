@@ -33,9 +33,31 @@ export function Article({ article }: { article: ArticleT }) {
     article.frontmatter.updatedAt &&
     article.frontmatter.updatedAt !== article.frontmatter.publishedAt;
 
+  const blogUrl = `${SITE_URL}${localePath(article.locale, "/blog")}`;
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Buppi Baby",
+        item: `${SITE_URL}${localePath(article.locale, "/")}`,
+      },
+      { "@type": "ListItem", position: 2, name: m.blog.title, item: blogUrl },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: article.frontmatter.title,
+        item: url,
+      },
+    ],
+  };
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${url}#article`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
     headline: article.frontmatter.title,
     description: article.frontmatter.description,
     image: cover ? [`${SITE_URL}${cover}`] : [`${SITE_URL}/og-image.png`],
@@ -43,12 +65,21 @@ export function Article({ article }: { article: ArticleT }) {
     dateModified:
       article.frontmatter.updatedAt ?? article.frontmatter.publishedAt,
     inLanguage: article.locale,
+    // The editorial team is the publisher itself: no individual byline is
+    // claimed until a named author/reviewer actually exists.
+    author: {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Buppi Baby",
+      url: `${SITE_URL}${localePath(article.locale, "/about")}`,
+    },
     publisher: {
       "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
       name: "Buppi Baby",
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/logo-full.webp`,
+        url: `${SITE_URL}/logo-full-2x.webp`,
       },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
@@ -64,6 +95,10 @@ export function Article({ article }: { article: ArticleT }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
       {/* Header — title + meta */}
@@ -182,6 +217,13 @@ export function Article({ article }: { article: ArticleT }) {
               },
             }}
             components={{
+              // Wide tables scroll inside their own box instead of widening
+              // the page on small screens.
+              table: (props) => (
+                <div className="table-scroll">
+                  <table {...props} />
+                </div>
+              ),
               img: (props) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -245,6 +287,13 @@ export function Article({ article }: { article: ArticleT }) {
             locale={article.locale}
           />
         ) : null}
+
+        <p
+          role="note"
+          className="mt-10 rounded-2xl border border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] bg-[var(--color-surface-elevated)] dark:bg-[var(--color-surface-elevated-dark)] px-5 py-4 text-[14px] leading-relaxed text-[var(--color-fg-secondary)] dark:text-slate-300"
+        >
+          {m.blog.medicalDisclaimer}
+        </p>
 
         <ShareBar
           url={url}

@@ -16,6 +16,8 @@ const quicksand = localFont({
   weight: "300 700",
   variable: "--font-quicksand",
   display: "swap",
+  // Only referenced through --font-rounded, which no element uses yet.
+  preload: false,
 });
 
 export const metadata: Metadata = {

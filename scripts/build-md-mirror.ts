@@ -75,7 +75,46 @@ const HOME: Record<Loc, { title: string; body: string }> = {
   },
 };
 
-/** Walk out/ and write a stub index.md next to any index.html that has none. */
+const ENTITIES: Record<string, string> = {
+  "&amp;": "&",
+  "&lt;": "<",
+  "&gt;": ">",
+  "&quot;": '"',
+  "&#x27;": "'",
+  "&#39;": "'",
+  "&nbsp;": " ",
+};
+
+/**
+ * Best-effort HTML → markdown for pages that have no hand-written mirror
+ * (about, tools, legal). Reads the server-rendered <main>, keeps headings,
+ * paragraphs, list items and links, and drops scripts, styles and icons.
+ */
+function htmlToMd(html: string): string {
+  const main = /<main[^>]*>([\s\S]*?)<\/main>/.exec(html)?.[1] ?? "";
+  return main
+    .replace(/<(script|style|svg|noscript|template)[\s\S]*?<\/\1>/g, "")
+    .replace(/<h1[^>]*>([\s\S]*?)<\/h1>/g, "")
+    .replace(/<h2[^>]*>([\s\S]*?)<\/h2>/g, "\n\n## $1\n\n")
+    .replace(/<h3[^>]*>([\s\S]*?)<\/h3>/g, "\n\n### $1\n\n")
+    .replace(/<li[^>]*>([\s\S]*?)<\/li>/g, "\n- $1")
+    .replace(
+      /<a[^>]*href="([^"#][^"]*)"[^>]*>([\s\S]*?)<\/a>/g,
+      (_m, href: string, text: string) =>
+        `[${text}](${href.startsWith("/") ? BASE + href : href})`,
+    )
+    .replace(/<\/(p|div|section|ul|ol|tr|label)>/g, "\n\n")
+    .replace(/<br\s*\/?>/g, "\n")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&[a-z#0-9]+;/gi, (e) => ENTITIES[e] ?? e)
+    .replace(/\[\s*\]\([^)]*\)/g, "")
+    .replace(/[ \t]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+/** Walk out/ and write an index.md next to any index.html that has none. */
 function stubMirrors(dir: string, rel: string): number {
   let n = 0;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -88,15 +127,23 @@ function stubMirrors(dir: string, rel: string): number {
     const title = /<title[^>]*>([\s\S]*?)<\/title>/.exec(html)?.[1]?.trim() ?? "buppi.baby";
     const desc = /<meta name="description" content="([^"]*)"/.exec(html)?.[1] ?? "";
     const canonical = `${BASE}${rel}/`;
+    const body = htmlToMd(html);
     writeFileSync(
       join(dir, "index.md"),
       fm({ title, description: desc || undefined, canonical }) +
-        `# ${title}\n\n${desc ? `> ${desc}\n>\n` : ""}> Canonical: ${canonical}\n\nFull page: ${canonical} · Site guide: ${BASE}/llms.txt\n`,
+        `# ${title}\n\n${desc ? `> ${desc}\n>\n` : ""}> Canonical: ${canonical}\n\n${body ? `${body}\n\n` : ""}Full page: ${canonical} · Site guide: ${BASE}/llms.txt\n`,
     );
     n++;
   }
   return n;
 }
+
+const REFERENCES_H2: Record<Loc, string> = {
+  "pt-BR": "Referências",
+  en: "References",
+  es: "Referencias",
+  fr: "Références",
+};
 
 function main() {
   if (!existsSync(OUT)) {
@@ -132,6 +179,19 @@ function main() {
       const faqMd = faq.length
         ? `\n\n## FAQ\n\n${faq.map((x) => `### ${x.question}\n\n${x.answer}`).join("\n\n")}`
         : "";
+      const refs = (data.references ?? []) as {
+        title: string;
+        source?: string;
+        url?: string;
+      }[];
+      const refsMd = refs.length
+        ? `\n\n## ${REFERENCES_H2[l]}\n\n${refs
+            .map(
+              (r) =>
+                `- ${r.url ? `[${r.title}](${r.url})` : r.title}${r.source ? ` — ${r.source}` : ""}`,
+            )
+            .join("\n")}`
+        : "";
       const md =
         fm({
           title: String(data.title),
@@ -139,7 +199,7 @@ function main() {
           canonical: `${BASE}${path}`,
           updated: isoDate(data.updatedAt ?? data.publishedAt),
         }) +
-        `# ${data.title}\n\n> ${data.description}\n>\n> Canonical: ${BASE}${path}\n\n${mdxToMd(content)}${faqMd}\n`;
+        `# ${data.title}\n\n> ${data.description}\n>\n> Canonical: ${BASE}${path}\n\n${mdxToMd(content)}${faqMd}${refsMd}\n`;
       write(path, md);
       byLocale[l].push({
         title: String(data.title),

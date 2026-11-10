@@ -22,7 +22,7 @@ export default function ToolsHubPage() {
       <main>
         <ToolsIndex locale={DEFAULT_LOCALE} />
       </main>
-      <Footer locale={DEFAULT_LOCALE} />
+      <Footer locale={DEFAULT_LOCALE} path="/ferramentas" />
     </>
   );
 }

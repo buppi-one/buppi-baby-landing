@@ -28,6 +28,7 @@ export async function generateMetadata({
       description: m.ogDescription,
       images: [{ url: "/og-image.png", width: 1200, height: 630 }],
       type: "website",
+      url: `/${locale}/`,
       locale: locale.replace("-", "_"),
     },
     twitter: {

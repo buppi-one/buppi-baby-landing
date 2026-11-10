@@ -5,7 +5,7 @@ import { Nav } from "@/components/Nav";
 import { Article } from "@/components/blog/Article";
 import { RedirectScript } from "@/components/blog/RedirectScript";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
-import { DEFAULT_LOCALE } from "@/i18n";
+import { DEFAULT_LOCALE, localePath, type Locale } from "@/i18n";
 import {
   getAlternatesMap,
   getArticle,
@@ -46,7 +46,14 @@ export default async function BlogArticlePage({
         <Article article={article} />
         <RelatedPosts current={article} />
       </main>
-      <Footer locale={DEFAULT_LOCALE} />
+      <Footer
+        locale={DEFAULT_LOCALE}
+        alternates={Object.fromEntries(
+          Object.entries(getAlternatesMap()[article.id] ?? {}).map(
+            ([l, s]) => [l, localePath(l as Locale, `/blog/${s}`)],
+          ),
+        )}
+      />
     </>
   );
 }

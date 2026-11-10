@@ -1,6 +1,32 @@
-import { getMessages, localePath, type Locale } from "@/i18n";
+import {
+  getMessages,
+  LOCALES,
+  LOCALE_LABELS,
+  localePath,
+  type Locale,
+} from "@/i18n";
 
-export function Footer({ locale }: { locale: Locale }) {
+/**
+ * `alternates` maps each locale to the equivalent path of the current page.
+ * When a page does not pass it, the links fall back to `path` (default: home)
+ * in every locale. These are plain anchors in the static HTML so crawlers can
+ * follow them — the header language menu only renders its links after a click.
+ */
+export function Footer({
+  locale,
+  path = "/",
+  alternates,
+}: {
+  locale: Locale;
+  path?: string;
+  alternates?: Partial<Record<Locale, string>>;
+}) {
+  const languageLinks = LOCALES.filter(
+    (l) => !alternates || alternates[l] !== undefined,
+  ).map((l) => ({
+    locale: l,
+    href: alternates?.[l] ?? localePath(l, path),
+  }));
   const m = getMessages(locale).footer;
   const blogTitle = getMessages(locale).blog.title;
 
@@ -102,7 +128,23 @@ export function Footer({ locale }: { locale: Locale }) {
         </div>
         <div className="pt-6 border-t border-[var(--color-border-warm)] dark:border-[var(--color-border-dark)] flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-[var(--color-fg-secondary)] dark:text-slate-400">
           <span>{m.copyright}</span>
-          <span>buppi.baby</span>
+          <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            {languageLinks.map(({ locale: l, href }) => (
+              <li key={l}>
+                <a
+                  href={href}
+                  hrefLang={l}
+                  lang={l}
+                  aria-current={l === locale ? "true" : undefined}
+                  className={`inline-block py-2 hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors ${
+                    l === locale ? "font-semibold text-[var(--color-ink)] dark:text-white" : ""
+                  }`}
+                >
+                  {LOCALE_LABELS[l]}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

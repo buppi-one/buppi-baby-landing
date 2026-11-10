@@ -5,7 +5,13 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { CATEGORIES, categoryFromUrlSlug } from "@/lib/blog/categories";
 import { getArticlesByLocale } from "@/lib/blog/loader";
-import { getMessages, isLocale, LOCALES, type Locale } from "@/i18n";
+import {
+  getMessages,
+  isLocale,
+  localePath,
+  LOCALES,
+  type Locale,
+} from "@/i18n";
 import { pageMetadata } from "@/lib/metadata";
 
 const SUPPORTED = ["en", "es", "fr"] as const;
@@ -68,7 +74,15 @@ export default async function LocalizedCategoryPage({
           heading={CATEGORIES[slug].label[locale as RouteLocale]}
         />
       </main>
-      <Footer locale={locale as RouteLocale} />
+      <Footer
+        locale={locale as RouteLocale}
+        alternates={Object.fromEntries(
+          LOCALES.map((l) => [
+            l,
+            localePath(l, `/blog/category/${CATEGORIES[slug].urlSlug[l]}`),
+          ]),
+        )}
+      />
     </>
   );
 }

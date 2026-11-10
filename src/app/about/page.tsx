@@ -7,7 +7,7 @@ export function generateMetadata(): Metadata {
   const m = getMessages(DEFAULT_LOCALE).about;
   return pageMetadata({
     locale: DEFAULT_LOCALE,
-    title: `${m.title} — Buppi Baby`,
+    title: m.title,
     description: m.intro,
     path: "/about/",
   });

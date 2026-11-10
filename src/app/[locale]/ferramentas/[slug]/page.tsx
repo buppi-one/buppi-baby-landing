@@ -53,7 +53,7 @@ export default async function LocalizedToolDetailPage({
       <main>
         <ToolPage locale={locale as RouteLocale} tool={tool} />
       </main>
-      <Footer locale={locale as RouteLocale} />
+      <Footer locale={locale as RouteLocale} alternates={toolPaths(tool)} />
     </>
   );
 }

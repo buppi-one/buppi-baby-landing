@@ -44,7 +44,7 @@ export const TOOLS: Tool[] = [
     },
     content: {
       "pt-BR": {
-        title: "Calculadora de fórmula por idade e peso",
+        title: "Calculadora de fórmula infantil por idade e peso",
         description:
           "Estime quantos ml de fórmula seu bebê precisa por dia e por mamada, do recém-nascido aos 6 meses — a partir do peso e da idade, com base nas orientações da AAP e da OMS.",
         heading: "Calculadora de fórmula",
@@ -52,7 +52,7 @@ export const TOOLS: Tool[] = [
           "Uma faixa de referência de quantos ml de fórmula oferecer, por dia e por mamada, a partir da idade e do peso do bebê. É um ponto de partida — não uma meta — e sempre com deferência ao pediatra.",
       },
       en: {
-        title: "Formula calculator by age and weight",
+        title: "Baby formula calculator by age and weight",
         description:
           "Estimate how many ml of formula your baby needs per day and per feed, from newborn to 6 months — from weight and age, based on AAP and WHO guidance.",
         heading: "Formula calculator",
@@ -60,7 +60,7 @@ export const TOOLS: Tool[] = [
           "A reference range for how much formula to offer, per day and per feed, from your baby's age and weight. It's a starting point — not a target — and always defers to your pediatrician.",
       },
       es: {
-        title: "Calculadora de fórmula por edad y peso",
+        title: "Calculadora de fórmula infantil por edad y peso",
         description:
           "Estima cuántos ml de fórmula necesita tu bebé al día y por toma, del recién nacido a los 6 meses — según el peso y la edad, con base en las guías de la AAP y la OMS.",
         heading: "Calculadora de fórmula",

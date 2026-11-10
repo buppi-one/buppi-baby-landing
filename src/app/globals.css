@@ -221,10 +221,17 @@
     overflow-x: auto;
     font-size: 0.95rem;
   }
+  .article-body .table-scroll {
+    overflow-x: auto;
+    margin: 1rem 0;
+    -webkit-overflow-scrolling: touch;
+  }
   .article-body table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1rem 0;
+  }
+  .article-body a.no-underline {
+    text-decoration: none;
   }
   .article-body th,
   .article-body td {

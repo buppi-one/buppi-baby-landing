@@ -18,14 +18,16 @@ export function SiteJsonLd({ locale }: { locale: Locale }) {
         "@id": `${BASE}/#organization`,
         name: "Buppi Baby",
         url: `${BASE}/`,
-        logo: `${BASE}/logo-full-2x.webp`,
+        logo: {
+          "@type": "ImageObject",
+          "@id": `${BASE}/#logo`,
+          url: `${BASE}/logo-full-2x.webp`,
+        },
         description,
         email: "suporte@buppi.baby",
         sameAs: [
           "https://www.instagram.com/buppi.baby/",
           "https://github.com/buppi-one",
-          STORE_LINKS.appStore,
-          STORE_LINKS.playStore,
         ],
         contactPoint: [
           {
@@ -43,6 +45,14 @@ export function SiteJsonLd({ locale }: { locale: Locale }) {
         ],
       },
       {
+        "@type": "WebSite",
+        "@id": `${BASE}/#website`,
+        name: "Buppi Baby",
+        url: `${BASE}/`,
+        inLanguage: ["pt-BR", "en", "es", "fr"],
+        publisher: { "@id": `${BASE}/#organization` },
+      },
+      {
         "@type": ["SoftwareApplication", "MobileApplication"],
         "@id": `${BASE}/#app`,
         name: "Buppi Baby",
@@ -53,6 +63,7 @@ export function SiteJsonLd({ locale }: { locale: Locale }) {
         offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
         downloadUrl: [STORE_LINKS.appStore, STORE_LINKS.playStore],
         installUrl: [STORE_LINKS.appStore, STORE_LINKS.playStore],
+        sameAs: [STORE_LINKS.appStore, STORE_LINKS.playStore],
         inLanguage: ["pt-BR", "en", "es", "fr"],
         publisher: { "@id": `${BASE}/#organization` },
       },

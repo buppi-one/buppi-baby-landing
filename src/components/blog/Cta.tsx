@@ -73,7 +73,7 @@ function CtaCompact({
       <a
         href={href}
         data-cta={id}
-        className="inline-flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--color-ink)] text-[var(--color-background-light)] text-sm font-semibold hover:opacity-90 transition-opacity self-stretch sm:self-center justify-center"
+        className="no-underline inline-flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--color-ink)] text-[var(--color-background-light)] text-sm font-semibold hover:opacity-90 transition-opacity self-stretch sm:self-center justify-center"
       >
         {content.cta}
       </a>
@@ -124,7 +124,7 @@ function CtaFeatured({
         <a
           href={href}
           data-cta={id}
-          className="inline-flex shrink-0 items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"
+          className="no-underline inline-flex shrink-0 items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"
           style={{ background: styles.accentBar, color: "var(--color-ink)" }}
         >
           {content.cta}

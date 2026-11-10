@@ -9,7 +9,7 @@ export function generateMetadata(): Metadata {
   const m = getMessages(DEFAULT_LOCALE).blog;
   const meta = pageMetadata({
     locale: DEFAULT_LOCALE,
-    title: `${m.title} — Buppi Baby`,
+    title: m.metaTitle,
     description: m.description,
     path: "/blog/",
   });
@@ -31,7 +31,7 @@ export default function BlogIndexPage() {
       <main>
         <BlogIndex locale={DEFAULT_LOCALE} />
       </main>
-      <Footer locale={DEFAULT_LOCALE} />
+      <Footer locale={DEFAULT_LOCALE} path="/blog" />
     </>
   );
 }

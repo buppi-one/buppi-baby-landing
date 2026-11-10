@@ -44,7 +44,7 @@ export default async function ToolDetailPage({
       <main>
         <ToolPage locale={DEFAULT_LOCALE} tool={tool} />
       </main>
-      <Footer locale={DEFAULT_LOCALE} />
+      <Footer locale={DEFAULT_LOCALE} alternates={toolPaths(tool)} />
     </>
   );
 }

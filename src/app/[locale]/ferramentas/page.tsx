@@ -44,7 +44,7 @@ export default async function LocalizedToolsHubPage({
       <main>
         <ToolsIndex locale={locale as RouteLocale} />
       </main>
-      <Footer locale={locale as RouteLocale} />
+      <Footer locale={locale as RouteLocale} path="/ferramentas" />
     </>
   );
 }

@@ -25,7 +25,7 @@ export async function generateMetadata({
   const m = getMessages(locale).blog;
   const meta = pageMetadata({
     locale,
-    title: `${m.title} — Buppi Baby`,
+    title: m.metaTitle,
     description: m.description,
     path: "/blog/",
   });
@@ -55,7 +55,7 @@ export default async function LocalizedBlogIndexPage({
       <main>
         <BlogIndex locale={locale as RouteLocale} />
       </main>
-      <Footer locale={locale as RouteLocale} />
+      <Footer locale={locale as RouteLocale} path="/blog" />
     </>
   );
 }

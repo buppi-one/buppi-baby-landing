@@ -564,8 +564,9 @@ export function FormulaCalculator({ locale }: { locale: Locale }) {
         </label>
       </div>
 
-      {/* Result */}
-      <div className="px-6 sm:px-8 pb-6">
+      {/* Result — announced politely so assistive tech and agents notice it
+          changing after an input. */}
+      <div className="px-6 sm:px-8 pb-6" role="status" aria-live="polite">
         {defer ? (
           <div className="rounded-2xl bg-[var(--color-accent-peach)]/20 dark:bg-white/5 border border-[var(--color-accent-peach)]/50 dark:border-[var(--color-border-dark)] px-5 py-4">
             <p className="flex items-center gap-2 font-semibold text-[var(--color-ink)] dark:text-white text-[15px] m-0">

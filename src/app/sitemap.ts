@@ -16,23 +16,20 @@ function urlFor(locale: Locale, path: string): string {
 
 type Entry = MetadataRoute.Sitemap[number];
 
-function staticEntries(lastModified: Date): Entry[] {
+function staticEntries(): Entry[] {
   return STATIC_PATHS.flatMap((path) =>
     LOCALES.map((locale) => {
       const languages = Object.fromEntries(LOCALES.map((l) => [l, urlFor(l, path)]));
       languages["x-default"] = urlFor(DEFAULT_LOCALE, path);
       return {
         url: urlFor(locale, path),
-        lastModified,
-        changeFrequency: "monthly" as const,
-        priority: path === "/" ? 1 : path === "/blog" ? 0.8 : 0.7,
         alternates: { languages },
       };
     }),
   );
 }
 
-function categoryEntries(lastModified: Date): Entry[] {
+function categoryEntries(): Entry[] {
   const out: Entry[] = [];
   for (const locale of LOCALES) {
     const used = new Set(getArticlesByLocale(locale).map((a) => a.frontmatter.category));
@@ -46,9 +43,6 @@ function categoryEntries(lastModified: Date): Entry[] {
       languages["x-default"] = urlFor(DEFAULT_LOCALE, `/blog/category/${meta.urlSlug[DEFAULT_LOCALE]}`);
       out.push({
         url: urlFor(locale, path),
-        lastModified,
-        changeFrequency: "weekly",
-        priority: 0.6,
         alternates: { languages },
       });
     }
@@ -76,8 +70,6 @@ function articleEntries(): Entry[] {
       out.push({
         url: urlFor(r.locale, `/blog/${r.slug}`),
         lastModified,
-        changeFrequency: "monthly",
-        priority: 0.6,
         alternates: { languages },
       });
     }
@@ -85,7 +77,7 @@ function articleEntries(): Entry[] {
   return out;
 }
 
-function toolEntries(lastModified: Date): Entry[] {
+function toolEntries(): Entry[] {
   const out: Entry[] = [];
   for (const tool of TOOLS) {
     const paths = toolPaths(tool); // per-locale, already prefixed + trailing slash
@@ -95,9 +87,6 @@ function toolEntries(lastModified: Date): Entry[] {
     for (const l of LOCALES) {
       out.push({
         url: `${BASE_URL}${paths[l]}`,
-        lastModified,
-        changeFrequency: "monthly",
-        priority: 0.7,
         alternates: { languages },
       });
     }
@@ -106,11 +95,13 @@ function toolEntries(lastModified: Date): Entry[] {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // Only articles carry a real edit date (frontmatter). Static, category and
+  // tool pages omit lastmod: a build timestamp would change on every deploy
+  // and teach crawlers to distrust the field.
   return [
-    ...staticEntries(now),
-    ...categoryEntries(now),
-    ...toolEntries(now),
+    ...staticEntries(),
+    ...categoryEntries(),
+    ...toolEntries(),
     ...articleEntries(),
   ];
 }

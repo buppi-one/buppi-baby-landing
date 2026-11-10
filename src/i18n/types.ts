@@ -31,6 +31,7 @@ export type Messages = {
     blog: string;
     tools: string;
     download: string;
+    downloadShort: string;
     signIn: string;
     themeAria: string;
     languageAria: string;
@@ -215,10 +216,12 @@ export type Messages = {
   };
   blog: {
     title: string;
+    metaTitle: string;
     description: string;
     readingTime: (minutes: number) => string;
     publishedOn: string;
     updatedOn: string;
+    medicalDisclaimer: string;
     backToBlog: string;
     categoryLabel: string;
     relatedPosts: string;

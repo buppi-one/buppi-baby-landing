@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     description: getMessages(DEFAULT_LOCALE).meta.ogDescription,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     type: "website",
+    url: "/",
     locale: "pt_BR",
   },
 };

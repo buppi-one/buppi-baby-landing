@@ -14,6 +14,8 @@ export function ToolPage({ locale, tool }: { locale: Locale; tool: Tool }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
+    "@id": `${url}#tool`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
     name: c.title,
     description: c.description,
     url,
@@ -21,12 +23,32 @@ export function ToolPage({ locale, tool }: { locale: Locale; tool: Tool }) {
     operatingSystem: "Web",
     inLanguage: locale,
     isAccessibleForFree: true,
-    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
     publisher: {
       "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
       name: "Buppi Baby",
-      logo: { "@type": "ImageObject", url: `${SITE_URL}/logo-full.webp` },
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/logo-full-2x.webp` },
     },
+  };
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Buppi Baby",
+        item: `${SITE_URL}${localePath(locale, "/")}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: m.badge,
+        item: `${SITE_URL}${localePath(locale, "/ferramentas")}`,
+      },
+      { "@type": "ListItem", position: 3, name: c.heading, item: url },
+    ],
   };
 
   return (
@@ -34,6 +56,10 @@ export function ToolPage({ locale, tool }: { locale: Locale; tool: Tool }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <div className="max-w-3xl mx-auto px-6 lg:px-14 pt-12 lg:pt-16 pb-16">
         <nav
