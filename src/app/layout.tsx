@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Outfit, Quicksand } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+// Self-hosted variable fonts (latin subset, from @fontsource-variable, OFL) so
+// the build does not depend on fetching Google Fonts at build time.
+const outfit = localFont({
+  src: "./fonts/outfit-latin-wght-normal.woff2",
+  weight: "100 900",
   variable: "--font-outfit",
   display: "swap",
 });
 
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+const quicksand = localFont({
+  src: "./fonts/quicksand-latin-wght-normal.woff2",
+  weight: "300 700",
   variable: "--font-quicksand",
   display: "swap",
 });
