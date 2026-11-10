@@ -211,6 +211,20 @@ Depois da Wave 4, avaliar: série de gravidez semana a semana (nappi faz 12–40
 
 ---
 
+## Wave 6 — demanda de sono no GSC (nov/2026)
+
+Fora do cluster de fórmula, a demanda dos últimos 90 dias é quase toda
+"janela de sono bebê de N meses" / "quanto tempo um bebê de N meses fica
+acordado", com os guias mensais entre a 5ª e a 10ª posição e CTR perto de zero.
+
+| # | Status | Ação | Alvo | Sinal |
+|---|---|---|---|---|
+| 1 | ✅ 2026-11-10 (4 idiomas) | Título e descrição espelhando a busca, com a janela em números | `sono-bebe-{2,3,10,11,12}-meses` | "janela de sono bebe 10 meses" 100 imp pos 8,5; 4 a 9 meses já tinham sido retitulados em 22/10 |
+| 2 | ⬜ medir ~20/11 | Reler CTR dos guias de 4 a 9 meses e das páginas de fórmula por mês; se não subir, pôr o número no título também | `sono-bebe-{4..9}-meses`, `formula-bebe-*` | `gsc.ts ctr` |
+| 3 | ⬜ | "cluster feeding qué es" em espanhol: 280 imp, pos 9,7, 1 clique. Rever título/descrição e abertura do es | `cluster-feeding-explicado` (es) | GSC 90d |
+| 4 | ⬜ | Volume por dias de vida ("bebê de 10, 15, 20, 22 dias mama quantos ml"): tabela dia a dia no post do recém-nascido | `quantos-ml-mama-recem-nascido` | ~300 imp somadas, pos 5 a 7 |
+| 5 | ⬜ | "quantos ml um bebê de 4/5 meses mama leite materno" e "bebê de 7 meses mama quantos ml": avaliar seção de leite materno ordenhado e página de 7 a 12 meses | novo ou reforço | ~275 imp, pos 5,5 a 7,3 |
+
 ## Cadência prática sugerida
 
 | Mês | Wave principal | Long-tail extra | Total publicados |
