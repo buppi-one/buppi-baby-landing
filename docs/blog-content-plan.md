@@ -199,7 +199,7 @@ Saúde fica por último.
 | 8 | ✅ 2026-11-05 (4 idiomas) | sleep | Bebê que só quer colo: é normal? Quando investigar | `bebe-so-quer-colo` | 6 usuários; 0 GSC |
 | 9 | ✅ 2026-11-05 (4 idiomas) | sleep | Quarto do bebê: temperatura, luz, ventilador e posição segura pra dormir | `ambiente-seguro-sono-bebe` | 4 usuários (bruços, ventilador, umidificador, elevar berço, calor) |
 | 10 | ✅ 2026-11-10 (reforço, 4 idiomas) | feeding | Estou com pouco leite? Sinais reais e sinais falsos | reforço em `bebe-mamando-o-suficiente` | 4 usuários; 0 GSC. Não virou artigo novo: o post existente já tinha a seção de produção percebida × real; H2 passou a espelhar a pergunta e entrou um FAQ dedicado |
-| 11 | ⬜ | health | Disquesia × cólica e quantos dias o bebê pode ficar sem fazer cocô | `disquesia-coco-do-bebe` | 6 usuários, mas tema de saúde (YMYL) com 0 GSC e padrão da cólica = baixo retorno orgânico; útil pro Assist linkar. Risco alto na regra de medicamentos |
+| 11 | ❌ descartado 2026-11-10 | health | Disquesia × cólica e quantos dias o bebê pode ficar sem fazer cocô | `disquesia-coco-do-bebe` | 6 usuários, mas tema de saúde (YMYL) com 0 GSC e padrão da cólica = baixo retorno orgânico; útil pro Assist linkar. Risco alto na regra de medicamentos |
 | 12 | ✅ 2026-11-04 (4 idiomas) | feeding | Bebê não quer comer e só quer peito: o que fazer | `bebe-nao-quer-comer` | Pedido do Thiago em 03/11. Recusa da comida entre 6 e 12 meses, ordem entre peito e refeição, texturas, ferro e sinais de alerta. Complementa a seção de recusa de `introducao-alimentar-6-meses-blw-vs-papinha`, que agora linka aqui |
 
 Fora do blog (sinais de produto do Assist): link de artigo que não abriu,
