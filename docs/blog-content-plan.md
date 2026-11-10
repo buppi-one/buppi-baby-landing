@@ -221,8 +221,8 @@ acordado", com os guias mensais entre a 5ª e a 10ª posição e CTR perto de ze
 |---|---|---|---|---|
 | 1 | ✅ 2026-11-10 (4 idiomas) | Título e descrição espelhando a busca, com a janela em números | `sono-bebe-{2,3,10,11,12}-meses` | "janela de sono bebe 10 meses" 100 imp pos 8,5; 4 a 9 meses já tinham sido retitulados em 22/10 |
 | 2 | ⬜ medir ~20/11 | Reler CTR dos guias de 4 a 9 meses e das páginas de fórmula por mês; se não subir, pôr o número no título também | `sono-bebe-{4..9}-meses`, `formula-bebe-*` | `gsc.ts ctr` |
-| 3 | ⬜ | "cluster feeding qué es" em espanhol: 280 imp, pos 9,7, 1 clique. Rever título/descrição e abertura do es | `cluster-feeding-explicado` (es) | GSC 90d |
-| 4 | ⬜ | Volume por dias de vida ("bebê de 10, 15, 20, 22 dias mama quantos ml"): tabela dia a dia no post do recém-nascido | `quantos-ml-mama-recem-nascido` | ~300 imp somadas, pos 5 a 7 |
+| 3 | ✅ 2026-11-10 (pt-BR, es, fr) | "cluster feeding qué es" em espanhol: 280 imp, pos 9,7, 1 clique. Título passou a responder "o que é" e a descrição cita o termo local | `cluster-feeding-explicado` (es) | GSC 90d |
+| 4 | ➖ nada a fazer | Volume por dias de vida ("bebê de 10, 15, 20, 22 dias mama quantos ml"): o post do recém-nascido já tem tabela dia a dia, FAQs de 15/20/24 dias e seção própria; o Google é que prefere a página geral para essas buscas | `quantos-ml-mama-recem-nascido` | ~300 imp somadas, pos 5 a 7 |
 | 5 | ⬜ | "quantos ml um bebê de 4/5 meses mama leite materno" e "bebê de 7 meses mama quantos ml": avaliar seção de leite materno ordenhado e página de 7 a 12 meses | novo ou reforço | ~275 imp, pos 5,5 a 7,3 |
 
 ## Cadência prática sugerida
