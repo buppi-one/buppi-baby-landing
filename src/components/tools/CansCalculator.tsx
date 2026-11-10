@@ -81,7 +81,7 @@ const STRINGS: Record<Locale, S> = {
       { label: "AAP — HealthyChildren", url: AAP },
       {
         label: "Ministério da Saúde",
-        url: "https://bvsms.saude.gov.br/bvs/publicacoes/guia_alimentar_criancas_menores_2anos.pdf",
+        url: "https://bvsms.saude.gov.br/bvs/publicacoes/guia_alimentar_criancas_brasileiras_menores_2_anos.pdf",
       },
     ],
     ctaText: "Acompanhe cada mamada no Buppi",
