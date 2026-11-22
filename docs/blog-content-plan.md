@@ -246,3 +246,16 @@ Em pt-BR + en. ES/FR podem rodar atrás (~2 semanas).
 - Revisar a cada trimestre: o que ranqueou bem? o que precisa ser reescrito?
 
 Last updated: 2026-11-05
+
+---
+
+## Série "Gestação semana a semana" (nov/2026)
+
+| # | Status | Categoria | Peça | id |
+|---|---|---|---|---|
+| G1 | ✅ 2026-11-22 (4 idiomas) | expecting-and-new-parents | Hub: gestação semana a semana | `gestacao-semana-a-semana` |
+| G2 | ✅ 2026-11-22 (4 idiomas) | expecting-and-new-parents | Semanas 1 a 3, 4 a 40, 41 e 42 (39 artigos) | `gestacao-1-a-3-semanas`, `gestacao-N-semanas`, `gestacao-41-e-42-semanas` |
+
+Regras e fontes da série: `docs/pregnancy-series.md` e `docs/pregnancy-series-references.md`.
+Navegação entre semanas: `npx tsx scripts/pregnancy-series/nav.ts`; consistência dos números:
+`npx tsx scripts/pregnancy-series/check.ts`. Instagram: um carrossel por dia, na ordem das semanas.

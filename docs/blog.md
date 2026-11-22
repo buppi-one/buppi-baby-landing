@@ -468,7 +468,7 @@ download — em pt-BR/en/es/fr automaticamente conforme o locale.
 - **Type-safe**: `CtaId` é union literal, autocomplete no editor se um dia o autor
   escrever direto em TS
 
-### Catálogo atual (15 CTAs)
+### Catálogo atual (16 CTAs)
 
 | ID | Quando usar | Variante |
 |---|---|---|
@@ -486,6 +486,7 @@ download — em pt-BR/en/es/fr automaticamente conforme o locale.
 | `family-realtime` | compartilhamento, feed familiar | secondary |
 | `family-grandparents` | avós, família estendida | secondary |
 | `health-symptoms` | cólica, refluxo, alergia — registrar pra mostrar pediatra | accent |
+| `pregnancy-start` | série de gestação semana a semana: começar a usar o app antes do parto | primary |
 | `download` | genérico, **estilo "featured"** (card grande de fundo escuro) | primary |
 
 ### Como escolher o CTA certo

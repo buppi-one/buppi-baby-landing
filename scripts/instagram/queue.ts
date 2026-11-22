@@ -55,7 +55,7 @@ function load(): Row[] {
       permalink: ledger[key]?.permalink,
     });
   }
-  return rows.sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id));
+  return rows.sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id, "en", { numeric: true }));
 }
 
 function main() {

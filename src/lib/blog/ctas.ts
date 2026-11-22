@@ -418,6 +418,34 @@ export const CTAS = {
     },
   },
 
+  // ── Pregnancy ───────────────────────────────────────────────
+  "pregnancy-start": {
+    icon: "heart",
+    variant: "primary",
+    content: {
+      "pt-BR": {
+        title: "Dá para começar a usar o Buppi ainda na gestação",
+        body: "Cadastre a data prevista do parto e deixe tudo pronto. Quando o bebê chegar, sono, mamadas e fraldas ficam a um toque.",
+        cta: "Baixar grátis",
+      },
+      en: {
+        title: "You can start using Buppi while still pregnant",
+        body: "Add your due date and have everything ready. When the baby arrives, sleep, feeds and diapers are one tap away.",
+        cta: "Get Buppi free",
+      },
+      es: {
+        title: "Puedes empezar a usar Buppi ya en el embarazo",
+        body: "Añade la fecha prevista de parto y déjalo todo listo. Cuando llegue el bebé, sueño, tomas y pañales quedan a un toque.",
+        cta: "Descargar gratis",
+      },
+      fr: {
+        title: "Vous pouvez utiliser Buppi dès la grossesse",
+        body: "Ajoutez la date prévue d'accouchement et préparez tout. À l'arrivée de bébé, sommeil, tétées et couches sont à portée de main.",
+        cta: "Télécharger gratuit",
+      },
+    },
+  },
+
   // ── Generic ─────────────────────────────────────────────────
   download: {
     icon: "bolt",
