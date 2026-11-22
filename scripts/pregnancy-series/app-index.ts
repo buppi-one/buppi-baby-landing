@@ -102,7 +102,9 @@ export function weeksOfArticle(id: string): { fromWeek: number; toWeek: number }
 export function quickAnswerOf(body: string): string | null {
   const m = body.match(/^\*\*[^*]+:?\*\*:?\s*(.+)$/m);
   if (!m) return null;
-  return m[1].replace(/\*\*/g, "").trim();
+  const text = m[1].replace(/\*\*/g, "").trim();
+  // It continues the label ("Quick answer: at 20 weeks…"); on its own it starts a sentence.
+  return text.charAt(0).toLocaleUpperCase() + text.slice(1);
 }
 
 /** The "Comparison" row of the article's numbers table, in any of the four languages. */
