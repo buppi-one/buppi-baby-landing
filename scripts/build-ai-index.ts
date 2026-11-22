@@ -13,11 +13,15 @@
  * which the Buppi app's Bebê › Guias screen lists per developmental phase.
  * The app fetches the article body from the published Markdown mirror
  * (/blog/<slug>/index.md), so this index only carries metadata + FAQ + refs.
+ *
+ * And pregnancy-weeks.<locale>.json: the week-by-week series for the app's
+ * "Semana a semana" screen (see scripts/pregnancy-series/app-index.ts).
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { getAllArticles } from "@/lib/blog/loader";
 import { LOCALES, type Locale } from "@/i18n";
+import { buildPregnancyWeeks, readSeriesTable } from "./pregnancy-series/app-index";
 
 const SITE_URL = "https://buppi.baby";
 
@@ -53,6 +57,7 @@ function build() {
   const outDir = join(process.cwd(), "public", "ai");
   mkdirSync(outDir, { recursive: true });
 
+  const weekNumbers = readSeriesTable(process.cwd());
   let total = 0;
   for (const locale of LOCALES as readonly Locale[]) {
     const entries: AiIndexEntry[] = articles
@@ -95,9 +100,16 @@ function build() {
       }));
     const guidesPayload = { generatedAt: new Date().toISOString(), locale, count: guides.length, guides };
     writeFileSync(join(outDir, `guides-index.${locale}.json`), JSON.stringify(guidesPayload));
-    console.log(`[build-ai-index] ${locale}: ${entries.length} posts, ${guides.length} guides`);
+    const weeks = buildPregnancyWeeks(
+      articles.filter((a) => a.locale === locale),
+      weekNumbers,
+      (slug) => urlFor(locale, slug),
+    );
+    const weeksPayload = { generatedAt: new Date().toISOString(), locale, count: weeks.length, weeks };
+    writeFileSync(join(outDir, `pregnancy-weeks.${locale}.json`), JSON.stringify(weeksPayload));
+    console.log(`[build-ai-index] ${locale}: ${entries.length} posts, ${guides.length} guides, ${weeks.length} pregnancy weeks`);
   }
-  console.log(`[build-ai-index] wrote ${LOCALES.length * 2} files, ${total} entries → public/ai/`);
+  console.log(`[build-ai-index] wrote ${LOCALES.length * 3} files, ${total} entries → public/ai/`);
 }
 
 build();
