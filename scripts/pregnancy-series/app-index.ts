@@ -47,6 +47,8 @@ export interface AppWeekEntry extends Omit<WeekNumbers, "week"> {
   mdUrl: string;
   readingTimeMinutes: number;
   references: { title: string; source: string; url?: string }[];
+  /** The article's cover illustration (absolute URL); null when it has none. */
+  coverUrl: string | null;
 }
 
 /** "25,6 cm" / "2 mm" → millimetres. */
@@ -122,6 +124,7 @@ export function buildPregnancyWeeks(
   articles: Article[],
   numbers: WeekNumbers[],
   urlFor: (slug: string) => string,
+  siteUrl: string,
 ): AppWeekEntry[] {
   const byWeek = new Map(numbers.map((n) => [n.week, n]));
   return articles
@@ -148,6 +151,8 @@ export function buildPregnancyWeeks(
         mdUrl: `${url}index.md`,
         readingTimeMinutes: a.readingTimeMinutes,
         references: a.frontmatter.references ?? [],
+        // Covers live in the article folder (same id in every locale), as the page's og:image does.
+        coverUrl: a.frontmatter.cover ? `${siteUrl}/blog/${a.id}/${a.frontmatter.cover.replace(/^\.\//, "")}` : null,
       };
     });
 }

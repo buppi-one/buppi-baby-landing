@@ -104,6 +104,7 @@ function build() {
       articles.filter((a) => a.locale === locale),
       weekNumbers,
       (slug) => urlFor(locale, slug),
+      SITE_URL,
     );
     const weeksPayload = { generatedAt: new Date().toISOString(), locale, count: weeks.length, weeks };
     writeFileSync(join(outDir, `pregnancy-weeks.${locale}.json`), JSON.stringify(weeksPayload));
