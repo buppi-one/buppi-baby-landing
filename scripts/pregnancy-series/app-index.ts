@@ -109,9 +109,12 @@ export function quickAnswerOf(body: string): string | null {
   return text.charAt(0).toLocaleUpperCase() + text.slice(1);
 }
 
-/** The "Comparison" row of the article's numbers table, in any of the four languages. */
+/**
+ * The "Comparison" row of the article's numbers table, in any of the four languages.
+ * Some English weeks label it "Size comparison".
+ */
 export function comparisonOf(body: string): string | null {
-  const m = body.match(/^\|\s*(?:Comparação|Comparison|Comparación|Comparaison)\s*\|\s*([^|]+?)\s*\|/m);
+  const m = body.match(/^\|\s*(?:Comparação|(?:Size )?[Cc]omparison|Comparación|Comparaison)\s*\|\s*([^|]+?)\s*\|/m);
   return m ? m[1].trim() : null;
 }
 
