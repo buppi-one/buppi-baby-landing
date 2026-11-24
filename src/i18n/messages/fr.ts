@@ -96,7 +96,7 @@ export const fr: Messages = {
           { bold: "Les preuves d'abord.", text: "Chaque guide du blog cite ses sources — pas d'approximation." },
           { bold: "Nous ne recommandons jamais de médicaments.", text: "Aucun contenu Buppi n'indique un médicament, une classe ou une dose. Cette décision appartient toujours au pédiatre." },
           { bold: "Confidentialité.", text: "Les données de votre bébé vous appartiennent. Nous ne vendons pas de données et n'affichons pas de publicité." },
-          { bold: "Gratuit pour commencer.", text: "L'essentiel de l'application est gratuit ; les fonctions familiales avancées sont optionnelles." },
+          { bold: "Gratuit pour toujours.", text: "L'application est gratuite et le restera, avec toute la famille et sans limite de personnes. Seules quelques fonctions en plus font partie du Pro." },
         ],
       },
     ],

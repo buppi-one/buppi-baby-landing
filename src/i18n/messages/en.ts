@@ -96,7 +96,7 @@ export const en: Messages = {
           { bold: "Evidence first.", text: "Every blog guide cites the sources it is based on — no guesswork." },
           { bold: "We never recommend medications.", text: "No Buppi content suggests a drug, class or dose. That decision always belongs to the pediatrician." },
           { bold: "Privacy.", text: "Your baby's data belongs to you. We don't sell data and we don't show ads." },
-          { bold: "Free to start.", text: "The app's essentials are free; advanced family features are optional." },
+          { bold: "Free forever.", text: "The app is free and will stay free, with the whole family included and no limit on people. Only a few extras are part of Pro." },
         ],
       },
     ],

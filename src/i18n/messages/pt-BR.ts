@@ -96,7 +96,7 @@ export const ptBR: Messages = {
           { bold: "Evidência primeiro.", text: "Todo guia do blog cita as fontes em que se baseia — nada de achismo." },
           { bold: "Nunca recomendamos medicamentos.", text: "Nenhum conteúdo do Buppi indica remédio, classe ou dose. Essa decisão é sempre do pediatra." },
           { bold: "Privacidade.", text: "Os dados do seu bebê pertencem a você. Não vendemos dados e não mostramos anúncios." },
-          { bold: "Grátis para começar.", text: "O essencial do app é gratuito; recursos avançados de família são opcionais." },
+          { bold: "Grátis pra sempre.", text: "O app é gratuito e vai continuar sendo, com a família toda junto, sem limite de pessoas. Só algumas funções a mais fazem parte do Pro." },
         ],
       },
     ],
