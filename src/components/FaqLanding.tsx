@@ -1,4 +1,4 @@
-import { SectionTag } from "@/components/Features";
+import { SectionTag } from "@/components/SectionTag";
 import { getMessages, type Locale } from "@/i18n";
 
 export function FaqLanding({ locale }: { locale: Locale }) {

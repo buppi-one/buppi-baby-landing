@@ -1,13 +1,14 @@
 import type { Messages } from "../types";
+import { storyPtBR } from "./story/pt-BR";
 
 export const ptBR: Messages = {
   meta: {
     title: "Buppi Baby - Cuidado Completo para o seu Bebê",
     description:
-      "Registre sono, amamentação, fraldas e marcos do desenvolvimento do seu bebê. Simples, bonito e gratuito.",
+      "Acompanhe a gestação semana a semana e, depois, o sono, a amamentação, as fraldas e os marcos do seu bebê. Simples, bonito e gratuito.",
     ogTitle: "Buppi Baby",
     ogDescription:
-      "O melhor app para acompanhar a rotina do seu bebê. Amamentação, sono, fraldas e marcos em um só lugar.",
+      "Da gestação ao primeiro ano: semana a semana, pré-natal, amamentação, sono, fraldas e marcos em um só lugar.",
   },
   nav: {
     features: "Funcionalidades",
@@ -48,169 +49,18 @@ export const ptBR: Messages = {
     relatedArticle: "Leia o guia completo",
     backToTools: "Todas as ferramentas",
   },
-  hero: {
-    badge: "NOVO",
-    badgeText: "Live Activity na tela de bloqueio",
-    titlePrefix: "O companheiro de rotina mais ",
-    titleHighlight: "inteligente",
-    titleSuffix: " do bebê.",
-    description:
-      "Registre amamentação, sono e fraldas em 1 toque. O Buppi aprende o ritmo do seu bebê e prevê a próxima soneca.",
-    badgesNote: "Grátis para começar • iOS e Android",
-    imageAlt: "Bebê sorrindo",
-    bullets: [
-      "Grátis para começar",
-      "iOS e Android",
-      "Sem anúncios",
-    ],
-    metrics: [
-      { value: "< 2s", label: "pra registrar um evento" },
-      { value: "12+", label: "tipos de registro" },
-      { value: "6", label: "pessoas no plano família" },
-      { value: "iOS · Android", label: "iPhone, iPad e Android" },
-    ],
-    card: { tag: "TARDE", title: "Amamentação", subtitle: "Esquerdo • 44min" },
-  },
-  features: {
-    tag: "FUNCIONALIDADES",
-    title: "Construído para os primeiros mil dias.",
-    description:
-      "Desde o primeiro dia, acompanhe cada detalhe da jornada do seu pequeno com cards intuitivos e uma linha do tempo organizada.",
-    blocks: [
-      { tag: "Sono", title: "Janelas previstas", desc: "O Buppi observa o histórico e diz quando o bebê provavelmente vai cansar." },
-      { tag: "Amamentação", title: "Cronômetro com lados", desc: "Sabe qual seio começou da última vez. Live Activity sempre à mão." },
-      { tag: "Fraldas", title: "Registro em 1 toque", desc: "Xixi, cocô, mista. 2 segundos do desbloqueio até feito." },
-      { tag: "Marcos", title: "Sem perder nenhum", desc: "Cada conquista entra com data, foto e idade exata do bebê." },
-    ],
-    smallCards: [
-      { title: "Mamadeira", desc: "Volume e fórmula" },
-      { title: "Crescimento", desc: "Peso, altura, percentil" },
-      { title: "Banho", desc: "Higiene e temperatura" },
-      { title: "Passeios", desc: "Tempo ao ar livre" },
-    ],
-    timeline: [
-      {
-        title: "Amamentação",
-        subtitle: "Direito • 26min",
-        time: "17:50 - 18:16",
-        tag: "agora",
-      },
-      {
-        title: "Amamentação",
-        subtitle: "Esquerdo • 44min",
-        time: "16:13 - 16:57",
-        tag: "1h atrás",
-      },
-      {
-        title: "Troca de Fralda",
-        subtitle: "Xixi",
-        time: "16:10",
-        tag: "2h atrás",
-      },
-      {
-        title: "Sono",
-        subtitle: "Duração: 3h 26min",
-        time: "12:35 - 16:01",
-        tag: "2h atrás",
-      },
-    ],
-    cards: [
-      { title: "Banho", subtitle: "Higiene diária" },
-      { title: "Vacinas", subtitle: "Calendário OK" },
-      { title: "Remédios", subtitle: "Alertas e doses" },
-      { title: "Passeios", subtitle: "Ar livre" },
-    ],
-  },
-  sharing: {
-    tag: "EM TEMPO REAL",
-    title: "A família toda na mesma página.",
-    description:
-      "Quando você troca uma fralda, todo mundo vê. Quando o pai dá mamadeira, todo mundo reage. Sem grupos de WhatsApp, sem planilhas.",
-    bullets: [
-      "Múltiplos perfis de bebês",
-      "Sincronização instantânea na nuvem",
-      "Reações nos eventos da família",
-      "Permissões e privacidade por pessoa",
-    ],
-    feedTitle: "Atividade · Lina",
-    online: "{n} online",
-    reactQuick: "Reagir rápido",
-    feedItems: [
-      { who: "Marina", role: "mãe", action: "iniciou soneca", detail: "14:18 · janela esperada" },
-      { who: "Bruno", role: "pai", action: "amamentou Lina", detail: "D 7min · E 8min · 13:16" },
-      { who: "Babá Carol", role: "cuidadora", action: "trocou fralda", detail: "xixi · 13:00" },
-      { who: "Vó Alice", role: "avó", action: "deu banho", detail: "11:30 · 36°C" },
-    ],
-    card: {
-      title: "Meus Bebês",
-      activeName: "Maria Clara",
-      activeDob: "17 de dezembro de 2024",
-      sharedName: "Caio",
-      sharedTag: "Compartilhado",
-      inviteTitle: "Usar código de convite",
-      inviteSubtitle: "Recebeu um código? Entre aqui",
-    },
-  },
-  stats: {
-    tag: "ESTATÍSTICAS",
-    title: "Padrões claros, decisões mais leves.",
-    description:
-      "Entenda os padrões de sono, alimentação e desenvolvimento do seu bebê através de estatísticas detalhadas e fáceis de ler.",
-    tabs: ["7 dias", "30 dias", "3 meses"],
-    sleep: {
-      title: "Resumo de Sono",
-      mapTitle: "SONO · MAPA DE 7 DIAS",
-      mapTotal: "Total 13h54m",
-      avgValue: "2h 44m",
-      avgLabel: "Média por dia",
-      totalValue: "10",
-      totalLabel: "Total sonos",
-      compareLabel: "Noturno vs Diurno",
-      night: "Noturno: 44%",
-      day: "Diurno: 56%",
-      legendSleeping: "Dormindo",
-      legendNap: "Soneca",
-    },
-    diaper: {
-      title: "Trocas de Fralda",
-      todayLabel: "TROCAS · HOJE",
-      legend: [
-        { label: "Xixi", pct: "4" },
-        { label: "Cocô", pct: "1" },
-        { label: "Mista", pct: "4" },
-      ],
-    },
-    nursing: {
-      title: "AMAMENTAÇÕES · MÉDIA",
-      value: "6,2",
-      desc: "vezes por dia · 14 min cada",
-    },
-    milestones: {
-      title: "MARCOS · ÚLTIMOS 90 DIAS",
-      items: ["Sorriu", "Cabeça", "Sentou", "Engatinhou", "Andou"],
-    },
-  },
   faq: {
     tag: "FAQ",
-    title: "Perguntas frequentes",
+    title: "Perguntas de quem está chegando",
     items: [
-      { q: "É realmente grátis?", a: "Sim. O plano gratuito tem registro completo (sono, mama, fralda, marcos), linha do tempo e estatísticas básicas — tudo armazenado localmente no aparelho. Não tem cuidadores adicionais nem backup na nuvem." },
-      { q: "Como funcionam os planos Duo e Circle?", a: "O Duo libera você + 1 pessoa (parceiro, parceira) e o Circle libera você + 5 pessoas (família estendida, avós, babá, pediatra). Os dois planos pagos sincronizam tudo na nuvem com backup automático." },
-      { q: "O que tem de iPhone-exclusivo?", a: "No iPhone você tem Live Activity na Dynamic Island (cronômetros e alertas mostrados sempre na tela), widgets na tela inicial e na tela de bloqueio. Ainda não temos no Android — está no roadmap." },
-      { q: "Funciona offline?", a: "Sim. No plano grátis, todo o registro acontece local, sem internet. Nos planos pagos você ganha sincronização e backup na nuvem além disso." },
-      { q: "Meus dados estão seguros?", a: "Sim. Criptografia em trânsito e em repouso, servidores no Brasil, conformidade com LGPD." },
-      { q: "Posso cancelar quando quiser?", a: "Pode. Sem multa, sem fidelidade. Você mantém acesso até o fim do período pago e os dados continuam disponíveis no plano grátis." },
+      { q: "É grátis mesmo? Tem pegadinha?", a: "É grátis e vai continuar sendo. Registrar, cronometrar, consultar o histórico inteiro, ver as estatísticas e compartilhar com a família não custa nada, sem anúncio e sem prazo. Só algumas funções a mais fazem parte do Pro, como a análise de sono completa e os widgets." },
+      { q: "Dá para começar ainda na gravidez?", a: "Dá. Você informa a data provável do parto e o Buppi acompanha semana a semana, com o pré-natal e as ferramentas da reta final. Quando o bebê nasce, um toque em “Nasceu!” abre o acompanhamento do bebê, sem perder nada da gestação." },
+      { q: "Funciona sem internet?", a: "Funciona. Tudo é salvo primeiro no celular e sincroniza sozinho quando a conexão volta." },
+      { q: "Quem vê os dados do meu bebê?", a: "Só quem você convidar, no papel que você escolher. Na gestação, os dados da gestante são dela: ela decide o que fica visível para a família. Você exporta ou apaga tudo quando quiser." },
+      { q: "Serve para iPhone e Android?", a: "Serve para os dois, e eles convivem: a mãe no iPhone e o pai no Android veem a mesma rotina." },
     ],
   },
-  cta: {
-    tag: "COMECE AGORA",
-    title: "O Buppi te espera na próxima soneca.",
-    description:
-      "Grátis para começar. Funciona em iOS e Android. Sem anúncios, sem letras miúdas.",
-    cardTag: "HOJE · LINA, 4 MESES",
-    cardTitle: "3 sonecas, 6 mamas, 9 trocas.",
-    cardSub: "Um dia bonito.",
-  },
+  story: storyPtBR,
   footer: {
     description:
       "O aplicativo mais completo e intuitivo para o acompanhamento do desenvolvimento do seu bebê. Feito por pais para pais.",

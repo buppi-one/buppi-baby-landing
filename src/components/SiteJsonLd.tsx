@@ -9,7 +9,7 @@ const BASE = "https://buppi.baby";
  * omitted until we decide to publish one (see agent-readiness audit).
  */
 export function SiteJsonLd({ locale }: { locale: Locale }) {
-  const description = getMessages(locale).hero.description;
+  const description = getMessages(locale).story.hero.lead;
   const data = {
     "@context": "https://schema.org",
     "@graph": [

@@ -1,13 +1,14 @@
 import type { Messages } from "../types";
+import { storyEn } from "./story/en";
 
 export const en: Messages = {
   meta: {
     title: "Buppi Baby — Complete Care for Your Baby",
     description:
-      "Track sleep, feeding, diapers and developmental milestones for your baby. Simple, beautiful, and free.",
+      "Follow your pregnancy week by week, then your baby's sleep, feeding, diapers and milestones. Simple, beautiful, and free.",
     ogTitle: "Buppi Baby",
     ogDescription:
-      "The best app to track your baby's routine. Feeding, sleep, diapers, and milestones — all in one place.",
+      "From pregnancy to the first year: week by week, prenatal care, feeding, sleep, diapers and milestones — all in one place.",
   },
   nav: {
     features: "Features",
@@ -48,169 +49,18 @@ export const en: Messages = {
     relatedArticle: "Read the full guide",
     backToTools: "All tools",
   },
-  hero: {
-    badge: "NEW",
-    badgeText: "Live Activity on the lock screen",
-    titlePrefix: "The most ",
-    titleHighlight: "intelligent",
-    titleSuffix: " baby routine companion.",
-    description:
-      "Log feeds, sleep, and diapers in one tap. Buppi learns your baby's rhythm and predicts the next nap.",
-    badgesNote: "Free to get started • iOS and Android",
-    imageAlt: "Smiling baby",
-    bullets: [
-      "Free to get started",
-      "iOS and Android",
-      "No ads",
-    ],
-    metrics: [
-      { value: "< 2s", label: "to log an event" },
-      { value: "12+", label: "event types" },
-      { value: "6", label: "people on the family plan" },
-      { value: "iOS · Android", label: "iPhone, iPad and Android" },
-    ],
-    card: { tag: "AFTERNOON", title: "Feeding", subtitle: "Left • 44min" },
-  },
-  features: {
-    tag: "FEATURES",
-    title: "Built for the first thousand days.",
-    description:
-      "From day one, follow every detail of your little one's journey with intuitive cards and an organized timeline.",
-    blocks: [
-      { tag: "Sleep", title: "Predicted nap windows", desc: "Buppi reads the history and tells you when your baby will likely tire next." },
-      { tag: "Feeding", title: "Side-aware timer", desc: "Knows which side started last time. Live Activity always at hand." },
-      { tag: "Diapers", title: "One-tap logging", desc: "Pee, poo, mixed. 2 seconds from unlock to done." },
-      { tag: "Milestones", title: "Never miss one", desc: "Each milestone gets the date, photo and your baby's exact age." },
-    ],
-    smallCards: [
-      { title: "Bottle", desc: "Volume and formula" },
-      { title: "Growth", desc: "Weight, height, percentile" },
-      { title: "Bath", desc: "Hygiene and temperature" },
-      { title: "Walks", desc: "Outdoor time" },
-    ],
-    timeline: [
-      {
-        title: "Feeding",
-        subtitle: "Right • 26min",
-        time: "5:50 PM - 6:16 PM",
-        tag: "now",
-      },
-      {
-        title: "Feeding",
-        subtitle: "Left • 44min",
-        time: "4:13 PM - 4:57 PM",
-        tag: "1h ago",
-      },
-      {
-        title: "Diaper Change",
-        subtitle: "Pee",
-        time: "4:10 PM",
-        tag: "2h ago",
-      },
-      {
-        title: "Sleep",
-        subtitle: "Duration: 3h 26min",
-        time: "12:35 PM - 4:01 PM",
-        tag: "2h ago",
-      },
-    ],
-    cards: [
-      { title: "Bath", subtitle: "Daily hygiene" },
-      { title: "Vaccines", subtitle: "Schedule on track" },
-      { title: "Medication", subtitle: "Reminders & doses" },
-      { title: "Walks", subtitle: "Outdoor time" },
-    ],
-  },
-  sharing: {
-    tag: "REAL TIME",
-    title: "The whole family on the same page.",
-    description:
-      "When you change a diaper, everyone sees it. When dad gives the bottle, everyone reacts. No WhatsApp groups, no spreadsheets.",
-    bullets: [
-      "Multiple baby profiles",
-      "Instant cloud sync",
-      "Reactions on family events",
-      "Per-person permissions and privacy",
-    ],
-    feedTitle: "Activity · Lina",
-    online: "{n} online",
-    reactQuick: "Quick react",
-    feedItems: [
-      { who: "Marina", role: "mom", action: "started a nap", detail: "2:18 PM · expected window" },
-      { who: "Bruno", role: "dad", action: "fed Lina", detail: "R 7min · L 8min · 1:16 PM" },
-      { who: "Carol", role: "nanny", action: "changed diaper", detail: "pee · 1:00 PM" },
-      { who: "Grandma Alice", role: "grandma", action: "bathed Lina", detail: "11:30 AM · 36°C" },
-    ],
-    card: {
-      title: "My Babies",
-      activeName: "Maria Clara",
-      activeDob: "December 17, 2024",
-      sharedName: "Caio",
-      sharedTag: "Shared",
-      inviteTitle: "Use invite code",
-      inviteSubtitle: "Got a code? Enter it here",
-    },
-  },
-  stats: {
-    tag: "STATS",
-    title: "Clear patterns, lighter decisions.",
-    description:
-      "Understand your baby's sleep, feeding, and growth patterns through detailed, easy-to-read statistics.",
-    tabs: ["7 days", "30 days", "3 months"],
-    sleep: {
-      title: "Sleep Summary",
-      mapTitle: "SLEEP · 7-DAY MAP",
-      mapTotal: "Total 13h54m",
-      avgValue: "2h 44m",
-      avgLabel: "Daily average",
-      totalValue: "10",
-      totalLabel: "Total naps",
-      compareLabel: "Night vs Day",
-      night: "Night: 44%",
-      day: "Day: 56%",
-      legendSleeping: "Sleeping",
-      legendNap: "Nap",
-    },
-    diaper: {
-      title: "Diaper Changes",
-      todayLabel: "CHANGES · TODAY",
-      legend: [
-        { label: "Pee", pct: "4" },
-        { label: "Poo", pct: "1" },
-        { label: "Mixed", pct: "4" },
-      ],
-    },
-    nursing: {
-      title: "FEEDS · AVERAGE",
-      value: "6.2",
-      desc: "times a day · 14 min each",
-    },
-    milestones: {
-      title: "MILESTONES · LAST 90 DAYS",
-      items: ["Smiled", "Head up", "Sat", "Crawled", "Walked"],
-    },
-  },
   faq: {
     tag: "FAQ",
-    title: "Frequently asked questions",
+    title: "Questions from people just arriving",
     items: [
-      { q: "Is it really free?", a: "Yes. The free plan includes full event logging (sleep, feeds, diapers, milestones), timeline and basic stats — all stored locally on the device. It does not include extra caregivers or cloud backup." },
-      { q: "How do the Duo and Circle plans work?", a: "Duo unlocks you + 1 person (partner). Circle unlocks you + 5 people (extended family — grandparents, nanny, pediatrician). Both paid plans sync everything to the cloud with automatic backup." },
-      { q: "What's iPhone-exclusive?", a: "On iPhone you get Live Activity in the Dynamic Island (timers and alerts always visible), home-screen widgets and lock-screen widgets. Android equivalents are on the roadmap." },
-      { q: "Does it work offline?", a: "Yes. On the free plan, all logging works offline-only. The paid plans add cloud sync and backup on top." },
-      { q: "Is my data safe?", a: "Yes. Encryption in transit and at rest, and we follow LGPD and GDPR-equivalent standards." },
-      { q: "Can I cancel anytime?", a: "You can. No fees, no commitment. You keep access until the end of the paid period; your data stays available on the free plan." },
+      { q: "Is it really free? What's the catch?", a: "It's free and it will stay free. Logging, timers, the full history, stats and sharing with your family cost nothing, with no ads and no time limit. Only a few extras are part of Pro, such as the full sleep analysis and the widgets." },
+      { q: "Can I start while still pregnant?", a: "Yes. You enter the due date and Buppi follows along week by week, with prenatal care and the tools for the home stretch. When the baby is born, one tap on “Baby is born!” opens the baby's tracking, keeping everything from the pregnancy." },
+      { q: "Does it work offline?", a: "Yes. Everything is saved on your phone first and syncs on its own when the connection is back." },
+      { q: "Who can see my baby's data?", a: "Only the people you invite, in the role you choose. During pregnancy, the pregnant person's data is theirs: they decide what the family can see. You can export or delete everything whenever you want." },
+      { q: "Does it work on iPhone and Android?", a: "On both, and they work together: one parent on iPhone and the other on Android see the same routine." },
     ],
   },
-  cta: {
-    tag: "START NOW",
-    title: "Buppi will be there for the next nap.",
-    description:
-      "Free to get started. Works on iOS and Android. No ads, no fine print.",
-    cardTag: "TODAY · LINA, 4 MONTHS",
-    cardTitle: "3 naps, 6 feeds, 9 changes.",
-    cardSub: "A beautiful day.",
-  },
+  story: storyEn,
   footer: {
     description:
       "The most complete and intuitive app to follow your baby's development. Built by parents, for parents.",
