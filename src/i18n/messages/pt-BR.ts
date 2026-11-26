@@ -109,7 +109,7 @@ export const ptBR: Messages = {
   privacy: {
     badge: "🔒 PRIVACIDADE",
     title: "Política de Privacidade",
-    updated: "Última atualização: 15 de setembro de 2026",
+    updated: "Última atualização: 26 de novembro de 2026",
     intro:
       "A sua privacidade é importante para nós. Esta Política de Privacidade explica como o Buppi Baby coleta, usa e protege suas informações pessoais.",
     sections: [
@@ -127,6 +127,7 @@ export const ptBR: Messages = {
             bold: "Registros de atividades:",
             text: "Amamentação, sono, fraldas, alimentação, banho, crescimento, temperatura, medicamentos, consultas e outros eventos que você registra — inclusive informações de saúde do bebê",
           },
+          { bold: "Dados da gestação:", text: "Data provável do parto e o que você registrar na gestação, como peso, pressão, glicose, sintomas, exames, consultas e fotos — inclusive informações de saúde da gestante" },
           { bold: "Dados de uso:", text: "Como você interage com o aplicativo" },
         ],
       },
@@ -154,6 +155,7 @@ export const ptBR: Messages = {
           {
             text: "Com provedores de serviço que nos ajudam a operar o aplicativo: Supabase (banco de dados e autenticação), Cloudflare (armazenamento de fotos), Google Cloud (notificações e análise de uso), RevenueCat (assinaturas), Sentry (relatórios de erro) e Expo (envio de notificações)",
           },
+          { text: "Com a Meta (Facebook e Instagram), para medir os anúncios do Buppi: o aplicativo informa à Meta que foi instalado e aberto e quando uma assinatura é comprada, junto com informações técnicas do aparelho (modelo, sistema, versão do app, idioma e fuso horário), além do endereço IP da conexão. Nenhum registro do bebê ou da gestação, nome, email ou foto é enviado. Também não enviamos o identificador de publicidade do aparelho, e o app não pede permissão de rastreamento" },
           { text: "Quando exigido por lei" },
         ],
       },

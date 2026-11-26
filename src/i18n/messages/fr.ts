@@ -109,7 +109,7 @@ export const fr: Messages = {
   privacy: {
     badge: "🔒 CONFIDENTIALITÉ",
     title: "Politique de Confidentialité",
-    updated: "Dernière mise à jour : 15 septembre 2026",
+    updated: "Dernière mise à jour : 26 novembre 2026",
     intro:
       "Votre vie privée est importante pour nous. Cette Politique de Confidentialité explique comment Buppi Baby collecte, utilise et protège vos informations personnelles.",
     sections: [
@@ -134,6 +134,7 @@ export const fr: Messages = {
             bold: "Enregistrements d'activités :",
             text: "Allaitement, sommeil, couches, alimentation, bain, croissance, température, médicaments, consultations et autres événements que vous enregistrez, y compris des informations de santé du bébé",
           },
+          { bold: "Données de grossesse :", text: "Date prévue d’accouchement et ce que vous enregistrez pendant la grossesse, comme le poids, la tension, la glycémie, les symptômes, les examens, les consultations et les photos, y compris des informations de santé de la personne enceinte" },
           {
             bold: "Données d'utilisation :",
             text: "Comment vous interagissez avec l'application",
@@ -172,6 +173,7 @@ export const fr: Messages = {
           {
             text: "Des prestataires de service qui nous aident à exploiter l'app : Supabase (base de données et authentification), Cloudflare (stockage des photos), Google Cloud (notifications et statistiques d'usage), RevenueCat (abonnements), Sentry (rapports d'erreurs) et Expo (envoi de notifications)",
           },
+          { text: "Meta (Facebook et Instagram), pour mesurer les publicités de Buppi : l’app indique à Meta qu’elle a été installée et ouverte et quand un abonnement est acheté, avec des informations techniques sur l’appareil (modèle, système, version de l’app, langue et fuseau horaire), ainsi que l’adresse IP de la connexion. Aucune donnée du bébé ou de la grossesse, aucun nom, e-mail ou photo n’est envoyé. Nous n’envoyons pas non plus l’identifiant publicitaire de l’appareil, et l’app ne demande pas d’autorisation de suivi" },
           { text: "Lorsque la loi l'exige" },
         ],
       },

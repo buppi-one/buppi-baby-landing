@@ -109,7 +109,7 @@ export const en: Messages = {
   privacy: {
     badge: "🔒 PRIVACY",
     title: "Privacy Policy",
-    updated: "Last updated: September 15, 2026",
+    updated: "Last updated: November 26, 2026",
     intro:
       "Your privacy matters to us. This Privacy Policy explains how Buppi Baby collects, uses, and protects your personal information.",
     sections: [
@@ -127,6 +127,7 @@ export const en: Messages = {
             bold: "Activity records:",
             text: "Feeding, sleep, diapers, meals, baths, growth, temperature, medication, doctor visits and other events you log — including the baby's health information",
           },
+          { bold: "Pregnancy data:", text: "Due date and what you record during pregnancy, such as weight, blood pressure, glucose, symptoms, exams, appointments and photos — including health information about the pregnant person" },
           { bold: "Usage data:", text: "How you interact with the app" },
         ],
       },
@@ -152,6 +153,7 @@ export const en: Messages = {
           {
             text: "With service providers that help us operate the app: Supabase (database and authentication), Cloudflare (photo storage), Google Cloud (notifications and usage analytics), RevenueCat (subscriptions), Sentry (error reports) and Expo (push delivery)",
           },
+          { text: "With Meta (Facebook and Instagram), to measure Buppi ads: the app tells Meta that it was installed and opened and when a subscription is purchased, along with technical information about the device (model, system, app version, language and time zone), plus the connection's IP address. No baby or pregnancy record, name, email or photo is sent. We also do not send the device advertising identifier, and the app does not ask for tracking permission" },
           { text: "When required by law" },
         ],
       },
