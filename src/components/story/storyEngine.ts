@@ -102,6 +102,10 @@ export function initStory(
     if (!el) throw new Error(`Story element #${ID_PREFIX}${id} is missing`);
     return el as T;
   };
+  /** A page renders only some chapters; each demo runs when its root element is there. */
+  const when = (id: string, run: () => void) => {
+    if (document.getElementById(ID_PREFIX + id)) run();
+  };
   const on = <K extends keyof HTMLElementEventMap>(
     target: EventTarget,
     type: K | string,
@@ -176,10 +180,12 @@ export function initStory(
         if (mid >= a.y && mid < b.y) days = a.d + ((b.d - a.d) * (mid - a.y)) / (b.y - a.y);
       }
     }
-    $("agelbl").textContent = days < 0 ? t.age.labelPregnancy : days < 1 ? t.age.labelBorn : t.age.labelBaby;
-    $("ageval").textContent = formatAge(days);
-    const progress = (days + PREGNANCY_DAYS) / (PREGNANCY_DAYS + AGE_END_DAYS);
-    $("agefill").style.transform = `scaleX(${Math.min(1, Math.max(0, progress)).toFixed(4)})`;
+    when("agelbl", () => {
+      $("agelbl").textContent = days < 0 ? t.age.labelPregnancy : days < 1 ? t.age.labelBorn : t.age.labelBaby;
+      $("ageval").textContent = formatAge(days);
+      const progress = (days + PREGNANCY_DAYS) / (PREGNANCY_DAYS + AGE_END_DAYS);
+      $("agefill").style.transform = `scaleX(${Math.min(1, Math.max(0, progress)).toFixed(4)})`;
+    });
     if (reduce) return;
     for (const img of scenes) {
       const frame = img.parentElement;
@@ -316,7 +322,7 @@ export function initStory(
   }
 
   /* ---- 7 · pregnancy week by week (numbers from the site's published index) ---- */
-  (() => {
+  when("app7", () => {
     const range = $<HTMLInputElement>("rng7");
     const sumBtn = $("wksumb");
     const qa = $("wkqa");
@@ -375,10 +381,10 @@ export function initStory(
       if (crossed) guide.done(1);
       guide.place();
     });
-  })();
+  });
 
   /* ---- 8 · prenatal care at week 24 ---- */
-  (() => {
+  when("app8", () => {
     const p = t.prenatal;
     const app = $("app8");
     const groupsEl = $("pngroups");
@@ -470,10 +476,10 @@ export function initStory(
       if (btn) openSheet(Number(btn.dataset.reg));
     });
     paint();
-  })();
+  });
 
   /* ---- 9 · contractions against the 5-1-1 rule ---- */
-  (() => {
+  when("app9", () => {
     const c = t.contractions;
     const app = $("app9");
     const btn = $("ctbtn");
@@ -556,10 +562,10 @@ export function initStory(
       }
     });
     paint();
-  })();
+  });
 
   /* ---- 1 · speed dial + nursing timer ---- */
-  (() => {
+  when("app1", () => {
     const fab = $("fab");
     const dial = $("dial");
     const timer = $("timer");
@@ -664,10 +670,10 @@ export function initStory(
       hint.innerHTML = rich(n.hintSaved, { side: side === "L" ? n.sideLower.R : n.sideLower.L });
       guide.finish();
     });
-  })();
+  });
 
   /* ---- 2 · nap prediction card ---- */
-  (() => {
+  when("app2", () => {
     const n = t.nap;
     const range = $<HTMLInputElement>("rng2");
     const whyButton = $("whyb");
@@ -725,10 +731,10 @@ export function initStory(
       guide.place();
     });
     paint();
-  })();
+  });
 
   /* ---- 3 · the week's routine ---- */
-  (() => {
+  when("app3", () => {
     const w = t.week;
     const week = $("week");
     const detail = $("wdetail");
@@ -772,10 +778,10 @@ export function initStory(
         detail.textContent = w.notes[i];
       }),
     );
-  })();
+  });
 
   /* ---- 4 · allergens derived from meals ---- */
-  (() => {
+  when("app4", () => {
     const a = t.allergens;
     const body = $("albody");
     const foods = $("foods");
@@ -848,10 +854,10 @@ export function initStory(
         guide.place();
       }),
     );
-  })();
+  });
 
   /* ---- 5 · access: one role per person ---- */
-  (() => {
+  when("app5", () => {
     const a = t.access;
     const body = $("acbody");
     const app = $("app5");
@@ -955,10 +961,10 @@ export function initStory(
       ],
       a.done,
     );
-  })();
+  });
 
   /* ---- 6 · the book, by age ---- */
-  (() => {
+  when("app6", () => {
     const b = t.book;
     const chips = $("agechips");
     const feed = $("bfeed");
@@ -1016,10 +1022,10 @@ export function initStory(
       ],
       b.done,
     );
-  })();
+  });
 
   /* ---- closing reel: every moment, oldest first, duplicated for a seamless loop ---- */
-  (() => {
+  when("reel", () => {
     const ids = MOMENT_GROUPS.flat().reverse();
     const once = ids
       .map((id) => {
@@ -1031,10 +1037,10 @@ export function initStory(
       })
       .join("");
     $("reel").innerHTML = once + once;
-  })();
+  });
 
   /* ---- birthday confetti ---- */
-  (() => {
+  when("confetti", () => {
     const box = $("confetti");
     box.innerHTML = "";
     if (reduce) return;
@@ -1047,7 +1053,7 @@ export function initStory(
       piece.style.animationDuration = `${3.6 + (i % 5) * 0.5}s`;
       box.appendChild(piece);
     }
-  })();
+  });
 
   return () => {
     abort.abort();

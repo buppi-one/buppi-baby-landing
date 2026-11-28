@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import localFont from "next/font/local";
-import type { CSSProperties, ReactNode } from "react";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import { StoreButtons } from "@/components/StoreButtons";
 import { getMessages, type Locale } from "@/i18n";
 import type { Polaroid as PolaroidCopy, PregnancyWeek, Rich, StoryMessages } from "@/i18n/storyTypes";
@@ -36,10 +36,10 @@ const caveat = localFont({
   preload: false,
 });
 
-const IMG = "/landing";
+export const IMG = "/landing";
 const SCENE_SIZE = { width: 1200, height: 800 };
-const BUPPI_SIZE = { width: 220, height: 256 };
-const STORY_CLASS = `story ${nunito.variable} ${caveat.variable}`;
+export const BUPPI_SIZE = { width: 220, height: 256 };
+export const STORY_CLASS = `story ${nunito.variable} ${caveat.variable}`;
 
 type App = StoryMessages["app"];
 
@@ -97,7 +97,7 @@ function RichText({ value }: { value: Rich }) {
   );
 }
 
-function Scene({
+export function Scene({
   src,
   alt,
   eager = false,
@@ -313,12 +313,51 @@ function Chapter({
   );
 }
 
-/* ---------- the story ---------- */
 
-/** Age strip, hero, the six chapters and the pricing block. */
-export function StoryTop({ locale }: { locale: Locale }) {
+/** The h1 of a hero, with the hand-drawn underline under the highlighted words. */
+export function HeroTitle({ before, highlight, after }: { before: string; highlight: string; after: string }) {
+  return (
+    <h1 style={{ marginTop: 14 }}>
+      {before}
+      <span className="hl">
+        {highlight}
+        <svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+          <path
+            d="M2 8 Q 50 2, 100 6 T 198 4"
+            pathLength={1}
+            stroke="var(--teal)"
+            strokeWidth="3.5"
+            fill="none"
+            strokeLinecap="round"
+          />
+        </svg>
+      </span>
+      {after}
+    </h1>
+  );
+}
+
+export type StoryChapterKey =
+  | "preg12"
+  | "preg24"
+  | "preg38"
+  | "born"
+  | "week1"
+  | "month2"
+  | "month4"
+  | "month6"
+  | "month9"
+  | "year1";
+
+/**
+ * Every chapter of the story, built once per page. The home page renders all of
+ * them in order; a campaign page picks the ones that match its subject. Each
+ * chapter owns the `st-` ids its demo in storyEngine.ts looks for, so a page
+ * must not render the same chapter twice.
+ */
+export function storyChapters(locale: Locale) {
   const m = getMessages(locale).story;
-  const { hero, app, chapters: c, born, pricing, rt } = m;
+  const { app, chapters: c, born, rt } = m;
   const yourTurn = rt.tour.yourTurn;
   const weeks = loadPregnancyWeeks(locale);
   const wk = weekCard(locale, rt, PREG_WEEK.current, weeks[PREG_WEEK.current]);
@@ -326,84 +365,10 @@ export function StoryTop({ locale }: { locale: Locale }) {
   const seeded = seedContractions();
   const pattern = contractionStats(seeded, CONTRACTIONS.startAt);
   const ct = rt.contractions;
-  const toastIcons: Array<[StoryIconName, string]> = [
-    ["heart", "#f29bb0"],
-    ["cloud", "#6fcabd"],
-    ["spark", "#e6b93c"],
-  ];
 
-  return (
-    <div className={STORY_CLASS}>
-      <StoryIconSprite />
-
-      <div className="agestrip">
-        <div className="wrap agechip">
-          <span className="lbl" id="st-agelbl">
-            {rt.age.labelPregnancy}
-          </span>
-          <b id="st-ageval">
-            {fill(rt.age.pregnancyWeek, { n: FULL_TERM_WEEKS + AGE_START_DAYS / DAYS_PER_WEEK })}
-          </b>
-        </div>
-        <div className="agebar">
-          <i id="st-agefill" />
-        </div>
-      </div>
-
-      <header className="hero">
-        <div className="wrap hero-grid">
-          <div>
-            <div className="eyebrow">{hero.eyebrow}</div>
-            <h1 style={{ marginTop: 14 }}>
-              {hero.titleBefore}
-              <span className="hl">
-                {hero.titleHighlight}
-                <svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
-                  <path
-                    d="M2 8 Q 50 2, 100 6 T 198 4"
-                    pathLength={1}
-                    stroke="var(--teal)"
-                    strokeWidth="3.5"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
-              {hero.titleAfter}
-            </h1>
-            <p className="lead" style={{ marginTop: 26 }}>
-              {hero.lead}
-            </p>
-            <div className="ctas">
-              <StoreButtons size="lg" locale={locale} />
-            </div>
-            <div className="notes">
-              {hero.notes.map((note) => (
-                <span key={note}>✓ {note}</span>
-              ))}
-            </div>
-            <p className="notes" style={{ marginTop: 26, fontWeight: 600, color: "var(--fg2)" }}>
-              {hero.scrollHint}
-            </p>
-          </div>
-          <div className="scenewrap">
-            <Scene src="hero" alt={hero.imageAlt} eager />
-            {hero.toasts.map((toast, i) => (
-              <div key={toast.title} className={`toast t${i + 1}`}>
-                <span className="dot" style={{ background: toastIcons[i][1] }}>
-                  <StoryIcon name={toastIcons[i][0]} />
-                </span>
-                <span>
-                  {toast.title}
-                  <small>{toast.sub}</small>
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </header>
-
-      {/* Pregnancy, week 12: the size of the baby, week by week */}
+  const chapters: Record<StoryChapterKey, ReactNode> = {
+    /* Pregnancy, week 12: the size of the baby, week by week */
+    preg12: (
       <Chapter
         id="gestacao"
         days={CHAPTER_DAYS.preg12}
@@ -486,8 +451,9 @@ export function StoryTop({ locale }: { locale: Locale }) {
           </div>
         </Phone>
       </Chapter>
-
-      {/* Pregnancy, week 24: prenatal care laid out by the week */}
+    ),
+    /* Pregnancy, week 24: prenatal care laid out by the week */
+    preg24: (
       <Chapter
         days={CHAPTER_DAYS.preg24}
         tone="day"
@@ -545,8 +511,9 @@ export function StoryTop({ locale }: { locale: Locale }) {
           </div>
         </Phone>
       </Chapter>
-
-      {/* Pregnancy, week 38: timing contractions against the agreed rule */}
+    ),
+    /* Pregnancy, week 38: timing contractions against the agreed rule */
+    preg38: (
       <Chapter
         days={CHAPTER_DAYS.preg38}
         tone="night"
@@ -623,8 +590,9 @@ export function StoryTop({ locale }: { locale: Locale }) {
           </div>
         </Phone>
       </Chapter>
-
-      {/* Birth: the pregnancy turns into the baby's tracking */}
+    ),
+    /* Birth: the pregnancy turns into the baby's tracking */
+    born: (
       <section className="chapter soft born" data-days={CHAPTER_DAYS.born}>
         <div className="wrap born-in rv">
           <div className="born-btn" aria-hidden="true">
@@ -634,8 +602,9 @@ export function StoryTop({ locale }: { locale: Locale }) {
           <p className="lead">{born.lead}</p>
         </div>
       </section>
-
-      {/* Week 1: one-tap logging and the nursing timer */}
+    ),
+    /* Week 1: one-tap logging and the nursing timer */
+    week1: (
       <Chapter
         id="funcionalidades"
         days={CHAPTER_DAYS.week1}
@@ -728,8 +697,9 @@ export function StoryTop({ locale }: { locale: Locale }) {
           <TabBar app={app} active="home" fabId="st-fab" />
         </Phone>
       </Chapter>
-
-      {/* Month 2: the next-nap prediction */}
+    ),
+    /* Month 2: the next-nap prediction */
+    month2: (
       <Chapter
         days={CHAPTER_DAYS.month2}
         tone="day"
@@ -825,8 +795,9 @@ export function StoryTop({ locale }: { locale: Locale }) {
           <TabBar app={app} active="home" />
         </Phone>
       </Chapter>
-
-      {/* Month 4: the sleep regression seen in the week view */}
+    ),
+    /* Month 4: the sleep regression seen in the week view */
+    month4: (
       <Chapter
         days={CHAPTER_DAYS.month4}
         tone="night"
@@ -901,8 +872,9 @@ export function StoryTop({ locale }: { locale: Locale }) {
           <TabBar app={app} active="stats" />
         </Phone>
       </Chapter>
-
-      {/* Month 6: allergens built from the meals logged */}
+    ),
+    /* Month 6: allergens built from the meals logged */
+    month6: (
       <Chapter
         days={CHAPTER_DAYS.month6}
         tone="soft"
@@ -931,8 +903,9 @@ export function StoryTop({ locale }: { locale: Locale }) {
           </div>
         </Phone>
       </Chapter>
-
-      {/* Month 9: who sees what */}
+    ),
+    /* Month 9: who sees what */
+    month9: (
       <Chapter
         id="familia"
         days={CHAPTER_DAYS.month9}
@@ -958,8 +931,9 @@ export function StoryTop({ locale }: { locale: Locale }) {
           <div className="a-body" id="st-acbody" />
         </Phone>
       </Chapter>
-
-      {/* Year 1: the book */}
+    ),
+    /* Year 1: the book */
+    year1: (
       <Chapter
         days={CHAPTER_DAYS.year1}
         tone="soft"
@@ -988,6 +962,95 @@ export function StoryTop({ locale }: { locale: Locale }) {
           <TabBar app={app} active="book" />
         </Phone>
       </Chapter>
+    ),
+  };
+  return { chapters, weeks };
+}
+
+/* ---------- the story ---------- */
+
+const CHAPTER_ORDER: StoryChapterKey[] = [
+  "preg12",
+  "preg24",
+  "preg38",
+  "born",
+  "week1",
+  "month2",
+  "month4",
+  "month6",
+  "month9",
+  "year1",
+];
+
+/** Age strip, hero, the chapters and the pricing block. */
+export function StoryTop({ locale }: { locale: Locale }) {
+  const m = getMessages(locale).story;
+  const { hero, pricing, rt } = m;
+  const { chapters, weeks } = storyChapters(locale);
+  const toastIcons: Array<[StoryIconName, string]> = [
+    ["heart", "#f29bb0"],
+    ["cloud", "#6fcabd"],
+    ["spark", "#e6b93c"],
+  ];
+
+  return (
+    <div className={STORY_CLASS}>
+      <StoryIconSprite />
+
+      <div className="agestrip">
+        <div className="wrap agechip">
+          <span className="lbl" id="st-agelbl">
+            {rt.age.labelPregnancy}
+          </span>
+          <b id="st-ageval">
+            {fill(rt.age.pregnancyWeek, { n: FULL_TERM_WEEKS + AGE_START_DAYS / DAYS_PER_WEEK })}
+          </b>
+        </div>
+        <div className="agebar">
+          <i id="st-agefill" />
+        </div>
+      </div>
+
+      <header className="hero">
+        <div className="wrap hero-grid">
+          <div>
+            <div className="eyebrow">{hero.eyebrow}</div>
+            <HeroTitle before={hero.titleBefore} highlight={hero.titleHighlight} after={hero.titleAfter} />
+            <p className="lead" style={{ marginTop: 26 }}>
+              {hero.lead}
+            </p>
+            <div className="ctas">
+              <StoreButtons size="lg" locale={locale} />
+            </div>
+            <div className="notes">
+              {hero.notes.map((note) => (
+                <span key={note}>✓ {note}</span>
+              ))}
+            </div>
+            <p className="notes" style={{ marginTop: 26, fontWeight: 600, color: "var(--fg2)" }}>
+              {hero.scrollHint}
+            </p>
+          </div>
+          <div className="scenewrap">
+            <Scene src="hero" alt={hero.imageAlt} eager />
+            {hero.toasts.map((toast, i) => (
+              <div key={toast.title} className={`toast t${i + 1}`}>
+                <span className="dot" style={{ background: toastIcons[i][1] }}>
+                  <StoryIcon name={toastIcons[i][0]} />
+                </span>
+                <span>
+                  {toast.title}
+                  <small>{toast.sub}</small>
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </header>
+
+      {CHAPTER_ORDER.map((key) => (
+        <Fragment key={key}>{chapters[key]}</Fragment>
+      ))}
 
       <section className="chapter day" id="precos">
         <div className="wrap">
@@ -1031,8 +1094,15 @@ export function StoryTop({ locale }: { locale: Locale }) {
 }
 
 /** The closing reel of moments and the download call. Keeps the #baixar anchor blog CTAs link to. */
-export function StoryClosing({ locale }: { locale: Locale }) {
-  const { closing } = getMessages(locale).story;
+export function StoryClosing({
+  locale,
+  copy,
+}: {
+  locale: Locale;
+  /** A campaign page closes on its own subject; the reel and the notes stay. */
+  copy?: { eyebrow: string; title: string; lead: string };
+}) {
+  const closing = { ...getMessages(locale).story.closing, ...copy };
   return (
     <div className={STORY_CLASS}>
       <section className="chapter day final" id="baixar">

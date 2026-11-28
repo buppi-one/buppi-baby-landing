@@ -31,7 +31,14 @@ function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle("dark", effective === "dark");
 }
 
-export function Nav({ locale }: { locale: Locale }) {
+export function Nav({
+  locale,
+  downloadHref,
+}: {
+  locale: Locale;
+  /** Where "Download" goes. A campaign page keeps the visitor on it; default is the home page's block. */
+  downloadHref?: string;
+}) {
   const m = getMessages(locale).nav;
   const blogTitle = getMessages(locale).blog.title;
   const pathname = usePathname() || "/";
@@ -238,7 +245,7 @@ export function Nav({ locale }: { locale: Locale }) {
           </div>
           <a
             className="inline-flex bg-[var(--color-primary-dark)] hover:opacity-90 text-white px-3 sm:px-5 py-2 rounded-xl font-semibold transition-all shadow-lg shadow-[var(--color-primary)]/25 text-[13px] sm:text-sm items-center whitespace-nowrap"
-            href={`${localePath(locale, "/")}#baixar`}
+            href={downloadHref ?? `${localePath(locale, "/")}#baixar`}
             data-cta="nav-download"
           >
             <span className="sm:hidden">{m.downloadShort}</span>
