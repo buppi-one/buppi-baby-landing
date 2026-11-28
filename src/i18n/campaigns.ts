@@ -22,3 +22,11 @@ export const CAMPAIGN_PATHS: Record<CampaignKey, string> = {
 export function getCampaignMessages(locale: Locale): CampaignMessages {
   return MESSAGES[locale];
 }
+
+/**
+ * The social preview of a campaign page: its own headline, illustration and
+ * app cards, so a shared link shows what that campaign is about.
+ */
+export function campaignOgImage(campaign: CampaignKey, locale: Locale): string {
+  return `/og${CAMPAIGN_PATHS[campaign].replace(/\/$/, "")}-${locale}.jpg`;
+}

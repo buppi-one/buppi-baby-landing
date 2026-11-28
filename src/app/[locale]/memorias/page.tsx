@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CampaignLanding } from "@/components/story/Campaign";
 import { isLocale } from "@/i18n";
-import { CAMPAIGN_PATHS, getCampaignMessages } from "@/i18n/campaigns";
+import { CAMPAIGN_PATHS, campaignOgImage, getCampaignMessages } from "@/i18n/campaigns";
 import { pageMetadata } from "@/lib/metadata";
 
 const CAMPAIGN = "memories";
@@ -28,6 +28,7 @@ export async function generateMetadata({
     title: copy.metaTitle,
     description: copy.metaDescription,
     path: CAMPAIGN_PATHS[CAMPAIGN],
+    image: campaignOgImage(CAMPAIGN, locale),
   });
 }
 
