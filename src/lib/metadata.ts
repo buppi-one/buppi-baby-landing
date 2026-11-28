@@ -3,6 +3,15 @@ import { LOCALES, type Locale } from "@/i18n";
 
 const SITE_URL = "https://buppi.baby";
 
+/**
+ * The social preview of the home page in each language: headline, the family
+ * illustration and two app cards. Rendered from the landing's own copy; WhatsApp
+ * and others cache previews per image URL, so a new design gets a new file name.
+ */
+export function homeOgImage(locale: Locale): string {
+  return `/og/home-${locale}.jpg`;
+}
+
 const OG_LOCALE: Record<Locale, string> = {
   "pt-BR": "pt_BR",
   en: "en_US",
@@ -47,7 +56,7 @@ export function pageMetadata({
   locale,
   title,
   description,
-  image = "/og-image.png",
+  image,
   ...rest
 }: PageMetadataInput): Metadata {
   const resolveFor = (l: Locale): string =>
@@ -58,7 +67,8 @@ export function pageMetadata({
   for (const l of LOCALES) languages[l] = resolveFor(l);
   languages["x-default"] = resolveFor("pt-BR");
 
-  const ogImage = image.startsWith("http") ? image : `${SITE_URL}${image}`;
+  const src = image ?? homeOgImage(locale);
+  const ogImage = src.startsWith("http") ? src : `${SITE_URL}${src}`;
 
   return {
     title,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { homeOgImage } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import { Landing } from "@/components/Landing";
 import { getMessages, isLocale } from "@/i18n";
@@ -26,7 +27,7 @@ export async function generateMetadata({
     openGraph: {
       title: m.ogTitle,
       description: m.ogDescription,
-      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+      images: [{ url: homeOgImage(locale), width: 1200, height: 630 }],
       type: "website",
       url: `/${locale}/`,
       locale: locale.replace("-", "_"),
@@ -35,7 +36,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: m.ogTitle,
       description: m.ogDescription,
-      images: ["/og-image.png"],
+      images: [homeOgImage(locale)],
     },
     alternates: {
       canonical: locale === "pt-BR" ? "/" : `/${locale}/`,

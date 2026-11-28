@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: "Buppi Baby",
     description:
       "O melhor app para acompanhar a rotina do seu bebê. Amamentação, sono, fraldas e marcos em um só lugar.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/og/home-pt-BR.jpg", width: 1200, height: 630 }],
     type: "website",
   },
   twitter: {
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Buppi Baby",
     description:
       "O melhor app para acompanhar a rotina do seu bebê. Amamentação, sono, fraldas e marcos em um só lugar.",
-    images: ["/og-image.png"],
+    images: ["/og/home-pt-BR.jpg"],
   },
 };
 
