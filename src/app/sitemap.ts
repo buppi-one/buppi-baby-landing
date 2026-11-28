@@ -5,7 +5,7 @@ import { TOOLS, toolPaths } from "@/lib/tools/registry";
 import { LOCALES, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n";
 
 const BASE_URL = "https://buppi.baby";
-const STATIC_PATHS = ["/", "/about", "/privacy", "/terms", "/support", "/delete-account", "/blog", "/ferramentas", "/gestacao", "/sono", "/memorias"];
+const STATIC_PATHS = ["/", "/about", "/privacy", "/terms", "/support", "/delete-account", "/blog", "/ferramentas", "/gestacao", "/sono", "/memorias", "/creators"];
 
 export const dynamic = "force-static";
 

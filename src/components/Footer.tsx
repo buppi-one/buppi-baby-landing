@@ -5,6 +5,7 @@ import {
   localePath,
   type Locale,
 } from "@/i18n";
+import { CREATORS_PATH, getCreatorsMessages } from "@/i18n/creators";
 
 /**
  * `alternates` maps each locale to the equivalent path of the current page.
@@ -82,6 +83,14 @@ export function Footer({
                   href={localePath(locale, "/support")}
                 >
                   {m.support}
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-[var(--color-primary-dark)] dark:hover:text-[var(--color-primary)] transition-colors"
+                  href={localePath(locale, CREATORS_PATH)}
+                >
+                  {getCreatorsMessages(locale).footerLink}
                 </a>
               </li>
             </ul>
